@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="Coderba" default="build-bin" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<!-- 
+	    Load properties
+	 -->
+	<loadproperties srcfile="ivymoduleconfiguration.properties" />
+
+	<!-- 
+		CODERBA configuration 
+	-->
+	<property name="coderba.built.by" value="www.pepstock.org" />
+	<tstamp>
+		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+	<property name="src.dir" value="src" />
+	<property name="classes.dir" value="classes" />
+	<property name="lib.dir" value="lib-ivy" />
+	<property name="javadoc.dir" value="javadoc" />
+	<property name="resources.dir" value="resources" />
+	<property name="retrieve.dir" value="retrieve" />
+
+	<property name="javascript.coderba.file" value="coderba.helper.js" />
+	<property name="javascript.coderba.minify.file" value="coderba.helper.min.js" />
+	<property name="javascript.package" value="org/pepstock/coderba/client/resources/js" />
+	<property name="javascript.src.dir" value="${src.dir}/${javascript.package}" />
+	<property name="javascript.dist.dir" value="${classes.dir}/${javascript.package}" />
+
+	<property name="dist.dir" value="dist" />
+	<property name="bin.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}.jar" />
+	<property name="sources.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}-sources.jar" />
+	<property name="javadoc.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}-javadoc.jar" />
+	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
+
+	<!-- 
+		JAVA compiler options 
+	-->
+	<property name="javac.debug" value="true" />
+	<property name="javac.debuglevel" value="lines,vars,source" />
+	<property name="javac.source" value="1.8" />
+	<property name="javac.target" value="1.8" />
+	<property name="javac.includeantruntime" value="false" />
+	<property name="javac.nowarn" value="true" />
+
+	<!-- 
+		TARGET SECTIONS 
+	-->
+	<!-- 
+		CODERBA - Removes the contents from all temporary folders 
+	-->
+	<target name="clean" description="Cleans folders">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${classes.dir}" includes="**/*"/>
+			<fileset dir="${dist.dir}" includes="**/*"/>
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
+		</delete>
+	</target>
+
+	<!--
+        IVY - Retrieves by IVY the needed jar 
+    -->
+	<target name="ivyRetrieve" depends="ivyRetrieve-compile, ivyRetrieve-runtime" />
+	
+	<target name="ivyRetrieve-runtime" depends="taskdefIvy">
+		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
+	</target>
+
+	<target name="ivyRetrieve-compile" depends="taskdefIvy">
+		<ivy:retrieve sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
+	</target>
+
+	<!--
+        IVY - Makes POM file 
+    -->
+	<target name="makePom" depends="taskdefIvy">
+		<property name="ivy.pom.name" value="Coderba"/>
+		<property name="ivy.pom.description" value="Coderba"/>
+		<property name="ivy.pom.url" value="www.pepstock.org"/>
+		<property name="ivy.pom.packaging" value="jar"/>
+
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/coderba-${ivy.pubrevision}.pom" templatefile="pom.template" >
+			<mapping conf="default" scope="compile" />
+		</ivy:makepom>
+	</target>
+
+	<!--
+        IVY - Publishes snapshots into MVN 
+    -->
+	<target name="ivyPublish-snapshot" depends="taskdefIvy">
+		<ivy:resolve />
+		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.pubrevision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
+			<artifacts pattern="${artifact.pattern}" />
+		</ivy:publish>
+	</target>
+
+	<!--
+        IVY - Publishes official release into MVN 
+    -->
+	<target name="ivyPublish-release" depends="taskdefIvy">
+		<ivy:resolve />
+		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.pubrevision}" forcedeliver="true" overwrite="true" publishivy="false">
+			<artifacts pattern="${artifact.pattern}" />
+		</ivy:publish>
+	</target>
+
+	<!--
+        CODERBA - BUILD all jars artifacts: classes, sources and javadoc
+    -->
+	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
+
+	<!--
+        CODERBA - BUILD sources jar
+    -->
+	<target name="build-sources">
+		<jar jarfile="${sources.archive.file}">
+			<fileset dir="${src.dir}" />
+			<manifest>
+				<section name="Coderba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${coderba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CODERBA - BUILD javadoc jar
+    -->
+	<target name="build-javadoc" depends="javadoc">
+		<jar jarfile="${javadoc.archive.file}">
+			<fileset dir="${javadoc.dir}" />
+			<manifest>
+				<section name="Coderba">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${coderba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CODERBA - BUILD classes jar
+    -->
+	<target name="build-bin" depends="compile">
+		<jar jarfile="${bin.archive.file}">
+			<fileset dir="${classes.dir}"/>
+			<manifest>
+				<section name="CODERBA">
+					<attribute name="Version" value="${ivy.pubrevision}" />
+					<attribute name="Built-By" value="${coderba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!--
+        CODERBA - JAVA compile, MINIFY CODERBA javascript helper, COPY resources into classes folder
+    -->
+	<target name="compile" depends="clean, buildInit, ivyRetrieve-runtime">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile"/>
+			</classpath>
+		</javac>
+		<!-- minify -->
+		<echo>Minify CODERBA from file "${javascript.coderba.file}" to "${javascript.coderba.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.coderba.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.coderba.file}" />
+			</sources>
+		</closure-compiler>
+		<!-- copy is necessary as GWT needs sources: exclude coderba.helper.js-->
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/${javascript.coderba.file}"/>
+			</fileset>
+		</copy>
+		<!-- javascript resoures to classes -->
+		<copy todir="${javascript.dist.dir}">
+			<fileset dir="${resources.dir}">
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<!--
+        CODERBA - JAVADOC execution
+    -->
+	<target name="javadoc" depends="ivyRetrieve">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
+		</delete>
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" 
+			windowtitle="CODERBA Javadoc">
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<fileset dir="${classes.dir}" />
+				<pathelement path="${java.class.path}" />
+			</classpath>
+			<packageset dir="${src.dir}" defaultexcludes="yes">
+				<include name="org/pepstock/**" />
+			</packageset>
+			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
+			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
+		</javadoc>
+	</target>
+
+	<!--
+		IVY targets for getting build dependencies and Travis CI needed libraries
+	-->
+	<property name="ant.user.home" value="${user.home}/.ant" />
+	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
+	
+	<!--
+		Task that download and prepare all build dependencies 
+	-->
+	<target name="buildInit" depends="downloadIvy, taskdefIvy, ivyRetrieve-compile">
+		<!-- Define Google Closure tasks -->
+    	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
+	</target>
+
+	<target name="downloadIvy">
+		<!-- Download the Ivy jar and then invoke it to download the others task libs -->
+		<mkdir dir="${ant.jar.dir}"/>
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
+	        dest="${ant.jar.dir}" usetimestamp="true"/>
+		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
+		<path id="ivyPath">
+			<fileset dir="${ant.jar.dir}">
+				<include name="**/ivy-*.jar"/>
+			</fileset>
+		</path>
+		<!-- Define the Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
+	</target>
+	
+	<target name="taskdefIvy">
+		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
+		<path id="ivyPath">
+			<fileset dir="${ant.jar.dir}">
+				<include name="**/ivy-*.jar"/>
+			</fileset>
+		</path>
+		<!-- Define the Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
+	</target>
+	
+</project>
