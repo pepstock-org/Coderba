@@ -182,11 +182,11 @@
 			</fileset>
 		</copy>
 		<!-- javascript resoures to classes -->
-		<copy todir="${javascript.dist.dir}">
+		<!--copy todir="${javascript.dist.dir}">
 			<fileset dir="${resources.dir}">
 				<include name="**/*.js"/>
 			</fileset>
-		</copy>
+		</copy-->
 	</target>
 
 	<!--
