@@ -16,7 +16,6 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
@@ -44,11 +43,11 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
 public class LineWidgetOptions extends BaseEntity {
 
 	public static final boolean DEFAULT_COVER_GUTTER = false;
-	
+
 	public static final boolean DEFAULT_NO_HSCROLL = false;
-	
+
 	public static final boolean DEFAULT_ABOVE = false;
-	
+
 	public static final boolean DEFAULT_HANDLE_MOUSE_EVENTS = false;
 
 	public static final int DEFAULT_INSERT_AT = UndefinedValues.INTEGER;
@@ -79,19 +78,19 @@ public class LineWidgetOptions extends BaseEntity {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
 			return value;
 		}
 	}
-	
+
 	public LineWidgetOptions() {
 		this(null);
 	}
 
-	LineWidgetOptions(NativeObject nativeObject) {
+	LineWidgetOptions(NativeLineWidget nativeObject) {
 		super(nativeObject);
 	}
 
@@ -110,7 +109,7 @@ public class LineWidgetOptions extends BaseEntity {
 	public final void setNoHScroll(boolean noHScroll) {
 		setValue(Property.NO_HSCROLL, noHScroll);
 	}
-	
+
 	public final boolean isAbove() {
 		return getValue(Property.ABOVE, DEFAULT_ABOVE);
 	}
@@ -118,7 +117,7 @@ public class LineWidgetOptions extends BaseEntity {
 	public final void setAbove(boolean above) {
 		setValue(Property.ABOVE, above);
 	}
-	
+
 	public final boolean isHandleMouseEvents() {
 		return getValue(Property.HANDLE_MOUSE_EVENTS, DEFAULT_HANDLE_MOUSE_EVENTS);
 	}
@@ -126,7 +125,7 @@ public class LineWidgetOptions extends BaseEntity {
 	public final void setHandleMouseEvents(boolean handleMouseEvents) {
 		setValue(Property.HANDLE_MOUSE_EVENTS, handleMouseEvents);
 	}
-	
+
 	public final int getInsertAt() {
 		return getValue(Property.INSERT_AT, DEFAULT_INSERT_AT);
 	}

@@ -16,7 +16,8 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.NativeEditor;
-import org.pepstock.coderba.client.commons.ArrayObject;
+import org.pepstock.coderba.client.commons.ArrayAnchor;
+import org.pepstock.coderba.client.commons.ArrayPosition;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -83,7 +84,7 @@ public final class NativeDocument {
 	 * @param to ending position to use
 	 * @return the text between the given points in the editor, which should be position objects
 	 */
-	native String getRange(NativeObject from, NativeObject to);
+	native String getRange(Position from, Position to);
 
 	/**
 	 * Get the text between the given points in the editor, which should be position objects. An optional third argument can be
@@ -94,7 +95,7 @@ public final class NativeDocument {
 	 * @param seperator the line separator string to use (defaults to "\n")
 	 * @return the text between the given points in the editor, which should be position objects
 	 */
-	native String getRange(NativeObject from, NativeObject to, String seperator);
+	native String getRange(Position from, Position to, String seperator);
 
 	/**
 	 * Replace the part of the document between from and to with the given string. <br>
@@ -103,7 +104,7 @@ public final class NativeDocument {
 	 * @param replacement new text to be added
 	 * @param from starting position to use
 	 */
-	native void replaceRange(String replacement, NativeObject from);
+	native void replaceRange(String replacement, Position from);
 
 	/**
 	 * Replace the part of the document between from and to with the given string. <br>
@@ -114,7 +115,7 @@ public final class NativeDocument {
 	 * @param from starting position to use
 	 * @param to ending position to use
 	 */
-	native void replaceRange(String replacement, NativeObject from, NativeObject to);
+	native void replaceRange(String replacement, Position from, Position to);
 
 	/**
 	 * Replace the part of the document between from and to with the given string. <br>
@@ -130,7 +131,7 @@ public final class NativeDocument {
 	 *            used to determine whether this change can be merged with previous history events, in the way described for
 	 *            selection origins.
 	 */
-	native void replaceRange(String replacement, NativeObject from, NativeObject to, String origin);
+	native void replaceRange(String replacement, Position from, Position to, String origin);
 
 	/**
 	 * Get the content of line by its number.
@@ -315,7 +316,7 @@ public final class NativeDocument {
 	 *            "anchor"(the fixed side of the selection).Omitting the argument is the same as passing "head".
 	 * @return A position object will be returned.
 	 */
-	native NativeObject getCursor(String start); // POSITION
+	native Position getCursor(String start); // POSITION
 
 	/**
 	 * Retrieves a list of all current selections.<br>
@@ -325,7 +326,7 @@ public final class NativeDocument {
 	 * @return a list of all current selections (by array contains anchor and head ( range object) properties referring to
 	 *         position objects)
 	 */
-	native ArrayObject listSelections(); // { anchor: CodeMirror.Position; head: CodeMirror.Position }[];
+	native ArrayAnchor listSelections(); // { anchor: CodeMirror.Position; head: CodeMirror.Position }[];
 
 	/**
 	 * Return true if any text is selected.
@@ -344,8 +345,7 @@ public final class NativeDocument {
 	 * @param ch column number
 	 * @param options options instance
 	 */
-	native void setCursor(int line, int ch, NativeObject options); // options { bias?: number, origin?: string, scroll?:
-																	// boolean }
+	native void setCursor(int line, int ch, NativeObject options);
 
 	/**
 	 * Set the cursor position.<br>
@@ -356,8 +356,7 @@ public final class NativeDocument {
 	 * @param pos position of cursor
 	 * @param options options instance
 	 */
-	native void setCursor(NativeObject pos, NativeObject options); // options { bias?: number, origin?: string, scroll?:
-																	// boolean }
+	native void setCursor(Position pos, NativeObject options);
 
 	/**
 	 * Set a single selection range.<br>
@@ -380,8 +379,8 @@ public final class NativeDocument {
 	 * @param head ending position
 	 * @param options options instance
 	 */
-	native void setSelection(NativeObject anchor, NativeObject head, NativeObject options); // ?: { bias?: number, origin?:
-																							// string, scroll?: boolean }
+	native void setSelection(Position anchor, Position head, NativeObject options); // ?: { bias?: number, origin?:
+																					// string, scroll?: boolean }
 
 	/**
 	 * Sets a new set of selections.<br>
@@ -397,8 +396,15 @@ public final class NativeDocument {
 	 *            previous selection had less ranges than the new one.
 	 * @param options options instance
 	 */
-	native void setSelections(ArrayObject ranges, Object primary, NativeObject options); // Array<{ anchor: CodeMirror.Position,
-																				  		// head: CodeMirror.Position }>
+	native void setSelections(ArrayAnchor ranges, Object primary, NativeObject options); // Array<{ anchor: CodeMirror.Position,
+																							// head: CodeMirror.Position }>
+
+	/**
+	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
+	 * 
+	 * @param anchor starting position
+	 */
+	native void addSelection(Position anchor);
 
 	/**
 	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
@@ -406,7 +412,7 @@ public final class NativeDocument {
 	 * @param anchor starting position
 	 * @param head ending position
 	 */
-	native void addSelection(NativeObject anchor, NativeObject head); // anchor: {line, ch}, ?head: {line, ch} RANGE
+	native void addSelection(Position anchor, Position head);
 
 	/**
 	 * Similar to setSelection, but will, if shift is held or the extending flag is set, move the head of the selection while
@@ -419,7 +425,7 @@ public final class NativeDocument {
 	 * @param to ending position
 	 * @param options options instance
 	 */
-	native void extendSelection(NativeObject from, NativeObject to, NativeObject options);
+	native void extendSelection(Position from, Position to, NativeObject options);
 
 	/**
 	 * An equivalent of extendSelection that acts on all selections at once.
@@ -427,7 +433,7 @@ public final class NativeDocument {
 	 * @param heads array of starting position
 	 * @param options options instance
 	 */
-	native void extendSelections(ArrayObject heads, NativeObject options); // : array<{line, ch}> POSITION
+	native void extendSelections(ArrayPosition heads, NativeObject options); // : array<{line, ch}> POSITION
 
 	/**
 	 * Applies the given function to all existing selections, and calls extendSelections on the result.
@@ -516,8 +522,7 @@ public final class NativeDocument {
 	 * 
 	 * @param function function instance to be called for all documents linked to the target document.
 	 */
-	//FIXME
-	native void iterLinkedDocs(CallbackProxy.Proxy function); // fn: (doc: CodeMirror.Doc, sharedHist: boolean) => void
+	native void iterLinkedDocs(CallbackProxy.Proxy function); 
 
 	/**
 	 * Undo one edit (if any undo events are stored).
@@ -558,7 +563,6 @@ public final class NativeDocument {
 	 * 
 	 * @return a (JSON-serializable) representation of the undo history
 	 */
-	//FIXME
 	native NativeObject getHistory();
 
 	/**
@@ -568,7 +572,6 @@ public final class NativeDocument {
 	 * 
 	 * @param history a (JSON-serializable) representation of the undo history
 	 */
-	//FIXME
 	native void setHistory(NativeObject history);
 
 	/**
@@ -638,7 +641,7 @@ public final class NativeDocument {
 	 * @param options options instance
 	 * @return a text marker instance
 	 */
-	native NativeTextMarker markText(NativeObject from, NativeObject to, NativeObject options); // return TEXTMARKER
+	native NativeTextMarker markText(Position from, Position to, NativeObject options);
 
 	/**
 	 * Inserts a bookmark, a handle that follows the text around it as it is being edited, at the given position.<br>
@@ -663,7 +666,7 @@ public final class NativeDocument {
 	 * @param options options instance
 	 * @return a text marker instance
 	 */
-	native NativeTextMarker setBookmark(NativeObject pos, NativeObject options); 
+	native NativeTextMarker setBookmark(Position pos, NativeObject options);
 
 	/**
 	 * Returns an array of all the bookmarks and marked ranges found between the given positions.
@@ -672,7 +675,7 @@ public final class NativeDocument {
 	 * @param to ending position
 	 * @return an array of all the bookmarks and marked ranges found between the given positions
 	 */
-	native ArrayTextMarker findMarks(NativeObject from, NativeObject to); 
+	native ArrayTextMarker findMarks(Position from, Position to);
 
 	/**
 	 * Returns an array of all the bookmarks and marked ranges present at the given position.
@@ -680,7 +683,7 @@ public final class NativeDocument {
 	 * @param pos position into document
 	 * @return an array of all the bookmarks and marked ranges
 	 */
-	native ArrayTextMarker findMarksAt(NativeObject pos); 
+	native ArrayTextMarker findMarksAt(Position pos);
 
 	/**
 	 * Returns an array containing all marked ranges in the document.
@@ -699,7 +702,7 @@ public final class NativeDocument {
 	 * @param value Value can be either null, to clear the marker, or a DOM element,
 	 * @return
 	 */
-	native NativeLineHandle setGutterMarker(int line, String gutterID, Element value); 
+	native NativeLineHandle setGutterMarker(int line, String gutterID, Element value);
 
 	/**
 	 * Sets the gutter marker for the given gutter (identified by its CSS class, see the gutters option) to the given value.
@@ -804,12 +807,12 @@ public final class NativeDocument {
 	 * to update the height of the line that contains the widget.
 	 * 
 	 * @param line line number
-	 * @param node 
+	 * @param node
 	 * @param options
 	 * @return line widget instance
 	 */
 	native NativeLineWidget addLineWidget(int line, Element node, NativeObject options);
-	
+
 	/**
 	 * Adds a line widget, an element shown below a line, spanning the whole of the editor's width, and moving the lines below
 	 * it downwards. <br>
@@ -892,7 +895,7 @@ public final class NativeDocument {
 	 * @param index value is relative to the start of the editor's text
 	 * @return a position object for a zero-based index
 	 */
-	native NativeObject posFromIndex(int index);
+	native Position posFromIndex(int index);
 
 	/**
 	 * The reverse of posFromIndex.
@@ -900,6 +903,5 @@ public final class NativeDocument {
 	 * @param position position into document.
 	 * @return value is relative to the start of the editor's text
 	 */
-	native int indexFromPos(NativeObject position); // POSiTION
-
+	native int indexFromPos(Position position);
 }

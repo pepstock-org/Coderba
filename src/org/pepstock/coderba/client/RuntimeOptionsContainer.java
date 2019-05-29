@@ -25,7 +25,6 @@ import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.ObjectType;
-import org.pepstock.coderba.client.commons.StandardKey;
 import org.pepstock.coderba.client.utils.JSON;
 import org.pepstock.coderba.client.utils.RegExp;
 
@@ -105,10 +104,9 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	 */
 	@Override
 	protected void removeProperty(String key) {
-		Key keyObject = new StandardKey(key);
+		Key keyObject = Key.create(key);
 		// do nothing
 		// the runtime options NEVER remove keys
-		// FIXME myabe can be added here the CLONE form defaults
 		Defaults options = CodeMirror.get().getDefaults();
 		cloneFromDefaults(options.getObject(), nativeEditor.getOptions(), keyObject);
 	}

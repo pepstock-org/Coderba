@@ -15,8 +15,8 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
-import org.pepstock.coderba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeTextMarker extends NativeObject {
+public final class NativeTextMarker extends NativeCastableObject{
 
 	// /** Returns an object representing the options for the marker. If copyWidget is given true, it will clone the value of
 	// the replacedWith option, if any. */
@@ -80,7 +80,7 @@ public final class NativeTextMarker extends NativeObject {
 	 * 
 	 * @return
 	 */
-	native NativeObject find(); // {from: CodeMirror.Position, to: CodeMirror.Position};
+	native Range find(); // {from: CodeMirror.Position, to: CodeMirror.Position};
 
 	/**
 	 * Called when you've done something that might change the size of the marker and want to cheaply update the display.

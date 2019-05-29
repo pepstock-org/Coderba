@@ -15,10 +15,11 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
@@ -26,127 +27,62 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScrollArea extends BaseEntity {
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class ScrollArea extends BaseNativeEntity {
+
 	/**
-	 * ScrollaArea factory to build a scroll area by a native object
+	 * To avoid any instantiation
 	 */
-	public static final NativeObjectContainerFactory<ScrollArea> FACTORY = new ScrollAreaFactory();
-	
-	/**
-	 * Name of properties of native object.
-	 */
-	enum Property implements Key
-	{
-		TOP("top"),
-		LEFT("left"),
-		WIDTH("width"),
-		HEIGHT("height"),
-		CLIENT_WIDTH("clientWidth"),
-		CLIENT_HEIGHT("clientHeight");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	ScrollArea() {
+		// do nothing
 	}
-	
-	/**
-	 * 
-	 */
-	ScrollArea(NativeObject nativeObject) {
-		super(nativeObject);
-	}
-	
+
 	/**
 	 * Returns the top of area.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the top of area.
 	 */
-	public final int getTop() {
-		return getValue(Property.TOP, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getTop();
 
 	/**
 	 * Returns the left of area.
 	 * 
-	 * @return the left of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the left of area.
 	 */
-	public final int getLeft() {
-		return getValue(Property.LEFT, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getLeft();
 
 	/**
-	 * Returns the right of area.
+	 * Returns the height of area.
 	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the height of area.
 	 */
-	public final int getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getHeight();
 
 	/**
-	 * Returns the bottom of area.
+	 * Returns the width of area.
 	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the width of area.
 	 */
-	public final int getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getWidth();
 
 	/**
-	 * Returns the right of area.
+	 * Returns the client height of area.
 	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the client height of area.
 	 */
-	public final int getClientHeight() {
-		return getValue(Property.CLIENT_HEIGHT, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getClientHeight();
 
 	/**
-	 * Returns the bottom of area.
+	 * Returns the client width of area.
 	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the client width of area.
 	 */
-	public final int getClientWidth() {
-		return getValue(Property.CLIENT_WIDTH, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class ScrollAreaFactory implements NativeObjectContainerFactory<ScrollArea> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public ScrollArea create(NativeObject nativeObject) {
-			return new ScrollArea(nativeObject);
-		}
-
-	}
+	@JsProperty
+	public native int getClientWidth();
 
 }

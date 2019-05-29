@@ -77,4 +77,6 @@ final class NativeJsHelper {
 	static native void remove(NativeObject object, String key);
 
 	static native void cloneProperty(Object source, Object target, String key);
+	
+	static native NativeObject cast(Object object);
 }

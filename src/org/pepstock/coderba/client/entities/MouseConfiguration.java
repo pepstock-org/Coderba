@@ -23,7 +23,6 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainer;
 import org.pepstock.coderba.client.enums.MouseRepeat;
 import org.pepstock.coderba.client.enums.MouseUnit;
 
@@ -35,7 +34,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MouseConfiguration extends NativeObjectContainer {
+public final class MouseConfiguration extends BaseEntity {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -56,7 +55,7 @@ public final class MouseConfiguration extends NativeObjectContainer {
 		 * @param pos position
 		 * @return a range around that, for a custom unit
 		 */
-		NativeObject call(NativeEditor editor, NativeObject pos);
+		Range call(NativeEditor editor, Position pos);
 	}
 
 	// ---------------------------
@@ -90,14 +89,14 @@ public final class MouseConfiguration extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
 			return value;
 		}
 	}
-	
+
 	private MouseUnitHandler mouseUnit = null;
 
 	/**
@@ -131,17 +130,15 @@ public final class MouseConfiguration extends NativeObjectContainer {
 	 * @param pos position
 	 * @return a range around that, for a custom unit
 	 */
-	private NativeObject onMouseUnit(NativeEditor editor, NativeObject pos) {
-		Position position = Position.FACTORY.create(pos);
+	private Range onMouseUnit(NativeEditor editor, Position pos) {
 		EditorArea area = EditorAreas.get(editor.getId());
 		if (area != null && mouseUnit != null) {
-			Range result = mouseUnit.handle(area, position);
+			Range result = mouseUnit.handle(area, pos);
 			if (result != null) {
-				return result.getObject();
+				return result;
 			}
 		}
-		Range result = new Range(position, position);
-		return result.getObject();
+		return Range.create(pos, pos);
 	}
 
 	/**
@@ -176,7 +173,7 @@ public final class MouseConfiguration extends NativeObjectContainer {
 			setUnit(repeat.getDefaultUnit());
 		}
 	}
-	
+
 	/**
 	 * The unit by which to select. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for
 	 * alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
@@ -261,8 +258,9 @@ public final class MouseConfiguration extends NativeObjectContainer {
 	 * Returns the native object as result.
 	 * 
 	 * @return the native object as result
+	 * FIXME
 	 */
-	public NativeObject getObject() {
+	public NativeObject exportedObject() {
 		return getNativeObject();
 	}
 }

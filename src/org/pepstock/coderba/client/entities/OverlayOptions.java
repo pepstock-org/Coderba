@@ -15,7 +15,12 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * The options parameter is optional to set overlay. If given, it should be an object, optionally containing the following
@@ -31,65 +36,31 @@ import org.pepstock.coderba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class OverlayOptions extends BaseEntity{
-	
-	public static final boolean DEFAULT_OPAQUE = false;
-
-	public static final int DEFAULT_PRIORITY = 0;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class OverlayOptions extends BaseNativeEntity {
 
 	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		OPAQUE("opaque"),
-		PRIORITY("priority");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
-	 * 
+	 * Creates an empty options.
 	 */
 	public OverlayOptions() {
-		super();
+		// do nothing
 	}
+
+	@JsProperty
+	public native void setOpaque(boolean opaque);
+
+	@JsProperty
+	public native boolean isOpaque();
+
+	@JsProperty
+	public native void setPriority(int priority);
+
+	@JsProperty(name = "priority")
+	private native int nativeGetPriority();
 	
-	public void setOpaque(boolean opaque) {
-		setValue(Property.OPAQUE, opaque);
-	}
-
-	public boolean isOpaque() {
-		return getValue(Property.OPAQUE, DEFAULT_OPAQUE);
-	}
-
-	public void setPriority(int priority) {
-		setValue(Property.PRIORITY, priority);
-	}
-
+	@JsOverlay
 	public int getPriority() {
-		return getValue(Property.PRIORITY, DEFAULT_PRIORITY);
+		return checkAndGet("priority", nativeGetPriority(), 0);
 	}
 
 }

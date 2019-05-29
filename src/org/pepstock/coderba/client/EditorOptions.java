@@ -219,11 +219,11 @@ public class EditorOptions implements IsOptions {
 		if (area != null && configureMouse != null) {
 			MouseConfiguration result = configureMouse.handle(area, confMouseRepeat, event);
 			if (result != null) {
-				return result.getObject();
+				return result.exportedObject();
 			}
 		}
 		MouseConfiguration result = new MouseConfiguration(confMouseRepeat);
-		return result.getObject();
+		return result.exportedObject();
 	}
 
 	/**

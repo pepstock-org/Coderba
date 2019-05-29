@@ -15,141 +15,90 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Defines a range of positions into editor documents.<br>
+ * The range is built by starting and ending positions.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
  */
-public final class Range extends BaseEntity{
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public class Range extends BaseNativeEntity {
+
 	/**
-	 * Range factory to build a range by a native object
+	 * To avoid any instantiation
 	 */
-	public static final NativeObjectContainerFactory<Range> FACTORY = new RangeFactory();
-	
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		FROM("from"),
-		TO("to");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	Range() {
+		// do nothing
 	}
-	
-	public Range(Position from, Position to) {
-		this(null);
+
+	/**
+	 * Creates a range by starting and ending positions
+	 * 
+	 * @param from starting position of range
+	 * @param to ending position of range
+	 * @return a range of positions
+	 */
+	@JsOverlay
+	public final static Range create(Position from, Position to) {
+		// checks if FROM argument is consistent
 		if (from == null) {
-			throw new IllegalArgumentException("From field is null");
+			// if not exception
+			throw new IllegalArgumentException("[Range] From field is null");
 		}
+		// checks if TO argument is consistent
 		if (to == null) {
-			throw new IllegalArgumentException("To field is null");
+			// if not exception
+			throw new IllegalArgumentException("[Range] To field is null");
 		}
-		setFrom(from);
-		setTo(to);
-	}
-	
-	Range(NativeObject nativeObject){
-		super(nativeObject);
-	}
-
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public Position getFrom() {
-		return Position.FACTORY.create(getValue(Property.FROM));
+		// creates a range
+		Range range = new Range();
+		// sets the MIN position between passed positions as FROM
+		range.setFrom(Position.min(from, to));
+		// sets the MAX position between passed positions as TO
+		range.setTo(Position.max(from, to));
+		return range;
 	}
 
 	/**
-	 * Returns the top of area.
+	 * Returns the starting position of range in editor documents.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the starting position of range in editor documents.
 	 */
-	private void setFrom(Position From) {
-		setValue(Property.FROM, From);
-	}
-	
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public Position getTo() {
-		return Position.FACTORY.create(getValue(Property.TO));
-	}
-	
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	private void setTo(Position To) {
-		setValue(Property.TO, To);
-	}
-	
-	public static Range create(Range source) {
-		if (source != null) {
-			return new Range(source.getFrom(), source.getTo());
-		}
-		Position from = new Position();
-		Position to = new Position(from.getLine());
-		return new Range(from, to);
-	}
-	
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class RangeFactory implements NativeObjectContainerFactory<Range> {
+	@JsProperty
+	public final native Position getFrom();
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public Range create(NativeObject nativeObject) {
-			Range range = new Range(nativeObject);
-			if (!range.has(Property.FROM)) {
-				throw new IllegalArgumentException("From field is missing");
-			}
-			if (!range.has(Property.TO)) {
-				throw new IllegalArgumentException("To field is missing");
-			}
-			return range;
-		}
+	/**
+	 * <b>INTERNAL<b><br>
+	 * Sets the starting position of range in editor documents.
+	 * 
+	 * @param from the starting position of range in editor documents
+	 */
+	@JsProperty
+	private final native void setFrom(Position from);
 
-	}
+	/**
+	 * Returns the ending position of range in editor documents.
+	 * 
+	 * @return the ending position of range in editor documents.
+	 */
+	@JsProperty
+	public final native Position getTo();
 
-	
+	/**
+	 * <b>INTERNAL<b><br>
+	 * Sets the ending position of range in editor documents.
+	 * 
+	 * @param to the ending position of range in editor documents
+	 */
+	@JsProperty
+	private final native void setTo(Position to);
+
 }

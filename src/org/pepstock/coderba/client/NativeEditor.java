@@ -22,8 +22,14 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
+import org.pepstock.coderba.client.entities.Anchor;
+import org.pepstock.coderba.client.entities.Area;
+import org.pepstock.coderba.client.entities.Coordinate;
 import org.pepstock.coderba.client.entities.NativeDocument;
+import org.pepstock.coderba.client.entities.OverlayOptions;
+import org.pepstock.coderba.client.entities.Point;
 import org.pepstock.coderba.client.entities.Position;
+import org.pepstock.coderba.client.entities.ScrollArea;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
@@ -320,7 +326,7 @@ public final class NativeEditor {
 	 * 
 	 * @return the target position for horizontal cursor motion
 	 */
-	native NativeObject findPosH(NativeObject start, int amount, String unit, boolean visually);
+	native Position findPosH(Position start, int amount, String unit, boolean visually);
 
 	/**
 	 * Similar to findPosH, but used for vertical motion.<br>
@@ -329,14 +335,14 @@ public final class NativeEditor {
 	 * 
 	 * @return the target position for vertical cursor motion
 	 */
-	native NativeObject findPosV(NativeObject start, int amount, String unit);
+	native Position findPosV(Position start, int amount, String unit);
 
 	/**
 	 * Returns the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position.
 	 * 
 	 * @return the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position
 	 */
-	native NativeObject findWordAt(NativeObject pos);
+	native Anchor findWordAt(Position pos);
 
 	/**
 	 * Attach an additional key map to the editor.<br>
@@ -379,7 +385,7 @@ public final class NativeEditor {
 	 * @param mode
 	 * @param options
 	 */
-	native void addOverlay(String mode, NativeObject options);
+	native void addOverlay(String mode, OverlayOptions options);
 
 	/**
 	 * Pass this the exact value passed for the mode parameter to addOverlay, or a string that corresponds to the name property
@@ -456,7 +462,7 @@ public final class NativeEditor {
 	 * @return an scroll area object that represents the current scroll position, the size of the scrollable area, and the size
 	 *         of the visible area (minus scrollbars).
 	 */
-	native NativeObject getScrollInfo();
+	native ScrollArea getScrollInfo();
 
 	/**
 	 * Scrolls the given position into view. what may be null to scroll the cursor into view, a position to scroll a character
@@ -470,7 +476,7 @@ public final class NativeEditor {
 	 *            pixel squares
 	 * @param margin the amount of vertical pixels around the given area that should be made visible as well
 	 */
-	native void scrollIntoView(NativeObject what, int margin);
+	native void scrollIntoView(Object what, int margin);
 
 	/**
 	 * Returns an area object containing the coordinates of the cursor position.<br>
@@ -485,7 +491,7 @@ public final class NativeEditor {
 	 * @param mode coordinates mode
 	 * @return an area object containing the coordinates of the cursor position
 	 */
-	native NativeObject cursorCoords(boolean where, String mode);
+	native Area cursorCoords(boolean where, String mode);
 
 	/**
 	 * Returns an area object containing the coordinates of the cursor position.<br>
@@ -500,7 +506,7 @@ public final class NativeEditor {
 	 * @param mode coordinates mode
 	 * @return an area object containing the coordinates of the cursor position
 	 */
-	native NativeObject cursorCoords(NativeObject where, String mode);
+	native Area cursorCoords(Position where, String mode);
 
 	/**
 	 * Returns the position and dimensions of an arbitrary character.<br>
@@ -512,7 +518,7 @@ public final class NativeEditor {
 	 * @param mode coordinates mode
 	 * @return an area object containing the coordinates of the cursor position
 	 */
-	native NativeObject charCoords(NativeObject pos, String mode);
+	native Area charCoords(Position pos, String mode);
 
 	/**
 	 * Given a point object (e.g. coordinates of a mouse event) returns the position that corresponds to it.<br>
@@ -523,7 +529,7 @@ public final class NativeEditor {
 	 * @param mode coordinates mode
 	 * @return a position object
 	 */
-	native NativeObject coordsChar(NativeObject object, String mode);
+	native Position coordsChar(Point object, String mode);
 
 	/**
 	 * Computes the line at the given pixel height. mode can be one of the same strings that coordsChar accepts.
@@ -583,7 +589,7 @@ public final class NativeEditor {
 	 * @return a coordinate object indicating the start (inclusive) and end (exclusive) of the currently rendered part of the
 	 *         document
 	 */
-	native NativeObject getViewport();
+	native Coordinate getViewport();
 
 	/**
 	 * If your code does something to change the size of the editor element (window resizes are already listened for), or
@@ -600,7 +606,7 @@ public final class NativeEditor {
 	 * @return the inner mode at a given position
 	 */
 	// FIXME
-	native Object getModeAt(NativeObject position);
+	native Object getModeAt(Position position);
 
 	/**
 	 * Retrieves information about the token the current mode found before the given position (a position object). The returned
@@ -622,7 +628,7 @@ public final class NativeEditor {
 	 *            edits were recently made and highlighting has not yet completed.
 	 * @return a token instance
 	 */
-	native NativeObject getTokenAt(NativeObject pos, boolean precise);
+	native NativeObject getTokenAt(Position pos, boolean precise);
 
 	/**
 	 * This is similar to getTokenAt, but collects all tokens for a given line into an array.<br>
@@ -649,7 +655,7 @@ public final class NativeEditor {
 	 * @param pos position to use
 	 * @return a type of token
 	 */
-	native String getTokenTypeAt(NativeObject pos);
+	native String getTokenTypeAt(Position pos);
 
 	/**
 	 * Fetch the set of applicable helper values for the given position. Helpers provide a way to look up functionality

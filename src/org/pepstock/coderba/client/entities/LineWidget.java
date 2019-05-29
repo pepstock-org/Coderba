@@ -17,7 +17,9 @@ package org.pepstock.coderba.client.entities;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 
 import com.google.gwt.dom.client.Element;
@@ -26,19 +28,19 @@ import com.google.gwt.dom.client.Element;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineWidget extends LineWidgetOptions{
-	
+public final class LineWidget extends LineWidgetOptions {
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	
+
 	private final NativeLineWidget nativeObject;
-	
+
 	private final Document document;
-	
+
 	private final LineHandle handle;
-	
+
 	private static final Element DEFAULT_NODE = null;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -63,7 +65,7 @@ public final class LineWidget extends LineWidgetOptions{
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
@@ -73,20 +75,20 @@ public final class LineWidget extends LineWidgetOptions{
 
 	/**
 	 * 
+	 * @param nativeObject
+	 * @param document
 	 */
 	LineWidget(NativeLineWidget nativeObject, Document document) {
 		super(nativeObject);
 		this.nativeObject = nativeObject;
-		if (keys().isEmpty()) {
-			throw new IllegalArgumentException("Native line widget is empty!");
-		}
-		if (document == null) {
-			throw new IllegalArgumentException("Document instance is null!");
-		}
 		this.document = document;
 		// stores the id based on a counter
 		setValue(Property.ID, COUNTER.getAndIncrement());
 		this.handle = new LineHandle(nativeObject.getLine());
+	}
+	
+	static int getId(NativeObject nativeObject) {
+		return Id.get(Property.ID, nativeObject);
 	}
 	
 	public int getId() {
@@ -96,11 +98,11 @@ public final class LineWidget extends LineWidgetOptions{
 	public int getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
-	
+
 	public Element getNode() {
 		return getValue(Property.NODE, DEFAULT_NODE);
 	}
-	
+
 	/**
 	 * @return the handle
 	 */
@@ -123,4 +125,7 @@ public final class LineWidget extends LineWidgetOptions{
 	public void changed() {
 		nativeObject.changed();
 	}
+	
+	
+	
 }

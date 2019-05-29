@@ -15,10 +15,12 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
@@ -26,105 +28,34 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Coordinate extends BaseEntity {
-	
-	/**
-	 * Area factory to build an area by a native object
-	 */
-	public static final NativeObjectContainerFactory<Coordinate> FACTORY = new CoordinateFactory();
-	
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		FROM("from"),
-		TO("to");
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Coordinate extends BaseNativeEntity {
 
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-	}
-	
 	/**
-	 * 
+	 * To avoid any instantiation
 	 */
-	Coordinate(NativeObject nativeObject) {
-		super(nativeObject);
-	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getFrom() {
-		return getValue(Property.FROM, UndefinedValues.INTEGER);
+	private Coordinate() {
+		// do nothing
 	}
 
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getTo() {
-		return getValue(Property.TO, UndefinedValues.INTEGER);
-	}
-	
-	/**
-	 * Sets the top location in pixel
-	 * 
-	 * @param top the top location in pixel
-	 */
-	public void setFrom(int from) {
-		setValue(Property.FROM, from);
+	@JsOverlay
+	public static Coordinate create(int from, int to) {
+		Coordinate range = new Coordinate();
+		range.setFrom(from);
+		range.setTo(to);
+		return range;
 	}
 
-	/**
-	 * Sets the bottom location in pixel
-	 * 
-	 * @param bottom the bottom location in pixel
-	 */
-	public void setTo(int to) {
-		setValue(Property.TO, to);
-	}
+	@JsProperty
+	public native int getFrom();
 
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class CoordinateFactory implements NativeObjectContainerFactory<Coordinate> {
+	@JsProperty
+	private native void setFrom(int from);
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public Coordinate create(NativeObject nativeObject) {
-			return new Coordinate(nativeObject);
-		}
+	@JsProperty
+	public native int getTo();
 
-	}
+	@JsProperty
+	private native void setTo(int to);
 
 }

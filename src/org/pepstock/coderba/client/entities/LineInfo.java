@@ -15,31 +15,40 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.coderba.client.commons.ArrayListHelper;
+import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.ArrayString;
 
 /**
  * 
  * {line, handle, text, gutterMarkers, textClass, bgClass, wrapClass, widgets}
+ * 
+ * FIXME doc
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class LineInfo {
-	
+
 	private final LineHandle handle;
-	
+
 	private final NativeLineInfo nativeObject;
+	
+	private final Document document;
 
 	/**
 	 * 
 	 */
-	LineInfo(NativeLineInfo nativeObject) {
+	LineInfo(NativeLineInfo nativeObject, Document document) {
 		this.nativeObject = nativeObject;
+		this.document = document;
 		this.handle = new LineHandle(nativeObject.getHandle());
 	}
-	
+
 	public int getLine() {
 		return nativeObject.getLine();
 	}
@@ -59,7 +68,7 @@ public final class LineInfo {
 	public String getBgClass() {
 		return nativeObject.getBgClass();
 	}
-	
+
 	public String getWrapClass() {
 		return nativeObject.getWrapClass();
 	}
@@ -68,7 +77,19 @@ public final class LineInfo {
 		ArrayString array = nativeObject.getGutterMarkers();
 		return ArrayListHelper.unmodifiableList(array);
 	}
-
-	//FIXM widgets is missing
-
+	
+	public List<LineWidget> getWidgets(){
+		List<LineWidget> widgets = new LinkedList<>();
+		ArrayObject array = nativeObject.getWidgets();
+		if (array != null) {
+			for (int i=0; i<array.length(); i++) {
+				int id  = LineWidget.getId(array.get(i));
+				LineWidget widget = document.getLineWidget(id);
+				if (widget != null) {
+					widgets.add(widget);
+				}
+			}
+		}
+		return Collections.unmodifiableList(widgets);
+	}
 }

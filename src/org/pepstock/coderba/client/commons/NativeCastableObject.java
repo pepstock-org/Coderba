@@ -9,38 +9,28 @@
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    WITHOUString WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.enums;
+package org.pepstock.coderba.client.commons;
 
-import org.pepstock.coderba.client.commons.Key;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
+ * Base object for all native objects implemented in Coderba.<br>
+ * It implements some common methods and wraps some native methods.
+ * 
  * @author Andrea "Stock" Stocchero
- *
  */
-public enum StickyPosition implements Key
-{
-	NULL("null"),
-	AFTER("after"),
-	BEFORE("before");
-	
-	private final String value;
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+public abstract class NativeCastableObject {
 
 	/**
-	 * @param value
+	 * To avoid any instantiation
 	 */
-	private StickyPosition(String value) {
-		this.value = value;
+	protected NativeCastableObject() {
+		// do nothing
 	}
-
-	/**
-	 * @return the value
-	 */
-	public String value() {
-		return value;
-	}
-	
 }

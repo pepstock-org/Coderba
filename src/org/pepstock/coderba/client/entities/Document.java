@@ -31,13 +31,13 @@ import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.callbacks.DocumentEachLineHandler;
 import org.pepstock.coderba.client.callbacks.DocumentExtendSelectionsHandler;
 import org.pepstock.coderba.client.callbacks.LinkedDocumentsHandler;
+import org.pepstock.coderba.client.commons.ArrayAnchor;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
-import org.pepstock.coderba.client.commons.ArrayObject;
+import org.pepstock.coderba.client.commons.ArrayPosition;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.JsHelper;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.defaults.GlobalDefaults;
 import org.pepstock.coderba.client.enums.CursorPosition;
@@ -53,7 +53,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Document {
+public final class Document {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -91,7 +91,7 @@ public class Document {
 		 * @param anchor anchor object for selection
 		 * @return the position of selection
 		 */
-		NativeObject call(NativeObject anchor);
+		Position call(Anchor anchor);
 	}
 
 	/**
@@ -167,21 +167,20 @@ public class Document {
 	 * @param anchor anchor object for selection
 	 * @return the position of selection
 	 */
-	private NativeObject onDocumentExtendSelections(NativeObject anchor) {
+	private Position onDocumentExtendSelections(Anchor anchor) {
 		NativeEditor nativeEditor = nativeObject.getEditor();
-		Anchor anchorItem = new Anchor(anchor);
 		if (documentExtendSelectionsHandler != null && nativeEditor != null) {
 			EditorArea area = EditorAreas.get(nativeEditor.getId());
 			if (area != null) {
-				Position result = documentExtendSelectionsHandler.handle(area, anchorItem);
+				Position result = documentExtendSelectionsHandler.handle(area, anchor);
 				if (result != null) {
-					return result.getObject();
+					return result;
 				}
 			}
 		}
-		return anchorItem.getAnchor().getObject();
+		return anchor.getAnchor();
 	}
-	
+
 	/**
 	 * A function that is called for all documents linked to the target document.
 	 * 
@@ -201,7 +200,7 @@ public class Document {
 	/**
 	 * @return the nativeObject
 	 */
-	public final NativeDocument getNativeObject() {
+	public final NativeDocument getNativeDocument() {
 		return nativeObject;
 	}
 
@@ -261,7 +260,7 @@ public class Document {
 	 */
 	public String getRange(Position from, Position to) {
 		if (from != null && to != null) {
-			return nativeObject.getRange(from.getObject(), to.getObject());
+			return nativeObject.getRange(from, to);
 		}
 		return GlobalDefaults.get().getValue();
 	}
@@ -276,10 +275,7 @@ public class Document {
 	 */
 	public String getRange(Range range, String seperator) {
 		if (range != null) {
-			if (seperator != null) {
-				return getRange(range.getFrom(), range.getTo(), seperator);
-			}
-			return getRange(range);
+			return getRange(range.getFrom(), range.getTo(), seperator);
 		}
 		return GlobalDefaults.get().getValue();
 	}
@@ -296,7 +292,7 @@ public class Document {
 	public String getRange(Position from, Position to, String seperator) {
 		if (from != null && to != null) {
 			if (seperator != null) {
-				return nativeObject.getRange(from.getObject(), to.getObject());
+				return nativeObject.getRange(from, to);
 			}
 			return getRange(from, to);
 		}
@@ -312,7 +308,7 @@ public class Document {
 	 */
 	public void replaceRange(String replacement, Position from) {
 		if (replacement != null && from != null) {
-			nativeObject.replaceRange(replacement, from.getObject());
+			nativeObject.replaceRange(replacement, from);
 		}
 	}
 
@@ -341,7 +337,7 @@ public class Document {
 	 */
 	public void replaceRange(String replacement, Position from, Position to) {
 		if (replacement != null && from != null && to != null) {
-			nativeObject.replaceRange(replacement, from.getObject(), to.getObject());
+			nativeObject.replaceRange(replacement, from, to);
 		}
 	}
 
@@ -381,7 +377,7 @@ public class Document {
 	public void replaceRange(String replacement, Position from, Position to, String origin) {
 		if (replacement != null && from != null && to != null) {
 			if (origin != null) {
-				nativeObject.replaceRange(replacement, from.getObject(), to.getObject(), origin);
+				nativeObject.replaceRange(replacement, from, to, origin);
 			} else {
 				replaceRange(replacement, from, to);
 			}
@@ -758,8 +754,8 @@ public class Document {
 	 *         position objects)
 	 */
 	public List<Anchor> listSelections() {
-		ArrayObject array = nativeObject.listSelections();
-		return ArrayListHelper.list(array, Anchor.FACTORY);
+		ArrayAnchor array = nativeObject.listSelections();
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -830,7 +826,7 @@ public class Document {
 	 */
 	public void setCursor(Position pos, CursorOptions options) {
 		if (pos != null) {
-			nativeObject.setCursor(pos.getObject(), checkOptions(options).getObject());
+			nativeObject.setCursor(pos, checkOptions(options).getObject());
 		}
 	}
 
@@ -901,7 +897,7 @@ public class Document {
 	 */
 	public void setSelection(Position anchor, Position head, CursorOptions options) {
 		if (anchor != null && head != null) {
-			nativeObject.setSelection(anchor.getObject(), head.getObject(), checkOptions(options).getObject());
+			nativeObject.setSelection(anchor, head, checkOptions(options).getObject());
 		}
 	}
 
@@ -924,7 +920,7 @@ public class Document {
 	 * @param options options instance
 	 */
 	public void setSelections(List<Anchor> ranges, CursorOptions options) {
-		ArrayObject array = ArrayObject.fromOrNull(ranges);
+		ArrayAnchor array = ArrayAnchor.fromOrNull(ranges);
 		if (array != null) {
 			nativeObject.setSelections(array, null, checkOptions(options).getObject());
 		}
@@ -945,7 +941,7 @@ public class Document {
 	 * @param options options instance
 	 */
 	public void setSelections(List<Anchor> ranges, int primary, CursorOptions options) {
-		ArrayObject array = ArrayObject.fromOrNull(ranges);
+		ArrayAnchor array = ArrayAnchor.fromOrNull(ranges);
 		if (array != null) {
 			nativeObject.setSelections(array, primary, checkOptions(options).getObject());
 		}
@@ -977,11 +973,22 @@ public class Document {
 	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
 	 * 
 	 * @param anchor starting position
+	 */
+	public void addSelection(Position anchor) {
+		if (anchor != null) {
+			nativeObject.addSelection(anchor);
+		}
+	}
+
+	/**
+	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
+	 * 
+	 * @param anchor starting position
 	 * @param head ending position
 	 */
 	public void addSelection(Position anchor, Position head) {
 		if (anchor != null && head != null) {
-			nativeObject.addSelection(anchor.getObject(), head.getObject());
+			nativeObject.addSelection(anchor, head);
 		}
 	}
 
@@ -1041,7 +1048,7 @@ public class Document {
 	 */
 	public void extendSelection(Position from, Position to, CursorOptions options) {
 		if (from != null && to != null) {
-			nativeObject.extendSelection(from.getObject(), to.getObject(), checkOptions(options).getObject());
+			nativeObject.extendSelection(from, to, checkOptions(options).getObject());
 		}
 	}
 
@@ -1061,7 +1068,7 @@ public class Document {
 	 * @param options options instance
 	 */
 	public void extendSelections(List<Position> heads, CursorOptions options) {
-		ArrayObject array = ArrayObject.fromOrNull(heads);
+		ArrayPosition array = ArrayPosition.fromOrNull(heads);
 		if (array != null) {
 			nativeObject.extendSelections(array, checkOptions(options).getObject());
 		}
@@ -1230,6 +1237,7 @@ public class Document {
 
 	/**
 	 * Returns the linked documents handler.
+	 * 
 	 * @return the linked documents handler
 	 */
 	public LinkedDocumentsHandler getLinkedDocumentsHandler() {
@@ -1238,12 +1246,13 @@ public class Document {
 
 	/**
 	 * Sets the linked documents handler.
+	 * 
 	 * @param linkedDocumentsHandler the linked documents handler
 	 */
 	public void setLinkedDocumentsHandler(LinkedDocumentsHandler linkedDocumentsHandler) {
 		this.linkedDocumentsHandler = linkedDocumentsHandler;
 	}
-	
+
 	/**
 	 * Will call the given function for all documents linked to the target document.<br>
 	 * It will be passed two arguments, the linked document and a boolean indicating whether that document shares history with
@@ -1267,7 +1276,7 @@ public class Document {
 	public void iterLinkedDocuments(LinkedDocumentsHandler handler) {
 		this.linkedDocumentsHandler = handler;
 		iterLinkedDocuments();
-	} 
+	}
 
 	/**
 	 * Undo one edit (if any undo events are stored).
@@ -1320,9 +1329,8 @@ public class Document {
 	 * 
 	 * @return a (JSON-serializable) representation of the undo history
 	 */
-	public NativeObject getHistory() {
-		// FIXME
-		return null;
+	public History getHistory() {
+		return new History(nativeObject.getHistory());
 	}
 
 	/**
@@ -1332,8 +1340,10 @@ public class Document {
 	 * 
 	 * @param history a (JSON-serializable) representation of the undo history
 	 */
-	public void setHistory(NativeObject history) {
-		// FIXME
+	void setHistory(History history) {
+		if (history != null) {
+			nativeObject.setHistory(history.getObject());
+		}
 	}
 
 	/**
@@ -1526,7 +1536,7 @@ public class Document {
 	 */
 	public TextMarker markText(Position from, Position to, TextMarkerOptions options) {
 		if (from != null && to != null) {
-			TextMarker marker = new TextMarker(nativeObject.markText(from.getObject(), to.getObject(), checkOptions(options, TextMarkerType.RANGE).getObject()), this);
+			TextMarker marker = new TextMarker(nativeObject.markText(from, to, checkOptions(options, TextMarkerType.RANGE).getObject()), this);
 			markers.put(marker.getId(), marker);
 			return marker;
 		}
@@ -1571,7 +1581,7 @@ public class Document {
 	 */
 	public TextMarker setBookmark(Position pos, TextMarkerOptions options) {
 		if (pos != null) {
-			TextMarker marker = new TextMarker(nativeObject.setBookmark(pos.getObject(), checkOptions(options, TextMarkerType.BOOKMARK).getObject()), this);
+			TextMarker marker = new TextMarker(nativeObject.setBookmark(pos, checkOptions(options, TextMarkerType.BOOKMARK).getObject()), this);
 			markers.put(marker.getId(), marker);
 			return marker;
 		}
@@ -1600,7 +1610,7 @@ public class Document {
 	 */
 	public List<TextMarker> findMarks(Position from, Position to) {
 		if (from != null && to != null) {
-			ArrayTextMarker array = nativeObject.findMarks(from.getObject(), to.getObject());
+			ArrayTextMarker array = nativeObject.findMarks(from, to);
 			return load(array);
 		}
 		return Collections.emptyList();
@@ -1614,7 +1624,7 @@ public class Document {
 	 */
 	public List<TextMarker> findMarksAt(Position pos) {
 		if (pos != null) {
-			ArrayTextMarker array = nativeObject.findMarksAt(pos.getObject());
+			ArrayTextMarker array = nativeObject.findMarksAt(pos);
 			return load(array);
 		}
 		return Collections.emptyList();
@@ -1952,6 +1962,16 @@ public class Document {
 	}
 
 	/**
+	 * Returns an already created line widget by its id.
+	 * 
+	 * @param id line widget id.
+	 * @return line widget instance or <code>null</code> if not exists
+	 */
+	LineWidget getLineWidget(int id) {
+		return lineWidgets.get(id);
+	}
+
+	/**
 	 * Returns the line number, text content, and marker status of the given line, which can be either a number or a line
 	 * handle.<br>
 	 * The returned object has the structure {line, handle, text, gutterMarkers, textClass, bgClass, wrapClass, widgets}, where
@@ -1968,7 +1988,7 @@ public class Document {
 		if (isValidLine(line)) {
 			NativeLineInfo nativeInfo = nativeObject.lineInfo(line);
 			if (nativeInfo != null) {
-				return new LineInfo(nativeInfo);
+				return new LineInfo(nativeInfo, this);
 			}
 		}
 		return null;
@@ -1991,7 +2011,7 @@ public class Document {
 		if (line != null) {
 			NativeLineInfo nativeInfo = nativeObject.lineInfo(line.getObject());
 			if (nativeInfo != null) {
-				return new LineInfo(nativeInfo);
+				return new LineInfo(nativeInfo, this);
 			}
 		}
 		return null;
@@ -2016,7 +2036,7 @@ public class Document {
 	 * @return a position object for a zero-based index
 	 */
 	public Position getPositionFromIndex(int index) {
-		return Position.FACTORY.create(nativeObject.posFromIndex(index));
+		return nativeObject.posFromIndex(index);
 	}
 
 	/**
@@ -2028,7 +2048,7 @@ public class Document {
 	 */
 	public int getIndexFromPosition(Position position) {
 		if (position != null) {
-			return nativeObject.indexFromPos(position.getObject());
+			return nativeObject.indexFromPos(position);
 		}
 		return UndefinedValues.INTEGER;
 	}

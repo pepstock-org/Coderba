@@ -20,28 +20,31 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.pepstock.coderba.client.entities.Anchor;
+
 /**
- * The user of this interface has precise control over where in the list each element is inserted. <br>
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each
+ * element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script array as back-end to store objects (integers).
+ * This implementation uses a java script array as back-end to store objects (anchors).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see org.pepstock.coderba.client.commons.RegExpResult.client.commons.ArrayAnchor
  */
-public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInteger> {
+public final class ArrayAnchorList extends AbstractArrayList<Anchor, ArrayAnchor> {
 
 	// delegated array to store objects
-	private final ArrayInteger array;
+	private final ArrayAnchor array;
 
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
 	 * 
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
-	ArrayIntegerList(ArrayInteger array) {
-		// if null, creates a new JS array
+	ArrayAnchorList(ArrayAnchor array) {
+		// if null, creates a new array
 		if (array == null) {
-			this.array = new ArrayInteger();
+			this.array = new ArrayAnchor();
 		} else {
 			// uses an existing array
 			this.array = array;
@@ -51,7 +54,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	/**
 	 * Creates an empty list
 	 */
-	public ArrayIntegerList() {
+	public ArrayAnchorList() {
 		this(null);
 	}
 
@@ -61,7 +64,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * @see org.pepstock.coderba.client.commons.AbstractArrayList#getArray()
 	 */
 	@Override
-	ArrayInteger getArray() {
+	ArrayAnchor getArray() {
 		return array;
 	}
 
@@ -70,11 +73,11 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(int... values) {
-		// checks if arguments are consistent 
+	public void addAll(Anchor... values) {
+		// checks if arguments are consistent
 		if (values != null && values.length > 0) {
 			// scans all elements
-			for (int val : values) {
+			for (Anchor val : values) {
 				// adds
 				add(val);
 			}
@@ -85,7 +88,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(Integer element) {
+	public boolean add(Anchor element) {
 		// checks if argument is consistent 
 		if (element != null) {
 			// adds element to array
@@ -101,12 +104,12 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends Integer> collection) {
+	public boolean addAll(Collection<? extends Anchor> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
 		// checks if argument is consistent 
 		if (modified) {
-			Iterator<? extends Integer> iter = collection.iterator();
+			Iterator<? extends Anchor> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
 				// adds and 
@@ -123,15 +126,14 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	@Override
 	public boolean retainAll(Collection<?> collection) {
-		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// set modified checking if collection is empty
+		boolean modified = !collection.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<Integer> contained = new ArrayList<>();
+			List<Anchor> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
-				Integer value = get(i);
+				Anchor value = get(i);
 				// checks if not present into
 				// passed collection
 				if (!collection.contains(value)) {
@@ -142,7 +144,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 			// if temporary list is not empty
 			if (!contained.isEmpty()) {
 				// scans all elements
-				for (Integer toRemove : contained) {
+				for (Anchor toRemove : contained) {
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -160,33 +162,33 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	}
 
 	/**
-	 * Returns the element at the specified position in this list. If index out of range, returns Integer.MIN_VALUE
+	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
 	@Override
-	public Integer get(int index) {
+	public Anchor get(int index) {
 		// checks range
 		if (checkRange(index)) {
 			return array.get(index);
 		}
-		return Integer.MIN_VALUE;
+		return null;
 	}
 
 	/**
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
-	 * Integer.MIN_VALUE
+	 * null
 	 */
 	@Override
-	public Integer set(int index, Integer element) {
+	public Anchor set(int index, Anchor element) {
 		// checks if element is consistent and in range
 		if (element != null && checkRange(index)) {
 			// gets current element at that index
-			Integer old = array.get(index);
+			Anchor old = array.get(index);
 			// replaces with new element
 			array.set(index, element);
 			// returns old
 			return old;
 		}
-		return Integer.MIN_VALUE;
+		return null;
 	}
 
 	/**
@@ -195,7 +197,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * indices).
 	 */
 	@Override
-	public void add(int index, Integer element) {
+	public void add(int index, Anchor element) {
 		// checks if element is consistent
 		if (element != null) {
 			// inserts into array
@@ -209,12 +211,12 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * the list.
 	 */
 	@Override
-	public Integer remove(int index) {
+	public Anchor remove(int index) {
 		// checks range
 		if (checkRange(index)) {
 			return array.remove(index);
 		}
-		return Integer.MIN_VALUE;
+		return null;
 	}
 
 	/**
@@ -223,12 +225,11 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	@Override
 	public int indexOf(Object object) {
-		// checks if is integer
-		if (object instanceof Integer) {
-			Integer value = (Integer) object;
-			// check index of
-			return array.indexOf(value.intValue());
+		// checks if argument is null
+		if (object != null) {
+			return array.indexOf(object);
 		}
+		// if here, argument not consistent
 		return AbstractArrayList.NOT_FOUND;
 	}
 
@@ -238,12 +239,11 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	@Override
 	public int lastIndexOf(Object object) {
-		// checks if is integer
-		if (object instanceof Integer) {
-			Integer value = (Integer) object;
-			// check last index of
-			return array.lastIndexOf(value.intValue());
+		// checks if argument is null
+		if (object != null) {
+			return array.lastIndexOf(object);
 		}
+		// if here, argument not consistent
 		return AbstractArrayList.NOT_FOUND;
 	}
 
@@ -254,7 +254,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	@Override
 	public Object[] toArray() {
-		Integer[] toArray = new Integer[array.length()];
+		Anchor[] toArray = new Anchor[array.length()];
 		for (int i = 0; i < array.length(); i++) {
 			toArray[i] = array.get(i);
 		}

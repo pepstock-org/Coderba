@@ -46,7 +46,7 @@ public final class NativeLineHandle {
 	 */
 	@JsProperty
 	native String getText();
-	
+
 	/**
 	 * Get the content of the document.
 	 * 

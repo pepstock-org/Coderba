@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.commons;
 
-
 /**
  * Enums the property ID used by CODERBA to identify the editor area.
  * 
@@ -81,6 +80,25 @@ public enum Id implements Key
 			// sets id
 			nativeObject.defineStringProperty(CODERBA_ID.value(), id);
 		}
+	}
+	
+	/**
+	 * Returns the property value from java script object, when the ID is stored as integer
+	 * 
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
+	 */
+	public static int get(Key key, NativeObject nativeObject) {
+		// checks if argument is consistent and property exists
+		if (nativeObject != null && nativeObject.hasProperty(key.value())) {
+			// gets descriptor
+			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
+			// if descriptor is consistent, return value
+			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
+		}
+		// property doesn't exist
+		return UndefinedValues.INTEGER;
 	}
 
 }

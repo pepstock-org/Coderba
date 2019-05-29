@@ -20,19 +20,17 @@ package org.pepstock.coderba.client.entities;
  *
  */
 public final class LineHandle {
-	
+
 	private final NativeLineHandle nativeObject;
 
 	/**
 	 * 
+	 * @param nativeObject
 	 */
 	LineHandle(NativeLineHandle nativeObject) {
 		this.nativeObject = nativeObject;
-		if (nativeObject == null) {
-			throw new IllegalArgumentException("Native line handle is null!");
-		}
 	}
-	
+
 	/**
 	 * Get the content of the document.
 	 * 
@@ -41,7 +39,7 @@ public final class LineHandle {
 	public String getText() {
 		return nativeObject.getText();
 	}
-	
+
 	/**
 	 * Get the content of the document.
 	 * 

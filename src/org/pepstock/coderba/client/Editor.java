@@ -20,8 +20,8 @@ import java.util.List;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.Id;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.defaults.GlobalDefaults;
 import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Area;
 import org.pepstock.coderba.client.entities.Coordinate;
@@ -43,7 +43,7 @@ import com.google.gwt.dom.client.Element;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Editor {
+public final class Editor {
 
 	private final NativeEditor nativeObject;
 	
@@ -52,7 +52,7 @@ public class Editor {
 	/**
 	 * @param nativeObject
 	 */
-	public Editor(NativeEditor nativeObject) {
+	Editor(NativeEditor nativeObject) {
 		this.nativeObject = nativeObject;
 		this.document = new Document(nativeObject.getDoc());
 	}
@@ -128,10 +128,9 @@ public class Editor {
 	 */
 	public final Position findPosH(Position start, int amount, HorizontalFindUnit unit, boolean visually) {
 		if (start != null && unit != null) {
-			return Position.FACTORY.create(nativeObject.findPosH(start.getObject(), amount, unit.value(), visually));
+			return nativeObject.findPosH(start, amount, unit.value(), visually);
 		}
-		// FIXME with default
-		return null;
+		return GlobalDefaults.get().getPosition();
 	}
 
 	/**
@@ -143,10 +142,9 @@ public class Editor {
 	 */
 	public final Position findPosV(Position start, int amount, VerticalFindUnit unit) {
 		if (start != null && unit != null) {
-			return Position.FACTORY.create(nativeObject.findPosV(start.getObject(), amount, unit.value()));
+			return nativeObject.findPosV(start, amount, unit.value());
 		}
-		// FIXME with default
-		return null;
+		return GlobalDefaults.get().getPosition();
 	}
 
 	/**
@@ -156,10 +154,9 @@ public class Editor {
 	 */
 	public final Anchor findWordAt(Position pos) {
 		if (pos != null) {
-			return Anchor.FACTORY.create(nativeObject.findWordAt(pos.getObject()));
+			return nativeObject.findWordAt(pos);
 		}
-		// FIXME with default
-		return null;
+		return GlobalDefaults.get().getAnchor();
 	}
 
 	/**
@@ -186,7 +183,7 @@ public class Editor {
 	public final void addOverlay(Mode mode, OverlayOptions options) {
 		if (mode != null) {
 			if (options != null) {
-				nativeObject.addOverlay(mode.getName(), options.getObject());
+				nativeObject.addOverlay(mode.getName(), options);
 			} else {
 				nativeObject.addOverlay(mode.getName());
 			}
@@ -223,7 +220,7 @@ public class Editor {
 	public final Document swapDoc(Document doc) {
 		Document currentDoc = getDocument();
 		if (doc != null) {
-			nativeObject.swapDoc(doc.getNativeObject());
+			nativeObject.swapDoc(doc.getNativeDocument());
 			this.document = doc;
 		}
 		return currentDoc;
@@ -269,7 +266,7 @@ public class Editor {
 	 *         of the visible area (minus scrollbars).
 	 */
 	public final ScrollArea getScrollInfo() {
-		return ScrollArea.FACTORY.create(nativeObject.getScrollInfo());
+		return nativeObject.getScrollInfo();
 	}
 
 	/**
@@ -282,11 +279,7 @@ public class Editor {
 	 * @param margin the amount of vertical pixels around the given area that should be made visible as well
 	 */
 	public final void scrollIntoView(Position what, int margin) {
-		if (what != null) {
-			internalScrollIntoView(what.getObject(), margin);
-		} else {
-			internalScrollIntoView(null, margin);
-		}
+		nativeObject.scrollIntoView(what, margin);
 	}
 
 	/**
@@ -299,11 +292,7 @@ public class Editor {
 	 * @param margin the amount of vertical pixels around the given area that should be made visible as well
 	 */
 	public final void scrollIntoView(Range what, int margin) {
-		if (what != null) {
-			internalScrollIntoView(what.getObject(), margin);
-		} else {
-			internalScrollIntoView(null, margin);
-		}
+		nativeObject.scrollIntoView(what, margin);
 	}
 
 	/**
@@ -317,26 +306,6 @@ public class Editor {
 	 * @param margin the amount of vertical pixels around the given area that should be made visible as well
 	 */
 	public final void scrollIntoView(Area what, int margin) {
-		if (what != null) {
-			internalScrollIntoView(what.getObject(), margin);
-		} else {
-			internalScrollIntoView(null, margin);
-		}
-	}
-
-	/**
-	 * Scrolls the given position into view. what may be null to scroll the cursor into view, a position to scroll a character
-	 * into view, a coordinate pixel range (in editor-local coordinates), or a coordinate range containing either two character
-	 * positions or two pixel squares.<br>
-	 * The margin parameter is optional.<br>
-	 * When given, it indicates the amount of vertical pixels around the given area that should be made visible as well.
-	 * 
-	 * @param what may be null to scroll the cursor into view, a position to scroll a character into view, a coordinate pixel
-	 *            range (in editor-local coordinates), or a coordinate range containing either two character positions or two
-	 *            pixel squares
-	 * @param margin the amount of vertical pixels around the given area that should be made visible as well
-	 */
-	private void internalScrollIntoView(NativeObject what, int margin) {
 		nativeObject.scrollIntoView(what, margin);
 	}
 
@@ -355,9 +324,9 @@ public class Editor {
 	 */
 	public final Area cursorCoords(boolean where, CoordinatesMode mode) {
 		if (mode != null) {
-			return Area.FACTORY.create(nativeObject.cursorCoords(where, mode.value()));
+			return nativeObject.cursorCoords(where, mode.value());
 		} else {
-			return Area.FACTORY.create(nativeObject.cursorCoords(where, CoordinatesMode.PAGE.value()));
+			return nativeObject.cursorCoords(where, CoordinatesMode.PAGE.value());
 		}
 	}
 
@@ -377,9 +346,9 @@ public class Editor {
 	public final Area cursorCoords(Position where, CoordinatesMode mode) {
 		if (where != null) {
 			if (mode != null) {
-				return Area.FACTORY.create(nativeObject.cursorCoords(where.getObject(), mode.value()));
+				return nativeObject.cursorCoords(where, mode.value());
 			} else {
-				return Area.FACTORY.create(nativeObject.cursorCoords(where.getObject(), CoordinatesMode.PAGE.value()));
+				return nativeObject.cursorCoords(where, CoordinatesMode.PAGE.value());
 			}
 		}
 		// FIXME default value
@@ -396,12 +365,12 @@ public class Editor {
 	 * @param mode coordinates mode
 	 * @return an area object containing the coordinates of the cursor position
 	 */
-	public final Area charCoords(Position where, CoordinatesMode mode) {
-		if (where != null) {
+	public final Area charCoords(Position position, CoordinatesMode mode) {
+		if (position != null) {
 			if (mode != null) {
-				return Area.FACTORY.create(nativeObject.charCoords(where.getObject(), mode.value()));
+				return nativeObject.charCoords(position, mode.value());
 			} else {
-				return Area.FACTORY.create(nativeObject.charCoords(where.getObject(), CoordinatesMode.PAGE.value()));
+				return nativeObject.charCoords(position, CoordinatesMode.PAGE.value());
 			}
 		}
 		// FIXME default value
@@ -413,16 +382,16 @@ public class Editor {
 	 * The optional mode parameter determines relative to what the coordinates are interpreted.<br>
 	 * It may be "window", "page" (the default), or "local".
 	 * 
-	 * @param object point object
+	 * @param point point object
 	 * @param mode coordinates mode
 	 * @return a position object
 	 */
-	public final Position coordsChar(Point object, CoordinatesMode mode) {
-		if (object != null) {
+	public final Position coordsChar(Point point, CoordinatesMode mode) {
+		if (point != null) {
 			if (mode != null) {
-				return Position.FACTORY.create(nativeObject.coordsChar(object.getObject(), mode.value()));
+				return nativeObject.coordsChar(point, mode.value());
 			} else {
-				return Position.FACTORY.create(nativeObject.coordsChar(object.getObject(), CoordinatesMode.PAGE.value()));
+				return nativeObject.coordsChar(point, CoordinatesMode.PAGE.value());
 			}
 		}
 		// FIXME default value
@@ -510,7 +479,7 @@ public class Editor {
 	 *         document
 	 */
 	public final Coordinate getViewport() {
-		return Coordinate.FACTORY.create(nativeObject.getViewport());
+		return nativeObject.getViewport();
 	}
 
 	/**
@@ -532,7 +501,7 @@ public class Editor {
 	// FIXME
 	public final Object getModeAt(Position position) {
 		if (position != null) {
-			return nativeObject.getModeAt(position.getObject());
+			return nativeObject.getModeAt(position);
 		}
 		// FIXME default
 		return null;
@@ -577,7 +546,7 @@ public class Editor {
 	 */
 	public final Token getTokenAt(Position pos, boolean precise) {
 		if (pos != null) {
-			return Token.FACTORY.create(nativeObject.getTokenAt(pos.getObject(), precise));
+			return Token.FACTORY.create(nativeObject.getTokenAt(pos, precise));
 		}
 		// FIXME default
 		return null;
@@ -625,7 +594,7 @@ public class Editor {
 	 */
 	public final String getTokenTypeAt(Position pos) {
 		if (pos != null) {
-			return nativeObject.getTokenTypeAt(pos.getObject());
+			return nativeObject.getTokenTypeAt(pos);
 		}
 		return UndefinedValues.STRING;
 	}

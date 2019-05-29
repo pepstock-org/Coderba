@@ -15,159 +15,138 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Defines an immutable anchor and a head (and automatically from and to) by two positions.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
  */
-public final class Anchor extends BaseEntity{
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Anchor extends BaseNativeEntity {
+
 	/**
-	 * Anchor factory to build a anchor by a native object
+	 * To avoid any instantiation
 	 */
-	public static final NativeObjectContainerFactory<Anchor> FACTORY = new AnchorFactory();
-	
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ANCHOR("anchor"),
-		HEAD("head"),
-		FROM("from"),
-		TO("to");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	private Anchor() {
+		// do nothing
 	}
 
+	/**
+	 * Creates an anchor by a range (from and to positions).
+	 * 
+	 * @param range range instance
+	 * @return an anchor instance
+	 */
+	@JsOverlay
+	public static Anchor create(Range range) {
+		// checks if argument is consistent
+		if (range == null) {
+			// if not, exception
+			throw new IllegalArgumentException("[Anchor] Range is null");
+		}
+		// creates the anchor by from and to positions of range
+		return create(range.getFrom(), range.getTo());
 
-	public Anchor(Range range) {
-		this(range.getFrom(), range.getTo());
 	}
 
-	public Anchor(Position anchor, Position head) {
-		this((NativeObject)null);
+	/**
+	 * Creates an anchor by two positions, the first as anchor, the second as head.
+	 * 
+	 * @param anchor position instance as anchor
+	 * @param head position instance as head
+	 * @return an anchor instance
+	 */
+	@JsOverlay
+	public static Anchor create(Position anchor, Position head) {
+		// checks if ANCHOR argument is consistent
 		if (anchor == null) {
-			throw new IllegalArgumentException("Anchor is null");
+			// if not, exception
+			throw new IllegalArgumentException("[Anchor] Anchor is null");
 		}
+		// checks if HEAD argument is consistent
 		if (head == null) {
-			throw new IllegalArgumentException("Head is null");
+			// if not, exception
+			throw new IllegalArgumentException("[Anchor] Head is null");
 		}
-		setAnchor(anchor);
-		setHead(head);
-		setFromAndTo();
-	}
-
-	
-	Anchor(NativeObject nativeObject){
-		super(nativeObject);
-	}
-
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public Position getAnchor() {
-		return Position.FACTORY.create(getValue(Property.ANCHOR));
+		// creates an anchor
+		Anchor object = new Anchor();
+		// sets values
+		object.setAnchor(anchor);
+		object.setHead(head);
+		// sets FROM and TO based on other values
+		object.setFromAndTo();
+		return object;
 	}
 
 	/**
-	 * Returns the top of area.
+	 * Returns the anchor position.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the anchor position
 	 */
-	public void setAnchor(Position anchor) {
-		setValue(Property.ANCHOR, anchor);
-		if (anchor != null) {
-			setFromAndTo();
-		}
-	}
-	
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public Position getHead() {
-		return Position.FACTORY.create(getValue(Property.HEAD));
-	}
+	@JsProperty
+	public native Position getAnchor();
 
 	/**
-	 * Returns the right of area.
+	 * <b>INTERNAL</b><br>
+	 * Sets the anchor position.
 	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @param anchor the anchor position
 	 */
-	public void setHead(Position head) {
-		setValue(Property.HEAD, head);
-		if (head != null) {
-			setFromAndTo();
-		}
-	}
-	
+	@JsProperty
+	private native void setAnchor(Position anchor);
+
+	/**
+	 * Returns the head position.
+	 * 
+	 * @return the head position
+	 */
+	@JsProperty
+	public native Position getHead();
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the head position.
+	 * 
+	 * @param head the head position
+	 */
+	@JsProperty
+	private native void setHead(Position head);
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the "from" property (the smaller between anchor and head).
+	 * 
+	 * @param from the "from" property (the smaller between anchor and head)
+	 */
+	@JsProperty
+	private native void setFrom(Position from);
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the "to" property (the larger between anchor and head).
+	 * 
+	 * @param to the "to" property (the smaller between anchor and head)
+	 */
+	@JsProperty
+	private native void setTo(Position to);
+
 	/**
 	 * Sets automatically FROM and TO keys, accordingly with anchor and head
 	 */
+	@JsOverlay
 	private void setFromAndTo() {
-		if (has(Property.ANCHOR, Property.HEAD)) {
-			Position anchor = getAnchor();
-			Position head = getHead();
-			setValue(Property.FROM, Position.min(anchor, head));
-			setValue(Property.TO, Position.max(anchor, head));
-		}
+		// gets anchor and head
+		Position anchor = getAnchor();
+		Position head = getHead();
+		// sets from and to based on MIN and MAX between anchor and head
+		setFrom(Position.min(anchor, head));
+		setTo(Position.max(anchor, head));
 	}
-	
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class AnchorFactory implements NativeObjectContainerFactory<Anchor> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public Anchor create(NativeObject nativeObject) {
-			Anchor anchor = new Anchor(nativeObject);
-			if (!anchor.has(Property.ANCHOR)) {
-				throw new IllegalArgumentException("Anchor field is missing");
-			}
-			if (!anchor.has(Property.HEAD)) {
-				throw new IllegalArgumentException("Head field is missing");
-			}
-			return anchor;
-		}
-
-	}
-
-	
 }

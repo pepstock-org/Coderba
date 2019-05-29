@@ -91,7 +91,7 @@ public enum Options implements Key
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
 	@Override
 	public String value() {

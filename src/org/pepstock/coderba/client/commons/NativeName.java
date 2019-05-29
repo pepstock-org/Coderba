@@ -25,8 +25,7 @@ public final class NativeName {
 	/**
 	 * Constant to bind java script object as object with name <b>{@value OBJECT}</b>.
 	 */
-	// FIXME change name
-	public static final String JSHELPER = "JsHelper";
+	public static final String JSHELPER = "CoderbaJsHelper";
 
 	/**
 	 * Constant to bind java script object as object with name <b>{@value OBJECT}</b>.
@@ -52,17 +51,6 @@ public final class NativeName {
 	 * Constant to bind java script object as ace with name <b>{@value ACE}</b>, (internal of ACE).
 	 */
 	public static final String DOCUMENT = "Doc";
-
-	/**
-	 * Constant to bind java script object as editor with name <b>{@value EDITOR}</b>, (internal of ACE).
-	 */
-	public static final String POSITION = "Pos";
-
-	/**
-	 * FIXME
-	 * Constant to bind java script object as editor with name <b>{@value EDITOR}</b>, (internal of ACE).
-	 */
-	public static final String TOKEN = "Token";
 
 	/**
 	 * To avoid any instantiation

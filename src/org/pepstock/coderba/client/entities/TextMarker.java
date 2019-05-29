@@ -15,22 +15,19 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.ObjectType;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TextMarker extends TextMarkerOptions{
-	
+public final class TextMarker extends TextMarkerOptions {
+
 	private final NativeTextMarker nativeObject;
-	
+
 	private final Document document;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -54,7 +51,7 @@ public final class TextMarker extends TextMarkerOptions{
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
@@ -68,15 +65,9 @@ public final class TextMarker extends TextMarkerOptions{
 	TextMarker(NativeTextMarker nativeObject, Document document) {
 		super(nativeObject);
 		this.nativeObject = nativeObject;
-		if (keys().isEmpty()) {
-			throw new IllegalArgumentException("Native text marker is empty!");
-		}
-		if (document == null) {
-			throw new IllegalArgumentException("Document instance is null!");
-		}
 		this.document = document;
 	}
-	
+
 	public int getId() {
 		return getValue(Property.ID, UndefinedValues.INTEGER);
 	}
@@ -84,7 +75,7 @@ public final class TextMarker extends TextMarkerOptions{
 	public boolean isCleared() {
 		return getValue(Property.EXPLICITLY_CLEARED, false);
 	}
-	
+
 	/**
 	 * Remove the mark.
 	 */
@@ -100,14 +91,8 @@ public final class TextMarker extends TextMarkerOptions{
 	 * @return
 	 */
 	public Range find() {
-		NativeObject object = nativeObject.find();
-		ObjectType type = JsHelper.get().typeOf(object);
-		if (ObjectType.UNDEFINED.equals(type)) {
-			// FIXME default
-			return null;
-		}
-		return new Range(object);
-	}; 
+		return nativeObject.find();
+	};
 
 	/**
 	 * Called when you've done something that might change the size of the marker and want to cheaply update the display.

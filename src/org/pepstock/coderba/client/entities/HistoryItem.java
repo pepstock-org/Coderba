@@ -15,10 +15,14 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.List;
+
+import org.pepstock.coderba.client.commons.ArrayAnchor;
+import org.pepstock.coderba.client.commons.ArrayHistoryChangeItem;
+import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
  * 
@@ -26,24 +30,17 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Token extends BaseEntity {
-
-	/**
-	 * Token factory to build a token by a native object
-	 * FIXME
-	 */
-	public static final NativeObjectContainerFactory<Token> FACTORY = new TokenFactory();
+public final class HistoryItem extends BaseEntity {
+	
+	static final HistoryItemFactory FACTORY = new HistoryItemFactory();
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		START("start"),
-		END("end"),
-		TYPE("type"),
-		STRING("string"),
-		STATE("state");
+		RANGES("ranges"),
+		CHANGES("changes");
 
 		// name value of property
 		private final String value;
@@ -71,62 +68,34 @@ public final class Token extends BaseEntity {
 	/**
 	 * 
 	 */
-	Token(NativeObject nativeObject) {
+	HistoryItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-
+	
 	/**
-	 * Returns the right of area.
 	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return
 	 */
-	public int getStart() {
-		return getValue(Property.START, UndefinedValues.INTEGER);
+	public boolean hasChanges() {
+		return has(Property.CHANGES);
 	}
 
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public int getEnd() {
-		return getValue(Property.END, UndefinedValues.INTEGER);
+	public List<Anchor> getRanges() {
+		ArrayAnchor array = getArrayValue(Property.RANGES);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public String getType() {
-		return getValue(Property.TYPE, UndefinedValues.STRING);
+	public List<HistoryChangeItem> getChanges() {
+		ArrayHistoryChangeItem array = getArrayValue(Property.CHANGES);
+		return ArrayListHelper.unmodifiableList(array);
 	}
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public String getString() {
-		return getValue(Property.STRING, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	// FIXME
-	public Object getState() {
-		return getValue(Property.STATE, UndefinedValues.STRING);
-	}
-
+	
 	/**
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	static class TokenFactory implements NativeObjectContainerFactory<Token> {
+	static class HistoryItemFactory implements NativeObjectContainerFactory<HistoryItem> {
 
 		/*
 		 * (non-Javadoc)
@@ -136,8 +105,8 @@ public final class Token extends BaseEntity {
 		 * NativeObject)
 		 */
 		@Override
-		public Token create(NativeObject nativeObject) {
-			return new Token(nativeObject);
+		public HistoryItem create(NativeObject nativeObject) {
+			return new HistoryItem(nativeObject);
 		}
 
 	}

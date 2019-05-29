@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
@@ -28,7 +29,7 @@ abstract class BaseEntity extends NativeObjectContainer {
 	 * 
 	 */
 	BaseEntity() {
-		this(null);
+		super();
 	}
 
 	/**
@@ -39,12 +40,19 @@ abstract class BaseEntity extends NativeObjectContainer {
 	}
 
 	/**
+	 * @param nativeObject
+	 */
+	BaseEntity(NativeCastableObject nativeObject) {
+		super(nativeObject);
+	}
+
+	/**
 	 * Returns the native object instance.
 	 * 
 	 * @return the native object instance.
 	 */
-	public final NativeObject getObject() {
+	final NativeObject getObject() {
 		return getNativeObject();
 	}
-	
+
 }

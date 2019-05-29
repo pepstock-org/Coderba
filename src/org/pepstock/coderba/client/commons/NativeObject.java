@@ -26,18 +26,19 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Base object for all native objects implemented in Charba.<br>
+ * Base object for all native objects implemented in Coderba.<br>
  * It implements some common methods and wraps some native methods.
  * 
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public class NativeObject {
+public final class NativeObject {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	protected NativeObject() {
+	NativeObject() {
+		// do nothing
 	}
 
 	/**

@@ -17,9 +17,7 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainer;
 import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.StandardKey;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
@@ -32,10 +30,11 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Phrases extends NativeObjectContainer {
-	
+public final class Phrases extends BaseEntity {
+
 	/**
-	 * Phrases factory to build a phrases object by a native object
+	 * Phrases factory to build a phrases object by a native object.
+	 * FIXME
 	 */
 	public static final NativeObjectContainerFactory<Phrases> FACTORY = new PhrasesFactory();
 
@@ -65,9 +64,9 @@ public final class Phrases extends NativeObjectContainer {
 	 * 
 	 */
 	public void setUserVisibleString(String key, String value) {
-		setUserVisibleString(new StandardKey(key), value);
+		setUserVisibleString(Key.create(key), value);
 	}
-	
+
 	/**
 	 * Some addons run user-visible strings (such as labels in the interface) through the phrase method to allow for
 	 * translation.<br>
@@ -94,7 +93,7 @@ public final class Phrases extends NativeObjectContainer {
 	 * @return a user-visible string or {@link UndefinedValues#STRING}
 	 */
 	public String getUserVisibleString(String key) {
-		return getUserVisibleString(new StandardKey(key));
+		return getUserVisibleString(Key.create(key));
 	}
 
 	/**
@@ -110,7 +109,7 @@ public final class Phrases extends NativeObjectContainer {
 	public String getUserVisibleString(Key key) {
 		return getValue(key, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -121,7 +120,8 @@ public final class Phrases extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
+		 * @see
+		 * org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
 		 * NativeObject)
 		 */
 		@Override

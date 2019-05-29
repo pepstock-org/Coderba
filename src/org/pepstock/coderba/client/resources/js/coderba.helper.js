@@ -18,7 +18,7 @@
 		and needed to improve JSINTEROP adoption for EDIRBA, because 
 		JSINTEROP is not able to address all javascript model.   
 	*/
-    function JsHelper() {};
+    function CoderbaJsHelper() {};
     /*
 	 This method determines whether the passed property of passed object is an Array.
 	  
@@ -26,7 +26,7 @@
 	 @param key the string name of the property to test.
 	 @return true if the value is an Array; otherwise, false.
     */
-    JsHelper.isArray = function(obj, key) {
+    CoderbaJsHelper.isArray = function(obj, key) {
 	    return Array.isArray(obj[key]);
     }  
     /*
@@ -35,7 +35,7 @@
 	 @param object the object to get type.
 	 @return the object type
     */
-    JsHelper.typeOf = function(obj) {
+    CoderbaJsHelper.typeOf = function(obj) {
     	return typeof obj;
     }
    /*
@@ -44,7 +44,7 @@
 	 @param object the object on which to remove the property.
 	 @param key the string name of the property to remove.
     */
-    JsHelper.remove = function(obj, key) {
+    CoderbaJsHelper.remove = function(obj, key) {
     	delete obj[key];
     }
     /*
@@ -54,8 +54,18 @@
 	 @param key the string name of the property to test.
 	 @return the object type
     */
-    JsHelper.type = function(obj, key) {
+    CoderbaJsHelper.type = function(obj, key) {
     	return typeof obj[key];
+    }
+   /*
+	 Returns the java script object type of a property.
+	  
+	 @param object the object on which to search the property.
+	 @param key the string name of the property to test.
+	 @return the object type
+    */
+    CoderbaJsHelper.cast = function(obj) {
+    	return obj;
     }
     /*
 	 Returns the java script object type of a property.
@@ -64,7 +74,7 @@
 	 @param key the string name of the property to test.
 	 @return the object type
     */
-    JsHelper.cloneProperty = function(source, target, key) {
+    CoderbaJsHelper.cloneProperty = function(source, target, key) {
     	Object.defineProperty(target, key, {
   			value: source[key],
   			writable: true,
@@ -78,7 +88,7 @@
 	  
 	 @return new proxy for callback.
     */
-    JsHelper.newCallbackProxy = function() {
+    CoderbaJsHelper.newCallbackProxy = function() {
     	/*
     		Creates an object with 2 properties.
     		CALLBACK: contains user callback implementation which must be called

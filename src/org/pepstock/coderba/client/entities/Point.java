@@ -15,9 +15,12 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
@@ -25,80 +28,54 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Point extends BaseEntity {
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public class Point extends BaseNativeEntity {
+
 	/**
-	 * Name of properties of native object.
+	 * To avoid any instantiation
 	 */
-	protected enum Property implements Key
-	{
-		TOP("top"),
-		LEFT("left");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	Point() {
+		// do nothing
 	}
-	
-	/**
-	 * 
-	 */
-	Point(NativeObject nativeObject) {
-		super(nativeObject);
+
+	@JsOverlay
+	public static Point create(int top, int left) {
+		Point point = new Point();
+		point.setTop(top);
+		point.setLeft(left);
+		return point;
 	}
-	
-	
+
 	/**
 	 * Sets the top location in pixel
 	 * 
 	 * @param top the top location in pixel
 	 */
-	public final void setTop(int top) {
-		setValue(Property.TOP, top);
-	}
-	
+	@JsProperty
+	protected final native void setTop(int top);
+
 	/**
 	 * Returns the top of area.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the top of area.
 	 */
-	public final int getTop() {
-		return getValue(Property.TOP, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the left of area.
-	 * 
-	 * @return the left of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public final int getLeft() {
-		return getValue(Property.LEFT, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public final native int getTop();
 
 	/**
 	 * Sets the left location in pixel
 	 * 
 	 * @param left the left location in pixel
 	 */
-	public final void setLeft(int left) {
-		setValue(Property.LEFT, left);
-	}
+	@JsProperty
+	protected final native void setLeft(int left);
+
+	/**
+	 * Returns the left of area.
+	 * 
+	 * @return the left of area.
+	 */
+	@JsProperty
+	public final native int getLeft();
+
 }

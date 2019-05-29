@@ -16,7 +16,6 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.enums.TextMarkerType;
 
@@ -168,7 +167,7 @@ public class TextMarkerOptions extends BaseEntity {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
@@ -189,7 +188,7 @@ public class TextMarkerOptions extends BaseEntity {
 		}
 	}
 
-	TextMarkerOptions(NativeObject nativeObject) {
+	TextMarkerOptions(NativeTextMarker nativeObject) {
 		super(nativeObject);
 		this.type = getValue(Property.TYPE, TextMarkerType.class, TextMarkerType.RANGE);
 	}

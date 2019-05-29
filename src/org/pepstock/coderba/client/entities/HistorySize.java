@@ -24,10 +24,10 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HistorySize extends BaseEntity{
-	
+public final class HistorySize extends BaseEntity {
+
 	public static final int EMPTY_HISTORY = 0;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -51,15 +51,15 @@ public final class HistorySize extends BaseEntity{
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
 			return value;
 		}
 	}
-	
-	HistorySize(NativeObject nativeObject){
+
+	HistorySize(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
@@ -80,5 +80,5 @@ public final class HistorySize extends BaseEntity{
 	public int getRedo() {
 		return getValue(Property.REDO, EMPTY_HISTORY);
 	}
-	
+
 }

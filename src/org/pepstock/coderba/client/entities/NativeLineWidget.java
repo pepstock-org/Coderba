@@ -15,8 +15,8 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
-import org.pepstock.coderba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -35,7 +35,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineWidget extends NativeObject {
+public final class NativeLineWidget extends NativeCastableObject{
 
 	/**
 	 * To avoid any instantiation
@@ -52,7 +52,7 @@ public final class NativeLineWidget extends NativeObject {
 	 */
 	@JsProperty
 	native int getId();
-	
+
 	/**
 	 * Returns the line handle.
 	 * 

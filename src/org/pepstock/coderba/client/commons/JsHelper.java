@@ -101,13 +101,14 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Removes a property from a java script object.
-	 * 
-	 * @param object the object on which to remove the property.
-	 * @param key the string name of the property to remove.
+	 * FIXME
 	 */
 	void cloneProperty(Object source,Object target, Key key) {
 		NativeJsHelper.cloneProperty(source, target, key.value());
+	}
+	
+	NativeObject cast(Object object) {
+		return NativeJsHelper.cast(object);
 	}
 
 }

@@ -40,13 +40,13 @@ import org.pepstock.coderba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  */
 public final class LinkedDocumentOptions extends BaseEntity {
-	
+
 	public static final boolean DEFAULT_SHARED_HIST = false;
 
 	public static final int DEFAULT_FROM_TO = 0;
-	
+
 	public static final String DEFAULT_MODE = CodeMirror.get().getDefaults().getLanguage().getName();
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -72,7 +72,7 @@ public final class LinkedDocumentOptions extends BaseEntity {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
@@ -107,11 +107,11 @@ public final class LinkedDocumentOptions extends BaseEntity {
 	public void setTo(int to) {
 		setValue(Property.TO, to);
 	}
-	
-//	public Language getLanguage() {
-//		String languageName = getValue(Property.MODE, DEFAULT_MODE);
-//		return Languages.get().retrieve(languageName);
-//	}
+
+	// public Language getLanguage() {
+	// String languageName = getValue(Property.MODE, DEFAULT_MODE);
+	// return Languages.get().retrieve(languageName);
+	// }
 
 	public void setLanguage(Language language) {
 		if (language != null && language.getName() != null) {

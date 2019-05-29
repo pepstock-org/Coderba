@@ -19,14 +19,45 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * FIXME
+ * Regular expressions are patterns used to match character combinations in strings.<br>
+ * In JavaScript, regular expressions are also objects.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public final class RegExp {
-	
-	public native void compile(String s, String a);
-	
+
+	/**
+	 * Creates a regular expression. See
+	 * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
+	 * 
+	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider
+	 *            range of values than would a literal string.
+	 */
+	public RegExp(String pattern) {
+		// do nothing
+	}
+
+	/**
+	 * Creates a regular expression. See
+	 * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">MDN RegExp</a>.
+	 * 
+	 * @param pattern the text of the regular expression. Patterns can include special characters so they can match a wider
+	 *            range of values than would a literal string.
+	 * @param flags If specified, flags indicates the flags to add. If flags is not specified and a regular expressions object
+	 *            is supplied, that object's flags (and lastIndex value) will be copied over.
+	 */
+	public RegExp(String pattern, String flags) {
+		// do nothing
+	}
+
+	/**
+	 * Executes a search for a match in a string.<br>
+	 * It returns an array of information or null on a mismatch.
+	 * 
+	 * @param s string to use for matching
+	 * @return an array of information or null on a mismatch.
+	 */
 	public native RegExpResult exec(String s);
 }

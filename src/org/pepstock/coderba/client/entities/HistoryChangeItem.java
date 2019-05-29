@@ -15,10 +15,15 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.List;
+
+import org.pepstock.coderba.client.commons.ArrayListHelper;
+import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -28,51 +33,27 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class Area extends Point {
+public final class HistoryChangeItem extends Range {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private Area() {
+	private HistoryChangeItem() {
 		// do nothing
 	}
 
+	/**
+	 * Returns the starting position of range in editor documents.
+	 * 
+	 * @return the starting position of range in editor documents.
+	 */
+	@JsProperty(name = "text")
+	private native ArrayString nativeGetText();
+	
 	@JsOverlay
-	public static Area create(int top, int left, int bottom, int right) {
-		Area area = new Area();
-		area.setTop(top);
-		area.setLeft(left);
-		area.setBottom(bottom);
-		area.setRight(right);
-		return area;
+	public List<String> getText(){
+		ArrayString array = nativeGetText();
+		return ArrayListHelper.unmodifiableList(array);
 	}
-
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area.
-	 */
-	public native int getRight();
-
-	/**
-	 * Sets the right location in pixel
-	 * 
-	 * @param right the right location in pixel
-	 */
-	private native void setRight(int right);
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area.
-	 */
-	public native int getBottom();
-
-	/**
-	 * Sets the bottom location in pixel
-	 * 
-	 * @param bottom the bottom location in pixel
-	 */
-	private native void setBottom(int bottom);
 
 }

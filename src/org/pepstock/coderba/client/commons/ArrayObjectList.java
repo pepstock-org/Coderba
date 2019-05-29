@@ -59,7 +59,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.AbstractArrayList#getArray()
+	 * @see org.pepstock.coderba.client.commons.AbstractArrayList#getArray()
 	 */
 	@Override
 	ArrayObject getArray() {

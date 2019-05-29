@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.NativeName;
 
@@ -61,8 +62,7 @@ final class NativeLineInfo {
 	@JsProperty
 	native String getWrapClass();
 
-	// FIXME
 	@JsProperty
-	native Object getWidgets();
+	native ArrayObject getWidgets();
 
 }

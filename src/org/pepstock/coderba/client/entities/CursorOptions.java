@@ -35,11 +35,11 @@ import org.pepstock.coderba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  */
 public final class CursorOptions extends BaseEntity {
-	
+
 	public static final boolean DEFAULT_SCROLL = true;
-	
+
 	public static final String DEFAULT_ORIGIN = "+input";
-	
+
 	public static final int DEFAULT_BIAS = 1;
 
 	/**
@@ -66,7 +66,7 @@ public final class CursorOptions extends BaseEntity {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
+		 * @see org.pepstock.coderba.client.commons.Key#value()
 		 */
 		@Override
 		public String value() {
@@ -75,59 +75,34 @@ public final class CursorOptions extends BaseEntity {
 	}
 
 	public CursorOptions() {
-		super(null);
+		super();
 	}
 
 	/**
-	 * Returns the top of area.
+	 * Determines whether the selection head should be scrolled into view.
 	 * 
-	 * @return the top of area. Default is {@link DEFAULT_SCROLL}.
+	 * @return <code>true</code> whether the selection head should be scrolled into view
 	 */
 	public boolean isScroll() {
 		return getValue(Property.SCROLL, DEFAULT_SCROLL);
 	}
 
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area.
-	 */
 	public void setScroll(boolean scroll) {
 		setValue(Property.SCROLL, scroll);
 	}
 
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link DEFAULT_SCROLL}.
-	 */
 	public String getOrigin() {
 		return getValue(Property.ORIGIN, DEFAULT_ORIGIN);
 	}
 
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area.
-	 */
 	public void setOrigin(String origin) {
 		setValue(Property.ORIGIN, origin);
 	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link DEFAULT_SCROLL}.
-	 */
+
 	public int getBias() {
 		return getValue(Property.BIAS, DEFAULT_BIAS);
 	}
 
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area.
-	 */
 	public void setBias(int bias) {
 		setValue(Property.BIAS, bias);
 	}

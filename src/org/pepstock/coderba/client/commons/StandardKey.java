@@ -24,28 +24,28 @@ package org.pepstock.coderba.client.commons;
  */
 public final class StandardKey implements Key {
 
-	private final String id;
+	private final String value;
 
 	/**
-	 * Builds the object with the key id as string
+	 * Builds the object with the key as string
 	 * 
-	 * @param id id of key as String
+	 * @param key key as string
 	 */
-	public StandardKey(String id) {
-		if (id == null) {
-			throw new IllegalArgumentException("Key id is null");
+	StandardKey(String key) {
+		if (key == null) {
+			throw new IllegalArgumentException("Key is null");
 		}
-		this.id = id;
+		this.value = key;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
 	@Override
 	public String value() {
-		return id;
+		return value;
 	}
 
 }

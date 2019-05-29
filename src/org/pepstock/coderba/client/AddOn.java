@@ -16,13 +16,18 @@
 package org.pepstock.coderba.client;
 
 /**
+ * CodeMirror distribution contains a number of reusable components that implement extra editor functionality.<br>
+ * This object maps abstractly those components.
+ *  
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class AddOn extends InjectableItem {
 
 	/**
-	 * @param value
+	 * Creates the object with the mandatory name of addon.
+	 * 
+	 * @param value the mandatory name of addon
 	 */
 	protected AddOn(String name) {
 		super(name);

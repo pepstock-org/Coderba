@@ -23,7 +23,9 @@ import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Phrases;
+import org.pepstock.coderba.client.entities.Position;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
@@ -36,15 +38,15 @@ import org.pepstock.coderba.client.utils.RegExp;
  *
  */
 public final class GlobalDefaults implements IsDefaultOptions {
-	
+
 	private static final GlobalDefaults INSTANCE = new GlobalDefaults();
-	
+
 	private static final String DEFAULT_VALUE = "";
-	
+
 	private static final Language DEFAULT_LANGUAGE = PlainText.LANGUAGE;
-	
+
 	private static final Theme DEFAULT_THEME = Default.THEME;
-	
+
 	/**
 	 * The default is "default", which is the only key map defined in codemirror itself.
 	 */
@@ -130,12 +132,16 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	private static final int DEFAULT_WORK_TIME = 200;
 
 	private static final int DEFAULT_WORK_DELAY = 300;
-	
+
 	private static final Phrases DEFAULT_PHRASES = null;
-	
+
 	private static final List<String> DEFAULT_GUTTERS = Collections.emptyList();
-	
+
 	private static final List<String> DEFAULT_ALLOW_DROP_FILE_TYPES = Collections.emptyList();
+
+	private static final Position DEFAULT_POSITION = Position.create();
+	
+	private static final Anchor DEFAULT_ANCHOR = Anchor.create(DEFAULT_POSITION, DEFAULT_POSITION);
 
 	/**
 	 * To avoid any instantiation
@@ -143,7 +149,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	private GlobalDefaults() {
 		// do nothing
 	}
-	
+
 	public static GlobalDefaults get() {
 		return INSTANCE;
 	}
@@ -157,7 +163,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	public String getValue() {
 		return DEFAULT_VALUE;
 	}
-	
+
 	/**
 	 * Returns the language to apply to the editor
 	 * 
@@ -189,7 +195,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	 * @return the theme to style the editor with
 	 */
 	@Override
-	public Theme getTheme(){
+	public Theme getTheme() {
 		return DEFAULT_THEME;
 	}
 
@@ -515,7 +521,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 		return DEFAULT_DRAG_DROP;
 	}
 
-
 	/**
 	 * When set (default is null) only files whose type is in the array can be dropped into the editor.<br>
 	 * The strings should be MIME types, and will be checked against the type of the File object as reported by the browser.
@@ -570,7 +575,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	 */
 	@Override
 	public boolean isResetSelectionOnContextMenu() {
-		return  DEFAULT_RESET_SELECTION_ON_CONTEXT_MENU;
+		return DEFAULT_RESET_SELECTION_ON_CONTEXT_MENU;
 	}
 
 	/**
@@ -687,6 +692,24 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	@Override
 	public int getWorkDelay() {
 		return DEFAULT_WORK_DELAY;
+	}
+
+	/**
+	 * Returns the default position.
+	 * 
+	 * @return the default position
+	 */
+	public Position getPosition() {
+		return DEFAULT_POSITION;
+	}
+	
+	/**
+	 * Returns the default anchor.
+	 * 
+	 * @return the default anchor
+	 */
+	public Anchor getAnchor() {
+		return DEFAULT_ANCHOR;
 	}
 
 }

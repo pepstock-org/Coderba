@@ -17,257 +17,285 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.CodeMirror;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.defaults.GlobalDefaults;
 import org.pepstock.coderba.client.enums.StickyPosition;
 
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * Whenever points in the document are represented, the API uses objects with "line" and "ch" properties. Both are zero-based.
- * CodeMirror makes sure to 'clip' any positions passed by client code so that they fit inside the document, so you shouldn't
- * worry too much about sanitizing your coordinates. If you give ch a value of null, or don't specify it, it will be replaced
- * with the length of the specified line. Such positions may also have a sticky property holding "before" or "after", whether
- * the position is associated with the character before or after it. This influences, for example, where the cursor is drawn on
- * a line-break or bidi-direction boundary
+ * Whenever points in the document are represented, the API uses objects with "line" and "ch"(column) properties, mapped by this
+ * immutable object.<br>
+ * Both are zero-based.<br>
+ * Such positions may also have a sticky property holding "before" or "after", whether the position is associated with the
+ * character before or after it.<br>
+ * This influences, for example, where the cursor is drawn on a line-break or bidi-direction boundary
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Position extends BaseEntity {
-	
-	public static final int DEFAULT_COLUMN = Integer.MAX_VALUE;
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Position extends BaseNativeEntity {
+
 	/**
-	 * Token factory to build a token by a native object
+	 * To avoid any instantiation
 	 */
-	public static final NativeObjectContainerFactory<Position> FACTORY = new PositionFactory();
-	
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		LINE("line"),
-		COLUMN("ch"),
-		STICKY("sticky"),
-		HIT_SIDE("hitSide");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	private Position() {
+		// do nothing
 	}
 
 	/**
-	 * A constructor for the objects that are used to represent the line in editor documents.
+	 * A constructor for the objects that are used to represent the first line number in editor documents.<br>
+	 * By default the column is 0, the starting of the line.
 	 * 
-	 * @param line line into document
-	 * @return a position only with the line. Column will be set with the length of the specified line.
+	 * @return a position with the first line number. Column will be set to 0
 	 */
-	public Position() {
-		this(CodeMirror.get().getDefaults().getFirstLineNumber(), 0);
-		
+	@JsOverlay
+	public static Position create() {
+		return create(CodeMirror.get().getDefaults().getFirstLineNumber(), 0);
+
 	}
 
 	/**
-	 * A constructor for the objects that are used to represent positions in editor documents. sticky defaults to null, but can
-	 * be set to "before" or "after" to make the position explicitly associate with the character before or after it.
+	 * A constructor for the objects that are used to represent positions in editor documents, using the passed line number.<br>
+	 * By default the column will be set to end of line (using {@link Integer#MAX_VALUE}).
 	 * 
-	 * @param line line into document
-	 * @param column column into document
+	 * @param line line number into document
+	 * @return a position with passed line number. Column will be set to {@link Integer#MAX_VALUE}
+	 */
+	@JsOverlay
+	public static Position create(int line) {
+		return create(line, Integer.MAX_VALUE);
+	}
+
+	/**
+	 * A constructor for the objects that are used to represent positions in editor documents, using the passed line and column
+	 * numbers.
+	 * 
+	 * @param line line number into document
+	 * @param column column number into document
+	 * @return a position with passed line and column numbers
+	 */
+	@JsOverlay
+	public static Position create(int line, int column) {
+		return create(line, column, null);
+	}
+
+	/**
+	 * A constructor for the objects that are used to represent positions in editor documents, using the passed line and column
+	 * numbers.<br>
+	 * The sticky can be set to "before" or "after" to make the position explicitly associate with the character before or after
+	 * it.
+	 * 
+	 * @param line line number into document
+	 * @param column column number into document
 	 * @param sticky before" or "after", whether the position is associated with the character before or after it.
-	 * @return a position object
+	 * @return a position with passed line and column numbers
 	 */
-	public Position(int line) {
-		this(line, DEFAULT_COLUMN);		
+	@JsOverlay
+	public static Position create(int line, int column, StickyPosition sticky) {
+		// creates object
+		Position position = new Position();
+		// sets all values
+		position.setLine(line);
+		position.setColumn(column);
+		position.setSticky(sticky);
+		return position;
 	}
 
 	/**
-	 * A constructor for the objects that are used to represent positions in editor documents. sticky defaults to null, but can
-	 * be set to "before" or "after" to make the position explicitly associate with the character before or after it.
+	 * Clones a object that are used to represent positions in editor documents.<br>
+	 * If source is <code>null</code>, a default position is created, with the first line number and column 0.
 	 * 
-	 * @param line line into document
-	 * @param column column into document
-	 * @param sticky before" or "after", whether the position is associated with the character before or after it.
-	 * @return a position object
+	 * @param source source position to clone
+	 * @return new position instance, clone of source one or a default one if source instance is <code>null</code>
 	 */
-	public Position(int line, int column) {
-		this(line, column, null);		
-	}
-
-	/**
-	 * A constructor for the objects that are used to represent positions in editor documents. sticky defaults to null, but can
-	 * be set to "before" or "after" to make the position explicitly associate with the character before or after it.
-	 * 
-	 * @param line line into document
-	 * @param column column into document
-	 * @param sticky before" or "after", whether the position is associated with the character before or after it.
-	 * @return a position object
-	 */
-	public Position(int line, int column, StickyPosition sticky) {
-		this(null);
-		setLine(line);
-		setColumn(column);
-		setSticky(sticky);
-	}
-
-	/**
-	 * FIXME
-	 * @param nativeObject
-	 */
-	Position(NativeObject nativeObject){
-		super(nativeObject);
-	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is {@link GlobalDefaults#getFirstLineNumber()}.
-	 */
-	public int getLine() {
-		return getValue(Property.LINE, UndefinedValues.INTEGER);
-	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is .
-	 */
-	private void setLine(int line) {
-		setValue(Property.LINE, line);
-	}
-
-	/**
-	 * Returns the right of area.
-	 * 
-	 * @return the right of area. Default is {@link Integer#MAX_VALUE}.
-	 */
-	public int getColumn() {
-		return getValue(Property.COLUMN, DEFAULT_COLUMN);
-	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is .
-	 */
-	private void setColumn(int character) {
-		setValue(Property.COLUMN, character);
-	}
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public StickyPosition getSticky() {
-		return getValue(Property.STICKY, StickyPosition.class, StickyPosition.AFTER);
-	}
-	
-	/**
-	 * Returns the top of area.
-	 * 
-	 * @return the top of area. Default is .
-	 */
-	public void setSticky(StickyPosition sticky) {
-		if (Key.isValid(sticky)) {
-			setValue(Property.STICKY, sticky);
-		}
-	}
-	
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public boolean isHitSide() {
-		return getValue(Property.HIT_SIDE, false);
-	}
-	
+	@JsOverlay
 	public static Position create(Position source) {
+		// checks if argument is consistent
 		if (source != null) {
-			Position clonedPosition = new Position(source.getLine(), source.getColumn());
-			if (source.has(Property.STICKY)) {
-				clonedPosition.setSticky(source.getSticky());
-			}
+			// create new position
+			Position clonedPosition = create(source.getLine(), source.getColumn());
+			// sets sticky if present
+			clonedPosition.nativeSetSticky(source.checkAndGet("sticky", source.nativeGetSticky(), null));
+			// returns cloned position
 			return clonedPosition;
 		}
-		return new Position();
+		// returns default position
+		return GlobalDefaults.get().getPosition();
 	}
-	
+
 	/**
-	 * Compare two positions, return 0 if they are the same, a negative number when a is less, and a positive number otherwise.
+	 * Returns the line number in editor documents.
 	 * 
-	 * @param a
-	 * @param b
-	 * @return
+	 * @return the line number in editor documents
 	 */
-	public static int compare(Position a, Position b) {
-		if (a != null) {
-			if (b != null) {
-				int diff = a.getLine() - b.getLine();
+	@JsProperty
+	public native int getLine();
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the line number in editor documents.
+	 * 
+	 * @param line the line number in editor documents
+	 */
+	@JsProperty
+	private native void setLine(int line);
+
+	/**
+	 * Returns the column number in editor documents.
+	 * 
+	 * @return the column number in editor documents
+	 */
+	@JsProperty(name = "ch")
+	public native int getColumn();
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the column number in editor documents.
+	 * 
+	 * @param column the column number in editor documents
+	 */
+	@JsProperty(name = "ch")
+	private native void setColumn(int column);
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Returns the sticky attribute.<br>
+	 * The sticky can be set to <code>null</code>, "before" or "after" to make the position explicitly associate with the
+	 * character before or after it.
+	 * 
+	 * @return can return <code>null</code>, "before" or "after" to make the position explicitly associate with the character
+	 *         before or after it
+	 */
+	@JsProperty(name = "sticky")
+	private native String nativeGetSticky();
+
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the sticky attribute.<br>
+	 * The sticky can be set to <code>null</code>, "before" or "after" to make the position explicitly associate with the
+	 * character before or after it.
+	 * 
+	 * @param sticky can be set to <code>null</code>, "before" or "after" to make the position explicitly associate with the
+	 *            character before or after it
+	 */
+	@JsProperty(name = "sticky")
+	private native void nativeSetSticky(String sticky);
+
+	/**
+	 * Returns the sticky attribute.<br>
+	 * The sticky can be set to {@link StickyPosition#NULL}, {@link StickyPosition#BEFORE} or {@link StickyPosition#AFTER} to
+	 * make the position explicitly associate with the character before or after it.
+	 * 
+	 * @return can return {@link StickyPosition#NULL}, {@link StickyPosition#BEFORE} or {@link StickyPosition#AFTER} to make the
+	 *         position explicitly associate with the character before or after it.
+	 */
+	@JsOverlay
+	public StickyPosition getSticky() {
+		return Key.getKeyByValue(StickyPosition.class, nativeGetSticky(), StickyPosition.NULL);
+	}
+
+	/**
+	 * Sets the sticky attribute.<br>
+	 * The sticky can be set to {@link StickyPosition#NULL}, {@link StickyPosition#BEFORE} or {@link StickyPosition#AFTER} to
+	 * make the position explicitly associate with the character before or after it.
+	 * 
+	 * @param sticky can be set to {@link StickyPosition#NULL}, {@link StickyPosition#BEFORE} or {@link StickyPosition#AFTER} to
+	 *            make the position explicitly associate with the character before or after it.
+	 */
+	@JsOverlay
+	public void setSticky(StickyPosition sticky) {
+		// checks if argument is consistent and is not set to NULL
+		if (Key.isValid(sticky) && !StickyPosition.NULL.equals(sticky)) {
+			nativeSetSticky(sticky.value());
+		} else {
+			// if here, argument not consistent, sets null
+			nativeSetSticky(null);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> when the motion was clipped by hitting the end or start of the document.
+	 * 
+	 * @return <code>true</code> when the motion was clipped by hitting the end or start of the document
+	 */
+	@JsProperty
+	public native boolean isHitSide();
+
+	/**
+	 * Compares two positions. Returns a negative integer, zero, or a positive integer as first position argument is less than,
+	 * equal to, or greater than the second argument.
+	 * 
+	 * @param firstPosition first position to use
+	 * @param secondPosition second position to use
+	 * @return a negative integer, zero, or a positive integer as first position argument is less than, equal to, or greater
+	 *         than the second argument
+	 */
+	@JsOverlay
+	public static int compare(Position firstPosition, Position secondPosition) {
+		// checks if first is not null
+		if (firstPosition != null) {
+			// checks if second is not null
+			if (secondPosition != null) {
+				// if here, both positions are consistent and
+				// then checks the lines and columns
+				int diff = firstPosition.getLine() - secondPosition.getLine();
+				// checks if both positions have got the same line number
 				if (diff == 0) {
-					return a.getColumn() - b.getColumn();
+					// if equals
+					// checks the column
+					return firstPosition.getColumn() - secondPosition.getColumn();
 				}
+				// if here, lines are not equals
 				return diff;
 			} else {
+				// if here, second position is null
+				// then the first position is greater than
 				return 1;
 			}
 		} else {
-			if (b != null) {
+			// if here, the first position is null
+			// checks if second is not null
+			if (secondPosition != null) {
+				// if here, first position is null
+				// then the second position is greater than
 				return -1;
 			} else {
+				// if here both first and second positions are null
+				// then equals
 				return 0;
 			}
 		}
 	}
-	
-	public static Position max(Position a, Position b) {
-		return compare(a, b) < 0 ? b : a;
-	}
 
-	public static Position min(Position a, Position b) {
-		return compare(a, b) < 0 ? a : b;
-	}
-	
 	/**
+	 * Returns the greater of two positions.<br>
+	 * If the arguments have the same value, the result is the first position.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @param firstPosition first position to use
+	 * @param secondPosition second position to use
+	 * @return the larger of first and second position.
 	 */
-	static class PositionFactory implements NativeObjectContainerFactory<Position>{
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.NativeObject)
-		 */
-		@Override
-		public Position create(NativeObject nativeObject) {
-			Position position = new Position(nativeObject);
-			if (!position.has(Property.LINE)) {
-				throw new IllegalArgumentException("'line' field is missing!");
-			}
-			if (!position.has(Property.COLUMN)) {
-				throw new IllegalArgumentException("'ch' field is missing!");
-			}
-			return position;
-		}
+	@JsOverlay
+	public static Position max(Position firstPosition, Position secondPosition) {
+		return compare(firstPosition, secondPosition) < 0 ? secondPosition : firstPosition;
 	}
+
+	/**
+	 * Returns the smaller of two positions.<br>
+	 * If the arguments have the same value, the result is the second position.
+	 * 
+	 * @param firstPosition first position to use
+	 * @param secondPosition second position to use
+	 * @return the smaller of first and second position.
+	 */
+	@JsOverlay
+	public static Position min(Position firstPosition, Position secondPosition) {
+		return compare(firstPosition, secondPosition) < 0 ? firstPosition : secondPosition;
+	}
+
 }

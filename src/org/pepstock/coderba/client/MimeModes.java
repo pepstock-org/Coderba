@@ -18,7 +18,6 @@ package org.pepstock.coderba.client;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
-import org.pepstock.coderba.client.commons.StandardKey;
 
 /**
  * 
@@ -34,7 +33,7 @@ public final class MimeModes extends NativeObjectContainer {
 	}
 
 	public NativeObject getMimeMode(Language language) {
-		Key key = new StandardKey(language.getName());
+		Key key = Key.create(language.getName());
 		if (has(key)) {
 			return getValue(key);
 		}
