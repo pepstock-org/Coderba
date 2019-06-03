@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeJsx;
 
 /**
  * Is the "JSX" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class JSX implements Language {
+public final class JSX extends Language{
 
-	private final String name = "text/jsx";
+	private static final String NAME = "text/jsx";
 
-	private final String longName = "JSX";
+	private static final String LONG_NAME = "JSX";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Jsx.MODE;
+	private static final Mode MODE = ModeJsx.MODE;
 
 	public static final JSX LANGUAGE = new JSX();
 
@@ -38,36 +39,27 @@ public class JSX implements Language {
 	 * To avoid any instantiation
 	 */
 	private JSX() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

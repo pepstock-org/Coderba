@@ -18,16 +18,13 @@ package org.pepstock.coderba.client;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.pepstock.coderba.client.commons.HasName;
 import org.pepstock.coderba.client.resources.InjectableResource;
 
 /**
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class InjectableItem implements HasName {
-	
-	private final String name; 
+public abstract class InjectableItem extends NamedItem {
 	
 	private final Collection<InjectableResource> resources = new ArrayList<>();
 
@@ -35,17 +32,7 @@ public abstract class InjectableItem implements HasName {
 	 * 
 	 */
 	InjectableItem(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Mode name is null");
-		}
-		this.name = name;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public final String getName() {
-		return name;
+		super(name);
 	}
 	
 	protected final Collection<InjectableResource> getResources(){

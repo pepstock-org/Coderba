@@ -18,9 +18,6 @@ package org.pepstock.coderba.client.commons;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.coderba.client.entities.Anchor;
-import org.pepstock.coderba.client.entities.HistoryChangeItem;
-
 /**
  * Utility to create array list objects from java script arrays.
  * 
@@ -88,29 +85,16 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a array list of anchor java script objects by a java script array.
+	 * Creates a array list of native entities java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of anchors instance
+	 * @return a array list of native entities instance
 	 */
-	public static ArrayAnchorList list(ArrayAnchor values) {
+	public static <E extends NativeEntity> ArrayEntityList<E> list(ArrayEntity<E> values) {
 		// creates the list
 		// if values not consistent
 		// creates an empty list
-		return new ArrayAnchorList(values);
-	}
-	
-	/**
-	 * Creates a array list of history change item java script objects by a java script array.
-	 * 
-	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of history change items instance
-	 */
-	public static ArrayHistoryChangeItemList list(ArrayHistoryChangeItem values) {
-		// creates the list
-		// if values not consistent
-		// creates an empty list
-		return new ArrayHistoryChangeItemList(values);
+		return new ArrayEntityList<>(values);
 	}
 	
 	/**
@@ -170,22 +154,12 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates an unmodifiable array list of anchor java script objects by a java script array.
+	 * Creates an unmodifiable array list of native entity java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of anchors instance
+	 * @return a array list of native entities instance
 	 */
-	public static List<Anchor> unmodifiableList(ArrayAnchor values) {
-		return Collections.unmodifiableList(list(values));
-	}
-	
-	/**
-	 * Creates an unmodifiable array list of history change item java script objects by a java script array.
-	 * 
-	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of history change items instance
-	 */
-	public static List<HistoryChangeItem> unmodifiableList(ArrayHistoryChangeItem values) {
+	public static <E extends NativeEntity> List<E> unmodifiableList(ArrayEntity<E> values) {
 		return Collections.unmodifiableList(list(values));
 	}
 	

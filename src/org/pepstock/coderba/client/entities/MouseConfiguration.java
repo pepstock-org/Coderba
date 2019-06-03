@@ -16,7 +16,6 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.EditorAreas;
 import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.callbacks.MouseUnitHandler;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -131,7 +130,7 @@ public final class MouseConfiguration extends BaseEntity {
 	 * @return a range around that, for a custom unit
 	 */
 	private Range onMouseUnit(NativeEditor editor, Position pos) {
-		EditorArea area = EditorAreas.get(editor.getId());
+		EditorArea area = editor.getEditorArea();
 		if (area != null && mouseUnit != null) {
 			Range result = mouseUnit.handle(area, pos);
 			if (result != null) {

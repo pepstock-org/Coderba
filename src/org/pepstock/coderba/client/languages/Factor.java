@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeFactor;
 
 /**
  * Is the "Factor" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Factor implements Language {
+public final class Factor extends Language{
 
-	private final String name = "text/x-factor";
+	private static final String NAME = "text/x-factor";
 
-	private final String longName = "Factor";
+	private static final String LONG_NAME = "Factor";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Factor.MODE;
+	private static final Mode MODE = ModeFactor.MODE;
 
 	public static final Factor LANGUAGE = new Factor();
 
@@ -38,36 +39,27 @@ public class Factor implements Language {
 	 * To avoid any instantiation
 	 */
 	private Factor() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

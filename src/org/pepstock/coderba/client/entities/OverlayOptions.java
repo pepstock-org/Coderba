@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -37,7 +38,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class OverlayOptions extends BaseNativeEntity {
+public final class OverlayOptions extends NativeEntity {
 
 	/**
 	 * Creates an empty options.

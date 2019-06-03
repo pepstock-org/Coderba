@@ -17,8 +17,7 @@ package org.pepstock.coderba.client.entities;
 
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.ArrayAnchor;
-import org.pepstock.coderba.client.commons.ArrayHistoryChangeItem;
+import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
@@ -81,12 +80,12 @@ public final class HistoryItem extends BaseEntity {
 	}
 
 	public List<Anchor> getRanges() {
-		ArrayAnchor array = getArrayValue(Property.RANGES);
+		ArrayEntity<Anchor> array = getArrayValue(Property.RANGES);
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	public List<HistoryChangeItem> getChanges() {
-		ArrayHistoryChangeItem array = getArrayValue(Property.CHANGES);
+		ArrayEntity<HistoryChangeItem> array = getArrayValue(Property.CHANGES);
 		return ArrayListHelper.unmodifiableList(array);
 	}
 	

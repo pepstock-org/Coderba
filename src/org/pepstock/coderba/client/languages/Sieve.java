@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeSieve;
 
 /**
  * Is the "Sieve" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Sieve implements Language {
+public final class Sieve extends Language{
 
-	private final String name = "application/sieve";
+	private static final String NAME = "application/sieve";
 
-	private final String longName = "Sieve";
+	private static final String LONG_NAME = "Sieve";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Sieve.MODE;
+	private static final Mode MODE = ModeSieve.MODE;
 
 	public static final Sieve LANGUAGE = new Sieve();
 
@@ -38,36 +39,27 @@ public class Sieve implements Language {
 	 * To avoid any instantiation
 	 */
 	private Sieve() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

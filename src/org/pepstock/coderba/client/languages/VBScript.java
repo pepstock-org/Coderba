@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeVbscript;
 
 /**
  * Is the "VBScript" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class VBScript implements Language {
+public final class VBScript extends Language{
 
-	private final String name = "text/vbscript";
+	private static final String NAME = "text/vbscript";
 
-	private final String longName = "VBScript";
+	private static final String LONG_NAME = "VBScript";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Vbscript.MODE;
+	private static final Mode MODE = ModeVbscript.MODE;
 
 	public static final VBScript LANGUAGE = new VBScript();
 
@@ -38,36 +39,27 @@ public class VBScript implements Language {
 	 * To avoid any instantiation
 	 */
 	private VBScript() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

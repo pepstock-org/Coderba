@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeTtcn;
 
 /**
  * Is the "TTCN" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TTCN implements Language {
+public final class TTCN extends Language{
 
-	private final String name = "text/x-ttcn";
+	private static final String NAME = "text/x-ttcn";
 
-	private final String longName = "TTCN";
+	private static final String LONG_NAME = "TTCN";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Ttcn.MODE;
+	private static final Mode MODE = ModeTtcn.MODE;
 
 	public static final TTCN LANGUAGE = new TTCN();
 
@@ -38,36 +39,27 @@ public class TTCN implements Language {
 	 * To avoid any instantiation
 	 */
 	private TTCN() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

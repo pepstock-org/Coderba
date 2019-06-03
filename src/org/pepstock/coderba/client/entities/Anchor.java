@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -29,13 +30,25 @@ import jsinterop.annotations.JsType;
  * 
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class Anchor extends BaseNativeEntity {
+public final class Anchor extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Anchor() {
 		// do nothing
+	}
+	
+	/**
+	 * Creates an EMPTY anchor, to use as default.
+	 * 
+	 * @return an EMPTY anchor, to use as default
+	 */
+	@JsOverlay
+	public static Anchor empty() {
+		// creates the anchor by from and to positions of range
+		Position defaultPosition = Position.empty();
+		return create(defaultPosition, defaultPosition);
 	}
 
 	/**

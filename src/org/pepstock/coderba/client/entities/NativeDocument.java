@@ -16,8 +16,7 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.NativeEditor;
-import org.pepstock.coderba.client.commons.ArrayAnchor;
-import org.pepstock.coderba.client.commons.ArrayPosition;
+import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -326,7 +325,7 @@ public final class NativeDocument {
 	 * @return a list of all current selections (by array contains anchor and head ( range object) properties referring to
 	 *         position objects)
 	 */
-	native ArrayAnchor listSelections(); // { anchor: CodeMirror.Position; head: CodeMirror.Position }[];
+	native ArrayEntity<Anchor> listSelections(); 
 
 	/**
 	 * Return true if any text is selected.
@@ -396,8 +395,7 @@ public final class NativeDocument {
 	 *            previous selection had less ranges than the new one.
 	 * @param options options instance
 	 */
-	native void setSelections(ArrayAnchor ranges, Object primary, NativeObject options); // Array<{ anchor: CodeMirror.Position,
-																							// head: CodeMirror.Position }>
+	native void setSelections(ArrayEntity<Anchor> ranges, Object primary, NativeObject options); 
 
 	/**
 	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
@@ -433,7 +431,7 @@ public final class NativeDocument {
 	 * @param heads array of starting position
 	 * @param options options instance
 	 */
-	native void extendSelections(ArrayPosition heads, NativeObject options); // : array<{line, ch}> POSITION
+	native void extendSelections(ArrayEntity<Position> heads, NativeObject options); 
 
 	/**
 	 * Applies the given function to all existing selections, and calls extendSelections on the result.
@@ -441,8 +439,7 @@ public final class NativeDocument {
 	 * @param function function invoked to apply selection.
 	 * @param options options instance
 	 */
-	native void extendSelectionsBy(CallbackProxy.Proxy function, NativeObject options); // f: function(range: {anchor, head}) //
-																						// --> {line, ch})
+	native void extendSelectionsBy(CallbackProxy.Proxy function, NativeObject options); 
 
 	/**
 	 * Sets or clears the 'extending' flag, which acts similar to the shift key, in that it will cause cursor movement and calls

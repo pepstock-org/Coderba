@@ -922,6 +922,66 @@ public abstract class AbstractNativeObjectContainer {
 	}
 	
 	// ------------------------------------------
+	// --- NATIVE ENTITY
+	// ------------------------------------------
+	
+	/**
+	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected abstract <T extends NativeEntity> void defineEntityProperty(String key, T value);
+
+	/**
+	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	protected abstract <T extends NativeEntity> T getEntityProperty(String key, T defaultValue);
+	
+	/**
+	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	protected final <T extends NativeEntity> T getValue(Key key, T defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// gets descriptor
+		return getEntityProperty(key.value(), defaultValue);
+	}
+
+	/**
+	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final <T extends NativeEntity> void setValue(Key key, T value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			removeIfExists(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			defineEntityProperty(key.value(), value);
+		}
+	}
+	
+	// ------------------------------------------
 	// --- CLONE
 	// ------------------------------------------
 	

@@ -26,7 +26,7 @@ import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
-import org.pepstock.coderba.client.themes.Default;
+import org.pepstock.coderba.client.keymaps.Default;
 import org.pepstock.coderba.client.utils.RegExp;
 
 /**

@@ -16,9 +16,13 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.coderba.client.commons.NativeEntity;
+import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * Some addons run user-visible strings (such as labels in the interface) through the phrase method to allow for
@@ -30,26 +34,14 @@ import org.pepstock.coderba.client.commons.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Phrases extends BaseEntity {
-
-	/**
-	 * Phrases factory to build a phrases object by a native object.
-	 * FIXME
-	 */
-	public static final NativeObjectContainerFactory<Phrases> FACTORY = new PhrasesFactory();
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Phrases extends NativeEntity {
 
 	/**
 	 * Creates an empty object ready to load phrases.
 	 */
 	public Phrases() {
-		this(null);
-	}
-
-	/**
-	 * Creates an empty object ready to load phrases.
-	 */
-	Phrases(NativeObject nativeObject) {
-		super(nativeObject);
+		// do nothing
 	}
 
 	/**
@@ -63,6 +55,7 @@ public final class Phrases extends BaseEntity {
 	 * @param value user-visible string
 	 * 
 	 */
+	@JsOverlay
 	public void setUserVisibleString(String key, String value) {
 		setUserVisibleString(Key.create(key), value);
 	}
@@ -78,8 +71,15 @@ public final class Phrases extends BaseEntity {
 	 * @param value user-visible string
 	 * 
 	 */
+	@JsOverlay
 	public void setUserVisibleString(Key key, String value) {
-		setValue(key, value);
+		if (Key.isValid(key)) {
+			if (value != null) {
+				defineStringProperty(key.value(), value);
+			} else {
+				removeProperty(key.value());
+			}
+		}
 	}
 
 	/**
@@ -92,6 +92,7 @@ public final class Phrases extends BaseEntity {
 	 * @param key key of user-visible string
 	 * @return a user-visible string or {@link UndefinedValues#STRING}
 	 */
+	@JsOverlay
 	public String getUserVisibleString(String key) {
 		return getUserVisibleString(Key.create(key));
 	}
@@ -106,28 +107,12 @@ public final class Phrases extends BaseEntity {
 	 * @param key key of user-visible string
 	 * @return a user-visible string or {@link UndefinedValues#STRING}
 	 */
+	@JsOverlay
 	public String getUserVisibleString(Key key) {
-		return getValue(key, UndefinedValues.STRING);
-	}
-
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class PhrasesFactory implements NativeObjectContainerFactory<Phrases> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public Phrases create(NativeObject nativeObject) {
-			return new Phrases(nativeObject);
+		if (Key.isValid(key)) {
+			return getStringProperty(key.value());
 		}
-
+		return UndefinedValues.STRING;
 	}
+
 }

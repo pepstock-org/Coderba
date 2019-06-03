@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeVb;
 
 /**
  * Is the "VB.NET" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class VBNET implements Language {
+public final class VBNET extends Language{
 
-	private final String name = "text/x-vb";
+	private static final String NAME = "text/x-vb";
 
-	private final String longName = "VB.NET";
+	private static final String LONG_NAME = "VB.NET";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Vb.MODE;
+	private static final Mode MODE = ModeVb.MODE;
 
 	public static final VBNET LANGUAGE = new VBNET();
 
@@ -38,36 +39,27 @@ public class VBNET implements Language {
 	 * To avoid any instantiation
 	 */
 	private VBNET() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

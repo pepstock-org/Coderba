@@ -24,16 +24,14 @@ import java.util.Map;
 import org.pepstock.coderba.client.CodeMirror;
 import org.pepstock.coderba.client.Editor;
 import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.EditorAreas;
 import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.Modes;
 import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.callbacks.DocumentEachLineHandler;
 import org.pepstock.coderba.client.callbacks.DocumentExtendSelectionsHandler;
 import org.pepstock.coderba.client.callbacks.LinkedDocumentsHandler;
-import org.pepstock.coderba.client.commons.ArrayAnchor;
+import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
-import org.pepstock.coderba.client.commons.ArrayPosition;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -154,7 +152,7 @@ public final class Document {
 	private void onDocumentEachLine(NativeLineHandle handle) {
 		NativeEditor nativeEditor = nativeObject.getEditor();
 		if (documentEachLineHandler != null && nativeEditor != null) {
-			EditorArea area = EditorAreas.get(nativeEditor.getId());
+			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
 				documentEachLineHandler.handle(area, new LineHandle(handle));
 			}
@@ -170,7 +168,7 @@ public final class Document {
 	private Position onDocumentExtendSelections(Anchor anchor) {
 		NativeEditor nativeEditor = nativeObject.getEditor();
 		if (documentExtendSelectionsHandler != null && nativeEditor != null) {
-			EditorArea area = EditorAreas.get(nativeEditor.getId());
+			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
 				Position result = documentExtendSelectionsHandler.handle(area, anchor);
 				if (result != null) {
@@ -190,7 +188,7 @@ public final class Document {
 	private void onLinkedDcouments(NativeDocument document, boolean sharedHistory) {
 		NativeEditor nativeEditor = nativeObject.getEditor();
 		if (linkedDocumentsHandler != null && nativeEditor != null) {
-			EditorArea area = EditorAreas.get(nativeEditor.getId());
+			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
 				linkedDocumentsHandler.handle(area, new Document(document), sharedHistory);
 			}
@@ -754,7 +752,7 @@ public final class Document {
 	 *         position objects)
 	 */
 	public List<Anchor> listSelections() {
-		ArrayAnchor array = nativeObject.listSelections();
+		ArrayEntity<Anchor> array = nativeObject.listSelections();
 		return ArrayListHelper.list(array);
 	}
 
@@ -920,7 +918,7 @@ public final class Document {
 	 * @param options options instance
 	 */
 	public void setSelections(List<Anchor> ranges, CursorOptions options) {
-		ArrayAnchor array = ArrayAnchor.fromOrNull(ranges);
+		ArrayEntity<Anchor> array = ArrayEntity.fromOrNull(ranges);
 		if (array != null) {
 			nativeObject.setSelections(array, null, checkOptions(options).getObject());
 		}
@@ -941,7 +939,7 @@ public final class Document {
 	 * @param options options instance
 	 */
 	public void setSelections(List<Anchor> ranges, int primary, CursorOptions options) {
-		ArrayAnchor array = ArrayAnchor.fromOrNull(ranges);
+		ArrayEntity<Anchor> array = ArrayEntity.fromOrNull(ranges);
 		if (array != null) {
 			nativeObject.setSelections(array, primary, checkOptions(options).getObject());
 		}
@@ -1068,7 +1066,7 @@ public final class Document {
 	 * @param options options instance
 	 */
 	public void extendSelections(List<Position> heads, CursorOptions options) {
-		ArrayPosition array = ArrayPosition.fromOrNull(heads);
+		ArrayEntity<Position> array = ArrayEntity.fromOrNull(heads);
 		if (array != null) {
 			nativeObject.extendSelections(array, checkOptions(options).getObject());
 		}
@@ -1148,7 +1146,7 @@ public final class Document {
 	public Editor getEditor() {
 		NativeEditor nativeEditor = nativeObject.getEditor();
 		if (nativeEditor != null) {
-			EditorArea area = EditorAreas.get(nativeEditor.getId());
+			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
 				return area.getEditor();
 			}

@@ -20,7 +20,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CodeMirror code editor and other java script codes, always needed to CODERBA.
+ * Client bundle to reference CodeMirror code editor and other java script codes, always needed to Coderba.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -28,28 +28,29 @@ public interface KeyMapResources extends ClientBundle {
 
 	// static reference of this resource
 	public static final KeyMapResources INSTANCE = GWT.create(KeyMapResources.class);
-
+		
 	/**
- * Returns the java script source code for Emacs.
- * @return <code>emacs.js</code> code for Emacs
- */
- @Source("/js/keymap/emacs.js")
- TextResource emacs();
-
-/**
- * Returns the java script source code for Sublime.
- * @return <code>sublime.js</code> code for Sublime
- */
- @Source("/js/keymap/sublime.js")
- TextResource sublime();
-
-/**
- * Returns the java script source code for Vim.
- * @return <code>vim.js</code> code for Vim
- */
- @Source("/js/keymap/vim.js")
- TextResource vim();
-
-
+	 * Returns the java script source code for Emacs.
+	 * 
+	 * @return <code>emacs.js</code> code for Emacs
+	 */
+	@Source("/js/keymap/emacs.js")
+	TextResource emacs();
+	
+	/**
+	 * Returns the java script source code for Sublime.
+	 * 
+	 * @return <code>sublime.js</code> code for Sublime
+	 */
+	@Source("/js/keymap/sublime.js")
+	TextResource sublime();
+	
+	/**
+	 * Returns the java script source code for Vim.
+	 * 
+	 * @return <code>vim.js</code> code for Vim
+	 */
+	@Source("/js/keymap/vim.js")
+	TextResource vim();
 
 }

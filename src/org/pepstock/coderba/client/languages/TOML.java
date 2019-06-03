@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeToml;
 
 /**
  * Is the "TOML" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TOML implements Language {
+public final class TOML extends Language{
 
-	private final String name = "text/x-toml";
+	private static final String NAME = "text/x-toml";
 
-	private final String longName = "TOML";
+	private static final String LONG_NAME = "TOML";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Toml.MODE;
+	private static final Mode MODE = ModeToml.MODE;
 
 	public static final TOML LANGUAGE = new TOML();
 
@@ -38,36 +39,27 @@ public class TOML implements Language {
 	 * To avoid any instantiation
 	 */
 	private TOML() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

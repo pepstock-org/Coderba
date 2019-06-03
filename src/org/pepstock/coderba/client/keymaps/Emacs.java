@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.resources.KeyMapResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "emacs" key map to enable the editor to manage keyboard.
+ * Is the "emacs"  key map to enable the editor to manage keyboard.
  * 
  * @author Andrea "Stock" Stocchero
  *

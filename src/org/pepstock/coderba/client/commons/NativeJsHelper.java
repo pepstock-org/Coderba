@@ -19,7 +19,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
+ * Java native object which is wrapping a CODERBA java script object implementation with some utilities to act on java script
  * objects.
  * 
  * @author Andrea "Stock" Stocchero
@@ -75,8 +75,29 @@ final class NativeJsHelper {
 	 * @param key the string name of the property to remove.
 	 */
 	static native void remove(NativeObject object, String key);
+	
+	/**
+	 * Removes a property from a java script object.
+	 * 
+	 * @param object the object on which to remove the property.
+	 * @param key the string name of the property to remove.
+	 */
+	static native void remove(NativeEntity object, String key);
 
+	/**
+	 * Clones the property value from source object to target one.
+	 * 
+	 * @param source source java script object
+	 * @param target target java script object
+	 * @param key The property key to clone
+	 */
 	static native void cloneProperty(Object source, Object target, String key);
 	
+	/**
+	 * Cast an object to a native object in order to be able to use into a native object container.
+	 * 
+	 * @param object object to cast
+	 * @return a native object instance
+	 */
 	static native NativeObject cast(Object object);
 }

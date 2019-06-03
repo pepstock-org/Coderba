@@ -62,7 +62,7 @@ public final class CodeMirror {
 		return defaults;
 	}
 	
-	public MimeModes getMimeModes() {
+	MimeModes getMimeModes() {
 		return mimeModes;
 	}
 	

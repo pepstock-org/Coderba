@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeOctave;
 
 /**
  * Is the "Octave" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Octave implements Language {
+public final class Octave extends Language{
 
-	private final String name = "text/x-octave";
+	private static final String NAME = "text/x-octave";
 
-	private final String longName = "Octave";
+	private static final String LONG_NAME = "Octave";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Octave.MODE;
+	private static final Mode MODE = ModeOctave.MODE;
 
 	public static final Octave LANGUAGE = new Octave();
 
@@ -38,36 +39,27 @@ public class Octave implements Language {
 	 * To avoid any instantiation
 	 */
 	private Octave() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

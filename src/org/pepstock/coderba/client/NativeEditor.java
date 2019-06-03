@@ -16,10 +16,11 @@
 package org.pepstock.coderba.client;
 
 import org.pepstock.coderba.client.commons.Array;
-import org.pepstock.coderba.client.commons.ArrayObject;
+import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.entities.Anchor;
@@ -30,6 +31,7 @@ import org.pepstock.coderba.client.entities.OverlayOptions;
 import org.pepstock.coderba.client.entities.Point;
 import org.pepstock.coderba.client.entities.Position;
 import org.pepstock.coderba.client.entities.ScrollArea;
+import org.pepstock.coderba.client.entities.Token;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
@@ -280,6 +282,25 @@ public final class NativeEditor {
 	 */
 	@JsMethod(name = "setOption")
 	native void setOptionValue(String key, Element value);
+	
+	// ---Native Entity
+	/**
+	 * Returns a value (native entity) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	@JsMethod(name = "getOption")
+	native <T extends NativeEntity> T getOptionValueAsEntity(String key);
+
+	/**
+	 * Sets a value (native entity) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	@JsMethod(name = "setOption")
+	native <T extends NativeEntity> void setOptionValue(String key, T value);
 	
 	// ------------------------------------------
 	// --- END OPTIONS methods
@@ -605,8 +626,7 @@ public final class NativeEditor {
 	 * @param position position to use
 	 * @return the inner mode at a given position
 	 */
-	// FIXME
-	native Object getModeAt(Position position);
+	native ModeSpecification getModeAt(Position position);
 
 	/**
 	 * Retrieves information about the token the current mode found before the given position (a position object). The returned
@@ -628,7 +648,7 @@ public final class NativeEditor {
 	 *            edits were recently made and highlighting has not yet completed.
 	 * @return a token instance
 	 */
-	native NativeObject getTokenAt(Position pos, boolean precise);
+	native Token getTokenAt(Position pos, boolean precise);
 
 	/**
 	 * This is similar to getTokenAt, but collects all tokens for a given line into an array.<br>
@@ -644,7 +664,7 @@ public final class NativeEditor {
 	 *            edits were recently made and highlighting has not yet completed.
 	 * @return an array of tokens
 	 */
-	native ArrayObject getLineTokens(int line, boolean precise);
+	native ArrayEntity<Token> getLineTokens(int line, boolean precise);
 
 	/**
 	 * This is a (much) cheaper version of getTokenAt useful for when you just need the type of the token at a given position,
@@ -822,12 +842,22 @@ public final class NativeEditor {
 	native Element getGutterElement();
 
 	/**
-	 * Returns the CODERBA ID, set to the chart.
+	 * Returns the CODERBA ID.
 	 * 
 	 * @return the CODERBA ID
 	 */
 	@JsOverlay
 	public String getId() {
 		return Id.get(getOptions());
+	}
+	
+	/**
+	 * Returns the editor area related to this editor.
+	 * 
+	 * @return the editor area related to this editor
+	 */
+	@JsOverlay
+	public EditorArea getEditorArea() {
+		return EditorAreas.get(getId());
 	}
 }

@@ -23,14 +23,13 @@ import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
-import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Phrases;
-import org.pepstock.coderba.client.entities.Position;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
+import org.pepstock.coderba.client.keymaps.Default;
 import org.pepstock.coderba.client.languages.PlainText;
-import org.pepstock.coderba.client.themes.Default;
+import org.pepstock.coderba.client.themes.ThemeDefault;
 import org.pepstock.coderba.client.utils.RegExp;
 
 /**
@@ -45,7 +44,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 
 	private static final Language DEFAULT_LANGUAGE = PlainText.LANGUAGE;
 
-	private static final Theme DEFAULT_THEME = Default.THEME;
+	private static final Theme DEFAULT_THEME = ThemeDefault.THEME;
 
 	/**
 	 * The default is "default", which is the only key map defined in codemirror itself.
@@ -138,10 +137,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	private static final List<String> DEFAULT_GUTTERS = Collections.emptyList();
 
 	private static final List<String> DEFAULT_ALLOW_DROP_FILE_TYPES = Collections.emptyList();
-
-	private static final Position DEFAULT_POSITION = Position.create();
-	
-	private static final Anchor DEFAULT_ANCHOR = Anchor.create(DEFAULT_POSITION, DEFAULT_POSITION);
 
 	/**
 	 * To avoid any instantiation
@@ -692,24 +687,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	@Override
 	public int getWorkDelay() {
 		return DEFAULT_WORK_DELAY;
-	}
-
-	/**
-	 * Returns the default position.
-	 * 
-	 * @return the default position
-	 */
-	public Position getPosition() {
-		return DEFAULT_POSITION;
-	}
-	
-	/**
-	 * Returns the default anchor.
-	 * 
-	 * @return the default anchor
-	 */
-	public Anchor getAnchor() {
-		return DEFAULT_ANCHOR;
 	}
 
 }

@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeClojure;
 
 /**
  * Is the "ClojureScript" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ClojureScript implements Language {
+public final class ClojureScript extends Language{
 
-	private final String name = "text/x-clojurescript";
+	private static final String NAME = "text/x-clojurescript";
 
-	private final String longName = "ClojureScript";
+	private static final String LONG_NAME = "ClojureScript";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Clojure.MODE;
+	private static final Mode MODE = ModeClojure.MODE;
 
 	public static final ClojureScript LANGUAGE = new ClojureScript();
 
@@ -38,36 +39,27 @@ public class ClojureScript implements Language {
 	 * To avoid any instantiation
 	 */
 	private ClojureScript() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

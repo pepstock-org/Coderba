@@ -251,7 +251,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public Phrases getPhrases() {
-		return Phrases.FACTORY.create(nativeObjectContainer.getValue(Options.PHRASES));
+		return nativeObjectContainer.getValue(Options.PHRASES, (Phrases)null);
 	}
 
 	/*
@@ -858,7 +858,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public void setLanguage(Language language) {
-		if (language != null && language.getName() != null) {
+		if (language != null) {
 			Injector.ensureInjected(language);
 			nativeObjectContainer.setValue(Options.MODE, language.getName());
 		}
@@ -931,7 +931,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public void setPhrases(Phrases phrases) {
-		 nativeObjectContainer.setValue(Options.PHRASES, phrases);
+		nativeObjectContainer.setValue(Options.PHRASES, phrases);
 	}
 
 	/*

@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeEiffel;
 
 /**
  * Is the "Eiffel" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Eiffel implements Language {
+public final class Eiffel extends Language{
 
-	private final String name = "text/x-eiffel";
+	private static final String NAME = "text/x-eiffel";
 
-	private final String longName = "Eiffel";
+	private static final String LONG_NAME = "Eiffel";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Eiffel.MODE;
+	private static final Mode MODE = ModeEiffel.MODE;
 
 	public static final Eiffel LANGUAGE = new Eiffel();
 
@@ -38,36 +39,27 @@ public class Eiffel implements Language {
 	 * To avoid any instantiation
 	 */
 	private Eiffel() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

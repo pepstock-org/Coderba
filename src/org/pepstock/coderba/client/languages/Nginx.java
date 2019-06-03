@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeNginx;
 
 /**
  * Is the "Nginx" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Nginx implements Language {
+public final class Nginx extends Language{
 
-	private final String name = "text/x-nginx-conf";
+	private static final String NAME = "text/x-nginx-conf";
 
-	private final String longName = "Nginx";
+	private static final String LONG_NAME = "Nginx";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Nginx.MODE;
+	private static final Mode MODE = ModeNginx.MODE;
 
 	public static final Nginx LANGUAGE = new Nginx();
 
@@ -38,36 +39,27 @@ public class Nginx implements Language {
 	 * To avoid any instantiation
 	 */
 	private Nginx() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

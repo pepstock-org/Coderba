@@ -15,131 +15,61 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.commons.NativeEntity;
+import org.pepstock.coderba.client.commons.NativeName;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
+ * Defines a token, created by the current editor mode.
  * 
+ * Missing "state" property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Token extends BaseEntity {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Token extends NativeEntity {
 
 	/**
-	 * Token factory to build a token by a native object
-	 * FIXME
+	 * To avoid any instantiation
 	 */
-	public static final NativeObjectContainerFactory<Token> FACTORY = new TokenFactory();
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		START("start"),
-		END("end"),
-		TYPE("type"),
-		STRING("string"),
-		STATE("state");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.coderba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
+	private Token() {
+		// do nothing
 	}
 
 	/**
+	 * Returns the character position into a line at which the token starts.
 	 * 
+	 * @return the character position into a line at which the token starts
 	 */
-	Token(NativeObject nativeObject) {
-		super(nativeObject);
-	}
+	@JsProperty
+	public native int getStart();
 
 	/**
-	 * Returns the right of area.
+	 * Returns the character position into a line at which the token ends.
 	 * 
-	 * @return the right of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the character position into a line at which the token ends
 	 */
-	public int getStart() {
-		return getValue(Property.START, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native int getEnd();
 
 	/**
-	 * Returns the bottom of area.
+	 * Returns the token type the mode assigned to the token, such as "keyword" or "comment" (may also be null).
 	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the token type the mode assigned to the token
 	 */
-	public int getEnd() {
-		return getValue(Property.END, UndefinedValues.INTEGER);
-	}
+	@JsProperty
+	public native String getType();
 
 	/**
-	 * Returns the bottom of area.
+	 * Returns the token's string.
 	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the token's string
 	 */
-	public String getType() {
-		return getValue(Property.TYPE, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	public String getString() {
-		return getValue(Property.STRING, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the bottom of area.
-	 * 
-	 * @return the bottom of area. Default is {@link UndefinedValues#INTEGER}.
-	 */
-	// FIXME
-	public Object getState() {
-		return getValue(Property.STATE, UndefinedValues.STRING);
-	}
-
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class TokenFactory implements NativeObjectContainerFactory<Token> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public Token create(NativeObject nativeObject) {
-			return new Token(nativeObject);
-		}
-
-	}
+	@JsProperty
+	public native String getString();
 
 }

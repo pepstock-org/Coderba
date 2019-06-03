@@ -20,24 +20,36 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
 /**
+ * Maps the "CodeMirror.mimeModes" property of Code mirror where are stored all mode specification.<br>
+ * This is useful when the mime is not enough. like to create a document.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class MimeModes extends NativeObjectContainer {
+final class MimeModes extends NativeObjectContainer {
+	
+	private static final ModeSpecification DEFAULT_MODE_SPECIFICATION = null;
 
 	/**
-	 * @param nativeObject
+	 * Creates the object mapping CodeMirror.mimeModes" property.
+	 * 
+	 * @param nativeObject CodeMirror.mimeModes" property
 	 */
 	MimeModes(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
-	public NativeObject getMimeMode(Language language) {
-		Key key = Key.create(language.getName());
-		if (has(key)) {
-			return getValue(key);
+	/**
+	 * Returns the mode specification related to the language (by mime of language).
+	 * 
+	 * @param language language to use to get the mode specification 
+	 * @return the mode specification related to the language or <code>null</code> if not exists.
+	 */
+	ModeSpecification getMode(Language language) {
+		// checks 
+		if (language != null) {
+			Key key = Key.create(language.getName());
+			return getValue(key, DEFAULT_MODE_SPECIFICATION);
 		}
 		return null;
 	}
-
 }

@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeOz;
 
 /**
  * Is the "Oz" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Oz implements Language {
+public final class Oz extends Language{
 
-	private final String name = "text/x-oz";
+	private static final String NAME = "text/x-oz";
 
-	private final String longName = "Oz";
+	private static final String LONG_NAME = "Oz";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Oz.MODE;
+	private static final Mode MODE = ModeOz.MODE;
 
 	public static final Oz LANGUAGE = new Oz();
 
@@ -38,36 +39,27 @@ public class Oz implements Language {
 	 * To avoid any instantiation
 	 */
 	private Oz() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

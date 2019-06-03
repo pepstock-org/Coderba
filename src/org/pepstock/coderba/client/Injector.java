@@ -28,7 +28,7 @@ import com.google.gwt.resources.client.TextResource;
 
 /**
  * This utility injects CodeMirror java script modules and CODERBA custom java script implementation (for some utilities) into the web page of
- * GWT.
+ * GWT, on demand.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -66,9 +66,11 @@ public final class Injector {
 	 */
 	public static void ensureInjected(Language language) {
 		// check if argument is consistent
-		if (language != null && language.getName() != null) {
+		if (language != null) {
 			ensureInjected();
 			ensureInjected(language.getMode());
+			ModeSpecification modeSpec = CodeMirror.get().getMimeModes().getMode(language);
+			language.setModeSpecification(modeSpec);
 			Languages.get().add(language);
 		}
 	}

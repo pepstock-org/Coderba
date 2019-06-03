@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeSql;
 
 /**
  * Is the "MySQL" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class MySQL implements Language {
+public final class MySQL extends Language{
 
-	private final String name = "text/x-mysql";
+	private static final String NAME = "text/x-mysql";
 
-	private final String longName = "MySQL";
+	private static final String LONG_NAME = "MySQL";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Sql.MODE;
+	private static final Mode MODE = ModeSql.MODE;
 
 	public static final MySQL LANGUAGE = new MySQL();
 
@@ -38,36 +39,27 @@ public class MySQL implements Language {
 	 * To avoid any instantiation
 	 */
 	private MySQL() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

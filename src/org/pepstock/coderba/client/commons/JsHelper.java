@@ -19,7 +19,7 @@ import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.resources.Resources;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a EDIRBA java script object implementation with some
+ * This is a singleton wrapper for Java native object which is wrapping a CODERBA java script object implementation with some
  * utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
@@ -101,12 +101,32 @@ public final class JsHelper {
 	}
 
 	/**
-	 * FIXME
+	 * Removes a property from a java script object.
+	 * 
+	 * @param object the object on which to remove the property.
+	 * @param key the string name of the property to remove.
 	 */
-	void cloneProperty(Object source,Object target, Key key) {
+	void remove(NativeEntity object, String key) {
+		NativeJsHelper.remove(object, key);
+	}
+
+	/**
+	 * Clones the property value from source object to target one.
+	 * 
+	 * @param source source java script object
+	 * @param target target java script object
+	 * @param key The property key to clone
+	 */
+	void cloneProperty(Object source, Object target, Key key) {
 		NativeJsHelper.cloneProperty(source, target, key.value());
 	}
-	
+
+	/**
+	 * Cast an object to a native object in order to be able to use into a native object container.
+	 * 
+	 * @param object object to cast
+	 * @return a native object instance
+	 */
 	NativeObject cast(Object object) {
 		return NativeJsHelper.cast(object);
 	}

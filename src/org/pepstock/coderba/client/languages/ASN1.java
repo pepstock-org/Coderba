@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeAsn1;
 
 /**
  * Is the "ASN.1" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ASN1 implements Language {
+public final class ASN1 extends Language{
 
-	private final String name = "text/x-ttcn-asn";
+	private static final String NAME = "text/x-ttcn-asn";
 
-	private final String longName = "ASN.1";
+	private static final String LONG_NAME = "ASN.1";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Asn1.MODE;
+	private static final Mode MODE = ModeAsn1.MODE;
 
 	public static final ASN1 LANGUAGE = new ASN1();
 
@@ -38,36 +39,27 @@ public class ASN1 implements Language {
 	 * To avoid any instantiation
 	 */
 	private ASN1() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

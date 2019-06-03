@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModePhp;
 
 /**
  * Is the "PHP" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PHP implements Language {
+public final class PHP extends Language{
 
-	private final String name = "text/x-php";
+	private static final String NAME = "text/x-php";
 
-	private final String longName = "PHP";
+	private static final String LONG_NAME = "PHP";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Php.MODE;
+	private static final Mode MODE = ModePhp.MODE;
 
 	public static final PHP LANGUAGE = new PHP();
 
@@ -38,36 +39,27 @@ public class PHP implements Language {
 	 * To avoid any instantiation
 	 */
 	private PHP() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

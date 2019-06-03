@@ -334,4 +334,26 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		return descriptor == null ? null : descriptor.getValue();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	 */
+	@Override
+	protected <T extends NativeEntity> void defineEntityProperty(String key, T value) {
+		// sets value
+		nativeObject.defineEntityProperty(key, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	 */
+	@Override
+	protected <T extends NativeEntity> T getEntityProperty(String key, T defaultValue) {
+		// gets descriptor
+		NativeEntityDescriptor<T> descriptor = nativeObject.getEntityProperty(key);
+		// returns value
+		return descriptor == null ? defaultValue : descriptor.getValue();
+	}
+	
+	
+
 }

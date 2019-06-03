@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeErlang;
 
 /**
  * Is the "Erlang" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Erlang implements Language {
+public final class Erlang extends Language{
 
-	private final String name = "text/x-erlang";
+	private static final String NAME = "text/x-erlang";
 
-	private final String longName = "Erlang";
+	private static final String LONG_NAME = "Erlang";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Erlang.MODE;
+	private static final Mode MODE = ModeErlang.MODE;
 
 	public static final Erlang LANGUAGE = new Erlang();
 
@@ -38,36 +39,27 @@ public class Erlang implements Language {
 	 * To avoid any instantiation
 	 */
 	private Erlang() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

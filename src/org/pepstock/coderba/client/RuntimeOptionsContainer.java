@@ -23,6 +23,7 @@ import org.pepstock.coderba.client.commons.Array;
 import org.pepstock.coderba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.ObjectType;
 import org.pepstock.coderba.client.utils.JSON;
@@ -330,6 +331,29 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		}
 		// returns value
 		return nativeEditor.getOptionValueAsElement(key);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	 */
+	@Override
+	protected <T extends NativeEntity> void defineEntityProperty(String key, T value) {
+		// if here, key is consistent
+		nativeEditor.setOptionValue(key, value);
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	 */
+	@Override
+	protected <T extends NativeEntity> T getEntityProperty(String key, T defaultValue) {
+		// checks if the value of property is undefined
+		if (!hasProperty(key)) {
+			return defaultValue;
+		}
+		// returns value
+		return nativeEditor.getOptionValueAsEntity(key);
 	}
 
 	/**

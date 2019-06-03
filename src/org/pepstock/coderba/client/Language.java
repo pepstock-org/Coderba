@@ -15,17 +15,56 @@
 */
 package org.pepstock.coderba.client;
 
-import org.pepstock.coderba.client.commons.HasName;
+import org.pepstock.coderba.client.utils.Window;
 
 /**
- * 
+ * Defines a programming language to use inside the editor.<br>
+ * It has got the relation with its "mode" and its mode specification.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface Language extends HasName{
+public abstract class Language extends NamedItem {
+
+	private ModeSpecification modeSpecification = null;
 	
-	String getLongName();
-	
-	Mode getMode();
+	private boolean isModeSpecLoaded = false;
+
+	/**
+	 * @param value
+	 */
+	protected Language(String name) {
+		super(name);
+	}
+
+	public abstract String getLongName();
+
+	public abstract Mode getMode();
+
+	/**
+	 * Returns the mode specification for this language.
+	 * 
+	 * @return the mode specification for this language or <code>null</code> if the mode of language is not already injected or
+	 *         if the language uses the default mode.
+	 */
+	public final ModeSpecification getModeSpecification() {
+		return modeSpecification;
+	}
+
+	/**
+	 * Sets the mode specification for this language, only if not already set.
+	 * 
+	 * @param modeSpecification the mode specification for this language.
+	 */
+	final void setModeSpecification(ModeSpecification modeSpecification) {
+		Window.getConsole().log("eccome");
+		// checks if mode spec is already loaded
+		if (!isModeSpecLoaded) {
+			// if not, it stores it
+			this.modeSpecification = modeSpecification;
+			// resets the flag
+			isModeSpecLoaded = true;
+		}
+	}
+
 }

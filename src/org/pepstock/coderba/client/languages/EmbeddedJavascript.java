@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeHtmlembedded;
 
 /**
  * Is the "Embedded Javascript" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class EmbeddedJavascript implements Language {
+public final class EmbeddedJavascript extends Language{
 
-	private final String name = "application/x-ejs";
+	private static final String NAME = "application/x-ejs";
 
-	private final String longName = "Embedded Javascript";
+	private static final String LONG_NAME = "Embedded Javascript";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Htmlembedded.MODE;
+	private static final Mode MODE = ModeHtmlembedded.MODE;
 
 	public static final EmbeddedJavascript LANGUAGE = new EmbeddedJavascript();
 
@@ -38,36 +39,27 @@ public class EmbeddedJavascript implements Language {
 	 * To avoid any instantiation
 	 */
 	private EmbeddedJavascript() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

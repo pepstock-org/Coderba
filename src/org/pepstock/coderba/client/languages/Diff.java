@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeDiff;
 
 /**
  * Is the "diff" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Diff implements Language {
+public final class Diff extends Language{
 
-	private final String name = "text/x-diff";
+	private static final String NAME = "text/x-diff";
 
-	private final String longName = "diff";
+	private static final String LONG_NAME = "diff";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Diff.MODE;
+	private static final Mode MODE = ModeDiff.MODE;
 
 	public static final Diff LANGUAGE = new Diff();
 
@@ -38,36 +39,27 @@ public class Diff implements Language {
 	 * To avoid any instantiation
 	 */
 	private Diff() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

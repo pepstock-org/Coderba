@@ -17,8 +17,8 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.CodeMirror;
 import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
-import org.pepstock.coderba.client.defaults.GlobalDefaults;
 import org.pepstock.coderba.client.enums.StickyPosition;
 
 import jsinterop.annotations.JsOverlay;
@@ -38,7 +38,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class Position extends BaseNativeEntity {
+public final class Position extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation
@@ -46,6 +46,18 @@ public final class Position extends BaseNativeEntity {
 	private Position() {
 		// do nothing
 	}
+	
+	/**
+	 * A constructor for the objects that are used to represent the first line number in editor documents.<br>
+	 * It creates an EMPY object, to use as default.
+	 * 
+	 * @return a EMPY position, to use as default, with line and columns numbers will be set to 0
+	 */
+	@JsOverlay
+	public static Position empty() {
+		return create(0, 0);
+	}
+
 
 	/**
 	 * A constructor for the objects that are used to represent the first line number in editor documents.<br>
@@ -56,7 +68,6 @@ public final class Position extends BaseNativeEntity {
 	@JsOverlay
 	public static Position create() {
 		return create(CodeMirror.get().getDefaults().getFirstLineNumber(), 0);
-
 	}
 
 	/**
@@ -124,8 +135,8 @@ public final class Position extends BaseNativeEntity {
 			// returns cloned position
 			return clonedPosition;
 		}
-		// returns default position
-		return GlobalDefaults.get().getPosition();
+		// returns source (which is null)
+		return source;
 	}
 
 	/**

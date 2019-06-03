@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModePug;
 
 /**
  * Is the "Pug" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Pug implements Language {
+public final class Pug extends Language{
 
-	private final String name = "text/x-pug";
+	private static final String NAME = "text/x-pug";
 
-	private final String longName = "Pug";
+	private static final String LONG_NAME = "Pug";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Pug.MODE;
+	private static final Mode MODE = ModePug.MODE;
 
 	public static final Pug LANGUAGE = new Pug();
 
@@ -38,36 +39,27 @@ public class Pug implements Language {
 	 * To avoid any instantiation
 	 */
 	private Pug() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

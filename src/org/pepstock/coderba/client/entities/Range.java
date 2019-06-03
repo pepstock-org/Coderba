@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -30,12 +31,12 @@ import jsinterop.annotations.JsType;
  * 
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public class Range extends BaseNativeEntity {
+public class Range extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	Range() {
+	protected Range() {
 		// do nothing
 	}
 

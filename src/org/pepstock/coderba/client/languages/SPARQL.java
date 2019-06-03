@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeSparql;
 
 /**
  * Is the "SPARQL" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class SPARQL implements Language {
+public final class SPARQL extends Language{
 
-	private final String name = "application/sparql-query";
+	private static final String NAME = "application/sparql-query";
 
-	private final String longName = "SPARQL";
+	private static final String LONG_NAME = "SPARQL";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Sparql.MODE;
+	private static final Mode MODE = ModeSparql.MODE;
 
 	public static final SPARQL LANGUAGE = new SPARQL();
 
@@ -38,36 +39,27 @@ public class SPARQL implements Language {
 	 * To avoid any instantiation
 	 */
 	private SPARQL() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

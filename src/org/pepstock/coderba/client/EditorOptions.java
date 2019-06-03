@@ -215,7 +215,7 @@ public class EditorOptions implements IsOptions {
 	 */
 	private NativeObject onConfigureMouse(NativeEditor editor, String repeat, NativeEvent event) {
 		MouseRepeat confMouseRepeat = Key.getKeyByValue(MouseRepeat.class, repeat, MouseRepeat.SINGLE);
-		EditorArea area = EditorAreas.get(editor.getId());
+		EditorArea area = editor.getEditorArea();
 		if (area != null && configureMouse != null) {
 			MouseConfiguration result = configureMouse.handle(area, confMouseRepeat, event);
 			if (result != null) {

@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeWebidl;
 
 /**
  * Is the "Web IDL" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class WebIDL implements Language {
+public final class WebIDL extends Language{
 
-	private final String name = "text/x-webidl";
+	private static final String NAME = "text/x-webidl";
 
-	private final String longName = "Web IDL";
+	private static final String LONG_NAME = "Web IDL";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Webidl.MODE;
+	private static final Mode MODE = ModeWebidl.MODE;
 
 	public static final WebIDL LANGUAGE = new WebIDL();
 
@@ -38,36 +39,27 @@ public class WebIDL implements Language {
 	 * To avoid any instantiation
 	 */
 	private WebIDL() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

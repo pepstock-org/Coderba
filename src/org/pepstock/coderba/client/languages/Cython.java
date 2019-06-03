@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModePython;
 
 /**
  * Is the "Cython" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Cython implements Language {
+public final class Cython extends Language{
 
-	private final String name = "text/x-cython";
+	private static final String NAME = "text/x-cython";
 
-	private final String longName = "Cython";
+	private static final String LONG_NAME = "Cython";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Python.MODE;
+	private static final Mode MODE = ModePython.MODE;
 
 	public static final Cython LANGUAGE = new Cython();
 
@@ -38,36 +39,27 @@ public class Cython implements Language {
 	 * To avoid any instantiation
 	 */
 	private Cython() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

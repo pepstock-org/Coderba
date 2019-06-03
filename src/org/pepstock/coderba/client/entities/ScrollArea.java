@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsPackage;
@@ -28,7 +29,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ScrollArea extends BaseNativeEntity {
+public final class ScrollArea extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation

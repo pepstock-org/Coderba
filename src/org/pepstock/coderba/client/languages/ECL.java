@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeEcl;
 
 /**
  * Is the "ECL" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ECL implements Language {
+public final class ECL extends Language{
 
-	private final String name = "text/x-ecl";
+	private static final String NAME = "text/x-ecl";
 
-	private final String longName = "ECL";
+	private static final String LONG_NAME = "ECL";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Ecl.MODE;
+	private static final Mode MODE = ModeEcl.MODE;
 
 	public static final ECL LANGUAGE = new ECL();
 
@@ -38,36 +39,27 @@ public class ECL implements Language {
 	 * To avoid any instantiation
 	 */
 	private ECL() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

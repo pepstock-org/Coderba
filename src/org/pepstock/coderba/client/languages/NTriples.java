@@ -17,6 +17,7 @@ package org.pepstock.coderba.client.languages;
 
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.modes.ModeNtriples;
 
 /**
  * Is the "NTriples" language entity in order to abe able to set to the editor.
@@ -24,13 +25,13 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class NTriples implements Language {
+public final class NTriples extends Language{
 
-	private final String name = "application/n-triples ";
+	private static final String NAME = "application/n-triples";
 
-	private final String longName = "NTriples";
+	private static final String LONG_NAME = "NTriples";
 
-	private final Mode mode = org.pepstock.coderba.client.modes.Ntriples.MODE;
+	private static final Mode MODE = ModeNtriples.MODE;
 
 	public static final NTriples LANGUAGE = new NTriples();
 
@@ -38,36 +39,27 @@ public class NTriples implements Language {
 	 * To avoid any instantiation
 	 */
 	private NTriples() {
+		super(NAME);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getLongName()
+	 * @see org.pepstock.coderba.client.Language#getLongName()
 	 */
 	@Override
 	public String getLongName() {
-		return longName;
+		return LONG_NAME;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.Language#getMode()
+	 * @see org.pepstock.coderba.client.Language#getMode()
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return MODE;
 	}
 
 }

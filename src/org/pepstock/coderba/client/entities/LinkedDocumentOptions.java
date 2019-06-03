@@ -19,7 +19,6 @@ import org.pepstock.coderba.client.CodeMirror;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
  * This is the options to configure new linked document.<br>
@@ -114,10 +113,9 @@ public final class LinkedDocumentOptions extends BaseEntity {
 	// }
 
 	public void setLanguage(Language language) {
-		if (language != null && language.getName() != null) {
+		if (language != null) {
 			Injector.ensureInjected(language);
-			NativeObject mimeMode = CodeMirror.get().getMimeModes().getMimeMode(language);
-			setValue(Property.MODE, mimeMode);
+			setValue(Property.MODE, language.getModeSpecification());
 		}
 	}
 
