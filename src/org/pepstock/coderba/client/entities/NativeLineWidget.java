@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
 
@@ -71,4 +72,20 @@ public final class NativeLineWidget extends NativeCastableObject {
 	 * It'll force CodeMirror to update the height of the line that contains the widget.
 	 */
 	native void changed();
+	
+	/**
+	 * Register an event handler for the given event type (a string) on the line widget instance.
+	 * 
+	 * @param type event name to activate
+	 * @param function callback proxy function
+	 */
+	native void on(String type, CallbackProxy.Proxy function);
+
+	/**
+	 * Remove an event handler on the line widget instance.
+	 * 
+	 * @param type event name to activate
+	 * @param function callback proxy function
+	 */
+	native void off(String type, CallbackProxy.Proxy function);
 }

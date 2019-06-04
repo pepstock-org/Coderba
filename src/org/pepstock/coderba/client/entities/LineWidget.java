@@ -17,19 +17,25 @@ package org.pepstock.coderba.client.entities;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
+import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
+import org.pepstock.coderba.client.events.LineWidgetRedrawEvent;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * @author Andrea "Stock" Stocchero
@@ -39,6 +45,30 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+	
+	/**
+	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
+	 * change.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface LineWidgetRedrawFunction {
+
+		/**
+		 * Is called before a change is applied, and its handler may choose to modify or cancel the change.
+		 */
+		void call();
+	}
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the LineHandleDelete function
+	private final CallbackProxy<LineWidgetRedrawFunction> lineWidgetRedrawFunctionProxy = JsHelper.get().newCallbackProxy();
 
 	private final NativeLineWidget nativeObject;
 
@@ -101,6 +131,10 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		}
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		lineWidgetRedrawFunctionProxy.setCallback(() -> onRedraw());
 	}
 
 	static int getId(NativeObject nativeObject) {
@@ -141,6 +175,23 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	public void changed() {
 		nativeObject.changed();
 	}
+	
+	// ---------------------------------
+	// --- EVENTS METHODS
+	// ---------------------------------
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onRedraw() {
+		EditorArea area = document.getEditorArea();
+		if (area != null) {
+			eventManager.fireEvent(new LineWidgetRedrawEvent(area, document, this));
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -149,6 +200,14 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
+		if (event.isRecognize(LineWidgetRedrawEvent.TYPE)) {
+			// checks if type of added event handler is LineWidgetRedrawEvent
+			// if there is not any LineWidgetRedrawEvent handler
+			if (eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 1) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.on(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
+			}
+		} 
 	}
 
 	/*
@@ -159,6 +218,14 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
+		if (event.isRecognize(LineWidgetRedrawEvent.TYPE)) {
+			// checks if type of removed event handler is LineWidgetRedrawEvent
+			// if there is not any LineWidgetRedrawEvent handler
+			if (eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 0) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.off(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
+			}
+		} 
 	}
 
 	/*

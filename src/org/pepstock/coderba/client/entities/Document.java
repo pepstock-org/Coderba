@@ -500,7 +500,7 @@ public final class Document implements IsEventManager {
 				if (lineHandles.containsKey(nativeLineHandle.getId())) {
 					return lineHandles.get(nativeLineHandle.getId());
 				} else {
-					LineHandle lineHandle = new LineHandle(nativeLineHandle);
+					LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 					lineHandles.put(lineHandle.getId(), lineHandle);
 					return lineHandle;
 				}
@@ -1216,16 +1216,26 @@ public final class Document implements IsEventManager {
 	 * @return the editor associated with a document
 	 */
 	public Editor getEditor() {
-		NativeEditor nativeEditor = nativeObject.getEditor();
-		if (nativeEditor != null) {
-			EditorArea area = nativeEditor.getEditorArea();
-			if (area != null) {
-				return area.getEditor();
-			}
+		EditorArea area = getEditorArea();
+		if (area != null) {
+			return area.getEditor();
 		}
 		return null;
 	}
 
+	/**
+	 * Retrieve the editor area associated with a document. May return null.
+	 * 
+	 * @return the editor area associated with a document
+	 */
+	public EditorArea getEditorArea() {
+		NativeEditor nativeEditor = nativeObject.getEditor();
+		if (nativeEditor != null) {
+			return nativeEditor.getEditorArea();
+		}
+		return null;
+	}
+	
 	/**
 	 * Gets the (outer) mode object for the editor.<br>
 	 * Note that this is distinct from getOption("mode"), which gives you the mode specification, rather than the resolved,
@@ -1744,7 +1754,7 @@ public final class Document implements IsEventManager {
 		if (isValidLine(line) && gutterID != null) {
 			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line, gutterID, value);
 			if (nativeLineHandle != null) {
-				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				return lineHandle;
 			}
@@ -1766,7 +1776,7 @@ public final class Document implements IsEventManager {
 		if (line != null && gutterID != null) {
 			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line.getObject(), gutterID, value);
 			if (nativeLineHandle != null) {
-				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				return lineHandle;
 			}
@@ -1824,7 +1834,7 @@ public final class Document implements IsEventManager {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			NativeLineHandle nativeHandle = nativeObject.addLineClass(line, whereToUse.value(), className);
 			if (nativeHandle != null) {
-				LineHandle handle = new LineHandle(nativeHandle);
+				LineHandle handle = new LineHandle(nativeHandle, this);
 				lineHandles.put(handle.getId(), handle);
 				return handle;
 			}
@@ -1861,7 +1871,7 @@ public final class Document implements IsEventManager {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			NativeLineHandle nativeLineHandle = nativeObject.addLineClass(line.getObject(), whereToUse.value(), className);
 			if (nativeLineHandle != null) {
-				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				return lineHandle;
 			}
@@ -1906,7 +1916,7 @@ public final class Document implements IsEventManager {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line, whereToUse.value(), className);
 			if (nativeLineHandle != null) {
-				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				return lineHandle;
 			}
@@ -1951,7 +1961,7 @@ public final class Document implements IsEventManager {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line.getObject(), whereToUse.value(), className);
 			if (nativeLineHandle != null) {
-				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				return lineHandle;
 			}
@@ -2248,7 +2258,7 @@ public final class Document implements IsEventManager {
 				if (lineHandles.containsKey(nativeLineHandle.getId())) {
 					lineHandle = lineHandles.get(nativeLineHandle.getId());
 				} else {
-					lineHandle = new LineHandle(nativeLineHandle);
+					lineHandle = new LineHandle(nativeLineHandle, this);
 				}
 				lineHandles.put(lineHandle.getId(), lineHandle);
 				documentEachLineHandler.handle(area, lineHandle);
