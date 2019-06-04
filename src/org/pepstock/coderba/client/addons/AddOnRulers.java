@@ -32,7 +32,7 @@ public final class AddOnRulers extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnRulers ADDON = new AddOnRulers();
+	public static final AddOnRulers INSTANCE = new AddOnRulers();
 
 	/**
 	 * To avoid any instantiation

@@ -32,7 +32,7 @@ public final class AddOnBraceFold extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnBraceFold ADDON = new AddOnBraceFold();
+	public static final AddOnBraceFold INSTANCE = new AddOnBraceFold();
 
 	/**
 	 * To avoid any instantiation

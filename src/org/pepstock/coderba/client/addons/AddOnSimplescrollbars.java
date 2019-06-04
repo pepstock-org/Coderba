@@ -33,7 +33,7 @@ public final class AddOnSimplescrollbars extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSimplescrollbars ADDON = new AddOnSimplescrollbars();
+	public static final AddOnSimplescrollbars INSTANCE = new AddOnSimplescrollbars();
 
 	/**
 	 * To avoid any instantiation

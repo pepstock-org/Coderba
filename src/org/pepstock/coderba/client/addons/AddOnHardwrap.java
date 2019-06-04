@@ -32,7 +32,7 @@ public final class AddOnHardwrap extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnHardwrap ADDON = new AddOnHardwrap();
+	public static final AddOnHardwrap INSTANCE = new AddOnHardwrap();
 
 	/**
 	 * To avoid any instantiation

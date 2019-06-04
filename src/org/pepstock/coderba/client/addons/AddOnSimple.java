@@ -32,7 +32,7 @@ public final class AddOnSimple extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSimple ADDON = new AddOnSimple();
+	public static final AddOnSimple INSTANCE = new AddOnSimple();
 
 	/**
 	 * To avoid any instantiation

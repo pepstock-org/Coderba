@@ -16,19 +16,28 @@
 package org.pepstock.coderba.client;
 
 /**
+ * Cache of all keymap instances loaded.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class KeyMaps extends InjectedItems<KeyMap> {
+public final class KeyMaps extends InjectedItems<KeyMap> {
 	
+	// singleton instance
 	private static final KeyMaps INSTANCE = new KeyMaps();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private KeyMaps() {
+		// do nothing
 	}
 	
+	/**
+	 * Returns the singleton instance of the cache.
+	 * 
+	 * @return the singleton instance of the cache
+	 */
 	public static KeyMaps get() {
 		return INSTANCE;
 	}

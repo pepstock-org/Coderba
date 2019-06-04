@@ -32,7 +32,7 @@ public final class AddOnSearch extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSearch ADDON = new AddOnSearch();
+	public static final AddOnSearch INSTANCE = new AddOnSearch();
 
 	/**
 	 * To avoid any instantiation

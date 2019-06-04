@@ -32,7 +32,7 @@ public final class AddOnClosetag extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnClosetag ADDON = new AddOnClosetag();
+	public static final AddOnClosetag INSTANCE = new AddOnClosetag();
 
 	/**
 	 * To avoid any instantiation

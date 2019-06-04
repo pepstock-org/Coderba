@@ -15,27 +15,38 @@
 */
 package org.pepstock.coderba.client;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import org.pepstock.coderba.client.resources.InjectableResource;
 
 /**
+ * Defines an object which must inject script or CSS style resources into DOM document, at runtime.<br>
+ * It must have a name.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class InjectableItem extends NamedItem {
-	
-	private final Collection<InjectableResource> resources = new ArrayList<>();
+
+	// internal collections of resources to be inject
+	private final Collection<InjectableResource> resources = new LinkedList<>();
 
 	/**
+	 * Creates the object with a mandatory name as string.
 	 * 
+	 * @param name name of object as string
 	 */
 	InjectableItem(String name) {
 		super(name);
 	}
-	
-	protected final Collection<InjectableResource> getResources(){
+
+	/**
+	 * Returns the collection of script or style resources to classes which extend this one.
+	 * 
+	 * @return the collection of script or style resources
+	 */
+	protected final Collection<InjectableResource> getResources() {
 		return resources;
 	}
 

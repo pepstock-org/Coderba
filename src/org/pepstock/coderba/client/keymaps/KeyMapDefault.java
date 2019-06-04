@@ -16,30 +16,28 @@
 package org.pepstock.coderba.client.keymaps;
 
 import org.pepstock.coderba.client.KeyMap;
-import org.pepstock.coderba.client.resources.KeyMapResources;
-import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "sublime"  key map to enable the editor to manage keyboard.
+ * Is the "default" key map to enable the editor to manage keyboard.<br>
+ * Out of the box key map, no resoure to add to DOM.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Sublime extends KeyMap {
+public final class KeyMapDefault extends KeyMap {
 	// name of editor keymap
-	private static final String NAME = "sublime";
+	private static final String NAME = "default";
 
 	/**
 	 * Instance of editor keymap.
 	 */
-	public static final Sublime KEYMAP = new Sublime();
+	public static final KeyMapDefault INSTANCE = new KeyMapDefault();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private Sublime() {
+	private KeyMapDefault() {
 		// passes the name of keymap
 		super(NAME);
-		getResources().add(new ScriptResource(KeyMapResources.INSTANCE.sublime()));
 	}
 }

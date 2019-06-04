@@ -32,7 +32,7 @@ public final class AddOnContinuelist extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnContinuelist ADDON = new AddOnContinuelist();
+	public static final AddOnContinuelist INSTANCE = new AddOnContinuelist();
 
 	/**
 	 * To avoid any instantiation

@@ -35,22 +35,5 @@ final class RuntimeOptions extends AbstractExtendedOptions<RuntimeOptionsContain
 	RuntimeOptions(NativeEditor nativeObject, IsDefaultOptions defaultsValue) {
 		super(new RuntimeOptionsContainer(nativeObject), defaultsValue);
 	}
-	
-	
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.pepstock.coderba.client.cm.entities.AbstractOptions#setLineNumberFormatter(org.pepstock.coderba.client.cm.commons.
-//	 * CallbackProxy.Proxy)
-//	 */
-//	@Override
-//	public void setLineNumberFormatter(Proxy lineNumberFormatter) {
-//		if (lineNumberFormatter != null) {
-//			super.setLineNumberFormatter(lineNumberFormatter);
-//		} else {
-//			Defaults options = CodeMirror.get().getDefaults();
-//			getNativeObjectContainer().cloneFromDefaults(options.getObject(), getNativeObjectContainer().getNativeEditor().getOptions(), Options.LINE_NUMBER_FORMATTER);
-//		}
-//	}
 
 }

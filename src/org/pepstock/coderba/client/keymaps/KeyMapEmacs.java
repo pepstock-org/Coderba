@@ -16,28 +16,30 @@
 package org.pepstock.coderba.client.keymaps;
 
 import org.pepstock.coderba.client.KeyMap;
+import org.pepstock.coderba.client.resources.KeyMapResources;
+import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "default" key map to enable the editor to manage keyboard.<br>
- * Out of the box key map, no resoure to add to DOM.
+ * Is the "emacs"  key map to enable the editor to manage keyboard.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Default extends KeyMap {
+public final class KeyMapEmacs extends KeyMap {
 	// name of editor keymap
-	private static final String NAME = "default";
+	private static final String NAME = "emacs";
 
 	/**
 	 * Instance of editor keymap.
 	 */
-	public static final Default KEYMAP = new Default();
+	public static final KeyMapEmacs INSTANCE = new KeyMapEmacs();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private Default() {
+	private KeyMapEmacs() {
 		// passes the name of keymap
 		super(NAME);
+		getResources().add(new ScriptResource(KeyMapResources.INSTANCE.emacs()));
 	}
 }

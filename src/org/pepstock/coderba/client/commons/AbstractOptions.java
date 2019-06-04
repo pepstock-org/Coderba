@@ -204,7 +204,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		String value = nativeObjectContainer.getValue(Options.KEY_MAP, defaultsValue.getKeyMap().getName());
 		String defaultKeyMapName = GlobalDefaults.get().getKeyMap().getName();
 		if (defaultKeyMapName.equalsIgnoreCase(value) && KeyMaps.get().retrieve(defaultKeyMapName) == null) {
-			Injector.ensureInjected(GlobalDefaults.get().getKeyMap());
+			GlobalDefaults.get().getKeyMap().inject();
 		}
 		return KeyMaps.get().retrieve(value);
 	}
@@ -846,7 +846,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	@Override
 	public void setKeyMap(KeyMap keyMap) {
 		if (keyMap != null) {
-			Injector.ensureInjected(keyMap);
+			keyMap.inject();
 			nativeObjectContainer.setValue(Options.KEY_MAP, keyMap.getName());
 		}
 	}

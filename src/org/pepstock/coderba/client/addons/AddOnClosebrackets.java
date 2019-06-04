@@ -32,7 +32,7 @@ public final class AddOnClosebrackets extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnClosebrackets ADDON = new AddOnClosebrackets();
+	public static final AddOnClosebrackets INSTANCE = new AddOnClosebrackets();
 
 	/**
 	 * To avoid any instantiation

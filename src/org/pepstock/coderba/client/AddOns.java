@@ -15,39 +15,31 @@
 */
 package org.pepstock.coderba.client;
 
-import org.pepstock.coderba.client.commons.HasName;
-
 /**
- * Abstract calls to define a type with a mandatory name, as string.
+ * Cache of all addon instances loaded.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class NamedItem implements HasName {
+public final class AddOns extends InjectedItems<AddOn> {
 
-	// name of object
-	private final String name;
+	// singleton instance
+	private static final AddOns INSTANCE = new AddOns();
 
 	/**
-	 * Creates the object with a mandatory name as string.
-	 * 
-	 * @param name name of object as string
+	 * To avoid any instantiation
 	 */
-	NamedItem(String name) {
-		// checks if name is consistent
-		if (name == null) {
-			// if not exception
-			throw new IllegalArgumentException("[NamedItem] Name is null");
-		}
-		this.name = name;
+	private AddOns() {
+		// do nothing
 	}
 
 	/**
-	 * Returns the name of the object.
+	 * Returns the singleton instance of the cache.
 	 * 
-	 * @return the name of object
+	 * @return the singleton instance of the cache
 	 */
-	public final String getName() {
-		return name;
+	public static AddOns get() {
+		return INSTANCE;
 	}
+
 }

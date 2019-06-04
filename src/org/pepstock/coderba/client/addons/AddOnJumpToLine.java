@@ -32,7 +32,7 @@ public final class AddOnJumpToLine extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnJumpToLine ADDON = new AddOnJumpToLine();
+	public static final AddOnJumpToLine INSTANCE = new AddOnJumpToLine();
 
 	/**
 	 * To avoid any instantiation

@@ -32,7 +32,7 @@ public final class AddOnComment extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnComment ADDON = new AddOnComment();
+	public static final AddOnComment INSTANCE = new AddOnComment();
 
 	/**
 	 * To avoid any instantiation

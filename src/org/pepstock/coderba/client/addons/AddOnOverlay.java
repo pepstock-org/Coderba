@@ -32,7 +32,7 @@ public final class AddOnOverlay extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnOverlay ADDON = new AddOnOverlay();
+	public static final AddOnOverlay INSTANCE = new AddOnOverlay();
 
 	/**
 	 * To avoid any instantiation

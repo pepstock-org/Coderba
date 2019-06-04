@@ -20,23 +20,29 @@ import org.pepstock.coderba.client.resources.ScriptResource;
 import org.pepstock.coderba.client.resources.StyleResource;
 
 /**
+ * Injectable object which represents the base script and style resource of CodeMirror to be injected before usign Coderba.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class CodeMirrorCode extends InjectableItem {
 
+	// name of injectable object
 	private static final String NAME = "CodeMirror";
 
 	/**
-	 * Instance of editor mode.
+	 * Instance of CodeMirror injectable object
 	 */
 	static final CodeMirrorCode CODE = new CodeMirrorCode();
 
 	/**
+	 * Creates the object adding the java script and CSS style resources to be loaded 
 	 */
 	CodeMirrorCode() {
 		super(NAME);
-		getResources().add(new ScriptResource(Resources.INSTANCE.codemirror()));
+		// style resources
 		getResources().add(new StyleResource(Resources.INSTANCE.codemirrorCss()));
+		// java script resource
+		getResources().add(new ScriptResource(Resources.INSTANCE.codemirror()));
 	}
 }

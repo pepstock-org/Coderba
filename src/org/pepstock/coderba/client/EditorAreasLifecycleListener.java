@@ -16,7 +16,8 @@
 package org.pepstock.coderba.client;
 
 /**
- * Interface to catch the initialization and destroy of all editor areas.<br> Used to configure or clean up resources.
+ * Interface to catch the initialization and destroy of all editor areas.<br>
+ * Used to configure or clean up resources.
  * 
  * @author Andrea "Stock" Stocchero
  * @see EditorAreas

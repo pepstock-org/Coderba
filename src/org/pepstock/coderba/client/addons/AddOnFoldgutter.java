@@ -33,7 +33,7 @@ public final class AddOnFoldgutter extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnFoldgutter ADDON = new AddOnFoldgutter();
+	public static final AddOnFoldgutter INSTANCE = new AddOnFoldgutter();
 
 	/**
 	 * To avoid any instantiation

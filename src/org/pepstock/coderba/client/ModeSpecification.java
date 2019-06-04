@@ -28,13 +28,13 @@ import jsinterop.annotations.JsType;
  * This is useful when the mime is not enough. like to create a document.<br>
  * It does not contain any visible method or property because is immutable.
  * 
- * Missing "state" property.
+ * FIXME Missing "state" property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ModeSpecification extends NativeEntity{
+public final class ModeSpecification extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation
@@ -42,13 +42,23 @@ public final class ModeSpecification extends NativeEntity{
 	private ModeSpecification() {
 		// do nothing
 	}
-	
+
+	/**
+	 * Returns the name of mode
+	 * 
+	 * @return the name of mode
+	 */
 	@JsProperty
 	private native String getName();
 
+	/**
+	 * Returns the mode instance.
+	 * 
+	 * @return the mode instance
+	 */
 	@JsOverlay
 	public Mode getMode() {
 		return Modes.get().retrieve(getName());
 	}
-	
+
 }

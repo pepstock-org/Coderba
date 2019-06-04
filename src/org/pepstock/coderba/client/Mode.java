@@ -16,13 +16,20 @@
 package org.pepstock.coderba.client;
 
 /**
+ * Modes typically consist of a single JavaScript file.<br>
+ * This file defines, in the simplest case, a lexer (tokenizer) for your language—a function that takes a character stream as
+ * input, advances it past a token, and returns a style for that token.<br>
+ * More advanced modes can also handle indentation for the language.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class Mode extends InjectableItem {
 
 	/**
-	 * @param value
+	 * Creates the mode with its name as string.
+	 * 
+	 * @param name name of mode as string
 	 */
 	protected Mode(String name) {
 		super(name);

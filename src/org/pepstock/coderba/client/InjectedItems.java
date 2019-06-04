@@ -21,12 +21,15 @@ import java.util.Map;
 import org.pepstock.coderba.client.commons.HasName;
 
 /**
+ * Common cache for injectable objects.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @param <T> type of injectable items to cache
  *
  */
 abstract class InjectedItems<T extends HasName> {
-	
+
 	// buffer with all injectable items instances
 	// K = injectable item name
 	// V = injectable item
@@ -36,24 +39,32 @@ abstract class InjectedItems<T extends HasName> {
 	 * To avoid any instantiation
 	 */
 	InjectedItems() {
+		// do nothing
 	}
-	
+
 	/**
 	 * Adds new injectable item instance into collection.
 	 * 
-	 * @param chart injectable ite
+	 * @param item injectable item
 	 */
 	final void add(T item) {
-		// putting getting the chart
+		// adds an injectable item into cache
 		instances.put(item.getName(), item);
 	}
 
+	/**
+	 * Retrieves a loaded injectable item by its name.
+	 * 
+	 * @param name name of injectable item
+	 * @return the injectable item instance or <code>null</code> if not loaded
+	 */
 	public final T retrieve(String name) {
 		// checks if argument is consistent
 		if (name != null) {
 			return instances.get(name);
 		}
-		// if here chart id is not consistent
+		// if here name is not consistent
+		// then retruns null
 		return null;
 	}
 

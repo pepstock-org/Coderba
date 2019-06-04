@@ -33,7 +33,7 @@ public final class AddOnDialog extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnDialog ADDON = new AddOnDialog();
+	public static final AddOnDialog INSTANCE = new AddOnDialog();
 
 	/**
 	 * To avoid any instantiation

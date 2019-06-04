@@ -32,7 +32,7 @@ public final class AddOnJavascriptLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnJavascriptLint ADDON = new AddOnJavascriptLint();
+	public static final AddOnJavascriptLint INSTANCE = new AddOnJavascriptLint();
 
 	/**
 	 * To avoid any instantiation

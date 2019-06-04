@@ -33,7 +33,7 @@ public final class AddOnShowHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnShowHint ADDON = new AddOnShowHint();
+	public static final AddOnShowHint INSTANCE = new AddOnShowHint();
 
 	/**
 	 * To avoid any instantiation

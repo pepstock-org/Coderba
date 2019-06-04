@@ -32,7 +32,7 @@ public final class AddOnAutorefresh extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnAutorefresh ADDON = new AddOnAutorefresh();
+	public static final AddOnAutorefresh INSTANCE = new AddOnAutorefresh();
 
 	/**
 	 * To avoid any instantiation

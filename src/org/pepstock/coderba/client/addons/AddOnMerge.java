@@ -33,7 +33,7 @@ public final class AddOnMerge extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMerge ADDON = new AddOnMerge();
+	public static final AddOnMerge INSTANCE = new AddOnMerge();
 
 	/**
 	 * To avoid any instantiation

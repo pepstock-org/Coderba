@@ -21,12 +21,17 @@ import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
 /**
  * Maps the "CodeMirror.mimeModes" property of Code mirror where are stored all mode specification.<br>
- * This is useful when the mime is not enough. like to create a document.
+ * This is useful when the mime is not enough. like to create a document.<br>
+ * The structure of the java script object is:<br>
+ * <br>
+ * K = language name (mime type)<br>
+ * V = mode specification, loaded when the mode has been injected<br>
  * 
  * @author Andrea "Stock" Stocchero
  */
 final class MimeModes extends NativeObjectContainer {
 	
+	// default when is not found
 	private static final ModeSpecification DEFAULT_MODE_SPECIFICATION = null;
 
 	/**
@@ -45,11 +50,16 @@ final class MimeModes extends NativeObjectContainer {
 	 * @return the mode specification related to the language or <code>null</code> if not exists.
 	 */
 	ModeSpecification getMode(Language language) {
-		// checks 
+		// checks if language is consistent
 		if (language != null) {
+			// creates a key by language name
+			// because the key of the object is the mime type of language
 			Key key = Key.create(language.getName());
+			// returns value or default is not exists
 			return getValue(key, DEFAULT_MODE_SPECIFICATION);
 		}
-		return null;
+		// if here, language is not consistent
+		// then returns default
+		return DEFAULT_MODE_SPECIFICATION;
 	}
 }

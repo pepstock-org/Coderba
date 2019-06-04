@@ -15,106 +15,134 @@
 */
 package org.pepstock.coderba.client;
 
+import org.pepstock.coderba.client.commons.NativeObject;
+
 import com.google.gwt.dom.client.TextAreaElement;
 
 /**
+ * CodeMirror is a code-editor component that can be embedded in Web pages.<br>
+ * The core library provides only the editor component and this class provides this component, with all static methods to
+ * consume by other classes.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class CodeMirror {
-	
+
+	// singleton instance
 	private static final CodeMirror INSTANCE = new CodeMirror();
-	
-	private final Defaults defaults;
-	
+	// native object of DEFAULT
+	private final NativeObject defaults;
+	// MIME modes object
 	private final MimeModes mimeModes;
 
 	/**
-	 * to avoid any instantiation
+	 * To avoid any instantiation
 	 */
 	private CodeMirror() {
+		// injects CodeMirror if needed
 		Injector.ensureInjected();
-		defaults = new Defaults(NativeCodeMirror.getDefaults());
+		// gets default object
+		defaults = NativeCodeMirror.getDefaults();
+		// gets mime modes object
 		mimeModes = new MimeModes(NativeCodeMirror.getMimeModes());
 	}
-	
-	public static CodeMirror get() {
+
+	/**
+	 * Returns the singleton instance of the code mirror.
+	 * 
+	 * @return the singleton instance of the code mirror
+	 */
+	static CodeMirror get() {
 		return INSTANCE;
 	}
-	
+
 	/**
-	 * It contains a string that indicates the version of the library. This is a triple of integers "major.minor.patch", where
-	 * patch is zero for releases, and something else (usually one) for dev snapshots.
+	 * It contains a string that indicates the version of the library.<br>
+	 * This is a triple of integers "major.minor.patch", where patch is zero for releases, and something else (usually one) for
+	 * development snapshots.
 	 * 
-	 * @return It contains a string that indicates the version of the library. This is a triple of integers "major.minor.patch",
-	 *         where patch is zero for releases, and something else (usually one) for dev snapshots.
+	 * @return It contains a string that indicates the version of the library.
 	 */
-	public String getVersion() {
+	public static String getVersion() {
 		return NativeCodeMirror.getVersion();
 	}
-	
+
 	/**
-	 * Returns the object containing the default options. You can update this object to change the defaults on your page.
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
 	 * 
 	 * @return the object containing the default options.
 	 */
-	public Defaults getDefaults() {
+	NativeObject getDefaults() {
 		return defaults;
 	}
-	
+
+	/**
+	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
+	 * 
+	 * @return the map of CodeMirror, which maps MIME types to mode specification
+	 */
 	MimeModes getMimeModes() {
 		return mimeModes;
 	}
-	
+
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a textarea DOM node as argument.<br>
-	 * It will replace the textarea with a CodeMirror instance, and wire up the form of that textarea (if any) to make sure the
-	 * editor contents are put into the textarea when the form is submitted.<br>
-	 * The text in the textarea will provide the content for the editor.
+	 * It takes a text area DOM node as argument.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
+	 * editor contents are put into the text area when the form is submitted.<br>
+	 * The text in the text area will provide the content for the editor.
 	 * 
-	 * @param host a textarea DOM node, already attached to body
-	 * @return an initialized editor
+	 * @param element a text area DOM node, already attached to body
+	 * @return an initialized editor with default configuration
 	 */
-	Editor fromTextArea(TextAreaElement host) {
-		return fromTextArea(host, null);
+	Editor fromTextArea(TextAreaElement element) {
+		return fromTextArea(element, null);
 	}
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a textarea DOM node as first argument and an optional configuration object as second.<br>
-	 * It will replace the textarea with a CodeMirror instance, and wire up the form of that textarea (if any) to make sure the
-	 * editor contents are put into the textarea when the form is submitted.<br>
-	 * The text in the textarea will provide the content for the editor.
+	 * It takes a text area DOM node as first argument and an optional configuration object as second.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
+	 * editor contents are put into the text area when the form is submitted.<br>
+	 * The text in the text area will provide the content for the editor.
 	 * 
-	 * @param host a textarea DOM node, already attached to body
-	 * @param options configuration object instance
+	 * @param element a text area DOM node, already attached to body
+	 * @param options user configuration object instance
 	 * @return an initialized editor
 	 */
-	Editor fromTextArea(TextAreaElement host, UserOptions configuration) {
-		if (host != null) {
+	Editor fromTextArea(TextAreaElement element, UserOptions configuration) {
+		// checks if text area element is consistent
+		if (element != null) {
+			// checks if a configuration object is passed
 			if (configuration != null) {
-				return new Editor(NativeCodeMirror.fromTextArea(host, configuration.getObject()));
+				// if yes, initialized the editor by configuration
+				return new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
 			} else {
-				return new Editor(NativeCodeMirror.fromTextArea(host));
+				// if no, initialized the editor by default configuration
+				return new Editor(NativeCodeMirror.fromTextArea(element));
 			}
 		}
-		throw new IllegalArgumentException("TextArea element is null");
+		// if here, the text area is not consistent
+		// then exception
+		throw new IllegalArgumentException("Unable to initialize the editor because TextArea element is null");
 	}
 
-	/**
-	 * Find the column position at a given string index using a given tabsize.
-	 * 
-	 * @param line
-	 * @param index
-	 * @param tabSize
-	 * @return
-	 */
-	public int countColumn(String line, int index, int tabSize) {
-		if (line != null) {
-			return NativeCodeMirror.countColumn(line, index, tabSize);
-		}
-		return -1;
-	}
+// FIXME	
+//	/**
+//	 * Find the column position at a given string index using a given tabsize.
+//	 * 
+//	 * @param line
+//	 * @param index
+//	 * @param tabSize
+//	 * @return
+//	 */
+//	public int countColumn(String line, int index, int tabSize) {
+//		if (line != null) {
+//			return NativeCodeMirror.countColumn(line, index, tabSize);
+//		}
+//		return -1;
+//	}
 
 }

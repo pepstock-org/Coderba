@@ -21,15 +21,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Is a static reference which collects all editor area instances to be able to enable callbacks.
+ * Cache which collects all editor area instances to be able to enable callbacks.<br>
+ * Manages also the user life cycle listeners on editor area. 
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class EditorAreas {
 
-	// buffer with all charts instances
-	// K = EDITOR AREA id (CHARBA ID)
+	// buffer with all editor area instances
+	// K = EDITOR AREA id (CODERBA ID)
 	// V = editor area instance
 	private static final Map<String, EditorArea> EDITOR_AREA_INSTANCES = new HashMap<>();
 	// list with all editor areas life cycle listeners
@@ -89,7 +90,7 @@ public final class EditorAreas {
 	}
 
 	/**
-	 * Fires the notification to all listeners after editor area init.
+	 * Fires the notification to all listeners after editor area initialization.
 	 * 
 	 * @param editorArea editor area instance
 	 */

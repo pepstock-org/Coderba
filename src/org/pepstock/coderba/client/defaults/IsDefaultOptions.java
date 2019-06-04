@@ -26,7 +26,7 @@ import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
-import org.pepstock.coderba.client.keymaps.Default;
+import org.pepstock.coderba.client.keymaps.KeyMapDefault;
 import org.pepstock.coderba.client.utils.RegExp;
 
 /**
@@ -213,7 +213,7 @@ public interface IsDefaultOptions {
 	int getTabSize();
 
 	/**
-	 * Returns the theme to style the editor with. The default is {@link Default}, for which colors are included in
+	 * Returns the theme to style the editor with. The default is {@link KeyMapDefault}, for which colors are included in
 	 * <code>codemirror.css</code>.
 	 * 
 	 * @return the theme to style the editor with

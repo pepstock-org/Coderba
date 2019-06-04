@@ -33,7 +33,7 @@ public final class AddOnTern extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnTern ADDON = new AddOnTern();
+	public static final AddOnTern INSTANCE = new AddOnTern();
 
 	/**
 	 * To avoid any instantiation

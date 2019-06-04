@@ -16,19 +16,28 @@
 package org.pepstock.coderba.client;
 
 /**
+ * Cache of all theme instances loaded.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Themes extends InjectedItems<Theme> {
+public final class Themes extends InjectedItems<Theme> {
 	
+	// singleton instance
 	private static final Themes INSTANCE = new Themes();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Themes() {
+		// do nothing
 	}
 	
+	/**
+	 * Returns the singleton instance of the cache.
+	 * 
+	 * @return the singleton instance of the cache
+	 */
 	public static Themes get() {
 		return INSTANCE;
 	}

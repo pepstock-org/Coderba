@@ -32,7 +32,7 @@ public final class AddOnCssLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnCssLint ADDON = new AddOnCssLint();
+	public static final AddOnCssLint INSTANCE = new AddOnCssLint();
 
 	/**
 	 * To avoid any instantiation

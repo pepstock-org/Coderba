@@ -33,7 +33,7 @@ public final class AddOnFullscreen extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnFullscreen ADDON = new AddOnFullscreen();
+	public static final AddOnFullscreen INSTANCE = new AddOnFullscreen();
 
 	/**
 	 * To avoid any instantiation

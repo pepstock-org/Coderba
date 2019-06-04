@@ -32,5 +32,12 @@ public abstract class AddOn extends InjectableItem {
 	protected AddOn(String name) {
 		super(name);
 	}
+	
+	/**
+	 * Injects the addon instance into DOM document in order to consume it by CodeMirror.
+	 */
+	public final void inject() {
+		Injector.ensureInjected(this);
+	}
 
 }

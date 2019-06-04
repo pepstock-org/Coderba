@@ -32,7 +32,7 @@ public final class AddOnXmlHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnXmlHint ADDON = new AddOnXmlHint();
+	public static final AddOnXmlHint INSTANCE = new AddOnXmlHint();
 
 	/**
 	 * To avoid any instantiation

@@ -108,8 +108,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		Key keyObject = Key.create(key);
 		// do nothing
 		// the runtime options NEVER remove keys
-		Defaults options = CodeMirror.get().getDefaults();
-		cloneFromDefaults(options.getObject(), nativeEditor.getOptions(), keyObject);
+		cloneFromDefaults(Defaults.get().getObject(), nativeEditor.getOptions(), keyObject);
 	}
 
 	/*
@@ -333,18 +332,23 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		return nativeEditor.getOptionValueAsElement(key);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String,
+	 * org.pepstock.coderba.client.commons.NativeEntity)
 	 */
 	@Override
 	protected <T extends NativeEntity> void defineEntityProperty(String key, T value) {
 		// if here, key is consistent
 		nativeEditor.setOptionValue(key, value);
 	}
-	
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String,
+	 * org.pepstock.coderba.client.commons.NativeEntity)
 	 */
 	@Override
 	protected <T extends NativeEntity> T getEntityProperty(String key, T defaultValue) {

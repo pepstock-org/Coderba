@@ -32,7 +32,7 @@ public final class AddOnMatchbrackets extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMatchbrackets ADDON = new AddOnMatchbrackets();
+	public static final AddOnMatchbrackets INSTANCE = new AddOnMatchbrackets();
 
 	/**
 	 * To avoid any instantiation

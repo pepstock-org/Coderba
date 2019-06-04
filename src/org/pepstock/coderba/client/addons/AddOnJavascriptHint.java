@@ -32,7 +32,7 @@ public final class AddOnJavascriptHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnJavascriptHint ADDON = new AddOnJavascriptHint();
+	public static final AddOnJavascriptHint INSTANCE = new AddOnJavascriptHint();
 
 	/**
 	 * To avoid any instantiation

@@ -32,7 +32,7 @@ public final class AddOnTrailingspace extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnTrailingspace ADDON = new AddOnTrailingspace();
+	public static final AddOnTrailingspace INSTANCE = new AddOnTrailingspace();
 
 	/**
 	 * To avoid any instantiation

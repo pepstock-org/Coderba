@@ -32,7 +32,7 @@ public final class AddOnRunmodeStandalone extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnRunmodeStandalone ADDON = new AddOnRunmodeStandalone();
+	public static final AddOnRunmodeStandalone INSTANCE = new AddOnRunmodeStandalone();
 
 	/**
 	 * To avoid any instantiation

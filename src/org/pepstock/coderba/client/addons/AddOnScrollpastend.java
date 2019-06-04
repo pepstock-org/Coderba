@@ -32,7 +32,7 @@ public final class AddOnScrollpastend extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnScrollpastend ADDON = new AddOnScrollpastend();
+	public static final AddOnScrollpastend INSTANCE = new AddOnScrollpastend();
 
 	/**
 	 * To avoid any instantiation

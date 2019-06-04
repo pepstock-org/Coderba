@@ -32,7 +32,7 @@ public final class AddOnLoadmode extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnLoadmode ADDON = new AddOnLoadmode();
+	public static final AddOnLoadmode INSTANCE = new AddOnLoadmode();
 
 	/**
 	 * To avoid any instantiation

@@ -25,20 +25,34 @@ import org.pepstock.coderba.client.utils.Window;
  *
  */
 public abstract class Language extends NamedItem {
-
-	private ModeSpecification modeSpecification = null;
 	
+	// mode specification instance
+	private ModeSpecification modeSpecification = null;
+	// flag if mode specification is already loaded
 	private boolean isModeSpecLoaded = false;
 
 	/**
-	 * @param value
+	 * Creates a language instance by its name.<br>
+	 * The language name is the MIME type defined for that language because a mode can implement more than 1 language.
+	 * 
+	 * @param name mime type which represents the language.
 	 */
 	protected Language(String name) {
 		super(name);
 	}
 
+	/**
+	 * Returns the long name (description) of language.
+	 * 
+	 * @return the long name (description) of language
+	 */
 	public abstract String getLongName();
 
+	/**
+	 * Returns the mode related to the language.
+	 * 
+	 * @return the mode related to the language
+	 */
 	public abstract Mode getMode();
 
 	/**
@@ -58,7 +72,7 @@ public abstract class Language extends NamedItem {
 	 */
 	final void setModeSpecification(ModeSpecification modeSpecification) {
 		Window.getConsole().log("eccome");
-		// checks if mode spec is already loaded
+		// checks if mode specification is already loaded
 		if (!isModeSpecLoaded) {
 			// if not, it stores it
 			this.modeSpecification = modeSpecification;

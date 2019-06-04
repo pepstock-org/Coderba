@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.TextAreaElement;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
+ * FIXME
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -64,7 +65,7 @@ public class EditorArea extends Widget {
 		super.setElement(element);
 		// injects codemirror.js java script source
 		Injector.ensureInjected();
-		initOptions = new UserOptions(CodeMirror.get().getDefaults());
+		initOptions = new UserOptions(Defaults.get());
 		options = new EditorOptions(initOptions);
 	}
 
@@ -180,7 +181,7 @@ public class EditorArea extends Widget {
 			EditorAreas.add(this);
 			this.editor = CodeMirror.get().fromTextArea(element, initOptions);
 			editor.setId(getId());
-			options.setDelegatedOptions(new RuntimeOptions(editor.getNativeObject(), CodeMirror.get().getDefaults()));
+			options.setDelegatedOptions(new RuntimeOptions(editor.getNativeObject(), Defaults.get()));
 			if (initializer != null) {
 				initializer.afterInit(this);
 			}

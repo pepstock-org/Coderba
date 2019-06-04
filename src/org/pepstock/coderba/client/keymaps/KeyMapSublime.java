@@ -20,26 +20,26 @@ import org.pepstock.coderba.client.resources.KeyMapResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "emacs"  key map to enable the editor to manage keyboard.
+ * Is the "sublime"  key map to enable the editor to manage keyboard.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Emacs extends KeyMap {
+public final class KeyMapSublime extends KeyMap {
 	// name of editor keymap
-	private static final String NAME = "emacs";
+	private static final String NAME = "sublime";
 
 	/**
 	 * Instance of editor keymap.
 	 */
-	public static final Emacs KEYMAP = new Emacs();
+	public static final KeyMapSublime INSTANCE = new KeyMapSublime();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private Emacs() {
+	private KeyMapSublime() {
 		// passes the name of keymap
 		super(NAME);
-		getResources().add(new ScriptResource(KeyMapResources.INSTANCE.emacs()));
+		getResources().add(new ScriptResource(KeyMapResources.INSTANCE.sublime()));
 	}
 }

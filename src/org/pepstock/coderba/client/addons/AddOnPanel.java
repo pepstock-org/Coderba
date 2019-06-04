@@ -32,7 +32,7 @@ public final class AddOnPanel extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnPanel ADDON = new AddOnPanel();
+	public static final AddOnPanel INSTANCE = new AddOnPanel();
 
 	/**
 	 * To avoid any instantiation

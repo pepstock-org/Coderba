@@ -32,7 +32,7 @@ public final class AddOnMatchtags extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMatchtags ADDON = new AddOnMatchtags();
+	public static final AddOnMatchtags INSTANCE = new AddOnMatchtags();
 
 	/**
 	 * To avoid any instantiation

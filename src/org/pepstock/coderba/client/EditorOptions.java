@@ -40,7 +40,8 @@ import com.google.gwt.dom.client.NativeEvent;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Wraps the user and runtime options of an editor area.
+ * Wraps the user and runtime options of an editor area and used to configure the editor, before and during the life cycle of
+ * editor.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -71,8 +72,8 @@ public class EditorOptions implements IsOptions {
 	}
 
 	/**
-	 * Java script FUNCTION used to format line numbers. The function is passed the line number, and should return a string that
-	 * will be shown in the gutter.
+	 * Java script FUNCTION used to format line numbers.<br>
+	 * The function is passed the line number, and should return a string that will be shown in the gutter.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
@@ -80,8 +81,8 @@ public class EditorOptions implements IsOptions {
 	interface LineNumberFormatterFunction {
 
 		/**
-		 * A function used to format line numbers. The function is passed the line number, and should return a string that will
-		 * be shown in the gutter.
+		 * A function used to format line numbers.<br>
+		 * The function is passed the line number, and should return a string that will be shown in the gutter.
 		 * 
 		 * @param line line number to format
 		 * @return string that will be shown in the gutter
@@ -90,8 +91,8 @@ public class EditorOptions implements IsOptions {
 	}
 
 	/**
-	 * Java script FUNCTION used to allow you to configure the behavior of mouse selection and dragging. The function is called
-	 * when the left mouse button is pressed.
+	 * Java script FUNCTION used to allow you to configure the behavior of mouse selection and dragging.<br>
+	 * The function is called when the left mouse button is pressed.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
@@ -99,8 +100,8 @@ public class EditorOptions implements IsOptions {
 	interface ConfigureMouseFunction {
 
 		/**
-		 * Allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse
-		 * button is pressed.
+		 * Allow you to configure the behavior of mouse selection and dragging.<br>
+		 * The function is called when the left mouse button is pressed.
 		 * 
 		 * @param editor CodeMirror editor instance
 		 * @param repeat type of click by mouse
@@ -168,62 +169,11 @@ public class EditorOptions implements IsOptions {
 	 * @see RuntimeOptions
 	 */
 	final void setDelegatedOptions(IsExtendedOptions delegated) {
+		// checks if argument is consistent
 		if (delegated != null) {
+			// sets the options
 			this.delegated = delegated;
 		}
-	}
-
-	/**
-	 * A function that, given a special character identified by the specialChars option, produces a DOM node that is used to
-	 * represent the character.
-	 * 
-	 * @param character a special character identified by the specialChars option
-	 * @return a DOM node that is used to represent the character.
-	 */
-	private Element onSpecialCharPlaceholder(char character) {
-		if (specialCharPlaceholder != null) {
-			return specialCharPlaceholder.handle(character);
-		}
-		return null;
-	}
-
-	/**
-	 * A function used to format line numbers. The function is passed the line number, and should return a string that will be
-	 * shown in the gutter.
-	 * 
-	 * @param line line number to format
-	 * @return string that will be shown in the gutter
-	 */
-	private String onLineNumberFormatter(int line) {
-		if (lineNumberFormatter != null) {
-			String result = lineNumberFormatter.format(line);
-			if (result != null) {
-				return result;
-			}
-		}
-		return String.valueOf(line);
-	}
-
-	/**
-	 * Allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse button is
-	 * pressed.
-	 * 
-	 * @param editor CodeMirror editor instance
-	 * @param repeat type of click by mouse
-	 * @param event native event
-	 * @return mouse configuration native object
-	 */
-	private NativeObject onConfigureMouse(NativeEditor editor, String repeat, NativeEvent event) {
-		MouseRepeat confMouseRepeat = Key.getKeyByValue(MouseRepeat.class, repeat, MouseRepeat.SINGLE);
-		EditorArea area = editor.getEditorArea();
-		if (area != null && configureMouse != null) {
-			MouseConfiguration result = configureMouse.handle(area, confMouseRepeat, event);
-			if (result != null) {
-				return result.exportedObject();
-			}
-		}
-		MouseConfiguration result = new MouseConfiguration(confMouseRepeat);
-		return result.exportedObject();
 	}
 
 	/**
@@ -234,10 +184,15 @@ public class EditorOptions implements IsOptions {
 	 *            a DOM node that is used to represent the character.
 	 */
 	public void setSpecialCharPlaceholder(SpecialCharPlaceholderHandler specialCharPlaceholder) {
+		// sets the callback
 		this.specialCharPlaceholder = specialCharPlaceholder;
+		// if callback is consistent
 		if (specialCharPlaceholder != null) {
+			// sets the function for callback
 			delegated.setSpecialCharPlaceholder(specialCharPlaceholderFunctionProxy.getProxy());
 		} else {
+			// if here callback is not consistent
+			// and the reset the function for callback
 			delegated.setSpecialCharPlaceholder(null);
 		}
 	}
@@ -260,10 +215,15 @@ public class EditorOptions implements IsOptions {
 	 * @param lineNumberFormatter line number formatter instance
 	 */
 	public void setLineNumberFormatter(LineNumberFormatterHandler lineNumberFormatter) {
+		// sets the callback
 		this.lineNumberFormatter = lineNumberFormatter;
+		// if callback is consistent
 		if (lineNumberFormatter != null) {
+			// sets the function for callback
 			delegated.setLineNumberFormatter(lineNumberFormatterFunctionProxy.getProxy());
 		} else {
+			// if here callback is not consistent
+			// and the reset the function for callback
 			delegated.setLineNumberFormatter(null);
 		}
 	}
@@ -279,29 +239,38 @@ public class EditorOptions implements IsOptions {
 	}
 
 	/**
-	 * Sets a function used to allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse button is
-	 * pressed.
+	 * Sets a function used to allow you to configure the behavior of mouse selection and dragging. The function is called when
+	 * the left mouse button is pressed.
 	 * 
 	 * @param configureMouse configure mouse handler instance
 	 */
 	public void setConfigureMouse(ConfigureMouseHandler configureMouse) {
+		// sets the callback
 		this.configureMouse = configureMouse;
+		// if callback is consistent
 		if (configureMouse != null) {
+			// sets the function for callback
 			delegated.setConfigureMouse(configureMouseFunctionProxy.getProxy());
 		} else {
+			// if here callback is not consistent
+			// and the reset the function for callback
 			delegated.setConfigureMouse(null);
 		}
 	}
 
 	/**
-	 * Returns a function used to allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse button is
-	 * pressed.
+	 * Returns a function used to allow you to configure the behavior of mouse selection and dragging. The function is called
+	 * when the left mouse button is pressed.
 	 * 
 	 * @return configure mouse handler instance
 	 */
 	public ConfigureMouseHandler getConfigureMouse() {
 		return configureMouse;
 	}
+	
+	// --------------------------------
+	// --- ALL DELEGATED METHODS
+	// --------------------------------
 
 	/*
 	 * (non-Javadoc)
@@ -1311,4 +1280,79 @@ public class EditorOptions implements IsOptions {
 	public final String toJSON() {
 		return delegated.toJSON();
 	}
+
+	// --------------------------------
+	// --- PRIVATE EVENT METHODS
+	// --------------------------------
+
+	/**
+	 * A function that, given a special character identified by the specialChars option, produces a DOM node that is used to
+	 * represent the character.
+	 * 
+	 * @param character a special character identified by the specialChars option
+	 * @return a DOM node that is used to represent the character.
+	 */
+	private Element onSpecialCharPlaceholder(char character) {
+		// checks if callback is consistent
+		if (specialCharPlaceholder != null) {
+			// invokes callback
+			return specialCharPlaceholder.handle(character);
+		}
+		// if here, callback is not set
+		// then returns element
+		// FIXME
+		return null;
+	}
+
+	/**
+	 * A function used to format line numbers.<br>
+	 * The function is passed the line number, and should return a string that will be shown in the gutter.
+	 * 
+	 * @param line line number to format
+	 * @return string that will be shown in the gutter
+	 */
+	private String onLineNumberFormatter(int line) {
+		// checks if callback is consistent
+		if (lineNumberFormatter != null) {
+			// invokes the callback
+			String result = lineNumberFormatter.format(line);
+			// checks if result consistent
+			if (result != null) {
+				return result;
+			}
+		}
+		// if here, the result is not consistent
+		// and then returns a string representation of line
+		return String.valueOf(line);
+	}
+
+	/**
+	 * Allow you to configure the behavior of mouse selection and dragging.<br>
+	 * The function is called when the left mouse button is pressed.
+	 * 
+	 * @param editor CodeMirror editor instance
+	 * @param repeat type of click by mouse
+	 * @param event native event
+	 * @return mouse configuration native object
+	 */
+	private NativeObject onConfigureMouse(NativeEditor editor, String repeat, NativeEvent event) {
+		// creates a mouse repeat object
+		MouseRepeat confMouseRepeat = Key.getKeyByValue(MouseRepeat.class, repeat, MouseRepeat.SINGLE);
+		// gets editor area from native editor
+		EditorArea area = editor.getEditorArea();
+		// if editor area and callback are consistent
+		if (area != null && configureMouse != null) {
+			// invokes callback
+			MouseConfiguration result = configureMouse.handle(area, confMouseRepeat, event);
+			// checks if result is consistent
+			if (result != null) {
+				return result.exportedObject();
+			}
+		}
+		// creates a default mouse configuratio
+		MouseConfiguration result = new MouseConfiguration(confMouseRepeat);
+		// returns the native object
+		return result.exportedObject();
+	}
+
 }

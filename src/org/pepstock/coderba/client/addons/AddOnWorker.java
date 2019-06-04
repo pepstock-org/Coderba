@@ -32,7 +32,7 @@ public final class AddOnWorker extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnWorker ADDON = new AddOnWorker();
+	public static final AddOnWorker INSTANCE = new AddOnWorker();
 
 	/**
 	 * To avoid any instantiation

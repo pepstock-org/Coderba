@@ -32,7 +32,7 @@ public final class AddOnXmlFold extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnXmlFold ADDON = new AddOnXmlFold();
+	public static final AddOnXmlFold INSTANCE = new AddOnXmlFold();
 
 	/**
 	 * To avoid any instantiation

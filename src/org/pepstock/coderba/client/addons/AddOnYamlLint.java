@@ -32,7 +32,7 @@ public final class AddOnYamlLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnYamlLint ADDON = new AddOnYamlLint();
+	public static final AddOnYamlLint INSTANCE = new AddOnYamlLint();
 
 	/**
 	 * To avoid any instantiation

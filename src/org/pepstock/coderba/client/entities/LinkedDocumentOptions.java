@@ -15,7 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.CodeMirror;
+import org.pepstock.coderba.client.Defaults;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.Key;
@@ -44,7 +44,7 @@ public final class LinkedDocumentOptions extends BaseEntity {
 
 	public static final int DEFAULT_FROM_TO = 0;
 
-	public static final String DEFAULT_MODE = CodeMirror.get().getDefaults().getLanguage().getName();
+	public static final String DEFAULT_MODE = Defaults.get().getLanguage().getName();
 
 	/**
 	 * Name of properties of native object.

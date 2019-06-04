@@ -32,7 +32,7 @@ public final class AddOnMatchHighlighter extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMatchHighlighter ADDON = new AddOnMatchHighlighter();
+	public static final AddOnMatchHighlighter INSTANCE = new AddOnMatchHighlighter();
 
 	/**
 	 * To avoid any instantiation

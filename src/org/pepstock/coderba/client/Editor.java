@@ -73,6 +73,13 @@ import com.google.gwt.dom.client.NativeEvent;
 import jsinterop.annotations.JsFunction;
 
 /**
+ * CodeMirror is a code-editor component that can be embedded in Web pages.<br>
+ * The core library provides only the editor component, no accompanying buttons, auto-completion, or other IDE
+ * functionality.<br>
+ * It does provide a rich API on top of which such functionality can be straightforwardly implemented.<br>
+ * CodeMirror works with language-specific modes.<br>
+ * Modes are JavaScript programs that help color (and optionally indent) text written in a given language.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -183,7 +190,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		 * Is called before the selection is moved.
 		 * 
 		 * @param editor native editor instance
-		 * @param item editor change item 
+		 * @param item editor change item
 		 */
 		void call(NativeEditor editor, EditorBeforeSelectionChangeItem item);
 	}
@@ -528,7 +535,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	// ---------------------------------
 	// --- EVENTS METHODS
 	// ---------------------------------
-	
+
 	/**
 	 * FIXME
 	 * 
@@ -597,6 +604,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param item
 	 */
@@ -606,9 +614,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorBeforeSelectionChangeEvent(area, item));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param event
 	 */
@@ -618,10 +627,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorBlurEvent(area, event));
 		}
 	}
-	
 
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param line
 	 */
@@ -632,9 +641,9 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		}
 	}
 
-	
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param event
 	 */
@@ -644,9 +653,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorFocusEvent(area, event));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param line
 	 * @param gutter
@@ -658,9 +668,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorGutterClickEvent(area, line, gutter, event));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param line
 	 * @param gutter
@@ -672,7 +683,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorGutterContextMenuEvent(area, line, gutter, event));
 		}
 	}
-	
+
 	/**
 	 * FIXME
 	 * 
@@ -685,9 +696,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorInputReadEvent(area, item));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param property
 	 */
@@ -700,6 +712,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 */
 	private void onRefresh(NativeEditor editor) {
@@ -708,9 +721,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorRefreshEvent(area));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param line
 	 * @param element
@@ -718,13 +732,14 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	private void onRenderLine(NativeEditor editor, NativeLineHandle line, Element element) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
-			//FIXME
-//			fireEvent(new EditorRenderLineEvent(area, line, element));
+			// FIXME
+			// fireEvent(new EditorRenderLineEvent(area, line, element));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param event
 	 */
@@ -737,6 +752,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 */
 	private void onScroll(NativeEditor editor) {
@@ -745,22 +761,24 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorScrollEvent(area));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 * @param oldDoc
 	 */
 	private void onSwapDoc(NativeEditor editor, NativeDocument oldDoc) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
-			//FIXME
-//			fireEvent(new EditorSwapDocEvent(area, oldDoc));
+			// FIXME
+			// fireEvent(new EditorSwapDocEvent(area, oldDoc));
 		}
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @param editor
 	 */
 	private void onUpdate(NativeEditor editor) {
@@ -769,19 +787,18 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			fireEvent(new EditorUpdateEvent(area));
 		}
 	}
-	
-	
+
 	private void onViewportChange(NativeEditor editor, int from, int to) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
 			fireEvent(new EditorViewportChangeEvent(area, from, to));
 		}
 	}
-	
+
 	// ---------------------------------
 	// --- METHODS
 	// ---------------------------------
-	
+
 	/**
 	 * Sets the CODERBA id to editor options.
 	 * 
@@ -840,7 +857,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		} else {
 			// argument is null and then
 			// set the default value
-			nativeObject.setValue(CodeMirror.get().getDefaults().getValue());
+			nativeObject.setValue(Defaults.get().getValue());
 		}
 	}
 
@@ -1288,7 +1305,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 			return nativeObject.getModeAt(position);
 		}
 		// FIXME defaults;
-		return CodeMirror.get().getDefaults().getLanguage().getModeSpecification();
+		return Defaults.get().getLanguage().getModeSpecification();
 	}
 
 	/**

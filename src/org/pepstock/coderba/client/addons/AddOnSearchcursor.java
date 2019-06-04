@@ -32,7 +32,7 @@ public final class AddOnSearchcursor extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSearchcursor ADDON = new AddOnSearchcursor();
+	public static final AddOnSearchcursor INSTANCE = new AddOnSearchcursor();
 
 	/**
 	 * To avoid any instantiation

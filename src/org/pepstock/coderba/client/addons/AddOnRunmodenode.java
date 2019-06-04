@@ -32,7 +32,7 @@ public final class AddOnRunmodenode extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnRunmodenode ADDON = new AddOnRunmodenode();
+	public static final AddOnRunmodenode INSTANCE = new AddOnRunmodenode();
 
 	/**
 	 * To avoid any instantiation

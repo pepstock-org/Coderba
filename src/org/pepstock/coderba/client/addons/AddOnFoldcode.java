@@ -32,7 +32,7 @@ public final class AddOnFoldcode extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnFoldcode ADDON = new AddOnFoldcode();
+	public static final AddOnFoldcode INSTANCE = new AddOnFoldcode();
 
 	/**
 	 * To avoid any instantiation

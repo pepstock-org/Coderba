@@ -32,7 +32,7 @@ public final class AddOnContinuecomment extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnContinuecomment ADDON = new AddOnContinuecomment();
+	public static final AddOnContinuecomment INSTANCE = new AddOnContinuecomment();
 
 	/**
 	 * To avoid any instantiation

@@ -32,7 +32,7 @@ public final class AddOnColorize extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnColorize ADDON = new AddOnColorize();
+	public static final AddOnColorize INSTANCE = new AddOnColorize();
 
 	/**
 	 * To avoid any instantiation

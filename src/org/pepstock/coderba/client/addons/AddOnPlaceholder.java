@@ -32,7 +32,7 @@ public final class AddOnPlaceholder extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnPlaceholder ADDON = new AddOnPlaceholder();
+	public static final AddOnPlaceholder INSTANCE = new AddOnPlaceholder();
 
 	/**
 	 * To avoid any instantiation

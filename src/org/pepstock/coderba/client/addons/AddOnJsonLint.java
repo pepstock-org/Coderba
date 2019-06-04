@@ -32,7 +32,7 @@ public final class AddOnJsonLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnJsonLint ADDON = new AddOnJsonLint();
+	public static final AddOnJsonLint INSTANCE = new AddOnJsonLint();
 
 	/**
 	 * To avoid any instantiation

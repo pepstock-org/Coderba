@@ -15,7 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.CodeMirror;
+import org.pepstock.coderba.client.Defaults;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
@@ -67,7 +67,7 @@ public final class Position extends NativeEntity {
 	 */
 	@JsOverlay
 	public static Position create() {
-		return create(CodeMirror.get().getDefaults().getFirstLineNumber(), 0);
+		return create(Defaults.get().getFirstLineNumber(), 0);
 	}
 
 	/**

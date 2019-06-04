@@ -32,7 +32,7 @@ public final class AddOnCssHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnCssHint ADDON = new AddOnCssHint();
+	public static final AddOnCssHint INSTANCE = new AddOnCssHint();
 
 	/**
 	 * To avoid any instantiation

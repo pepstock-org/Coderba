@@ -32,7 +32,7 @@ public final class AddOnMarkdownFold extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMarkdownFold ADDON = new AddOnMarkdownFold();
+	public static final AddOnMarkdownFold INSTANCE = new AddOnMarkdownFold();
 
 	/**
 	 * To avoid any instantiation

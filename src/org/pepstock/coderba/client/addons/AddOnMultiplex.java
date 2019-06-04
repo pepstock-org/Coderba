@@ -32,7 +32,7 @@ public final class AddOnMultiplex extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMultiplex ADDON = new AddOnMultiplex();
+	public static final AddOnMultiplex INSTANCE = new AddOnMultiplex();
 
 	/**
 	 * To avoid any instantiation

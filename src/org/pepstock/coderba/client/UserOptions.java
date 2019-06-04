@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-class UserOptions extends AbstractExtendedOptions<UserOptionsContainer> {
+final class UserOptions extends AbstractExtendedOptions<UserOptionsContainer> {
 
 	/**
 	 * Creates a new options manager for user, with an empty native object and default values.

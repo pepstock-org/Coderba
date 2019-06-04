@@ -32,7 +32,7 @@ public final class AddOnCommentFold extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnCommentFold ADDON = new AddOnCommentFold();
+	public static final AddOnCommentFold INSTANCE = new AddOnCommentFold();
 
 	/**
 	 * To avoid any instantiation

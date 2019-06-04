@@ -32,7 +32,7 @@ public final class AddOnCoffeescriptLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnCoffeescriptLint ADDON = new AddOnCoffeescriptLint();
+	public static final AddOnCoffeescriptLint INSTANCE = new AddOnCoffeescriptLint();
 
 	/**
 	 * To avoid any instantiation

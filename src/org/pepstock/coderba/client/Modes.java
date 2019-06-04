@@ -16,19 +16,28 @@
 package org.pepstock.coderba.client;
 
 /**
+ * Cache of all mode instances loaded.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Modes extends InjectedItems<Mode> {
+public final class Modes extends InjectedItems<Mode> {
 	
+	// singleton instance
 	private static final Modes INSTANCE = new Modes();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Modes() {
+		// do nothing
 	}
 	
+	/**
+	 * Returns the singleton instance of the cache.
+	 * 
+	 * @return the singleton instance of the cache
+	 */
 	public static Modes get() {
 		return INSTANCE;
 	}

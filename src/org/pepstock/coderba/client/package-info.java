@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Root package which contains the main classes to manage an editor, by <code>CodeMirror</code>.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

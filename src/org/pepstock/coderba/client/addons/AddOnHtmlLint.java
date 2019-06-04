@@ -32,7 +32,7 @@ public final class AddOnHtmlLint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnHtmlLint ADDON = new AddOnHtmlLint();
+	public static final AddOnHtmlLint INSTANCE = new AddOnHtmlLint();
 
 	/**
 	 * To avoid any instantiation

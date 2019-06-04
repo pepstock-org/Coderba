@@ -17,7 +17,6 @@ package org.pepstock.coderba.client;
 
 import org.pepstock.coderba.client.commons.Array;
 import org.pepstock.coderba.client.commons.ArrayEntity;
-import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.NativeEntity;
@@ -43,6 +42,13 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * CodeMirror is a code-editor component that can be embedded in Web pages.<br>
+ * The core library provides only the editor component, no accompanying buttons, auto-completion, or other IDE
+ * functionality.<br>
+ * It does provide a rich API on top of which such functionality can be straightforwardly implemented.<br>
+ * CodeMirror works with language-specific modes.<br>
+ * Modes are JavaScript programs that help color (and optionally indent) text written in a given language.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -55,59 +61,53 @@ public final class NativeEditor {
 	private NativeEditor() {
 		// do nothing
 	}
-	
+
 	/**
-	 * 	WHAT IS MISSING
+	 * WHAT IS MISSING
 	 * 
-        Sets the gutter marker for the given gutter (identified by its CSS class, see the gutters option) to the given value.
-        Value can be either null, to clear the marker, or a DOM element, to set it. The DOM element will be shown in the specified gutter next to the specified line. 
-        setGutterMarker(line: any, gutterID: string, value: HTMLElement | null): CodeMirror.LineHandle;
-
-        Remove all gutter markers in the gutter with the given ID. 
-        clearGutter(gutterID: string): void;
-
-        Set a CSS class name for the given line.line can be a number or a line handle.
-        where determines to which element this class should be applied, can can be one of "text" (the text element, which lies in front of the selection),
-        "background"(a background element that will be behind the selection),
-        or "wrap" (the wrapper node that wraps all of the line's elements, including gutter elements).
-        class should be the name of the class to apply. 
-        addLineClass(line: any, where: string, _class_: string): CodeMirror.LineHandle;
-
-        Remove a CSS class from a line.line can be a line handle or number.
-        where should be one of "text", "background", or "wrap"(see addLineClass).
-        class can be left off to remove all classes for the specified node, or be a string to remove only a specific class. 
-        removeLineClass(line: any, where: string, class_?: string): CodeMirror.LineHandle;
-
-        Returns the line number, text content, and marker status of the given line, which can be either a number or a line handle. 
-        lineInfo(line: any): {
-            line: any;
-            handle: any;
-            text: string;
-            // Object mapping gutter IDs to marker elements. 
-            gutterMarkers: any;
-            textClass: string;
-            bgClass: string;
-            wrapClass: string;
-            // Array of line widgets attached to this line. 
-            widgets: any;
-        };
-
-        Puts node, which should be an absolutely positioned DOM node, into the editor, positioned right below the given { line , ch } position.
-        When scrollIntoView is true, the editor will ensure that the entire node is visible (if possible).
-        To remove the widget again, simply use DOM methods (move it somewhere else, or call removeChild on its parent). 
-        addWidget(pos: CodeMirror.Position, node: HTMLElement, scrollIntoView: boolean): void;
-
-        Adds a line widget, an element shown below a line, spanning the whole of the editor's width, and moving the lines below it downwards.
-        line should be either an integer or a line handle, and node should be a DOM node, which will be displayed below the given line.
-        options, when given, should be an object that configures the behavior of the widget.
-        Note that the widget node will become a descendant of nodes with CodeMirror-specific CSS classes, and those classes might in some cases affect it. 
-        addLineWidget(line: any, node: HTMLElement, options?: CodeMirror.LineWidgetOptions): CodeMirror.LineWidget;
+	 * Sets the gutter marker for the given gutter (identified by its CSS class, see the gutters option) to the given value.
+	 * Value can be either null, to clear the marker, or a DOM element, to set it. The DOM element will be shown in the
+	 * specified gutter next to the specified line. setGutterMarker(line: any, gutterID: string, value: HTMLElement | null):
+	 * CodeMirror.LineHandle;
+	 * 
+	 * Remove all gutter markers in the gutter with the given ID. clearGutter(gutterID: string): void;
+	 * 
+	 * Set a CSS class name for the given line.line can be a number or a line handle. where determines to which element this
+	 * class should be applied, can can be one of "text" (the text element, which lies in front of the selection),
+	 * "background"(a background element that will be behind the selection), or "wrap" (the wrapper node that wraps all of the
+	 * line's elements, including gutter elements). class should be the name of the class to apply. addLineClass(line: any,
+	 * where: string, _class_: string): CodeMirror.LineHandle;
+	 * 
+	 * Remove a CSS class from a line.line can be a line handle or number. where should be one of "text", "background", or
+	 * "wrap"(see addLineClass). class can be left off to remove all classes for the specified node, or be a string to remove
+	 * only a specific class. removeLineClass(line: any, where: string, class_?: string): CodeMirror.LineHandle;
+	 * 
+	 * Returns the line number, text content, and marker status of the given line, which can be either a number or a line
+	 * handle. lineInfo(line: any): { line: any; handle: any; text: string; // Object mapping gutter IDs to marker elements.
+	 * gutterMarkers: any; textClass: string; bgClass: string; wrapClass: string; // Array of line widgets attached to this
+	 * line. widgets: any; };
+	 * 
+	 * Puts node, which should be an absolutely positioned DOM node, into the editor, positioned right below the given { line ,
+	 * ch } position. When scrollIntoView is true, the editor will ensure that the entire node is visible (if possible). To
+	 * remove the widget again, simply use DOM methods (move it somewhere else, or call removeChild on its parent).
+	 * addWidget(pos: CodeMirror.Position, node: HTMLElement, scrollIntoView: boolean): void;
+	 * 
+	 * Adds a line widget, an element shown below a line, spanning the whole of the editor's width, and moving the lines below
+	 * it downwards. line should be either an integer or a line handle, and node should be a DOM node, which will be displayed
+	 * below the given line. options, when given, should be an object that configures the behavior of the widget. Note that the
+	 * widget node will become a descendant of nodes with CodeMirror-specific CSS classes, and those classes might in some cases
+	 * affect it. addLineWidget(line: any, node: HTMLElement, options?: CodeMirror.LineWidgetOptions): CodeMirror.LineWidget;
 	 **/
 
 	// -----------------------------------
 	// --- OBJECT methods
 	// -----------------------------------
 
+	/**
+	 * Returns the configuration of editor.
+	 * 
+	 * @return the configuration of editor
+	 */
 	@JsProperty(name = "options")
 	native NativeObject getOptions();
 
@@ -282,7 +282,7 @@ public final class NativeEditor {
 	 */
 	@JsMethod(name = "setOption")
 	native void setOptionValue(String key, Element value);
-	
+
 	// ---Native Entity
 	/**
 	 * Returns a value (native entity) into embedded JavaScript object at specific property.
@@ -301,7 +301,7 @@ public final class NativeEditor {
 	 */
 	@JsMethod(name = "setOption")
 	native <T extends NativeEntity> void setOptionValue(String key, T value);
-	
+
 	// ------------------------------------------
 	// --- END OPTIONS methods
 	// ------------------------------------------
@@ -309,22 +309,22 @@ public final class NativeEditor {
 	/**
 	 * Get the content of the current editor document.
 	 * 
-	 * @return he content of the current editor document
+	 * @return the content of the current editor document
 	 */
 	native String getValue();
 
 	/**
-	 * Get the content of the current editor document. You can pass it an optional argument to specify the string to be used to
-	 * separate lines (defaults to "\n").
+	 * Get the content of the current editor document.<br>
+	 * You can pass it an optional argument to specify the string to be used to separate lines (defaults to "\n").
 	 * 
-	 * @param separator You can pass it an optional argument to specify the string to be used to separate lines (defaults to
-	 *            "\n")
+	 * @param separator the string to be used to separate lines (defaults to "\n")
 	 * @return the content of the current editor document
 	 */
 	native String getValue(String separator);
 
 	/**
 	 * Set the content of the current editor document.
+	 * 
 	 * @param content the content of the current editor document
 	 */
 	native void setValue(String content);
@@ -337,33 +337,35 @@ public final class NativeEditor {
 	native boolean hasFocus();
 
 	/**
-	 * Used to find the target position for horizontal cursor motion.<br>
-	 * "start" is a position object, amount an integer (may be negative), and unit one of the string "char", "column", or
-	 * "word".<br>
-	 * Will return a position that is produced by moving amount times the distance specified by unit.<br>
-	 * When visually is true, motion in right-to-left text will be visual rather than logical.<br>
-	 * When the motion was clipped by hitting the end or start of the document, the returned value will have a hitSide property
-	 * set to true.
+	 * Used to find the target position for horizontal cursor motion.
 	 * 
-	 * @return the target position for horizontal cursor motion
+	 * @param start is a position object
+	 * @param amount amount an integer (may be negative)
+	 * @param unit unit one of the string "char", "column", or "word".
+	 * @param visually When is true, motion in right-to-left text will be visual rather than logical.<br>
+	 *            When the motion was clipped by hitting the end or start of the document, the returned value will have a
+	 *            hitSide property set to true.
+	 * @return a position that is produced by moving amount times the distance specified by unit
 	 */
 	native Position findPosH(Position start, int amount, String unit, boolean visually);
 
 	/**
-	 * Similar to findPosH, but used for vertical motion.<br>
-	 * Unit may be "line" or "page".<br>
-	 * The other arguments and the returned value have the same interpretation as they have in "findPosH".
+	 * Used to find the target position for vertical cursor motion.
 	 * 
-	 * @return the target position for vertical cursor motion
+	 * @param start is a position object
+	 * @param amount amount an integer (may be negative)
+	 * @param unit unit one of the string "line" or "page".
+	 * @return a position that is produced by moving amount times the distance specified by unit
 	 */
 	native Position findPosV(Position start, int amount, String unit);
 
 	/**
 	 * Returns the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position.
 	 * 
+	 * @param position the position to use
 	 * @return the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position
 	 */
-	native Anchor findWordAt(Position pos);
+	native Anchor findWordAt(Position position);
 
 	/**
 	 * Attach an additional key map to the editor.<br>
@@ -379,8 +381,9 @@ public final class NativeEditor {
 	native void addKeyMap(String keyMapName, boolean bottom);
 
 	/**
-	 * Disable a keymap added with addKeyMap. Either pass in the key map object itself, or a string, which will be compared
-	 * against the name property of the active key maps.
+	 * Disable a keymap added with addKeyMap.<br>
+	 * Either pass in the key map object itself, or a string, which will be compared against the name property of the active key
+	 * maps.
 	 * 
 	 * @param keyMapName name of keymap
 	 */
@@ -389,22 +392,18 @@ public final class NativeEditor {
 
 	/**
 	 * Enable a highlighting overlay.<br>
-	 * This is a stateless mini-mode that can be used to add extra highlighting.<br>
-	 * For example, the search addon uses it to highlight the term that's currently being searched.<br>
-	 * mode can be a mode spec or a mode object (an object with a token method).
+	 * This is a state less mini mode that can be used to add extra highlighting.
 	 * 
-	 * @param mode
+	 * @param mode can be a mode specification or a mode object
 	 */
 	native void addOverlay(String mode);
 
 	/**
 	 * Enable a highlighting overlay.<br>
-	 * This is a stateless mini-mode that can be used to add extra highlighting.<br>
-	 * For example, the search addon uses it to highlight the term that's currently being searched.<br>
-	 * mode can be a mode spec or a mode object (an object with a token method).
+	 * This is a state less mini mode that can be used to add extra highlighting.
 	 * 
-	 * @param mode
-	 * @param options
+	 * @param mode can be a mode specification or a mode object
+	 * @param options overlay options
 	 */
 	native void addOverlay(String mode, OverlayOptions options);
 
@@ -412,27 +411,25 @@ public final class NativeEditor {
 	 * Pass this the exact value passed for the mode parameter to addOverlay, or a string that corresponds to the name property
 	 * of that value, to remove an overlay again.
 	 * 
-	 * @param mode
+	 * @param mode exact value passed for the mode parameter to addOverlay, or a string that corresponds to the name property of
+	 *            that value
 	 */
 	native void removeOverlay(String mode);
 
 	/**
-	 * Register an event handler for the given event type (a string) on the editor instance. There is also a
-	 * CodeMirror.on(object, type, func) version that allows registering of events on any object.
+	 * Register an event handler for the given event type (a string) on the editor instance.
 	 * 
-	 * @param type
-	 * @param function
+	 * @param type event name to activate
+	 * @param function callback proxy function
 	 */
-	// FIXME
 	native void on(String type, CallbackProxy.Proxy function);
 
 	/**
-	 * Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.
+	 * Remove an event handler on the editor instance.
 	 * 
-	 * @param type
-	 * @param function
+	 * @param type event name to activate
+	 * @param function callback proxy function
 	 */
-	// FIXME
 	native void off(String type, CallbackProxy.Proxy function);
 
 	/**
@@ -451,20 +448,19 @@ public final class NativeEditor {
 	native void swapDoc(NativeDocument doc);
 
 	/**
-	 * Programmatically set the size of the editor (overriding the applicable CSS rules). width and height are numbers
-	 * (interpreted as pixels).
+	 * Programmatically set the size of the editor (overriding the applicable CSS rules).
 	 * 
-	 * @param width width of editor
-	 * @param height height of editor
+	 * @param width width (interpreted as pixels) of editor
+	 * @param height height (interpreted as pixels) of editor
 	 */
 	native void setSize(double width, double height);
 
 	/**
-	 * Programmatically set the size of the editor (overriding the applicable CSS rules). width and height are CSS units
-	 * ("100%", for example). You can pass null for either of them to indicate that that dimension should not be changed.
+	 * Programmatically set the size of the editor (overriding the applicable CSS rules). You can pass null for either of them
+	 * to indicate that that dimension should not be changed.
 	 * 
-	 * @param width width of editor
-	 * @param height height of editor
+	 * @param width width CSS units ("100%", for example) of editor
+	 * @param height height CSS units ("100%", for example) of editor
 	 */
 	native void setSize(String width, String height);
 
@@ -577,15 +573,6 @@ public final class NativeEditor {
 	native double heightAtLine(int line, String mode, boolean includeWidgets);
 
 	/**
-	 * FIXME
-	 * 
-	 * @param line
-	 * @param mode
-	 * @return
-	 */
-	// native double heightAtLine(LineHandle line, String mode: string, boolean includeWidgets);
-
-	/**
 	 * Returns the line height of the default font for the editor.
 	 * 
 	 * @return the line height of the default font for the editor.
@@ -597,7 +584,7 @@ public final class NativeEditor {
 	 * Note that for non-monospace fonts, this is mostly useless, and even for monospace fonts, non-ascii characters might have
 	 * a different width.
 	 * 
-	 * @return the pixel width of an 'x' in the default font for the edito
+	 * @return the pixel width of an 'x' in the default font for the editor
 	 */
 	native double defaultCharWidth();
 
@@ -678,97 +665,24 @@ public final class NativeEditor {
 	native String getTokenTypeAt(Position pos);
 
 	/**
-	 * Fetch the set of applicable helper values for the given position. Helpers provide a way to look up functionality
-	 * appropriate for a mode. The type argument provides the helper namespace (see registerHelper), in which the values will be
-	 * looked up. When the mode itself has a property that corresponds to the type, that directly determines the keys that are
-	 * used to look up the helper values (it may be either a single string, or an array of strings). Failing that, the mode's
-	 * helperType property and finally the mode's name are used.<br>
-	 * <br>
-	 * For example, the JavaScript mode has a property fold containing "brace". When the brace-fold addon is loaded, that
-	 * defines a helper named brace in the fold namespace. This is then used by the foldcode addon to figure out that it can use
-	 * that folding function to fold JavaScript code.<br>
-	 * <br>
-	 * When any 'global' helpers are defined for the given namespace, their predicates are called on the current mode and
-	 * editor, and all those that declare they are applicable will also be added to the array that is returned.
-	 * 
-	 * @param pos
-	 * @param type
-	 * @return
-	 */
-	// FIXME
-	native ArrayString getHelpers(Position pos, String type); // array<helper>
-
-	/**
-	 * Returns the first applicable helper value.
-	 * 
-	 * @param pos
-	 * @param type
-	 * @return
-	 */
-	// FIXME
-	native Object getHelper(Position pos, String type); // helper
-
-	/**
-	 * Returns the mode's parser state, if any, at the end of the given line number. If no line number is given, the state at
-	 * the end of the document is returned. This can be useful for storing parsing errors in the state, or getting other kinds
-	 * of contextual information for a line. precise is defined as in getTokenAt().
-	 * 
-	 * @param line
-	 * @param precise
-	 * @return
-	 */
-	// FIXME
-	native Object getStateAfter(int line, boolean precise);
-
-	/**
-	 * CodeMirror internally buffers changes and only updates its DOM structure after it has finished performing some operation.
-	 * If you need to perform a lot of operations on a CodeMirror instance, you can call this method with a function argument.
-	 * It will call the function, buffering up all changes, and only doing the expensive update after the function returns. This
-	 * can be a lot faster. The return value from this method will be the return value of your function.
-	 * 
-	 * @param function
-	 * @return
-	 */
-	// FIXME
-	native Object operation(CallbackProxy.Proxy function);
-
-	/**
-	 * In normal circumstances, use the above operation method. But if you want to buffer operations happening asynchronously,
-	 * or that can't all be wrapped in a callback function, you can call startOperation to tell CodeMirror to start buffering
-	 * changes, and endOperation to actually render all the updates. Be careful: if you use this API and forget to call
-	 * endOperation, the editor will just never update.
-	 */
-	// FIXME
-	native void startOperation();
-
-	/**
-	 * In normal circumstances, use the above operation method. But if you want to buffer operations happening asynchronously,
-	 * or that can't all be wrapped in a callback function, you can call startOperation to tell CodeMirror to start buffering
-	 * changes, and endOperation to actually render all the updates. Be careful: if you use this API and forget to call
-	 * endOperation, the editor will just never update.
-	 */
-	// FIXME
-	native void endOperation();
-
-	/**
-	 * Adjust the indentation of the given line. The second argument (which defaults to "smart") may be one of: <br>
-	 * "prev" Base indentation on the indentation of the previous line.<br>
-	 * "smart" Use the mode's smart indentation if available, behave like "prev" otherwise.<br>
-	 * "add" Increase the indentation of the line by one indent unit.<br>
-	 * "subtract" Reduce the indentation of the line.<br>
-	 * <br>
+	 * Adjust the indentation of the given line.
 	 * 
 	 * @param line line row to indent
-	 * @param dir the direction
+	 * @param dir the direction (which defaults to "smart") may be one of: <br>
+	 *            "prev" Base indentation on the indentation of the previous line.<br>
+	 *            "smart" Use the mode's smart indentation if available, behave like "prev" otherwise.<br>
+	 *            "add" Increase the indentation of the line by one indent unit.<br>
+	 *            "subtract" Reduce the indentation of the line.<br>
+	 *            <br>
 	 */
 	native void indentLine(int line, String dir);
 
 	/**
-	 * Adjust the indentation of the given line. The second argument is <code>int</code> to add (positive number) or reduce
-	 * (negative number) the indentation by the given amount of spaces.
+	 * Adjust the indentation of the given line.
 	 * 
 	 * @param line line row to indent
-	 * @param dir amount of spaces
+	 * @param dir amount of spaces to add (positive number) or reduce (negative number) the indentation by the given amount of
+	 *            spaces.
 	 */
 	native void indentLine(int line, int dir);
 
@@ -812,8 +726,8 @@ public final class NativeEditor {
 	native String phrase(String text);
 
 	/**
-	 * Returns the input field for the editor. Will be a textarea or an editable div, depending on the value of the inputStyle
-	 * option.
+	 * Returns the input field for the editor. Will be a text area or an editable <code>DIV</code>, depending on the value of
+	 * the inputStyle option.
 	 * 
 	 * @return the input field for the editor
 	 */
@@ -850,7 +764,7 @@ public final class NativeEditor {
 	public String getId() {
 		return Id.get(getOptions());
 	}
-	
+
 	/**
 	 * Returns the editor area related to this editor.
 	 * 

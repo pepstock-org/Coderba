@@ -32,7 +32,7 @@ public final class AddOnMarkSelection extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMarkSelection ADDON = new AddOnMarkSelection();
+	public static final AddOnMarkSelection INSTANCE = new AddOnMarkSelection();
 
 	/**
 	 * To avoid any instantiation

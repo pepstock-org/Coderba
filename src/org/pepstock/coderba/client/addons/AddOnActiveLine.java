@@ -32,7 +32,7 @@ public final class AddOnActiveLine extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnActiveLine ADDON = new AddOnActiveLine();
+	public static final AddOnActiveLine INSTANCE = new AddOnActiveLine();
 
 	/**
 	 * To avoid any instantiation

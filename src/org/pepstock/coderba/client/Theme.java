@@ -16,13 +16,18 @@
 package org.pepstock.coderba.client;
 
 /**
+ * The theme to style the editor with.<br>
+ * A theme is related to CSS file defining the corresponding styles.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class Theme extends InjectableItem {
 
 	/**
-	 * @param value
+	 * Creates the object with the mandatory name of theme.
+	 * 
+	 * @param value the mandatory name of theme
 	 */
 	protected Theme(String name) {
 		super(name);

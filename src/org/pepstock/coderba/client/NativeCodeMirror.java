@@ -21,12 +21,15 @@ import org.pepstock.coderba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.TextAreaElement;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * CodeMirror is a code-editor component that can be embedded in Web pages.<br>
+ * The core library provides only the editor component and this class provides this component, with all static methods to
+ * consume by other classes.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -45,50 +48,56 @@ public final class NativeCodeMirror {
 	// -----------------------------------
 
 	/**
-	 * It contains a string that indicates the version of the library. This is a triple of integers "major.minor.patch", where
-	 * patch is zero for releases, and something else (usually one) for dev snapshots.
+	 * It contains a string that indicates the version of the library.<br>
+	 * This is a triple of integers "major.minor.patch", where patch is zero for releases, and something else (usually one) for
+	 * development snapshots.
 	 * 
-	 * @return It contains a string that indicates the version of the library. This is a triple of integers "major.minor.patch",
-	 *         where patch is zero for releases, and something else (usually one) for dev snapshots.
+	 * @return It contains a string that indicates the version of the library.
 	 */
 	@JsProperty(name = "version")
 	static native String getVersion();
 
 	/**
-	 * Returns the object containing the default options. You can update this object to change the defaults on your page.
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
 	 * 
 	 * @return the object containing the default options.
 	 */
 	@JsProperty(name = "defaults")
 	static native NativeObject getDefaults();
 	
+	/**
+	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
+	 * 
+	 * @return the map of CodeMirror, which maps MIME types to mode specification
+	 */
 	@JsProperty(name = "mimeModes")
 	static native NativeObject getMimeModes();
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a textarea DOM node as first argument and an optional configuration object as second.<br>
-	 * It will replace the textarea with a CodeMirror instance, and wire up the form of that textarea (if any) to make sure the
-	 * editor contents are put into the textarea when the form is submitted.<br>
-	 * The text in the textarea will provide the content for the editor.
+	 * It takes a text area DOM node as first argument and an optional configuration object as second.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
+	 * editor contents are put into the text area when the form is submitted.<br>
+	 * The text in the text area will provide the content for the editor.
 	 * 
-	 * @param host a textarea DOM node, already attached to body
-	 * @param options configuration object instance
+	 * @param element a text area DOM node, already attached to body
+	 * @param options user configuration object instance
 	 * @return an initialized editor
 	 */
-	static native NativeEditor fromTextArea(TextAreaElement host, NativeObject options);
+	static native NativeEditor fromTextArea(TextAreaElement element, NativeObject options);
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a textarea DOM node as argument.<br>
-	 * It will replace the textarea with a CodeMirror instance, and wire up the form of that textarea (if any) to make sure the
-	 * editor contents are put into the textarea when the form is submitted.<br>
-	 * The text in the textarea will provide the content for the editor.
+	 * It takes a text area DOM node as argument.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
+	 * editor contents are put into the text area when the form is submitted.<br>
+	 * The text in the text area will provide the content for the editor.
 	 * 
-	 * @param host a textarea DOM node, already attached to body
-	 * @return an initialized editor
+	 * @param element a text area DOM node, already attached to body
+	 * @return an initialized editor with default configuration
 	 */
-	static native NativeEditor fromTextArea(TextAreaElement host);
+	static native NativeEditor fromTextArea(TextAreaElement element);
 
 	/**
 	 * FIXME Can be used to define new options for CodeMirror. The updateFunc will be called with the editor instance and the
@@ -153,61 +162,5 @@ public final class NativeCodeMirror {
 																													// CodeMirror),
 																													// value:
 																													// helper
-
-	// /** Utility function that computes an end position from a change (an object with from, to, and text properties, as passed
-	// to
-	// various event handlers).
-	// The returned position will be the end of the changed range, after the change is applied. */
-	// function changeEnd(change: EditorChange): Position;
-
-	/**
-	 * A constructor for the objects that are used to represent the line in editor documents.
-	 * 
-	 * @param line line into document
-	 * @return a position only with the line. Column will be set with the length of the specified line.
-	 */
-	@JsMethod(name = "Pos")
-	static native NativeObject createPosition(int line);
-
-	/**
-	 * A constructor for the objects that are used to represent positions in editor documents. sticky defaults to null, but can
-	 * be set to "before" or "after" to make the position explicitly associate with the character before or after it.
-	 * 
-	 * @param line line into document
-	 * @param ch column into document
-	 * @param sticky before" or "after", whether the position is associated with the character before or after it.
-	 * @return a position object
-	 */
-	@JsMethod(name = "Pos")
-	static native NativeObject createPosition(int line, int ch, String sticky);
-
-	/**
-	 * FIXME Utility function that computes an end position from a change (an object with from, to, and text properties, as
-	 * passed to various event handlers). The returned position will be the end of the changed range, after the change is
-	 * applied.
-	 * 
-	 * @param change
-	 * @return
-	 */
-	static native NativeObject changeEnd(Object change); // {line, ch}
-
-	/**
-	 * Find the column position at a given string index using a given tabsize.
-	 * 
-	 * @param line
-	 * @param index
-	 * @param tabSize
-	 * @return
-	 */
-	static native int countColumn(String line, int index, int tabSize);
-
-	/**
-	 * Compare two positions, return 0 if they are the same, a negative number when a is less, and a positive number otherwise.
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 */
-	static native int cmpPos(NativeObject a, NativeObject b);
 
 }

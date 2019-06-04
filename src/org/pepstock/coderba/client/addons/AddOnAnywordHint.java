@@ -32,7 +32,7 @@ public final class AddOnAnywordHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnAnywordHint ADDON = new AddOnAnywordHint();
+	public static final AddOnAnywordHint INSTANCE = new AddOnAnywordHint();
 
 	/**
 	 * To avoid any instantiation

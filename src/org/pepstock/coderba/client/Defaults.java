@@ -28,14 +28,25 @@ import org.pepstock.coderba.client.defaults.GlobalDefaults;
  *
  */
 public final class Defaults extends AbstractOptions<UserOptionsContainer> {
+	
+	// singleton instance
+	private static final Defaults INSTANCE = new Defaults();
 
 	/**
-	 * Creates the wrapper to the <code>CodeMirror.defaults</code> using the default values.
-	 * 
-	 * @param nativeObject <code>CodeMirror.defaults</code> instance.
+	 * Creates the wrapper to the <code>CodeMirror.defaults</code> using the default values.<br>
+	 * Uses a USER options container anche the global defaults for internal defaults.
 	 */
-	Defaults(NativeObject nativeObject) {
-		super(new UserOptionsContainer(nativeObject), GlobalDefaults.get());
+	Defaults() {
+		super(new UserOptionsContainer(CodeMirror.get().getDefaults()), GlobalDefaults.get());
+	}
+	
+	/**
+	 * Returns the singleton instance of the defaults.
+	 * 
+	 * @return the singleton instance of the defaults
+	 */
+	public static Defaults get() {
+		return INSTANCE;
 	}
 
 	/**

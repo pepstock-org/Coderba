@@ -32,7 +32,7 @@ public final class AddOnIndentFold extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnIndentFold ADDON = new AddOnIndentFold();
+	public static final AddOnIndentFold INSTANCE = new AddOnIndentFold();
 
 	/**
 	 * To avoid any instantiation

@@ -25,19 +25,19 @@ import org.pepstock.coderba.client.resources.ScriptResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Vim extends KeyMap {
+public final class KeyMapVim extends KeyMap {
 	// name of editor keymap
 	private static final String NAME = "vim";
 
 	/**
 	 * Instance of editor keymap.
 	 */
-	public static final Vim KEYMAP = new Vim();
+	public static final KeyMapVim INSTANCE = new KeyMapVim();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private Vim() {
+	private KeyMapVim() {
 		// passes the name of keymap
 		super(NAME);
 		getResources().add(new ScriptResource(KeyMapResources.INSTANCE.vim()));

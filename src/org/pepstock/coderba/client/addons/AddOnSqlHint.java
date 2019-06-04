@@ -32,7 +32,7 @@ public final class AddOnSqlHint extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSqlHint ADDON = new AddOnSqlHint();
+	public static final AddOnSqlHint INSTANCE = new AddOnSqlHint();
 
 	/**
 	 * To avoid any instantiation

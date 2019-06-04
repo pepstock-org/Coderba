@@ -27,7 +27,7 @@ import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
-import org.pepstock.coderba.client.keymaps.Default;
+import org.pepstock.coderba.client.keymaps.KeyMapDefault;
 import org.pepstock.coderba.client.languages.PlainText;
 import org.pepstock.coderba.client.themes.ThemeDefault;
 import org.pepstock.coderba.client.utils.RegExp;
@@ -49,7 +49,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	/**
 	 * The default is "default", which is the only key map defined in codemirror itself.
 	 */
-	private static final KeyMap DEFAULT_KEYMAP = org.pepstock.coderba.client.keymaps.Default.KEYMAP;
+	private static final KeyMap DEFAULT_KEYMAP = KeyMapDefault.INSTANCE;
 
 	private static final int DEFAULT_INDENT_UNIT = 2;
 
@@ -184,7 +184,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	}
 
 	/**
-	 * Returns the theme to style the editor with. The default is {@link Default}, for which colors are included in
+	 * Returns the theme to style the editor with. The default is {@link KeyMapDefault}, for which colors are included in
 	 * <code>codemirror.css</code>.
 	 * 
 	 * @return the theme to style the editor with

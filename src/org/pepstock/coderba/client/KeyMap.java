@@ -16,16 +16,29 @@
 package org.pepstock.coderba.client;
 
 /**
+ * Key maps are ways to associate keys and mouse buttons with functionality.<br>
+ * A key map is an object mapping strings that identify the buttons to functions that implement their functionality.<br>
+ * The CodeMirror distributions comes with Emacs, Vim, and Sublime Text-style keymaps.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class KeyMap extends InjectableItem {
 
 	/**
-	 * @param value
+	 * Creates a keymap by its name.
+	 * 
+	 * @param name name of keymap
 	 */
 	protected KeyMap(String name) {
 		super(name);
+	}
+
+	/**
+	 * Injects the keymap instance into DOM document in order to consume it by CodeMirror.
+	 */
+	public final void inject() {
+		Injector.ensureInjected(this);
 	}
 
 }

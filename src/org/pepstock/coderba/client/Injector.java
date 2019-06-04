@@ -27,8 +27,8 @@ import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * This utility injects CodeMirror java script modules and CODERBA custom java script implementation (for some utilities) into the web page of
- * GWT, on demand.
+ * This utility injects CodeMirror java script modules and CODERBA custom java script implementation (for some utilities) into
+ * the web page of GWT, on demand.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -48,75 +48,104 @@ public final class Injector {
 	private Injector() {
 		// do nothing
 	}
-	
+
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
-	 * 
-	 * @param item injectable item to inject
+	 * Injects CodeMirror java script and CSS style sheet files.
 	 */
 	public static void ensureInjected() {
 		// check if argument is consistent
 		internalEnsureInjected(CodeMirrorCode.CODE);
 	}
-	
+
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
+	 * Injects a language object, injecting the mode resources related to the language.
 	 * 
-	 * @param item injectable item to inject
+	 * @param language language instance
 	 */
 	public static void ensureInjected(Language language) {
 		// check if argument is consistent
 		if (language != null) {
+			// injects CodeMirror if missing
 			ensureInjected();
+			// injects mode of language
 			ensureInjected(language.getMode());
+			// gets the mode specification, loaded in the previous statement
 			ModeSpecification modeSpec = CodeMirror.get().getMimeModes().getMode(language);
+			// loads the the mode specification into language
 			language.setModeSpecification(modeSpec);
+			// adds language into cache
 			Languages.get().add(language);
 		}
 	}
 
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
+	 * Injects a mode object. This is not visible because the mode must be loaded by a language.
 	 * 
-	 * @param item injectable item to inject
+	 * @param mode mode instance
 	 */
-	public static void ensureInjected(Mode mode) {
+	private static void ensureInjected(Mode mode) {
 		// check if argument is consistent
 		if (mode != null) {
-			ensureInjected();
+			// injects mode
 			internalEnsureInjected(mode);
+			// adds mode into cache
 			Modes.get().add(mode);
+		}
+	}
+	
+	/**
+	 * Injects an addon object.This is not visible because the addon must be loaded by "inject" method of AddOn class.
+	 * 
+	 * @param addon addon instance
+	 * @see AddOn
+	 */
+	static void ensureInjected(AddOn addon) {
+		// check if argument is consistent
+		if (addon != null) {
+			// injects CodeMirror if missing
+			ensureInjected();
+			// injects addon
+			internalEnsureInjected(addon);
+			// adds addon into cache
+			AddOns.get().add(addon);
 		}
 	}
 
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
+	 * Injects a keymap object.This is not visible because the keymap must be loaded by "inject" method of KeyMap class.
 	 * 
-	 * @param item injectable item to inject
+	 * @param keymap keymap instance
+	 * @see KeyMap
 	 */
-	public static void ensureInjected(KeyMap keyMap) {
+	static void ensureInjected(KeyMap keyMap) {
 		// check if argument is consistent
 		if (keyMap != null) {
+			// injects CodeMirror if missing
 			ensureInjected();
+			// injects keymap
 			internalEnsureInjected(keyMap);
+			// adds keymap into cache
 			KeyMaps.get().add(keyMap);
 		}
 	}
 
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
+	 * Injects a theme object.
 	 * 
-	 * @param item injectable item to inject
+	 * @param theme theme instance
 	 */
 	public static void ensureInjected(Theme theme) {
 		// check if argument is consistent
 		if (theme != null) {
+			// injects CodeMirror if missing
 			ensureInjected();
+			// injects theme
 			internalEnsureInjected(theme);
+			// adds theme into cache
 			Themes.get().add(theme);
 		}
 	}
-	
+
 	/**
 	 * Injects a script resource if not injected yet.
 	 * 
@@ -126,9 +155,8 @@ public final class Injector {
 		ensureInjected(resource, Document.get().createScriptElement());
 	}
 
-
 	/**
-	 * Injects a script resource if not injected yet by an injectable item.
+	 * Injects script or style resources if not injected yet by an injectable item.
 	 * 
 	 * @param item injectable item to inject
 	 */
@@ -147,15 +175,17 @@ public final class Injector {
 			}
 		}
 	}
-	
+
 	/**
-	 * Injects a script resource if not injected yet.
+	 * Injects a script or style resource if not injected yet.
 	 * 
 	 * @param resource script resource
+	 * @param element DOM element which will contain the resource
 	 */
 	private static void ensureInjected(ResourcePrototype resource, Element element) {
 		// checks if resource is consistent
 		if (resource != null) {
+			// creates a unique key
 			String resourceKey = createKey(resource);
 			// checks if already injected
 			if (!ELEMENTS_INJECTED.contains(resourceKey)) {
@@ -172,7 +202,14 @@ public final class Injector {
 			}
 		}
 	}
-	
+
+	/**
+	 * Creates a unique key for a resource, in order to be able to cache it.<br>
+	 * The key is built by class name of resource, a separator and the name of resource.
+	 * 
+	 * @param resource resource instance to inject
+	 * @return a unique key
+	 */
 	private static final String createKey(ResourcePrototype resource) {
 		return resource.getClass().getName() + KEY_CLASS_AND_METHOD_SEPARATOR + resource.getName();
 	}

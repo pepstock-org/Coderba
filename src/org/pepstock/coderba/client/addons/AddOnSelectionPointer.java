@@ -32,7 +32,7 @@ public final class AddOnSelectionPointer extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnSelectionPointer ADDON = new AddOnSelectionPointer();
+	public static final AddOnSelectionPointer INSTANCE = new AddOnSelectionPointer();
 
 	/**
 	 * To avoid any instantiation

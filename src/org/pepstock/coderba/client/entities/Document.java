@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.coderba.client.CodeMirror;
+import org.pepstock.coderba.client.Defaults;
 import org.pepstock.coderba.client.Editor;
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.Mode;
@@ -1169,7 +1169,7 @@ public final class Document {
 				return mode;
 			}
 		}
-		return CodeMirror.get().getDefaults().getLanguage().getMode();
+		return Defaults.get().getLanguage().getMode();
 	}
 
 	/**

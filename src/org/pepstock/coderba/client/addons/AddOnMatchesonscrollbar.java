@@ -33,7 +33,7 @@ public final class AddOnMatchesonscrollbar extends AddOn {
 	/**
 	 * Instance of editor addon.
 	 */
-	public static final AddOnMatchesonscrollbar ADDON = new AddOnMatchesonscrollbar();
+	public static final AddOnMatchesonscrollbar INSTANCE = new AddOnMatchesonscrollbar();
 
 	/**
 	 * To avoid any instantiation
