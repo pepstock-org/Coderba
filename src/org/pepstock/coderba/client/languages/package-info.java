@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains all programming languages, provided out of the box by <code>CodeMirror</code>, to use inside the editor.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

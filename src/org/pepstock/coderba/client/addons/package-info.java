@@ -14,6 +14,9 @@
     limitations under the License.
 */
 /**
+ * CodeMirror distribution contains a number of reusable components that implement extra editor functionality.<br>
+ * This package contains abstractly those components.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

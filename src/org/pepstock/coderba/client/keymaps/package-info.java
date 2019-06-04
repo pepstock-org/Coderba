@@ -14,6 +14,10 @@
     limitations under the License.
 */
 /**
+ * Contains all key maps, provided out of the box by <code>CodeMirror</code>, to associate keys and mouse buttons with
+ * functionality.<br>
+ * A key map is an object mapping strings that identify the buttons to functions that implement their functionality.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

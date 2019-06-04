@@ -16,7 +16,7 @@
 package org.pepstock.coderba.client;
 
 /**
- * The theme to style the editor with.<br>
+ * The theme to style the editor.<br>
  * A theme is related to CSS file defining the corresponding styles.
  * 
  * @author Andrea "Stock" Stocchero
