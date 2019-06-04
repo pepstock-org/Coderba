@@ -32,7 +32,7 @@ public interface ModeResources extends ClientBundle {
 	// ----------------------------
 	// --- JavaScript Resources ---
 	// ----------------------------
-	
+
 	/**
 	 * Returns the java script source code for ModeApl.
 	 * 
@@ -992,11 +992,11 @@ public interface ModeResources extends ClientBundle {
 	 */
 	@Source("/js/mode/z80/z80.js")
 	TextResource z80();
-	
+
 	// ----------------------------
-	// --- CSS Resources        ---
+	// --- CSS Resources ---
 	// ----------------------------
-	
+
 	/**
 	 * Returns the CSS source code for ModeTiddlywiki.
 	 * 
@@ -1004,7 +1004,7 @@ public interface ModeResources extends ClientBundle {
 	 */
 	@Source("/js/mode/tiddlywiki/tiddlywiki.css")
 	TextResource tiddlywikiCss();
-	
+
 	/**
 	 * Returns the CSS source code for ModeTiki.
 	 * 

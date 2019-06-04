@@ -28,7 +28,7 @@ public interface ThemeResources extends ClientBundle {
 
 	// static reference of this resource
 	public static final ThemeResources INSTANCE = GWT.create(ThemeResources.class);
-		
+
 	/**
 	 * Returns the CSS source code for ThemeC3024Day.
 	 * 
@@ -36,7 +36,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/3024-day.css")
 	TextResource m3024Day();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeC3024Night.
 	 * 
@@ -44,7 +44,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/3024-night.css")
 	TextResource m3024Night();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeAbcdef.
 	 * 
@@ -52,7 +52,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/abcdef.css")
 	TextResource abcdef();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeAmbianceMobile.
 	 * 
@@ -60,7 +60,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/ambiance-mobile.css")
 	TextResource ambianceMobile();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeAmbiance.
 	 * 
@@ -68,7 +68,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/ambiance.css")
 	TextResource ambiance();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeBase16Dark.
 	 * 
@@ -76,7 +76,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/base16-dark.css")
 	TextResource base16Dark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeBase16Light.
 	 * 
@@ -84,7 +84,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/base16-light.css")
 	TextResource base16Light();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeBespin.
 	 * 
@@ -92,7 +92,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/bespin.css")
 	TextResource bespin();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeBlackboard.
 	 * 
@@ -100,7 +100,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/blackboard.css")
 	TextResource blackboard();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeCobalt.
 	 * 
@@ -108,7 +108,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/cobalt.css")
 	TextResource cobalt();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeColorforth.
 	 * 
@@ -116,7 +116,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/colorforth.css")
 	TextResource colorforth();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeDarcula.
 	 * 
@@ -124,7 +124,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/darcula.css")
 	TextResource darcula();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeDracula.
 	 * 
@@ -132,7 +132,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/dracula.css")
 	TextResource dracula();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeDuotoneDark.
 	 * 
@@ -140,7 +140,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/duotone-dark.css")
 	TextResource duotoneDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeDuotoneLight.
 	 * 
@@ -148,7 +148,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/duotone-light.css")
 	TextResource duotoneLight();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeEclipse.
 	 * 
@@ -156,7 +156,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/eclipse.css")
 	TextResource eclipse();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeElegant.
 	 * 
@@ -164,7 +164,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/elegant.css")
 	TextResource elegant();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeErlangDark.
 	 * 
@@ -172,7 +172,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/erlang-dark.css")
 	TextResource erlangDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeGruvboxDark.
 	 * 
@@ -180,7 +180,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/gruvbox-dark.css")
 	TextResource gruvboxDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeHopscotch.
 	 * 
@@ -188,7 +188,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/hopscotch.css")
 	TextResource hopscotch();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeIcecoder.
 	 * 
@@ -196,7 +196,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/icecoder.css")
 	TextResource icecoder();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeIdea.
 	 * 
@@ -204,7 +204,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/idea.css")
 	TextResource idea();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeIsotope.
 	 * 
@@ -212,7 +212,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/isotope.css")
 	TextResource isotope();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeLesserDark.
 	 * 
@@ -220,7 +220,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/lesser-dark.css")
 	TextResource lesserDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeLiquibyte.
 	 * 
@@ -228,7 +228,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/liquibyte.css")
 	TextResource liquibyte();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeLucario.
 	 * 
@@ -236,7 +236,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/lucario.css")
 	TextResource lucario();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeMaterial.
 	 * 
@@ -244,7 +244,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/material.css")
 	TextResource material();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeMbo.
 	 * 
@@ -252,7 +252,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/mbo.css")
 	TextResource mbo();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeMdnLike.
 	 * 
@@ -260,7 +260,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/mdn-like.css")
 	TextResource mdnLike();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeMidnight.
 	 * 
@@ -268,7 +268,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/midnight.css")
 	TextResource midnight();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeMonokai.
 	 * 
@@ -276,7 +276,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/monokai.css")
 	TextResource monokai();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeNeat.
 	 * 
@@ -284,7 +284,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/neat.css")
 	TextResource neat();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeNeo.
 	 * 
@@ -292,7 +292,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/neo.css")
 	TextResource neo();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeNight.
 	 * 
@@ -300,7 +300,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/night.css")
 	TextResource night();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeNord.
 	 * 
@@ -308,7 +308,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/nord.css")
 	TextResource nord();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeOceanicNext.
 	 * 
@@ -316,7 +316,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/oceanic-next.css")
 	TextResource oceanicNext();
-	
+
 	/**
 	 * Returns the CSS source code for ThemePandaSyntax.
 	 * 
@@ -324,7 +324,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/panda-syntax.css")
 	TextResource pandaSyntax();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeParaisoDark.
 	 * 
@@ -332,7 +332,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/paraiso-dark.css")
 	TextResource paraisoDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeParaisoLight.
 	 * 
@@ -340,7 +340,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/paraiso-light.css")
 	TextResource paraisoLight();
-	
+
 	/**
 	 * Returns the CSS source code for ThemePastelOnDark.
 	 * 
@@ -348,7 +348,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/pastel-on-dark.css")
 	TextResource pastelOnDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeRailscasts.
 	 * 
@@ -356,7 +356,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/railscasts.css")
 	TextResource railscasts();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeRubyblue.
 	 * 
@@ -364,7 +364,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/rubyblue.css")
 	TextResource rubyblue();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeSeti.
 	 * 
@@ -372,7 +372,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/seti.css")
 	TextResource seti();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeShadowfox.
 	 * 
@@ -380,7 +380,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/shadowfox.css")
 	TextResource shadowfox();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeSolarized.
 	 * 
@@ -388,7 +388,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/solarized.css")
 	TextResource solarized();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeSsms.
 	 * 
@@ -396,7 +396,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/ssms.css")
 	TextResource ssms();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeTheMatrix.
 	 * 
@@ -404,7 +404,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/the-matrix.css")
 	TextResource theMatrix();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeTomorrowNightBright.
 	 * 
@@ -412,7 +412,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/tomorrow-night-bright.css")
 	TextResource tomorrowNightBright();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeTomorrowNightEighties.
 	 * 
@@ -420,7 +420,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/tomorrow-night-eighties.css")
 	TextResource tomorrowNightEighties();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeTtcn.
 	 * 
@@ -428,7 +428,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/ttcn.css")
 	TextResource ttcn();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeTwilight.
 	 * 
@@ -436,7 +436,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/twilight.css")
 	TextResource twilight();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeVibrantInk.
 	 * 
@@ -444,7 +444,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/vibrant-ink.css")
 	TextResource vibrantInk();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeXqDark.
 	 * 
@@ -452,7 +452,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/xq-dark.css")
 	TextResource xqDark();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeXqLight.
 	 * 
@@ -460,7 +460,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/xq-light.css")
 	TextResource xqLight();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeYeti.
 	 * 
@@ -468,7 +468,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/yeti.css")
 	TextResource yeti();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeYonce.
 	 * 
@@ -476,7 +476,7 @@ public interface ThemeResources extends ClientBundle {
 	 */
 	@Source("/js/theme/yonce.css")
 	TextResource yonce();
-	
+
 	/**
 	 * Returns the CSS source code for ThemeZenburn.
 	 * 

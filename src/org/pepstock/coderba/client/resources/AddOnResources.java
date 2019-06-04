@@ -32,7 +32,7 @@ public interface AddOnResources extends ClientBundle {
 	// ----------------------------
 	// --- JavaScript Resources ---
 	// ----------------------------
-	
+
 	/**
 	 * Returns the java script source code for AddOnComment.
 	 * 
@@ -496,11 +496,11 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/wrap/hardwrap.js")
 	TextResource hardwrap();
-	
+
 	// ----------------------------
-	// --- CSS Resources        ---
+	// --- CSS Resources ---
 	// ----------------------------
-	
+
 	/**
 	 * Returns the CSS source code for AddOnDialog.
 	 * 
@@ -508,7 +508,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/dialog/dialog.css")
 	TextResource dialogCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnFullscreen.
 	 * 
@@ -516,7 +516,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/display/fullscreen.css")
 	TextResource fullscreenCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnFoldgutter.
 	 * 
@@ -524,7 +524,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/fold/foldgutter.css")
 	TextResource foldgutterCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnShowHint.
 	 * 
@@ -532,7 +532,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/hint/show-hint.css")
 	TextResource showHintCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnLint.
 	 * 
@@ -540,7 +540,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/lint/lint.css")
 	TextResource lintCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnMerge.
 	 * 
@@ -548,7 +548,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/merge/merge.css")
 	TextResource mergeCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnSimplescrollbars.
 	 * 
@@ -556,7 +556,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/scroll/simplescrollbars.css")
 	TextResource simplescrollbarsCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnMatchesonscrollbar.
 	 * 
@@ -564,7 +564,7 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/search/matchesonscrollbar.css")
 	TextResource matchesonscrollbarCss();
-	
+
 	/**
 	 * Returns the CSS source code for AddOnTern.
 	 * 
@@ -572,5 +572,5 @@ public interface AddOnResources extends ClientBundle {
 	 */
 	@Source("/js/addon/tern/tern.css")
 	TextResource ternCss();
-	
+
 }

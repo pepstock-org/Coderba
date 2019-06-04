@@ -23,8 +23,8 @@ import com.google.gwt.resources.client.TextResource;
  *
  */
 public interface InjectableResource {
-	
+
 	TextResource getResource();
-	
+
 	Element getElement();
 }

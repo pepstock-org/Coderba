@@ -31,7 +31,7 @@ public interface Resources extends ClientBundle {
 
 	@Source("/js/coderba.helper.min.js")
 	TextResource coderba();
-	
+
 	/**
 	 * Returns the java script source code for CodeMirror.
 	 * 

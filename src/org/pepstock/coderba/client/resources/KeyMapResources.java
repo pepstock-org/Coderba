@@ -28,7 +28,7 @@ public interface KeyMapResources extends ClientBundle {
 
 	// static reference of this resource
 	public static final KeyMapResources INSTANCE = GWT.create(KeyMapResources.class);
-		
+
 	/**
 	 * Returns the java script source code for Emacs.
 	 * 
@@ -36,7 +36,7 @@ public interface KeyMapResources extends ClientBundle {
 	 */
 	@Source("/js/keymap/emacs.js")
 	TextResource emacs();
-	
+
 	/**
 	 * Returns the java script source code for Sublime.
 	 * 
@@ -44,7 +44,7 @@ public interface KeyMapResources extends ClientBundle {
 	 */
 	@Source("/js/keymap/sublime.js")
 	TextResource sublime();
-	
+
 	/**
 	 * Returns the java script source code for Vim.
 	 * 
