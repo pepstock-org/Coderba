@@ -15,47 +15,47 @@
 */
 package org.pepstock.coderba.client.events;
 
-import java.util.List;
-
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.entities.Anchor;
+import org.pepstock.coderba.client.entities.Document;
 
 /**
- * Like the "change" event, but batched per operation, passing an array containing all the changes that happened in the
- * operation. This event is fired after the operation finished, and display changes it makes will trigger a new operation.
+ * Event which is fired when new event handler has been removed to the chart.<br>
+ * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EditorChangesEvent extends AbstractEditorEvent<EditorChangesEventHandler> {
+public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEvent<DocumentBeforeSelectionChangeEventHandler> {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<EditorChangesEventHandler> TYPE = new Type<>();
+	public static final Type<DocumentBeforeSelectionChangeEventHandler> TYPE = new Type<>();
 	/**
 	 * Event name of CodeMirror
 	 */
-	public static final String NAME = "changes";
-
-	private final List<ChangeItem> items;
+	public static final String NAME = "beforeSelectionChange";
+	
+	private final Anchor item;
 
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
 	 * @param handlerType the type of removed handler.
 	 */
-	public EditorChangesEvent(EditorArea editorArea, List<ChangeItem> items) {
-		super(TYPE, editorArea);
-		if (items == null) {
-			throw new IllegalArgumentException("[EditorChangesEvent] Editor change items is null");
+	public DocumentBeforeSelectionChangeEvent(EditorArea editorArea, Document document, Anchor item) {
+		super(TYPE, editorArea, document);
+		if (item == null) {
+			throw new IllegalArgumentException("[DocumentBeforeSelectionChangeEvent] Anchor is null");
 		}
-		this.items = items;
+		this.item = item;
 	}
 
 	/**
 	 * @return the item
 	 */
-	public final List<ChangeItem> getItems() {
-		return items;
+	public final Anchor getItem() {
+		return item;
 	}
 
 	/*
@@ -64,7 +64,7 @@ public final class EditorChangesEvent extends AbstractEditorEvent<EditorChangesE
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
-	public Type<EditorChangesEventHandler> getAssociatedType() {
+	public Type<DocumentBeforeSelectionChangeEventHandler> getAssociatedType() {
 		return TYPE;
 	}
 
@@ -74,8 +74,8 @@ public final class EditorChangesEvent extends AbstractEditorEvent<EditorChangesE
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override
-	protected void dispatch(EditorChangesEventHandler handler) {
-		handler.onChanges(this);
+	protected void dispatch(DocumentBeforeSelectionChangeEventHandler handler) {
+		handler.onBeforeSelectionChange(this);
 	}
 
 }

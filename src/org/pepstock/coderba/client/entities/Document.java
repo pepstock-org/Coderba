@@ -42,6 +42,15 @@ import org.pepstock.coderba.client.enums.CursorPosition;
 import org.pepstock.coderba.client.enums.LineClassLocation;
 import org.pepstock.coderba.client.enums.Select;
 import org.pepstock.coderba.client.enums.TextMarkerType;
+import org.pepstock.coderba.client.events.AddHandlerEvent;
+import org.pepstock.coderba.client.events.AddHandlerEventHandler;
+import org.pepstock.coderba.client.events.ChangeItem;
+import org.pepstock.coderba.client.events.DocumentBeforeChangeEvent;
+import org.pepstock.coderba.client.events.DocumentBeforeSelectionChangeEvent;
+import org.pepstock.coderba.client.events.DocumentChangeEvent;
+import org.pepstock.coderba.client.events.DocumentCursorActivityEvent;
+import org.pepstock.coderba.client.events.RemoveHandlerEvent;
+import org.pepstock.coderba.client.events.RemoveHandlerEventHandler;
 
 import com.google.gwt.dom.client.Element;
 
@@ -51,7 +60,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Document {
+public final class Document extends EventManager implements AddHandlerEventHandler, RemoveHandlerEventHandler {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -109,6 +118,74 @@ public final class Document {
 		void call(NativeDocument document, boolean sharedHistory);
 	}
 
+	/**
+	 * Java script FUNCTION that is called every time the content of the document is changed.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface DocumentChangeFunction {
+
+		/**
+		 * Is called every time the content of the document is changed.
+		 * 
+		 * @param document native document instance
+		 * @param item document change item
+		 */
+		void call(NativeDocument document, ChangeItem item);
+	}
+
+	/**
+	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
+	 * change.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface DocumentBeforeChangeFunction {
+
+		/**
+		 * Is called before a change is applied, and its handler may choose to modify or cancel the change.
+		 * 
+		 * @param document native document instance
+		 * @param item document change item
+		 */
+		void call(NativeDocument document, ChangeItem item);
+	}
+
+	/**
+	 * Java script FUNCTION that is called when the cursor or selection moves, or any change is made to the document content.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface DocumentCursorActivityFunction {
+
+		/**
+		 * Is called when the cursor or selection moves, or any change is made to the document content.
+		 * 
+		 * @param document native document instance
+		 */
+		void call(NativeDocument document);
+	}
+
+	/**
+	 * Java script FUNCTION that is called before the selection is moved.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface DocumentBeforeSelectionChangeFunction {
+
+		/**
+		 * Is called before the selection is moved.
+		 * 
+		 * @param document native document instance
+		 * @param item document change item
+		 */
+		void call(NativeDocument document, Anchor item);
+	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -118,6 +195,14 @@ public final class Document {
 	private final CallbackProxy<DocumentExtendSelectionsFunction> documentExtendSelectionsFunctionProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the lined documents function
 	private final CallbackProxy<LinkedDocumentsFunction> linkedDocumentsFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the DocumentBeforeChangeEvent function
+	private final CallbackProxy<DocumentBeforeChangeFunction> documentBeforeChangeFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the DocumentBeforeSelectionChangeEvent function
+	private final CallbackProxy<DocumentBeforeSelectionChangeFunction> documentBeforeSelectionChangeFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the DocumentChangeEvent function
+	private final CallbackProxy<DocumentChangeFunction> documentChangeFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the DocumentCursorActivityEvent function
+	private final CallbackProxy<DocumentCursorActivityFunction> documentCursorActivityFunctionProxy = JsHelper.get().newCallbackProxy();
 
 	private final NativeDocument nativeObject;
 
@@ -136,12 +221,82 @@ public final class Document {
 	 */
 	public Document(NativeDocument nativeObject) {
 		this.nativeObject = nativeObject;
+		addHandler(AddHandlerEvent.TYPE, this);
+		addHandler(RemoveHandlerEvent.TYPE, this);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		documentEachLineFunctionProxy.setCallback((handle) -> onDocumentEachLine(handle));
 		documentExtendSelectionsFunctionProxy.setCallback((anchor) -> onDocumentExtendSelections(anchor));
 		linkedDocumentsFunctionProxy.setCallback((document, sharedHistory) -> onLinkedDcouments(document, sharedHistory));
+		documentChangeFunctionProxy.setCallback((document, item) -> onChange(document, item));
+		documentBeforeChangeFunctionProxy.setCallback((document, item) -> onBeforeChange(document, item));
+		documentCursorActivityFunctionProxy.setCallback((document) -> onCursorActivity(document));
+		documentBeforeSelectionChangeFunctionProxy.setCallback((document, item) -> onBeforeSelectionChange(document, item));
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onChange(NativeDocument document, ChangeItem item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				fireEvent(new DocumentChangeEvent(area, this, item));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onBeforeChange(NativeDocument document, ChangeItem item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				fireEvent(new DocumentBeforeChangeEvent(area, this, item));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onCursorActivity(NativeDocument document) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				fireEvent(new DocumentCursorActivityEvent(area, this));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onBeforeSelectionChange(NativeDocument document, Anchor item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				fireEvent(new DocumentBeforeSelectionChangeEvent(area, this, item));
+			}
+		}
 	}
 
 	/**
@@ -2123,6 +2278,83 @@ public final class Document {
 			return Collections.unmodifiableList(result);
 		}
 		return Collections.emptyList();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.coderba.client.events.
+	 * RemoveHandlerEvent)
+	 */
+	@Override
+	public void onRemove(RemoveHandlerEvent event) {
+		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
+			// checks if type of removed event handler is DocumentBeforeChangeEvent
+			// if there is not any DocumentBeforeChangeEvent handler
+			if (getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 0) {
+				// sets OFF the callback proxy in order to call the user event interface
+				nativeObject.off(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
+			// checks if type of removed event handler is DocumentBeforeSelectionChangeEvent
+			// if there is not any DocumentBeforeSelectionChangeEvent handler
+			if (getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 0) {
+				// sets OFF the callback proxy in order to call the user event interface
+				nativeObject.off(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
+			// checks if type of removed event handler is DocumentChangeEvent
+			// if there is not any DocumentChangeEvent handler
+			if (getHandlerCount(DocumentChangeEvent.TYPE) == 0) {
+				// sets OFF the callback proxy in order to call the user event interface
+				nativeObject.off(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
+			// checks if type of removed event handler is DocumentCursorActivityEvent
+			// if there is not any DocumentCursorActivityEvent handler
+			if (getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
+				// sets OFF the callback proxy in order to call the user event interface
+				nativeObject.off(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.coderba.client.events.AddHandlerEvent)
+	 */
+	@Override
+	public void onAdd(AddHandlerEvent event) {
+		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
+			// checks if type of added event handler is DocumentBeforeChangeEvent
+			// if there is not any DocumentBeforeChangeEvent handler
+			if (getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 1) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.on(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
+			// checks if type of added event handler is DocumentBeforeSelectionChangeEvent
+			// if there is not any DocumentBeforeSelectionChangeEvent handler
+			if (getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 1) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.on(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
+			// checks if type of added event handler is DocumentChangeEvent
+			// if there is not any DocumentBeforeSelectionChangeEvent handler
+			if (getHandlerCount(DocumentChangeEvent.TYPE) == 1) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.on(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
+			}
+		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
+			// checks if type of added event handler is DocumentCursorActivityEvent
+			// if there is not any DocumentCursorActivityEvent handler
+			if (getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
+				// sets the callback proxy in order to call the user event interface
+				nativeObject.on(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
+			}
+		}
 	}
 
 }

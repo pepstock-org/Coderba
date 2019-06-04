@@ -34,14 +34,14 @@ public final class EditorInputReadEvent extends AbstractEditorEvent<EditorInputR
 	 */
 	public static final String NAME = "inputRead";
 	
-	private final EditorChangeItem item;
+	private final ChangeItem item;
 
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
 	 * @param handlerType the type of removed handler.
 	 */
-	public EditorInputReadEvent(EditorArea editorArea, EditorChangeItem item) {
+	public EditorInputReadEvent(EditorArea editorArea, ChangeItem item) {
 		super(TYPE, editorArea);
 		if (item == null) {
 			throw new IllegalArgumentException("[EditorInputReadEvent] Editor change item is null");
@@ -52,7 +52,7 @@ public final class EditorInputReadEvent extends AbstractEditorEvent<EditorInputR
 	/**
 	 * @return the item
 	 */
-	public final EditorChangeItem getItem() {
+	public final ChangeItem getItem() {
 		return item;
 	}
 

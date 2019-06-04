@@ -34,14 +34,14 @@ public final class EditorChangeEvent extends AbstractEditorEvent<EditorChangeEve
 	 */
 	public static final String NAME = "change";
 	
-	private final EditorChangeItem item;
+	private final ChangeItem item;
 
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
 	 * @param handlerType the type of removed handler.
 	 */
-	public EditorChangeEvent(EditorArea editorArea, EditorChangeItem item) {
+	public EditorChangeEvent(EditorArea editorArea, ChangeItem item) {
 		super(TYPE, editorArea);
 		if (item == null) {
 			throw new IllegalArgumentException("[EditorChangeEvent] Editor change item is null");
@@ -52,7 +52,7 @@ public final class EditorChangeEvent extends AbstractEditorEvent<EditorChangeEve
 	/**
 	 * @return the item
 	 */
-	public final EditorChangeItem getItem() {
+	public final ChangeItem getItem() {
 		return item;
 	}
 

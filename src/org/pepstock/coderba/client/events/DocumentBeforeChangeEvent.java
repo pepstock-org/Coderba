@@ -16,6 +16,7 @@
 package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.entities.Document;
 
 /**
  * This event is fired before a change is applied, and its handler may choose to modify or cancel the change.<br>
@@ -39,12 +40,12 @@ import org.pepstock.coderba.client.EditorArea;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBeforeChangeEventHandler> {
+public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<DocumentBeforeChangeEventHandler> {
 
 	/**
 	 * Event type
 	 */
-	public static final Type<EditorBeforeChangeEventHandler> TYPE = new Type<>();
+	public static final Type<DocumentBeforeChangeEventHandler> TYPE = new Type<>();
 	/**
 	 * Event name of CodeMirror
 	 */
@@ -57,10 +58,10 @@ public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBef
 	 * 
 	 * @param handlerType the type of removed handler.
 	 */
-	public EditorBeforeChangeEvent(EditorArea editorArea, ChangeItem item) {
-		super(TYPE, editorArea);
+	public DocumentBeforeChangeEvent(EditorArea editorArea, Document document, ChangeItem item) {
+		super(TYPE, editorArea, document);
 		if (item == null) {
-			throw new IllegalArgumentException("[EditorBeforeChangeEvent] Editor change item is null");
+			throw new IllegalArgumentException("[DocumentBeforeChangeEvent] Editor change item is null");
 		}
 		this.item = item;
 	}
@@ -80,7 +81,7 @@ public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBef
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
-	public Type<EditorBeforeChangeEventHandler> getAssociatedType() {
+	public Type<DocumentBeforeChangeEventHandler> getAssociatedType() {
 		return TYPE;
 	}
 
@@ -90,7 +91,7 @@ public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBef
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override
-	protected void dispatch(EditorBeforeChangeEventHandler handler) {
+	protected void dispatch(DocumentBeforeChangeEventHandler handler) {
 		handler.onBeforeChange(this);
 	}
 

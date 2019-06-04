@@ -47,7 +47,7 @@ import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeEvent;
 import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeItem;
 import org.pepstock.coderba.client.events.EditorBlurEvent;
 import org.pepstock.coderba.client.events.EditorChangeEvent;
-import org.pepstock.coderba.client.events.EditorChangeItem;
+import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.EditorChangesEvent;
 import org.pepstock.coderba.client.events.EditorCursorActivityEvent;
 import org.pepstock.coderba.client.events.EditorElectrictInputEvent;
@@ -103,7 +103,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		 * @param editor native editor instance
 		 * @param item editor change item
 		 */
-		void call(NativeEditor editor, EditorChangeItem item);
+		void call(NativeEditor editor, ChangeItem item);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		 * @param editor native editor instance
 		 * @param items array of changes
 		 */
-		void call(NativeEditor editor, ArrayEntity<EditorChangeItem> items);
+		void call(NativeEditor editor, ArrayEntity<ChangeItem> items);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		 * @param editor native editor instance
 		 * @param item editor change item
 		 */
-		void call(NativeEditor editor, EditorChangeItem item);
+		void call(NativeEditor editor, ChangeItem item);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 		 * @param editor native editor instance
 		 * @param item editor change item
 		 */
-		void call(NativeEditor editor, EditorChangeItem item);
+		void call(NativeEditor editor, ChangeItem item);
 	}
 
 	/**
@@ -542,10 +542,10 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	 * @param editor
 	 * @param items
 	 */
-	private void onChanges(NativeEditor editor, ArrayEntity<EditorChangeItem> items) {
+	private void onChanges(NativeEditor editor, ArrayEntity<ChangeItem> items) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
-			List<EditorChangeItem> list = ArrayListHelper.unmodifiableList(items);
+			List<ChangeItem> list = ArrayListHelper.unmodifiableList(items);
 			fireEvent(new EditorChangesEvent(area, list));
 		}
 	}
@@ -556,7 +556,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	 * @param editor
 	 * @param item
 	 */
-	private void onChange(NativeEditor editor, EditorChangeItem item) {
+	private void onChange(NativeEditor editor, ChangeItem item) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
 			fireEvent(new EditorChangeEvent(area, item));
@@ -569,7 +569,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	 * @param editor
 	 * @param item
 	 */
-	private void onBeforeChange(NativeEditor editor, EditorChangeItem item) {
+	private void onBeforeChange(NativeEditor editor, ChangeItem item) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
 			fireEvent(new EditorBeforeChangeEvent(area, item));
@@ -690,7 +690,7 @@ public final class Editor extends EventManager implements AddHandlerEventHandler
 	 * @param editor
 	 * @param item
 	 */
-	private void onInputRead(NativeEditor editor, EditorChangeItem item) {
+	private void onInputRead(NativeEditor editor, ChangeItem item) {
 		EditorArea area = editor.getEditorArea();
 		if (area != null) {
 			fireEvent(new EditorInputReadEvent(area, item));

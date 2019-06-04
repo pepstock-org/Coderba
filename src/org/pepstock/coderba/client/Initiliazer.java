@@ -15,14 +15,33 @@
 */
 package org.pepstock.coderba.client;
 
-/**FIXME
+/**
+ * Interface to be implemented to configure the editor before or after its initialization.<br>
+ * This is mandatory because the editor can be instantiated ONLY after the widget will be attached to DOM document and therefore
+ * there is a point of time when the editor is not consistent.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface Initiliazer {
-	
-	void beforeInit(EditorArea editorArea);
 
-	void afterInit(EditorArea editorArea);
+	/**
+	 * Invoked before the editor will be created.<br>
+	 * Here the editor instance will be always null.
+	 * 
+	 * @param editorArea editor area widget instance
+	 */
+	default void beforeInit(EditorArea editorArea) {
+		// do nothing
+	}
+
+	/**
+	 * Invoked after the editor will be created.
+	 * 
+	 * @param editorArea editor area widget instance
+	 */
+	default void afterInit(EditorArea editorArea) {
+		// do nothing
+	}
 
 }

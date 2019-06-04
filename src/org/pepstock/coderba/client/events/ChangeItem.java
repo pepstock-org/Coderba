@@ -39,12 +39,12 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class EditorChangeItem extends Range {
+public final class ChangeItem extends Range {
 
 	/**
 	 * to avoid any instantiation
 	 */
-	EditorChangeItem() {
+	ChangeItem() {
 	}
 
 	@JsProperty(name = "text")

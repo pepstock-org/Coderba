@@ -21,7 +21,10 @@ import com.google.gwt.dom.client.TextAreaElement;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * FIXME
+ * GWT widget to use into user interface which is wrapping a text area and a CodeMirror editor to manage the content of the area
+ * itself.<br>
+ * Pay attention that the CodeMirror editor must be initialized after the widget will be attached to DOM document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -34,9 +37,9 @@ public class EditorArea extends Widget {
 	// text area ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 	// flag if must be initialized on attach
-	private boolean initOnLoad = true;
+	private boolean initOnAttach = true;
 	// flag if must be destroy on detach
-	private boolean destroyOnUnload = true;
+	private boolean destroyOnDetach = true;
 	// initializer instance
 	private Initiliazer initializer = null;
 	// editor instance
@@ -45,11 +48,14 @@ public class EditorArea extends Widget {
 	private final UserOptions initOptions;
 	// editor configuration
 	private final EditorOptions options;
+
 	/**
-	 * @param element
+	 * Creates the widget initializing all needed elements to manage the editing.
 	 */
 	public EditorArea() {
+		// creates a text area
 		element = Document.get().createTextAreaElement();
+		// sets unique ID
 		element.setId(id);
 		// sets default width values
 		element.getStyle().setWidth(DEFAULT_PCT_SIZE, Unit.PCT);
@@ -65,7 +71,10 @@ public class EditorArea extends Widget {
 		super.setElement(element);
 		// injects codemirror.js java script source
 		Injector.ensureInjected();
+		// creates a user options
+		// before creating the editor
 		initOptions = new UserOptions(Defaults.get());
+		// creates the option wrapper
 		options = new EditorOptions(initOptions);
 	}
 
@@ -80,65 +89,81 @@ public class EditorArea extends Widget {
 	}
 
 	/**
-	 * Returns <code>true</code> if CodeMirror editor has been initialized, otherwise <code>false</code>.
+	 * Returns <code>true</code> if editor has been initialized, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if CodeMirror editor has been initialized, otherwise <code>false</code>.
+	 * @return <code>true</code> if editor has been initialized, otherwise <code>false</code>.
 	 */
 	public final boolean isInitialized() {
 		return editor != null;
 	}
 
 	/**
-	 * @return the editor
+	 * Returns the editor instance or <code>null</code> if invokes before the widget will attached.
+	 * 
+	 * @return the editor or <code>null</code> if invokes before the widget will attached.
 	 */
 	public final Editor getEditor() {
 		return editor;
 	}
-	
+
 	/**
-	 * @return the configuration
+	 * Returns the editor configuration.
+	 * 
+	 * @return the editor configuration
 	 */
 	public final EditorOptions getOptions() {
 		return options;
 	}
 
 	/**
-	 * @return the initOnLoad
+	 * Returns <code>true</code> if the editor will be initialized after the widget will be attached to DOM.
+	 * 
+	 * @return <code>true</code> if the editor will be initialized after the widget will be attached to DOM
 	 */
-	boolean isInitOnLoad() {
-		return initOnLoad;
+	boolean isInitOnAttach() {
+		return initOnAttach;
 	}
 
 	/**
-	 * @param initOnLoad the initOnLoad to set
+	 * Sets <code>true</code> if the editor will be initialized after the widget will be attached to DOM.
+	 * 
+	 * @param initOnAttach <code>true</code> if the editor will be initialized after the widget will be attached to DOM.
 	 */
-	public void setInitOnLoad(boolean initOnLoad) {
-		this.initOnLoad = initOnLoad;
+	public void setInitOnAttach(boolean initOnAttach) {
+		this.initOnAttach = initOnAttach;
 	}
 
 	/**
-	 * @return the destroyOnUnload
+	 * Returns <code>true</code> if the editor will be destroy after the widget will be detached from DOM.
+	 * 
+	 * @return <code>true</code> if the editor will be destroy after the widget will be detached from DOM.
 	 */
-	public boolean isDestroyOnUnload() {
-		return destroyOnUnload;
+	public boolean isDestroyOnDetach() {
+		return destroyOnDetach;
 	}
 
 	/**
-	 * @param destroyOnUnload the destroyOnUnload to set
+	 * Sets <code>true</code> if the editor will be destroy after the widget will be detached from DOM.
+	 * 
+	 * @param destroyOnDetach <code>true</code> if the editor will be destroy after the widget will be detached from DOM.
 	 */
-	public void setDestroyOnUnload(boolean destroyOnUnload) {
-		this.destroyOnUnload = destroyOnUnload;
+	public void setDestroyOnDetach(boolean destroyOnDetach) {
+		this.destroyOnDetach = destroyOnDetach;
 	}
 
 	/**
-	 * @return the initializer
+	 * Returns the initializer instance.
+	 * 
+	 * @return the initializer instance
 	 */
 	public Initiliazer getInitializer() {
 		return initializer;
 	}
 
 	/**
-	 * @param initializer the initializer to set
+	 * Sets new initializer instance.
+	 * 
+	 * @param initializer new initializer instance
 	 */
 	public void setInitializer(Initiliazer initializer) {
 		this.initializer = initializer;
@@ -147,11 +172,16 @@ public class EditorArea extends Widget {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onLoad()
+	 * @see com.google.gwt.user.client.ui.Widget#onAttach()
 	 */
 	@Override
-	protected void onLoad() {
-		if (initOnLoad) {
+	protected void onAttach() {
+		// invokes super
+		// MANDATORY
+		super.onAttach();
+		// checks if must create the editor
+		if (initOnAttach) {
+			// initializes editor
 			initialize();
 		}
 	}
@@ -159,43 +189,65 @@ public class EditorArea extends Widget {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.google.gwt.user.client.ui.Widget#onUnload()
+	 * @see com.google.gwt.user.client.ui.Widget#onDetach()
 	 */
 	@Override
-	protected void onUnload() {
-		if (destroyOnUnload) {
+	protected void onDetach() {
+		// invokes super
+		// MANDATORY
+		super.onDetach();
+		// checks if must destroy the editor
+		if (destroyOnDetach) {
 			// destroy
 			destroy();
 		}
 	}
-	
+
+	/**
+	 * Initializes the CodeMirror editor.
+	 */
 	public final void initialize() {
+		// checks if editor is already initialized
 		if (editor == null) {
+			// checks an initializer instance has been set
 			if (initializer != null) {
+				// invokes the custom implementation
 				initializer.beforeInit(this);
 			}
+			// checks the configuration contains a starting text
 			if (options.getValue() != null) {
+				// if yes, sets to text area
 				element.setInnerHTML(options.getValue());
 			}
-			// stores the chart instance into collection
+			// stores the editor area instance into cache
 			EditorAreas.add(this);
+			// creates the code mirror editor
 			this.editor = CodeMirror.get().fromTextArea(element, initOptions);
+			// sets the unique id to editor
 			editor.setId(getId());
+			// switches the configuration from user to runtime
 			options.setDelegatedOptions(new RuntimeOptions(editor.getNativeObject(), Defaults.get()));
+			// checks an initializer instance has been set
 			if (initializer != null) {
+				// invokes the custom implementation
 				initializer.afterInit(this);
 			}
-			// notify after init
+			// notify after initialization
 			EditorAreas.fireAfterInit(this);
 		}
 	}
-	
+
+	/**
+	 * Destroy the CodeMirror editor.
+	 */
 	public final void destroy() {
+		// checks if editor is already initialized
 		if (editor != null) {
 			// notify before destroy
 			EditorAreas.fireBeforeDestory(this);
 			// destroy ...
-			// removes chart instance from collection
+			editor = null;
+			// removes editor area instance from cache
 			EditorAreas.remove(getId());
 		}
 	}

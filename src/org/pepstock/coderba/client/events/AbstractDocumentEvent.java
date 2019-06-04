@@ -16,6 +16,7 @@
 package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.entities.Document;
 
 import com.google.gwt.event.shared.EventHandler;
 
@@ -23,26 +24,26 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEditorEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
-	
-	private final EditorArea editorArea;
+public abstract class AbstractDocumentEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
+
+	private final Document document;
 
 	/**
 	 * @param handlerType
 	 */
-	public AbstractEditorEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea) {
-		super(handlerType);
-		if (editorArea == null) {
-			throw new IllegalArgumentException("[AbstarctEditorEvent] Editor area is null");
+	public AbstractDocumentEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document) {
+		super(handlerType, editorArea);
+		if (document == null) {
+			throw new IllegalArgumentException("[AbstarctDocumentEvent] Document is null");
 		}
-		this.editorArea = editorArea;
+		this.document = document;
 	}
-	
+
 	/**
-	 * @return the editorArea
+	 * @return the document
 	 */
-	public final EditorArea getEditorArea() {
-		return editorArea;
+	public Document getDocument() {
+		return document;
 	}
 
 }

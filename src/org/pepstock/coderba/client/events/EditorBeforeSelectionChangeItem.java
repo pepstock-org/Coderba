@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  * . Its handler may inspect the set of selection ranges, present as an array of {anchor, head} objects in the ranges property
  * of the obj argument, and optionally change them by calling the update method on this object, passing an array of ranges in
  * the same format. The object also contains an origin property holding the origin string passed to the selection-changing
- * method, if any. Handlers for this event have the same restriction as "beforeChange" handlers — they should not do anything to
+ * method, if any. Handlers for this event have the same restriction as "beforeChange" handlers - they should not do anything to
  * directly update the state of the editor.
  * 
  * @author Andrea "Stock" Stocchero
