@@ -67,7 +67,7 @@ public final class NativeTextMarker extends NativeCastableObject {
 	 * @return the id of marker
 	 */
 	@JsProperty
-	native int getId();
+	public native int getId();
 
 	/**
 	 * Remove the mark.

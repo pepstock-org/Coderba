@@ -27,6 +27,8 @@ import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Area;
 import org.pepstock.coderba.client.entities.Coordinate;
 import org.pepstock.coderba.client.entities.Document;
+import org.pepstock.coderba.client.entities.Documents;
+import org.pepstock.coderba.client.entities.LineHandle;
 import org.pepstock.coderba.client.entities.NativeDocument;
 import org.pepstock.coderba.client.entities.NativeLineHandle;
 import org.pepstock.coderba.client.entities.OverlayOptions;
@@ -1868,9 +1870,12 @@ public final class Editor implements IsEventManager {
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
 		if (area != null) {
-			// fires the event
-			// FIXME
-			// eventManager.fireEvent(new EditorRenderLineEvent(area, line, element));
+			Document doc = area.getEditor().getDocument();
+			LineHandle lineHandle = doc.getLineHandleById(line.getId());
+			if (lineHandle != null) {
+				// fires the event
+				eventManager.fireEvent(new EditorRenderLineEvent(area, lineHandle, element));
+			}
 		}
 	}
 
@@ -1916,10 +1921,10 @@ public final class Editor implements IsEventManager {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
-		if (area != null) {
+		if (area != null && Documents.get().has(oldDoc.getId())) {
+			Document oldDocument = Documents.get().retrieve(oldDoc.getId());
 			// fires the event
-			// FIXME
-			// eventManager.fireEvent(new EditorSwapDocEvent(area, oldDoc));
+			eventManager.fireEvent(new EditorSwapDocEvent(area, oldDocument));
 		}
 	}
 

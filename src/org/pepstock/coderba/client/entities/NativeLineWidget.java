@@ -51,7 +51,7 @@ public final class NativeLineWidget extends NativeCastableObject {
 	 * @return the id of widget
 	 */
 	@JsProperty
-	native int getId();
+	public native int getId();
 
 	/**
 	 * Returns the line handle.

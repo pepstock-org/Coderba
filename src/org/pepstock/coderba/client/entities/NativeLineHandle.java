@@ -45,7 +45,7 @@ public final class NativeLineHandle {
 	 * @return the id of object
 	 */
 	@JsProperty
-	native int getId();
+	public native int getId();
 
 	/**
 	 * Sets the id of object

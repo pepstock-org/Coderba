@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.coderba.client.Defaults;
 import org.pepstock.coderba.client.Editor;
@@ -65,6 +66,9 @@ import jsinterop.annotations.JsFunction;
  */
 public final class Document implements IsEventManager {
 
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -230,6 +234,8 @@ public final class Document implements IsEventManager {
 		this.nativeObject = nativeObject;
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		// stores id
+		this.nativeObject.setId(COUNTER.getAndIncrement());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -240,13 +246,23 @@ public final class Document implements IsEventManager {
 		documentBeforeChangeFunctionProxy.setCallback((document, item) -> onBeforeChange(document, item));
 		documentCursorActivityFunctionProxy.setCallback((document) -> onCursorActivity(document));
 		documentBeforeSelectionChangeFunctionProxy.setCallback((document, item) -> onBeforeSelectionChange(document, item));
+		// adds to cache
+		Documents.get().add(this);
 	}
 
 	/**
 	 * @return the nativeObject
 	 */
-	public final NativeDocument getNativeDocument() {
+	public NativeDocument getNativeDocument() {
 		return nativeObject;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getId() {
+		return nativeObject.getId();
 	}
 
 	/**
@@ -512,7 +528,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @return the "each line" handler
 	 */
-	public final DocumentEachLineHandler getDocumentEachLineHandler() {
+	public DocumentEachLineHandler getDocumentEachLineHandler() {
 		return documentEachLineHandler;
 	}
 
@@ -521,7 +537,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @param documentEachLineHandler the "each line" handler, previously calling the scan
 	 */
-	public final void setDocumentEachLineHandler(DocumentEachLineHandler documentEachLineHandler) {
+	public void setDocumentEachLineHandler(DocumentEachLineHandler documentEachLineHandler) {
 		this.documentEachLineHandler = documentEachLineHandler;
 	}
 
@@ -1133,7 +1149,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @return the document extend selections handler
 	 */
-	public final DocumentExtendSelectionsHandler getDocumentExtendSelectionsHandler() {
+	public DocumentExtendSelectionsHandler getDocumentExtendSelectionsHandler() {
 		return documentExtendSelectionsHandler;
 	}
 
@@ -1142,7 +1158,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @param documentExtendSelectionsHandler the document extend selections handler
 	 */
-	public final void setDocumentExtendSelectionsHandler(DocumentExtendSelectionsHandler documentExtendSelectionsHandler) {
+	public void setDocumentExtendSelectionsHandler(DocumentExtendSelectionsHandler documentExtendSelectionsHandler) {
 		this.documentExtendSelectionsHandler = documentExtendSelectionsHandler;
 	}
 
@@ -1273,7 +1289,8 @@ public final class Document implements IsEventManager {
 	 * @return new document that's linked to the target document
 	 */
 	public Document linkedDocument(LinkedDocumentOptions options) {
-		return new Document(nativeObject.linkedDoc(checkOptions(options).getObject()));
+		Document newDocument = new Document(nativeObject.linkedDoc(checkOptions(options).getObject()));
+		return newDocument;
 	}
 
 	/**
@@ -2270,7 +2287,8 @@ public final class Document implements IsEventManager {
 		if (linkedDocumentsHandler != null && nativeEditor != null) {
 			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
-				linkedDocumentsHandler.handle(area, new Document(document), sharedHistory);
+				Document storedDocument = Documents.get().retrieve(document.getId());
+				linkedDocumentsHandler.handle(area, storedDocument, sharedHistory);
 			}
 		}
 	}

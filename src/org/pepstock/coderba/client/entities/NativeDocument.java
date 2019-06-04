@@ -25,6 +25,7 @@ import org.pepstock.coderba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.Element;
 
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -43,7 +44,7 @@ public final class NativeDocument {
 	NativeDocument(String text) {
 		// do nothing
 	}
-
+	
 	/**
 	 * The last three arguments are optional and can be used to set a mode for the document, make it start at a line number
 	 * other than 0, and set a specific line separator respectively. FIXME
@@ -52,6 +53,22 @@ public final class NativeDocument {
 		// do nothing
 	}
 
+	/**
+	 * Returns the id of object.
+	 * 
+	 * @return the id of object
+	 */
+	@JsProperty
+	public native int getId();
+
+	/**
+	 * Sets the id of object
+	 * 
+	 * @param id the id of object
+	 */
+	@JsProperty
+	native void setId(int id);
+	
 	/**
 	 * Get the content of the document.
 	 * 
