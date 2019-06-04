@@ -46,7 +46,12 @@ public final class LineInfo {
 	LineInfo(NativeLineInfo nativeObject, Document document) {
 		this.nativeObject = nativeObject;
 		this.document = document;
-		this.handle = new LineHandle(nativeObject.getHandle());
+		NativeLineHandle handle = nativeObject.getHandle();
+		if (handle != null) {
+			this.handle = this.document.getLineHandleById(handle.getId());
+		} else {
+			this.handle = null;
+		}
 	}
 
 	public int getLine() {

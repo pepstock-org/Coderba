@@ -28,12 +28,9 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * is a {from, to, text, removed, origin} object containing information about the changes that occurred as second argument.<br>
- * from and to are the positions (in the pre-change coordinate system) where the change started and ended (for example, it might
- * be {ch:0, line:18} if the position is at the beginning of line #19).<br>
- * text is an array of strings representing the text that replaced the changed range (split by line).<br>
- * removed is the text that used to be between from and to, which is overwritten by this change.<br>
- * This event is fired before the end of an operation, before the DOM updates happen.
+ * Object containing information about the changes that occurred.<br>
+ * from and to are the positions (in the pre-change coordinate system) where the change started and ended.<br>
+ * The event is fired before the end of an operation, before the DOM updates happen.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -47,22 +44,49 @@ public final class ChangeItem extends Range {
 	ChangeItem() {
 	}
 
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Returns an array of strings representing the text that replaced the changed range (split by line).
+	 * 
+	 * @return an array of strings representing the text that replaced the changed range (split by line)
+	 */
 	@JsProperty(name = "text")
 	native ArrayString nativeGetText();
 
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Returns the text that used to be between from and to, which is overwritten by this change.
+	 * 
+	 * @return the text that used to be between from and to, which is overwritten by this change.
+	 */
 	@JsProperty(name = "removed")
 	native ArrayString nativeGetRemoved();
 
+	/**
+	 * Returns a list of strings representing the text that replaced the changed range (split by line).
+	 * 
+	 * @return a list of strings representing the text that replaced the changed range (split by line).
+	 */
 	@JsOverlay
 	public List<String> getText() {
 		return ArrayListHelper.unmodifiableList(nativeGetText());
 	}
 
+	/**
+	 * Return the text that used to be between from and to, which is overwritten by this change.
+	 * 
+	 * @return the text that used to be between from and to, which is overwritten by this change.
+	 */
 	@JsOverlay
 	public List<String> getRemoved() {
 		return ArrayListHelper.unmodifiableList(nativeGetRemoved());
 	}
 
+	/**
+	 * Returns the origin string.
+	 * 
+	 * @return the origin string
+	 */
 	@JsProperty
 	public native String getOrigin();
 }

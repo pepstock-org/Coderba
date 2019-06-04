@@ -40,6 +40,22 @@ public final class NativeLineHandle {
 	}
 
 	/**
+	 * Returns the id of object.
+	 * 
+	 * @return the id of object
+	 */
+	@JsProperty
+	native int getId();
+
+	/**
+	 * Sets the id of object
+	 * 
+	 * @param id the id of object
+	 */
+	@JsProperty
+	native void setId(int id);
+
+	/**
 	 * Get the content of the document.
 	 * 
 	 * @return he content of the document

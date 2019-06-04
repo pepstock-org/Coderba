@@ -48,8 +48,11 @@ abstract class InjectedItems<T extends HasName> {
 	 * @param item injectable item
 	 */
 	final void add(T item) {
-		// adds an injectable item into cache
-		instances.put(item.getName(), item);
+		// checks if already added
+		if (!instances.containsKey(item.getName())) {
+			// adds an injectable item into cache
+			instances.put(item.getName(), item);
+		}
 	}
 
 	/**
@@ -64,7 +67,7 @@ abstract class InjectedItems<T extends HasName> {
 			return instances.get(name);
 		}
 		// if here name is not consistent
-		// then retruns null
+		// then returns null
 		return null;
 	}
 

@@ -13,13 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.entities;
+package org.pepstock.coderba.client.events;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.pepstock.coderba.client.events.AddHandlerEvent;
-import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -32,20 +29,25 @@ import com.google.gwt.event.shared.UmbrellaException;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class EventManager {
+public final class EventManager {
 
 	private final HandlerManager eventHandlerManager;
+	
+	private final IsEventManager eventManager;
 
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 
-	/**
-	 * 
-	 */
-	protected EventManager() {
-		eventHandlerManager = new HandlerManager(this, false);
+	public EventManager(IsEventManager eventManager) {
+		if (eventManager == null) {
+			throw new IllegalArgumentException("Event manager is null");
+		}
+		this.eventManager = eventManager;
+		eventHandlerManager = new HandlerManager(this.eventManager, false);
+		eventHandlerManager.addHandler(AddHandlerEvent.TYPE, eventManager);
+		eventHandlerManager.addHandler(RemoveHandlerEvent.TYPE, eventManager);
 	}
 
-	protected final void removeAllHandlers() {
+	public void removeAllHandlers() {
 		for (HandlerRegistration handler : handlerRegistrations) {
 			handler.removeHandler();
 		}
@@ -57,7 +59,7 @@ public abstract class EventManager {
 	 * @param type the event type
 	 * @return the number of registered handlers
 	 */
-	protected final int getHandlerCount(GwtEvent.Type<?> type) {
+	public int getHandlerCount(GwtEvent.Type<?> type) {
 		return eventHandlerManager.getHandlerCount(type);
 	}
 
@@ -72,7 +74,7 @@ public abstract class EventManager {
 	 * 
 	 * @param event the event
 	 */
-	protected final void fireEvent(GwtEvent<?> event) {
+	public void fireEvent(GwtEvent<?> event) {
 		if (event != null) {
 			eventHandlerManager.fireEvent(event);
 		}
@@ -84,8 +86,12 @@ public abstract class EventManager {
 	 * @see com.google.gwt.event.shared.HandlerManager#addHandler(com.google.gwt.event.shared.GwtEvent.Type,
 	 * com.google.gwt.event.shared.EventHandler)
 	 */
-	public final <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
-		// FIXME checks arguments
+	public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+		// checks if arguments are consistent
+		if (type == null || handler == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Type or handler instance is null");
+		}
 		// adds handler
 		HandlerRegistration registration = new InternalHandlerRegistration<H>(this, eventHandlerManager.addHandler(type, handler), type, handler);
 		// if the handler is a chart event handler one
@@ -103,7 +109,7 @@ public abstract class EventManager {
 	 * @see com.google.gwt.event.shared.HandlerManager#removeHandler(com.google.gwt.event.shared.GwtEvent.Type,
 	 * com.google.gwt.event.shared.EventHandler)
 	 */
-	private final <H extends EventHandler> void removeHandler(Type<H> type, H handler) {
+	private <H extends EventHandler> void removeHandler(Type<H> type, H handler) {
 		// removes handler
 		eventHandlerManager.removeHandler(type, handler);
 		// sends the event

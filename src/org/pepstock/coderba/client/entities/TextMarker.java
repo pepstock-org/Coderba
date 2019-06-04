@@ -17,16 +17,26 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.events.AddHandlerEvent;
+import org.pepstock.coderba.client.events.EventManager;
+import org.pepstock.coderba.client.events.IsEventManager;
+import org.pepstock.coderba.client.events.RemoveHandlerEvent;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TextMarker extends TextMarkerOptions {
+public final class TextMarker extends TextMarkerOptions implements IsEventManager {
 
 	private final NativeTextMarker nativeObject;
 
 	private final Document document;
+
+	private final EventManager eventManager;
 
 	/**
 	 * Name of properties of native object.
@@ -66,6 +76,8 @@ public final class TextMarker extends TextMarkerOptions {
 		super(nativeObject);
 		this.nativeObject = nativeObject;
 		this.document = document;
+		// sets event manager
+		this.eventManager = new EventManager(this);
 	}
 
 	public int getId() {
@@ -103,4 +115,35 @@ public final class TextMarker extends TextMarkerOptions {
 			nativeObject.changed();
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.coderba.client.events.AddHandlerEvent)
+	 */
+	@Override
+	public void onAdd(AddHandlerEvent event) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.coderba.client.events.
+	 * RemoveHandlerEvent)
+	 */
+	@Override
+	public void onRemove(RemoveHandlerEvent event) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.IsEventManager#addHandler(com.google.gwt.event.shared.GwtEvent.Type,
+	 * com.google.gwt.event.shared.EventHandler)
+	 */
+	@Override
+	public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+		return eventManager.addHandler(type, handler);
+	}
+
 }

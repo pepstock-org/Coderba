@@ -128,21 +128,4 @@ public final class CodeMirror {
 		// then exception
 		throw new IllegalArgumentException("Unable to initialize the editor because TextArea element is null");
 	}
-
-	// FIXME
-	// /**
-	// * Find the column position at a given string index using a given tabsize.
-	// *
-	// * @param line
-	// * @param index
-	// * @param tabSize
-	// * @return
-	// */
-	// public int countColumn(String line, int index, int tabSize) {
-	// if (line != null) {
-	// return NativeCodeMirror.countColumn(line, index, tabSize);
-	// }
-	// return -1;
-	// }
-
 }

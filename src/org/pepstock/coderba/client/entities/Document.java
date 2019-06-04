@@ -43,16 +43,19 @@ import org.pepstock.coderba.client.enums.LineClassLocation;
 import org.pepstock.coderba.client.enums.Select;
 import org.pepstock.coderba.client.enums.TextMarkerType;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
-import org.pepstock.coderba.client.events.AddHandlerEventHandler;
 import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.DocumentBeforeChangeEvent;
 import org.pepstock.coderba.client.events.DocumentBeforeSelectionChangeEvent;
 import org.pepstock.coderba.client.events.DocumentChangeEvent;
 import org.pepstock.coderba.client.events.DocumentCursorActivityEvent;
+import org.pepstock.coderba.client.events.EventManager;
+import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
-import org.pepstock.coderba.client.events.RemoveHandlerEventHandler;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import jsinterop.annotations.JsFunction;
 
@@ -60,7 +63,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Document extends EventManager implements AddHandlerEventHandler, RemoveHandlerEventHandler {
+public final class Document implements IsEventManager {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -206,9 +209,13 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 
 	private final NativeDocument nativeObject;
 
+	private final EventManager eventManager;
+
 	private final Map<Integer, TextMarker> markers = new HashMap<>();
 
 	private final Map<Integer, LineWidget> lineWidgets = new HashMap<>();
+
+	private final Map<Integer, LineHandle> lineHandles = new HashMap<>();
 
 	private DocumentEachLineHandler documentEachLineHandler = null;
 
@@ -221,8 +228,8 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	 */
 	public Document(NativeDocument nativeObject) {
 		this.nativeObject = nativeObject;
-		addHandler(AddHandlerEvent.TYPE, this);
-		addHandler(RemoveHandlerEvent.TYPE, this);
+		// sets event manager
+		this.eventManager = new EventManager(this);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -233,121 +240,6 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 		documentBeforeChangeFunctionProxy.setCallback((document, item) -> onBeforeChange(document, item));
 		documentCursorActivityFunctionProxy.setCallback((document) -> onCursorActivity(document));
 		documentBeforeSelectionChangeFunctionProxy.setCallback((document, item) -> onBeforeSelectionChange(document, item));
-	}
-
-	/**
-	 * FIXME
-	 * 
-	 * @param editor
-	 * @param item
-	 */
-	private void onChange(NativeDocument document, ChangeItem item) {
-		NativeEditor editor = nativeObject.getEditor();
-		if (editor != null) {
-			EditorArea area = editor.getEditorArea();
-			if (area != null) {
-				fireEvent(new DocumentChangeEvent(area, this, item));
-			}
-		}
-	}
-
-	/**
-	 * FIXME
-	 * 
-	 * @param editor
-	 * @param item
-	 */
-	private void onBeforeChange(NativeDocument document, ChangeItem item) {
-		NativeEditor editor = nativeObject.getEditor();
-		if (editor != null) {
-			EditorArea area = editor.getEditorArea();
-			if (area != null) {
-				fireEvent(new DocumentBeforeChangeEvent(area, this, item));
-			}
-		}
-	}
-
-	/**
-	 * FIXME
-	 * 
-	 * @param editor
-	 * @param item
-	 */
-	private void onCursorActivity(NativeDocument document) {
-		NativeEditor editor = nativeObject.getEditor();
-		if (editor != null) {
-			EditorArea area = editor.getEditorArea();
-			if (area != null) {
-				fireEvent(new DocumentCursorActivityEvent(area, this));
-			}
-		}
-	}
-
-	/**
-	 * FIXME
-	 * 
-	 * @param editor
-	 * @param item
-	 */
-	private void onBeforeSelectionChange(NativeDocument document, Anchor item) {
-		NativeEditor editor = nativeObject.getEditor();
-		if (editor != null) {
-			EditorArea area = editor.getEditorArea();
-			if (area != null) {
-				fireEvent(new DocumentBeforeSelectionChangeEvent(area, this, item));
-			}
-		}
-	}
-
-	/**
-	 * A function that is called to iterate over the whole document, and call callback for each line, passing the line handle.
-	 * 
-	 * @param handle line handle for each row
-	 */
-	private void onDocumentEachLine(NativeLineHandle handle) {
-		NativeEditor nativeEditor = nativeObject.getEditor();
-		if (documentEachLineHandler != null && nativeEditor != null) {
-			EditorArea area = nativeEditor.getEditorArea();
-			if (area != null) {
-				documentEachLineHandler.handle(area, new LineHandle(handle));
-			}
-		}
-	}
-
-	/**
-	 * A function that is called to apply the given function to all existing selections.
-	 * 
-	 * @param anchor anchor object for selection
-	 * @return the position of selection
-	 */
-	private Position onDocumentExtendSelections(Anchor anchor) {
-		NativeEditor nativeEditor = nativeObject.getEditor();
-		if (documentExtendSelectionsHandler != null && nativeEditor != null) {
-			EditorArea area = nativeEditor.getEditorArea();
-			if (area != null) {
-				Position result = documentExtendSelectionsHandler.handle(area, anchor);
-				if (result != null) {
-					return result;
-				}
-			}
-		}
-		return anchor.getAnchor();
-	}
-
-	/**
-	 * A function that is called for all documents linked to the target document.
-	 * 
-	 * @param document the linked document
-	 * @param sharedHistory indicating whether that document shares history with the target.
-	 */
-	private void onLinkedDcouments(NativeDocument document, boolean sharedHistory) {
-		NativeEditor nativeEditor = nativeObject.getEditor();
-		if (linkedDocumentsHandler != null && nativeEditor != null) {
-			EditorArea area = nativeEditor.getEditorArea();
-			if (area != null) {
-				linkedDocumentsHandler.handle(area, new Document(document), sharedHistory);
-			}
-		}
 	}
 
 	/**
@@ -587,7 +479,16 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	 */
 	public LineHandle getLineHandle(int line) {
 		if (isValidLine(line)) {
-			return new LineHandle(nativeObject.getLineHandle(line));
+			NativeLineHandle nativeLineHandle = nativeObject.getLineHandle(line);
+			if (nativeLineHandle != null) {
+				if (lineHandles.containsKey(nativeLineHandle.getId())) {
+					return lineHandles.get(nativeLineHandle.getId());
+				} else {
+					LineHandle lineHandle = new LineHandle(nativeLineHandle);
+					lineHandles.put(lineHandle.getId(), lineHandle);
+					return lineHandle;
+				}
+			}
 		}
 		return null;
 	}
@@ -1710,6 +1611,16 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	}
 
 	/**
+	 * Returns an existing text marker instance by its id.
+	 * 
+	 * @param id id of text marker
+	 * @return an existing text marker or <code>null</code> if not exists
+	 */
+	public TextMarker getMarkerById(int id) {
+		return markers.get(id);
+	}
+
+	/**
 	 * Inserts a bookmark, a handle that follows the text around it as it is being edited, at the given position.<br>
 	 * A bookmark has two methods find() and clear().<br>
 	 * The first returns the current position of the bookmark, if it is still in the document. <br>
@@ -1814,9 +1725,11 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	 */
 	public LineHandle setGutterMarker(int line, String gutterID, Element value) {
 		if (isValidLine(line) && gutterID != null) {
-			NativeLineHandle nativeHandle = nativeObject.setGutterMarker(line, gutterID, value);
-			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line, gutterID, value);
+			if (nativeLineHandle != null) {
+				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				return lineHandle;
 			}
 		}
 		return null;
@@ -1834,12 +1747,24 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	 */
 	public LineHandle setGutterMarker(LineHandle line, String gutterID, Element value) {
 		if (line != null && gutterID != null) {
-			NativeLineHandle nativeHandle = nativeObject.setGutterMarker(line.getObject(), gutterID, value);
-			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line.getObject(), gutterID, value);
+			if (nativeLineHandle != null) {
+				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				return lineHandle;
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public LineHandle getLineHandleById(int id) {
+		return lineHandles.get(id);
 	}
 
 	/**
@@ -1882,7 +1807,9 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			NativeLineHandle nativeHandle = nativeObject.addLineClass(line, whereToUse.value(), className);
 			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+				LineHandle handle = new LineHandle(nativeHandle);
+				lineHandles.put(handle.getId(), handle);
+				return handle;
 			}
 		}
 		return null;
@@ -1915,9 +1842,11 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	public LineHandle addLineClass(LineHandle line, LineClassLocation where, String className) {
 		if (line != null && className != null) {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
-			NativeLineHandle nativeHandle = nativeObject.addLineClass(line.getObject(), whereToUse.value(), className);
-			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+			NativeLineHandle nativeLineHandle = nativeObject.addLineClass(line.getObject(), whereToUse.value(), className);
+			if (nativeLineHandle != null) {
+				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				return lineHandle;
 			}
 		}
 		return null;
@@ -1958,9 +1887,11 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	public LineHandle removeLineClass(int line, LineClassLocation where, String className) {
 		if (isValidLine(line)) {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
-			NativeLineHandle nativeHandle = nativeObject.removeLineClass(line, whereToUse.value(), className);
-			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line, whereToUse.value(), className);
+			if (nativeLineHandle != null) {
+				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				return lineHandle;
 			}
 		}
 		return null;
@@ -2001,9 +1932,11 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 	public LineHandle removeLineClass(LineHandle line, LineClassLocation where, String className) {
 		if (line != null) {
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
-			NativeLineHandle nativeHandle = nativeObject.removeLineClass(line.getObject(), whereToUse.value(), className);
-			if (nativeHandle != null) {
-				return new LineHandle(nativeHandle);
+			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line.getObject(), whereToUse.value(), className);
+			if (nativeLineHandle != null) {
+				LineHandle lineHandle = new LineHandle(nativeLineHandle);
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				return lineHandle;
 			}
 		}
 		return null;
@@ -2280,6 +2213,147 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 		return Collections.emptyList();
 	}
 
+	// ---------------------------------
+	// --- CALLBACkS METHODS
+	// ---------------------------------
+
+	/**
+	 * A function that is called to iterate over the whole document, and call callback for each line, passing the line handle.
+	 * 
+	 * @param nativeLineHandle line handle for each row
+	 */
+	private void onDocumentEachLine(NativeLineHandle nativeLineHandle) {
+		NativeEditor nativeEditor = nativeObject.getEditor();
+		if (documentEachLineHandler != null && nativeEditor != null) {
+			EditorArea area = nativeEditor.getEditorArea();
+			if (area != null) {
+				LineHandle lineHandle;
+				if (lineHandles.containsKey(nativeLineHandle.getId())) {
+					lineHandle = lineHandles.get(nativeLineHandle.getId());
+				} else {
+					lineHandle = new LineHandle(nativeLineHandle);
+				}
+				lineHandles.put(lineHandle.getId(), lineHandle);
+				documentEachLineHandler.handle(area, lineHandle);
+			}
+		}
+	}
+
+	/**
+	 * A function that is called to apply the given function to all existing selections.
+	 * 
+	 * @param anchor anchor object for selection
+	 * @return the position of selection
+	 */
+	private Position onDocumentExtendSelections(Anchor anchor) {
+		NativeEditor nativeEditor = nativeObject.getEditor();
+		if (documentExtendSelectionsHandler != null && nativeEditor != null) {
+			EditorArea area = nativeEditor.getEditorArea();
+			if (area != null) {
+				Position result = documentExtendSelectionsHandler.handle(area, anchor);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		return anchor.getAnchor();
+	}
+
+	/**
+	 * A function that is called for all documents linked to the target document.
+	 * 
+	 * @param document the linked document
+	 * @param sharedHistory indicating whether that document shares history with the target.
+	 */
+	private void onLinkedDcouments(NativeDocument document, boolean sharedHistory) {
+		NativeEditor nativeEditor = nativeObject.getEditor();
+		if (linkedDocumentsHandler != null && nativeEditor != null) {
+			EditorArea area = nativeEditor.getEditorArea();
+			if (area != null) {
+				linkedDocumentsHandler.handle(area, new Document(document), sharedHistory);
+			}
+		}
+	}
+
+	// ---------------------------------
+	// --- EVENTS METHODS
+	// ---------------------------------
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onChange(NativeDocument document, ChangeItem item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				eventManager.fireEvent(new DocumentChangeEvent(area, this, item));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onBeforeChange(NativeDocument document, ChangeItem item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				eventManager.fireEvent(new DocumentBeforeChangeEvent(area, this, item));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onCursorActivity(NativeDocument document) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				eventManager.fireEvent(new DocumentCursorActivityEvent(area, this));
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param editor
+	 * @param item
+	 */
+	private void onBeforeSelectionChange(NativeDocument document, Anchor item) {
+		NativeEditor editor = nativeObject.getEditor();
+		if (editor != null) {
+			EditorArea area = editor.getEditorArea();
+			if (area != null) {
+				eventManager.fireEvent(new DocumentBeforeSelectionChangeEvent(area, this, item));
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.IsEventManager#addHandler(com.google.gwt.event.shared.GwtEvent.Type,
+	 * com.google.gwt.event.shared.EventHandler)
+	 */
+	@Override
+	public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+		return eventManager.addHandler(type, handler);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -2291,28 +2365,28 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
 			// checks if type of removed event handler is DocumentBeforeChangeEvent
 			// if there is not any DocumentBeforeChangeEvent handler
-			if (getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 0) {
+			if (eventManager.getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 0) {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
 			// checks if type of removed event handler is DocumentBeforeSelectionChangeEvent
 			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 0) {
+			if (eventManager.getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 0) {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
 			// checks if type of removed event handler is DocumentChangeEvent
 			// if there is not any DocumentChangeEvent handler
-			if (getHandlerCount(DocumentChangeEvent.TYPE) == 0) {
+			if (eventManager.getHandlerCount(DocumentChangeEvent.TYPE) == 0) {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
 			// checks if type of removed event handler is DocumentCursorActivityEvent
 			// if there is not any DocumentCursorActivityEvent handler
-			if (getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
+			if (eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
 			}
@@ -2329,28 +2403,28 @@ public final class Document extends EventManager implements AddHandlerEventHandl
 		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
 			// checks if type of added event handler is DocumentBeforeChangeEvent
 			// if there is not any DocumentBeforeChangeEvent handler
-			if (getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 1) {
+			if (eventManager.getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 1) {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
 			// checks if type of added event handler is DocumentBeforeSelectionChangeEvent
 			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 1) {
+			if (eventManager.getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 1) {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
 			// checks if type of added event handler is DocumentChangeEvent
 			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (getHandlerCount(DocumentChangeEvent.TYPE) == 1) {
+			if (eventManager.getHandlerCount(DocumentChangeEvent.TYPE) == 1) {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
 			}
 		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
 			// checks if type of added event handler is DocumentCursorActivityEvent
 			// if there is not any DocumentCursorActivityEvent handler
-			if (getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
+			if (eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
 			}

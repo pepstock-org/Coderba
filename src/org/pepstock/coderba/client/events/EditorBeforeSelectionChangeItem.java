@@ -28,11 +28,12 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * . Its handler may inspect the set of selection ranges, present as an array of {anchor, head} objects in the ranges property
- * of the obj argument, and optionally change them by calling the update method on this object, passing an array of ranges in
- * the same format. The object also contains an origin property holding the origin string passed to the selection-changing
- * method, if any. Handlers for this event have the same restriction as "beforeChange" handlers - they should not do anything to
- * directly update the state of the editor.
+ * Its handler may inspect the set of selection ranges, present as an array of anchor objects in the ranges property of the
+ * object argument, and optionally change them by calling the update method on this object, passing an array of ranges in the
+ * same format.<br>
+ * The object also contains an origin property holding the origin string passed to the selection-changing method, if any.<br>
+ * Handlers for this event have the same restriction as "beforeChange" handlers - they should not do anything to directly update
+ * the state of the editor.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -46,17 +47,37 @@ public final class EditorBeforeSelectionChangeItem {
 	EditorBeforeSelectionChangeItem() {
 	}
 
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Returns an array of anchor objects in the ranges property of the object argument.
+	 * 
+	 * @return an array of anchor objects in the ranges property of the object argument
+	 */
 	@JsProperty(name = "ranges")
 	native ArrayEntity<Anchor> nativeGetRanges();
 
+	/**
+	 * Returns a list of anchor objects in the ranges property of the object argument.
+	 * 
+	 * @return a list of anchor objects in the ranges property of the object argument.
+	 */
 	@JsOverlay
-	public List<Anchor> getText() {
+	public List<Anchor> getRanges() {
 		return ArrayListHelper.unmodifiableList(nativeGetRanges());
 	}
 
+	/**
+	 * Returns the origin string passed to the selection-changing method, if any.
+	 * 
+	 * @return the origin string passed to the selection-changing method, if any
+	 */
 	@JsProperty
 	public native String getOrigin();
 
+	/**
+	 * FIXME
+	 * @return
+	 */
 	@JsProperty
 	public native Object getUpdate();
 

@@ -15,13 +15,29 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.pepstock.coderba.client.events.AddHandlerEvent;
+import org.pepstock.coderba.client.events.EventManager;
+import org.pepstock.coderba.client.events.IsEventManager;
+import org.pepstock.coderba.client.events.RemoveHandlerEvent;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
+
 /**
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineHandle {
+public final class LineHandle implements IsEventManager {
 
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	
 	private final NativeLineHandle nativeObject;
+
+	private final EventManager eventManager;
 
 	/**
 	 * 
@@ -29,6 +45,14 @@ public final class LineHandle {
 	 */
 	LineHandle(NativeLineHandle nativeObject) {
 		this.nativeObject = nativeObject;
+		// stores the id based on a counter
+		this.nativeObject.setId(COUNTER.getAndIncrement());
+		// sets event manager
+		this.eventManager = new EventManager(this);
+	}
+	
+	public int getId() {
+		return nativeObject.getId();
 	}
 
 	/**
@@ -66,6 +90,36 @@ public final class LineHandle {
 	 */
 	final NativeLineHandle getObject() {
 		return nativeObject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.IsEventManager#addHandler(com.google.gwt.event.shared.GwtEvent.Type,
+	 * com.google.gwt.event.shared.EventHandler)
+	 */
+	@Override
+	public <H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler) {
+		return eventManager.addHandler(type, handler);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.coderba.client.events.
+	 * RemoveHandlerEvent)
+	 */
+	@Override
+	public void onRemove(RemoveHandlerEvent event) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.coderba.client.events.AddHandlerEvent)
+	 */
+	@Override
+	public void onAdd(AddHandlerEvent event) {
 	}
 
 }
