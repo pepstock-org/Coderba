@@ -29,9 +29,9 @@ public enum MouseRepeat implements Key
 	SINGLE("single", MouseUnit.CHAR),
 	DOUBLE("double", MouseUnit.WORD),
 	TRIPLE("triple", MouseUnit.LINE);
-	
+
 	private final String value;
-	
+
 	private final MouseUnit defaultUnit;
 
 	/**
@@ -55,5 +55,5 @@ public enum MouseRepeat implements Key
 	public final MouseUnit getDefaultUnit() {
 		return defaultUnit;
 	}
-	
+
 }

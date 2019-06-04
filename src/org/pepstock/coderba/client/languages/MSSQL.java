@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSql;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MSSQL extends Language{
+public final class MSSQL extends Language {
 
 	private static final String NAME = "text/x-mssql";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeProperties;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Propertiesfiles extends Language{
+public final class Propertiesfiles extends Language {
 
 	private static final String NAME = "text/x-properties";
 

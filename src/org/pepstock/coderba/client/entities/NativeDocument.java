@@ -325,7 +325,7 @@ public final class NativeDocument {
 	 * @return a list of all current selections (by array contains anchor and head ( range object) properties referring to
 	 *         position objects)
 	 */
-	native ArrayEntity<Anchor> listSelections(); 
+	native ArrayEntity<Anchor> listSelections();
 
 	/**
 	 * Return true if any text is selected.
@@ -395,7 +395,7 @@ public final class NativeDocument {
 	 *            previous selection had less ranges than the new one.
 	 * @param options options instance
 	 */
-	native void setSelections(ArrayEntity<Anchor> ranges, Object primary, NativeObject options); 
+	native void setSelections(ArrayEntity<Anchor> ranges, Object primary, NativeObject options);
 
 	/**
 	 * Adds a new selection to the existing set of selections, and makes it the primary selection.
@@ -431,7 +431,7 @@ public final class NativeDocument {
 	 * @param heads array of starting position
 	 * @param options options instance
 	 */
-	native void extendSelections(ArrayEntity<Position> heads, NativeObject options); 
+	native void extendSelections(ArrayEntity<Position> heads, NativeObject options);
 
 	/**
 	 * Applies the given function to all existing selections, and calls extendSelections on the result.
@@ -439,7 +439,7 @@ public final class NativeDocument {
 	 * @param function function invoked to apply selection.
 	 * @param options options instance
 	 */
-	native void extendSelectionsBy(CallbackProxy.Proxy function, NativeObject options); 
+	native void extendSelectionsBy(CallbackProxy.Proxy function, NativeObject options);
 
 	/**
 	 * Sets or clears the 'extending' flag, which acts similar to the shift key, in that it will cause cursor movement and calls
@@ -519,7 +519,7 @@ public final class NativeDocument {
 	 * 
 	 * @param function function instance to be called for all documents linked to the target document.
 	 */
-	native void iterLinkedDocs(CallbackProxy.Proxy function); 
+	native void iterLinkedDocs(CallbackProxy.Proxy function);
 
 	/**
 	 * Undo one edit (if any undo events are stored).
@@ -901,7 +901,7 @@ public final class NativeDocument {
 	 * @return value is relative to the start of the editor's text
 	 */
 	native int indexFromPos(Position position);
-	
+
 	/**
 	 * Register an event handler for the given event type (a string) on the document instance.
 	 * 

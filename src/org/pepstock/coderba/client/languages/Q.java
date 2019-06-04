@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeQ;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Q extends Language{
+public final class Q extends Language {
 
 	private static final String NAME = "text/x-q";
 

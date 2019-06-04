@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJavascript;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JSONLD extends Language{
+public final class JSONLD extends Language {
 
 	private static final String NAME = "application/ld+json";
 

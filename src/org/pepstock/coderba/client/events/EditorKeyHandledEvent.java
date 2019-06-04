@@ -35,11 +35,11 @@ public final class EditorKeyHandledEvent extends AbstractEditorEvent<EditorKeyHa
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "keyHandled";
-	
+
 	private final String name;
-	
+
 	private final NativeEvent event;
-	
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
@@ -70,7 +70,6 @@ public final class EditorKeyHandledEvent extends AbstractEditorEvent<EditorKeyHa
 	public final NativeEvent getEvent() {
 		return event;
 	}
-
 
 	/*
 	 * (non-Javadoc)

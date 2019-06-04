@@ -19,6 +19,7 @@ import org.pepstock.coderba.client.commons.Key;
 
 /**
  * The select argument can be used to change a document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -32,7 +33,7 @@ public enum Select implements Key
 	 * Passing "start" will collapse the selection to the start of the inserted text.
 	 */
 	START("start");
-	
+
 	private final String value;
 
 	/**
@@ -48,5 +49,5 @@ public enum Select implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHtmlembedded;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ASPNET extends Language{
+public final class ASPNET extends Language {
 
 	private static final String NAME = "application/x-aspx";
 

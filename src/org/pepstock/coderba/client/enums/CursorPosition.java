@@ -32,7 +32,7 @@ public enum CursorPosition implements Key
 	 */
 	HEAD("head"),
 	/**
-	 *  End of the selection to return is the fixed side of the selection.
+	 * End of the selection to return is the fixed side of the selection.
 	 */
 	ANCHOR("anchor"),
 	/**

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeXml;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class XML extends Language{
+public final class XML extends Language {
 
 	private static final String NAME = "application/xml";
 

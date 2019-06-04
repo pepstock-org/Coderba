@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeProtobuf;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ProtoBuf extends Language{
+public final class ProtoBuf extends Language {
 
 	private static final String NAME = "text/x-protobuf";
 

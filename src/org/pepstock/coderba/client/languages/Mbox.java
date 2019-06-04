@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMbox;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Mbox extends Language{
+public final class Mbox extends Language {
 
 	private static final String NAME = "application/mbox";
 

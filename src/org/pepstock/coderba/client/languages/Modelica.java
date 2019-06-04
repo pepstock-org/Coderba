@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeModelica;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Modelica extends Language{
+public final class Modelica extends Language {
 
 	private static final String NAME = "text/x-modelica";
 

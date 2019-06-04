@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePascal;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Pascal extends Language{
+public final class Pascal extends Language {
 
 	private static final String NAME = "text/x-pascal";
 

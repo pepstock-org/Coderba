@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeNtriples;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class NTriples extends Language{
+public final class NTriples extends Language {
 
 	private static final String NAME = "application/n-triples";
 

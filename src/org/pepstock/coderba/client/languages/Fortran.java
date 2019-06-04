@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeFortran;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Fortran extends Language{
+public final class Fortran extends Language {
 
 	private static final String NAME = "text/x-fortran";
 

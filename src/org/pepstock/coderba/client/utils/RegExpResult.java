@@ -37,7 +37,7 @@ public final class RegExpResult extends Array {
 	 */
 	RegExpResult() {
 	}
-	
+
 	/**
 	 * Returns the 0-based index of the match in the string.
 	 * 
@@ -45,7 +45,7 @@ public final class RegExpResult extends Array {
 	 */
 	@JsProperty(name = "index")
 	public final native int index();
-	
+
 	/**
 	 * Returns the original string that was matched against.
 	 * 

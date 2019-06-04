@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSmalltalk;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Smalltalk extends Language{
+public final class Smalltalk extends Language {
 
 	private static final String NAME = "text/x-stsrc";
 

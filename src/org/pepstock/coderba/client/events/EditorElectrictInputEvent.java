@@ -35,6 +35,7 @@ public final class EditorElectrictInputEvent extends AbstractEditorEvent<EditorE
 	public static final String NAME = "electricInput";
 
 	private final int line;
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 

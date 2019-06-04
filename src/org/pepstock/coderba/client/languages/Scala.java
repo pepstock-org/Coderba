@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Scala extends Language{
+public final class Scala extends Language {
 
 	private static final String NAME = "text/x-scala";
 

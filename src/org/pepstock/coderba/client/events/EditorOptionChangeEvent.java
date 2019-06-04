@@ -33,7 +33,7 @@ public final class EditorOptionChangeEvent extends AbstractEditorEvent<EditorOpt
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "optionChange";
-	
+
 	private final String property;
 
 	/**
@@ -52,7 +52,6 @@ public final class EditorOptionChangeEvent extends AbstractEditorEvent<EditorOpt
 	public String getProperty() {
 		return property;
 	}
-
 
 	/*
 	 * (non-Javadoc)

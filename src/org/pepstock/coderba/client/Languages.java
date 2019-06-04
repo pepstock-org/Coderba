@@ -21,8 +21,8 @@ package org.pepstock.coderba.client;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Languages  extends InjectedItems<Language> {
-	
+public final class Languages extends InjectedItems<Language> {
+
 	// singleton instance
 	private static final Languages INSTANCE = new Languages();
 
@@ -32,7 +32,7 @@ public final class Languages  extends InjectedItems<Language> {
 	private Languages() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the cache.
 	 * 

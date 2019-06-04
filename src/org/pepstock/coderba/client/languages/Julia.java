@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJulia;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Julia extends Language{
+public final class Julia extends Language {
 
 	private static final String NAME = "text/x-julia";
 

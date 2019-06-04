@@ -26,8 +26,9 @@ public enum HorizontalFindUnit implements Key
 	CHAR("char"),
 	COLUMN("column"),
 	WORD("word");
-	
+
 	private final String value;
+
 	/**
 	 * @param value
 	 */
@@ -41,5 +42,5 @@ public enum HorizontalFindUnit implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

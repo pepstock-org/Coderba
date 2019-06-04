@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.EventHandler;
  *
  */
 public abstract class AbstractEditorEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
-	
+
 	private final EditorArea editorArea;
 
 	/**
@@ -37,7 +37,7 @@ public abstract class AbstractEditorEvent<H extends EventHandler> extends Abstra
 		}
 		this.editorArea = editorArea;
 	}
-	
+
 	/**
 	 * @return the editorArea
 	 */

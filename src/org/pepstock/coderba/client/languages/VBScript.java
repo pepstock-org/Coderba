@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVbscript;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class VBScript extends Language{
+public final class VBScript extends Language {
 
 	private static final String NAME = "text/vbscript";
 

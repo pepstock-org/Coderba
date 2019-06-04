@@ -35,8 +35,7 @@ import org.pepstock.coderba.client.entities.Document;
  * <br>
  * <br>
  * Doing so will, since this handler is called directly from the bowels of the CodeMirror implementation, probably cause the
- * editor to become corrupted.
- * FIXME missing methods
+ * editor to become corrupted. FIXME missing methods
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -65,8 +64,6 @@ public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<Docum
 		}
 		this.item = item;
 	}
-
-
 
 	/**
 	 * @return the item

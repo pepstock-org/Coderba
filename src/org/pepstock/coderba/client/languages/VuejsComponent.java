@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVue;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class VuejsComponent extends Language{
+public final class VuejsComponent extends Language {
 
 	private static final String NAME = "text/x-vue";
 

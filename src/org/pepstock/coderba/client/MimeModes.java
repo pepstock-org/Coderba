@@ -30,7 +30,7 @@ import org.pepstock.coderba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  */
 final class MimeModes extends NativeObjectContainer {
-	
+
 	// default when is not found
 	private static final ModeSpecification DEFAULT_MODE_SPECIFICATION = null;
 
@@ -46,7 +46,7 @@ final class MimeModes extends NativeObjectContainer {
 	/**
 	 * Returns the mode specification related to the language (by mime of language).
 	 * 
-	 * @param language language to use to get the mode specification 
+	 * @param language language to use to get the mode specification
 	 * @return the mode specification related to the language or <code>null</code> if not exists.
 	 */
 	ModeSpecification getMode(Language language) {

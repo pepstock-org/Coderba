@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeAsciiarmor;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PGP extends Language{
+public final class PGP extends Language {
 
 	private static final String NAME = "application/pgp";
 

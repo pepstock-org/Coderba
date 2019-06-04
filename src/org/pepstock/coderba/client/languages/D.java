@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeD;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class D extends Language{
+public final class D extends Language {
 
 	private static final String NAME = "text/x-d";
 

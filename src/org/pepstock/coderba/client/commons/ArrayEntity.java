@@ -179,8 +179,8 @@ public final class ArrayEntity<T extends NativeEntity> extends Array {
 	}
 
 	/**
-	 * Removes the element at the specified entity in this array. Shifts any subsequent elements to the left (subtracts one
-	 * from their indices). Returns the element that was removed from the array.
+	 * Removes the element at the specified entity in this array. Shifts any subsequent elements to the left (subtracts one from
+	 * their indices). Returns the element that was removed from the array.
 	 * 
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified entity
@@ -191,8 +191,8 @@ public final class ArrayEntity<T extends NativeEntity> extends Array {
 	}
 
 	/**
-	 * Inserts the specified element at the specified entity in this array. Shifts the element currently at that entity (if
-	 * any) and any subsequent elements to the right (adds one to their indices).
+	 * Inserts the specified element at the specified entity in this array. Shifts the element currently at that entity (if any)
+	 * and any subsequent elements to the right (adds one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
 	 * @param value element to be inserted

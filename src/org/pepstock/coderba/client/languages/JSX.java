@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJsx;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JSX extends Language{
+public final class JSX extends Language {
 
 	private static final String NAME = "text/jsx";
 

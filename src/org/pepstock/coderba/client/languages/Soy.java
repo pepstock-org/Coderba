@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSoy;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Soy extends Language{
+public final class Soy extends Language {
 
 	private static final String NAME = "text/x-soy";
 

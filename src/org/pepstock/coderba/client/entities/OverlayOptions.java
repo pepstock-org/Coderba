@@ -58,7 +58,7 @@ public final class OverlayOptions extends NativeEntity {
 
 	@JsProperty(name = "priority")
 	private native int nativeGetPriority();
-	
+
 	@JsOverlay
 	public int getPriority() {
 		return checkAndGet("priority", nativeGetPriority(), 0);

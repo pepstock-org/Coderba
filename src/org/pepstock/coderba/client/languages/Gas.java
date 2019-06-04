@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeGas;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Gas extends Language{
+public final class Gas extends Language {
 
 	private static final String NAME = "text/x-gas";
 

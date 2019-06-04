@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHaskellLiterate;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HaskellLiterate extends Language{
+public final class HaskellLiterate extends Language {
 
 	private static final String NAME = "text/x-literate-haskell";
 

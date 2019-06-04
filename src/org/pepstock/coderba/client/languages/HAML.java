@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHaml;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HAML extends Language{
+public final class HAML extends Language {
 
 	private static final String NAME = "text/x-haml";
 

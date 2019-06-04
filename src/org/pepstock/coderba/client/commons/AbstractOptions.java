@@ -68,7 +68,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/**
 	 * Returns the native object container used at creation time.
 	 * 
-	 * @return  the native object container used at creation time
+	 * @return the native object container used at creation time
 	 */
 	protected final T getNativeObjectContainer() {
 		return nativeObjectContainer;
@@ -251,7 +251,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public Phrases getPhrases() {
-		return nativeObjectContainer.getValue(Options.PHRASES, (Phrases)null);
+		return nativeObjectContainer.getValue(Options.PHRASES, (Phrases) null);
 	}
 
 	/*
@@ -1138,8 +1138,10 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	public void setWorkTime(int workTime) {
 		nativeObjectContainer.setValue(Options.WORK_TIME, workTime);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.IsOptions#toJSON()
 	 */
 	@Override

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeFactor;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Factor extends Language{
+public final class Factor extends Language {
 
 	private static final String NAME = "text/x-factor";
 

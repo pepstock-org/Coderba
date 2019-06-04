@@ -49,7 +49,7 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 	protected NativeObjectContainer(NativeObject nativeObject) {
 		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
 	}
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -179,7 +179,8 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String, boolean)
+	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String,
+	 * boolean)
 	 */
 	@Override
 	protected void defineBooleanProperty(String key, boolean value) {
@@ -314,8 +315,11 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		return descriptor == null ? null : descriptor.getValue();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineElementProperty(java.lang.String, com.google.gwt.dom.client.Element)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineElementProperty(java.lang.String,
+	 * com.google.gwt.dom.client.Element)
 	 */
 	@Override
 	protected void defineElementProperty(String key, Element value) {
@@ -323,8 +327,11 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		nativeObject.defineElementProperty(key, value);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getElementProperty(java.lang.String, com.google.gwt.dom.client.Element)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getElementProperty(java.lang.String,
+	 * com.google.gwt.dom.client.Element)
 	 */
 	@Override
 	protected Element getElementProperty(String key, Element defaultValue) {
@@ -334,8 +341,11 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		return descriptor == null ? null : descriptor.getValue();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineEntityProperty(java.lang.String,
+	 * org.pepstock.coderba.client.commons.NativeEntity)
 	 */
 	@Override
 	protected <T extends NativeEntity> void defineEntityProperty(String key, T value) {
@@ -343,8 +353,11 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		nativeObject.defineEntityProperty(key, value);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String, org.pepstock.coderba.client.commons.NativeEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getEntityProperty(java.lang.String,
+	 * org.pepstock.coderba.client.commons.NativeEntity)
 	 */
 	@Override
 	protected <T extends NativeEntity> T getEntityProperty(String key, T defaultValue) {
@@ -353,7 +366,5 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
-	
-	
 
 }

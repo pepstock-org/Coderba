@@ -33,7 +33,7 @@ public final class EditorUpdateEvent extends AbstractEditorEvent<EditorUpdateEve
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "update";
-	
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 

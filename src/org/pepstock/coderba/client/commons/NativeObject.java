@@ -215,7 +215,7 @@ public final class NativeObject {
 		// defines the property
 		defineProperty(this, key, descriptor);
 	}
-	
+
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
@@ -251,7 +251,7 @@ public final class NativeObject {
 		// defines the property
 		defineProperty(this, key, descriptor);
 	}
-	
+
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
@@ -269,7 +269,7 @@ public final class NativeObject {
 		// defines the property
 		defineProperty(this, key, descriptor);
 	}
-	
+
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
@@ -377,7 +377,7 @@ public final class NativeObject {
 	NativeObjectDescriptor getObjectProperty(String key) {
 		return getInternalObjectProperty(key);
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.
@@ -389,7 +389,7 @@ public final class NativeObject {
 	NativeRegExpDescriptor getRegExpProperty(String key) {
 		return getInternalObjectProperty(key);
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.
@@ -401,7 +401,7 @@ public final class NativeObject {
 	NativeElementDescriptor getElementProperty(String key) {
 		return getInternalObjectProperty(key);
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.

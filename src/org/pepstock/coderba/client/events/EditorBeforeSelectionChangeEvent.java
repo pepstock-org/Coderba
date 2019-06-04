@@ -33,7 +33,7 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "beforeSelectionChange";
-	
+
 	private final EditorBeforeSelectionChangeItem item;
 
 	/**

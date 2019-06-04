@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSlim;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Slim extends Language{
+public final class Slim extends Language {
 
 	private static final String NAME = "text/x-slim";
 

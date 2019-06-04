@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeAsterisk;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Asterisk extends Language{
+public final class Asterisk extends Language {
 
 	private static final String NAME = "text/x-asterisk";
 

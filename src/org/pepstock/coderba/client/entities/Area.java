@@ -46,7 +46,7 @@ public final class Area extends Point {
 		area.setRight(right);
 		return area;
 	}
-	
+
 	@JsOverlay
 	public static Area empty() {
 		return create(0, 0, 0, 0);

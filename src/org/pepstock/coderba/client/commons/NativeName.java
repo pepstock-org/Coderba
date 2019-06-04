@@ -41,7 +41,7 @@ public final class NativeName {
 	 * Constant to bind java script object as window with name <b>{@value WINDOW}</b>.
 	 */
 	public static final String WINDOW = "window";
-	
+
 	/**
 	 * Constant to bind java script object as ace with name <b>{@value ACE}</b>, (internal of ACE).
 	 */

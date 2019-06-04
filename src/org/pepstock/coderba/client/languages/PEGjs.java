@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePegjs;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PEGjs extends Language{
+public final class PEGjs extends Language {
 
 	private static final String NAME = "null";
 

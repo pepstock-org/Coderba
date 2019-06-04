@@ -35,7 +35,7 @@ public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEv
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "beforeSelectionChange";
-	
+
 	private final Anchor item;
 
 	/**

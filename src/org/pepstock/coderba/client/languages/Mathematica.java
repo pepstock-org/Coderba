@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMathematica;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Mathematica extends Language{
+public final class Mathematica extends Language {
 
 	private static final String NAME = "text/x-mathematica";
 

@@ -24,7 +24,7 @@ import org.pepstock.coderba.client.entities.Position;
  *
  */
 public interface DocumentExtendSelectionsHandler {
-	
+
 	Position handle(EditorArea are, Anchor anchor);
 
 }

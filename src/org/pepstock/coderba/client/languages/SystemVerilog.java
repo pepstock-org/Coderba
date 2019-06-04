@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVerilog;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SystemVerilog extends Language{
+public final class SystemVerilog extends Language {
 
 	private static final String NAME = "text/x-systemverilog";
 

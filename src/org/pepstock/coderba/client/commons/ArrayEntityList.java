@@ -71,7 +71,7 @@ public final class ArrayEntityList<T extends NativeEntity> extends AbstractArray
 	 */
 	@Override
 	public boolean add(T element) {
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (element != null) {
 			// adds element to array
 			array.push(element);
@@ -89,12 +89,12 @@ public final class ArrayEntityList<T extends NativeEntity> extends AbstractArray
 	public boolean addAll(Collection<? extends T> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends T> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
-				// adds and 
+				// adds and
 				// sets modified
 				modified = modified && add(iter.next());
 			}

@@ -33,7 +33,7 @@ public final class EditorRefreshEvent extends AbstractEditorEvent<EditorRefreshE
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "refresh";
-	
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 

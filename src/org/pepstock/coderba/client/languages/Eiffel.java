@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeEiffel;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Eiffel extends Language{
+public final class Eiffel extends Language {
 
 	private static final String NAME = "text/x-eiffel";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeYaml;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class YAML extends Language{
+public final class YAML extends Language {
 
 	private static final String NAME = "text/x-yaml";
 

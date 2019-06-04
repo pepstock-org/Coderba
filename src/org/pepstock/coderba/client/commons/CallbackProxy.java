@@ -21,7 +21,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a native object which wraps a java script object created by {@link org.pepstock.coderba.client.commons.charba.client.commons.JsHelper}.<br>
+ * This is a native object which wraps a java script object created by
+ * {@link org.pepstock.coderba.client.commons.charba.client.commons.JsHelper}.<br>
  * This object is used to get a proxy instance which is able to call a java script function passing laso <code>this</code> java
  * script value, to maintain the environment when required.
  * 

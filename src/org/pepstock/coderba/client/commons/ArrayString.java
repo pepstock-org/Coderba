@@ -135,7 +135,7 @@ public final class ArrayString extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of strings starting from array of keys.
 	 * 
@@ -187,7 +187,6 @@ public final class ArrayString extends Array {
 		// returns the array
 		return result;
 	}
-
 
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the

@@ -33,7 +33,7 @@ public final class EditorInputReadEvent extends AbstractEditorEvent<EditorInputR
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "inputRead";
-	
+
 	private final ChangeItem item;
 
 	/**

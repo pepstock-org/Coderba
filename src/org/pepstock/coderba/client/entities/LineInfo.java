@@ -37,7 +37,7 @@ public final class LineInfo {
 	private final LineHandle handle;
 
 	private final NativeLineInfo nativeObject;
-	
+
 	private final Document document;
 
 	/**
@@ -77,13 +77,13 @@ public final class LineInfo {
 		ArrayString array = nativeObject.getGutterMarkers();
 		return ArrayListHelper.unmodifiableList(array);
 	}
-	
-	public List<LineWidget> getWidgets(){
+
+	public List<LineWidget> getWidgets() {
 		List<LineWidget> widgets = new LinkedList<>();
 		ArrayObject array = nativeObject.getWidgets();
 		if (array != null) {
-			for (int i=0; i<array.length(); i++) {
-				int id  = LineWidget.getId(array.get(i));
+			for (int i = 0; i < array.length(); i++) {
+				int id = LineWidget.getId(array.get(i));
 				LineWidget widget = document.getLineWidget(id);
 				if (widget != null) {
 					widgets.add(widget);

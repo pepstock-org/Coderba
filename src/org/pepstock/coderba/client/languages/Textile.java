@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTextile;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Textile extends Language{
+public final class Textile extends Language {
 
 	private static final String NAME = "text/x-textile";
 

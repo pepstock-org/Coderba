@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeNsis;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class NSIS extends Language{
+public final class NSIS extends Language {
 
 	private static final String NAME = "text/x-nsis";
 

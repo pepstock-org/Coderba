@@ -46,7 +46,7 @@ public final class Position extends NativeEntity {
 	private Position() {
 		// do nothing
 	}
-	
+
 	/**
 	 * A constructor for the objects that are used to represent the first line number in editor documents.<br>
 	 * It creates an EMPY object, to use as default.
@@ -57,7 +57,6 @@ public final class Position extends NativeEntity {
 	public static Position empty() {
 		return create(0, 0);
 	}
-
 
 	/**
 	 * A constructor for the objects that are used to represent the first line number in editor documents.<br>

@@ -25,7 +25,7 @@ public enum InputStyle implements Key
 {
 	TEXT_AREA("textarea"),
 	CONTENT_EDITABLE("contenteditable");
-	
+
 	private final String value;
 
 	/**
@@ -41,5 +41,5 @@ public enum InputStyle implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTroff;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Troff extends Language{
+public final class Troff extends Language {
 
 	private static final String NAME = "text/troff";
 

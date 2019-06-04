@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSolr;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Solr extends Language{
+public final class Solr extends Language {
 
 	private static final String NAME = "text/x-solr";
 

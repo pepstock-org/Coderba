@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeShell;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Shell extends Language{
+public final class Shell extends Language {
 
 	private static final String NAME = "text/x-sh";
 

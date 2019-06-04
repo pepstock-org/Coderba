@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeOz;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Oz extends Language{
+public final class Oz extends Language {
 
 	private static final String NAME = "text/x-oz";
 

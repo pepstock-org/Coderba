@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Squirrel extends Language{
+public final class Squirrel extends Language {
 
 	private static final String NAME = "text/x-squirrel";
 

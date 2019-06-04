@@ -22,7 +22,7 @@ package org.pepstock.coderba.client;
  *
  */
 public final class KeyMaps extends InjectedItems<KeyMap> {
-	
+
 	// singleton instance
 	private static final KeyMaps INSTANCE = new KeyMaps();
 
@@ -32,7 +32,7 @@ public final class KeyMaps extends InjectedItems<KeyMap> {
 	private KeyMaps() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the cache.
 	 * 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHttp;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HTTP extends Language{
+public final class HTTP extends Language {
 
 	private static final String NAME = "message/http";
 

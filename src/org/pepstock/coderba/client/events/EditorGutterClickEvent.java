@@ -35,9 +35,9 @@ public final class EditorGutterClickEvent extends AbstractEditorWithNativeEvent<
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "gutterClick";
-	
+
 	private final int line;
-	
+
 	private final String gutter;
 
 	/**
@@ -64,7 +64,6 @@ public final class EditorGutterClickEvent extends AbstractEditorWithNativeEvent<
 	public String getGutter() {
 		return gutter;
 	}
-
 
 	/*
 	 * (non-Javadoc)

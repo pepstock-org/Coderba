@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeRpm;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RPMSpec extends Language{
+public final class RPMSpec extends Language {
 
 	private static final String NAME = "text/x-rpm-spec";
 

@@ -36,7 +36,7 @@ import org.pepstock.coderba.client.utils.RegExp;
  *
  */
 public interface IsOptions extends IsDefaultOptions {
-	
+
 	/**
 	 * The starting value of the editor.
 	 * 
@@ -61,7 +61,7 @@ public interface IsOptions extends IsDefaultOptions {
 	 * @param lineSeparator the line separator for the editor
 	 */
 	void setLineSeparator(String lineSeparator);
-	
+
 	/**
 	 * Sets the theme to style the editor with. The default is {@link KeyMapDefault}, for which colors are included in
 	 * <code>codemirror.css</code>.
@@ -112,7 +112,7 @@ public interface IsOptions extends IsDefaultOptions {
 	 * @param specialChars A regular expression used to determine which characters should be replaced by a special placeholder.
 	 */
 	void setSpecialChars(RegExp specialChars);
-	
+
 	/**
 	 * Flips overall layout and selects base paragraph direction to be left-to-right or right-to-left.
 	 * 
@@ -445,7 +445,7 @@ public interface IsOptions extends IsDefaultOptions {
 	 *            use timeout to sleep for workDelay milliseconds.
 	 */
 	void setWorkDelay(int workDelay);
-	
+
 	/**
 	 * Returns the string JSON representation of the object.
 	 * 

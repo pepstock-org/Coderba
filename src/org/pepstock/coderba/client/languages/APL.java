@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeApl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class APL extends Language{
+public final class APL extends Language {
 
 	private static final String NAME = "text/apl";
 

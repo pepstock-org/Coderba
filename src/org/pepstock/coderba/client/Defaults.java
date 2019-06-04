@@ -28,7 +28,7 @@ import org.pepstock.coderba.client.defaults.GlobalDefaults;
  *
  */
 public final class Defaults extends AbstractOptions<UserOptionsContainer> {
-	
+
 	// singleton instance
 	private static final Defaults INSTANCE = new Defaults();
 
@@ -39,7 +39,7 @@ public final class Defaults extends AbstractOptions<UserOptionsContainer> {
 	Defaults() {
 		super(new UserOptionsContainer(CodeMirror.get().getDefaults()), GlobalDefaults.get());
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the defaults.
 	 * 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClojure;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ClojureScript extends Language{
+public final class ClojureScript extends Language {
 
 	private static final String NAME = "text/x-clojurescript";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMirc;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MIRC extends Language{
+public final class MIRC extends Language {
 
 	private static final String NAME = "text/mirc";
 

@@ -23,7 +23,7 @@ import org.pepstock.coderba.client.entities.LineHandle;
  *
  */
 public interface DocumentEachLineHandler {
-	
+
 	void handle(EditorArea are, LineHandle handle);
 
 }

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVb;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class VBNET extends Language{
+public final class VBNET extends Language {
 
 	private static final String NAME = "text/x-vb";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeDylan;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Dylan extends Language{
+public final class Dylan extends Language {
 
 	private static final String NAME = "text/x-dylan";
 

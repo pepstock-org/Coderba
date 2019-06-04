@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeLua;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Lua extends Language{
+public final class Lua extends Language {
 
 	private static final String NAME = "text/x-lua";
 

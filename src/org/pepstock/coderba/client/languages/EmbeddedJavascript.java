@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHtmlembedded;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EmbeddedJavascript extends Language{
+public final class EmbeddedJavascript extends Language {
 
 	private static final String NAME = "application/x-ejs";
 

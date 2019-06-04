@@ -267,7 +267,7 @@ public class EditorOptions implements IsOptions {
 	public ConfigureMouseHandler getConfigureMouse() {
 		return configureMouse;
 	}
-	
+
 	// --------------------------------
 	// --- ALL DELEGATED METHODS
 	// --------------------------------

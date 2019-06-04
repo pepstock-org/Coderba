@@ -90,8 +90,8 @@ public final class CodeMirror {
 	/**
 	 * This method provides another way to initialize an editor.<br>
 	 * It takes a text area DOM node as argument.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
-	 * editor contents are put into the text area when the form is submitted.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
+	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
 	 * @param element a text area DOM node, already attached to body
@@ -104,8 +104,8 @@ public final class CodeMirror {
 	/**
 	 * This method provides another way to initialize an editor.<br>
 	 * It takes a text area DOM node as first argument and an optional configuration object as second.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
-	 * editor contents are put into the text area when the form is submitted.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
+	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
 	 * @param element a text area DOM node, already attached to body
@@ -129,20 +129,20 @@ public final class CodeMirror {
 		throw new IllegalArgumentException("Unable to initialize the editor because TextArea element is null");
 	}
 
-// FIXME	
-//	/**
-//	 * Find the column position at a given string index using a given tabsize.
-//	 * 
-//	 * @param line
-//	 * @param index
-//	 * @param tabSize
-//	 * @return
-//	 */
-//	public int countColumn(String line, int index, int tabSize) {
-//		if (line != null) {
-//			return NativeCodeMirror.countColumn(line, index, tabSize);
-//		}
-//		return -1;
-//	}
+	// FIXME
+	// /**
+	// * Find the column position at a given string index using a given tabsize.
+	// *
+	// * @param line
+	// * @param index
+	// * @param tabSize
+	// * @return
+	// */
+	// public int countColumn(String line, int index, int tabSize) {
+	// if (line != null) {
+	// return NativeCodeMirror.countColumn(line, index, tabSize);
+	// }
+	// return -1;
+	// }
 
 }

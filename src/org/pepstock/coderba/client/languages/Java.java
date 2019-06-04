@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Java extends Language{
+public final class Java extends Language {
 
 	private static final String NAME = "text/x-java";
 

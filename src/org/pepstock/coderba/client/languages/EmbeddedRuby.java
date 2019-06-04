@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHtmlembedded;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EmbeddedRuby extends Language{
+public final class EmbeddedRuby extends Language {
 
 	private static final String NAME = "application/x-erb";
 

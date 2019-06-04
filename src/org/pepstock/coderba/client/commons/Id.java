@@ -81,7 +81,7 @@ public enum Id implements Key
 			nativeObject.defineStringProperty(CODERBA_ID.value(), id);
 		}
 	}
-	
+
 	/**
 	 * Returns the property value from java script object, when the ID is stored as integer
 	 * 

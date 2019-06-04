@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePerl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Perl extends Language{
+public final class Perl extends Language {
 
 	private static final String NAME = "text/x-perl";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeDockerfile;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Dockerfile extends Language{
+public final class Dockerfile extends Language {
 
 	private static final String NAME = "text/x-dockerfile";
 

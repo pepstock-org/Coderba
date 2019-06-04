@@ -24,7 +24,7 @@ import org.pepstock.coderba.client.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PlainText extends Language{
+public final class PlainText extends Language {
 
 	private static final String NAME = "text/plain";
 

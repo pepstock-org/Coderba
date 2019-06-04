@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePig;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Pig extends Language{
+public final class Pig extends Language {
 
 	private static final String NAME = "text/x-pig";
 

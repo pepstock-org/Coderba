@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePhp;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PHP extends Language{
+public final class PHP extends Language {
 
 	private static final String NAME = "text/x-php";
 

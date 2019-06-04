@@ -33,9 +33,9 @@ public final class EditorViewportChangeEvent extends AbstractEditorEvent<EditorV
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "viewportChange";
-	
+
 	private final int from;
-	
+
 	private final int to;
 
 	/**
@@ -46,7 +46,7 @@ public final class EditorViewportChangeEvent extends AbstractEditorEvent<EditorV
 	public EditorViewportChangeEvent(EditorArea editorArea, int from, int to) {
 		super(TYPE, editorArea);
 		this.from = from;
-		this.to = to;		
+		this.to = to;
 	}
 
 	/**

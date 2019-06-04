@@ -23,7 +23,7 @@ import org.pepstock.coderba.client.entities.Document;
  *
  */
 public interface LinkedDocumentsHandler {
-	
+
 	void handle(EditorArea are, Document document, boolean sharedHistory);
 
 }

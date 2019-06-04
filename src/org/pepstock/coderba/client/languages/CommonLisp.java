@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCommonlisp;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class CommonLisp extends Language{
+public final class CommonLisp extends Language {
 
 	private static final String NAME = "text/x-common-lisp";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJsx;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TypeScriptJSX extends Language{
+public final class TypeScriptJSX extends Language {
 
 	private static final String NAME = "text/typescript-jsx";
 

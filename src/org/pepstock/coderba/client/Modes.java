@@ -22,7 +22,7 @@ package org.pepstock.coderba.client;
  *
  */
 public final class Modes extends InjectedItems<Mode> {
-	
+
 	// singleton instance
 	private static final Modes INSTANCE = new Modes();
 
@@ -32,7 +32,7 @@ public final class Modes extends InjectedItems<Mode> {
 	private Modes() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the cache.
 	 * 

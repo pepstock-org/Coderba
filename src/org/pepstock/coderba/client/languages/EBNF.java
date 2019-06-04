@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeEbnf;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EBNF extends Language{
+public final class EBNF extends Language {
 
 	private static final String NAME = "text/x-ebnf";
 

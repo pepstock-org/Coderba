@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeR;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class R extends Language{
+public final class R extends Language {
 
 	private static final String NAME = "text/x-rsrc";
 

@@ -20,8 +20,8 @@ import org.pepstock.coderba.client.commons.Key;
 /**
  * Defines the enumeration of configure mouse behaviors.<br>
  * The unit by which to select.<br>
- * May be one of the built-in units for a custom unit. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for alt-clicks (or, on Chrome OS,
- * meta-shift-clicks), and "char" otherwise.
+ * May be one of the built-in units for a custom unit. The default is to return "word" for double clicks, "line" for triple
+ * clicks, "rectangle" for alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
  * 
  * @author Andrea "Stock" Stocchero
  *

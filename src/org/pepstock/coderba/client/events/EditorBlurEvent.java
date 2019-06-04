@@ -35,6 +35,7 @@ public final class EditorBlurEvent extends AbstractEditorWithNativeEvent<EditorB
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "blur";
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 

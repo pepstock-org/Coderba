@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCrystal;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Crystal extends Language{
+public final class Crystal extends Language {
 
 	private static final String NAME = "text/x-crystal";
 

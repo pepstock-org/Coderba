@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeGroovy;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Groovy extends Language{
+public final class Groovy extends Language {
 
 	private static final String NAME = "text/x-groovy";
 

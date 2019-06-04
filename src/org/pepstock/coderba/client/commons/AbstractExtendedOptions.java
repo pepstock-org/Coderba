@@ -68,9 +68,8 @@ public abstract class AbstractExtendedOptions<T extends AbstractNativeObjectCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.coderba.client.defaults.IsExtendedOptions#setConfigureMouse(org.pepstock.coderba.client.commons.CallbackProxy.
-	 * Proxy)
+	 * @see org.pepstock.coderba.client.defaults.IsExtendedOptions#setConfigureMouse(org.pepstock.coderba.client.commons.
+	 * CallbackProxy. Proxy)
 	 */
 	@Override
 	public void setConfigureMouse(Proxy configureMouse) {

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeIdl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class IDL extends Language{
+public final class IDL extends Language {
 
 	private static final String NAME = "text/x-idl";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeDart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Dart extends Language{
+public final class Dart extends Language {
 
 	private static final String NAME = "text/x-dart";
 

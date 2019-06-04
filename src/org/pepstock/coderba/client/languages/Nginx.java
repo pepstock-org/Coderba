@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeNginx;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Nginx extends Language{
+public final class Nginx extends Language {
 
 	private static final String NAME = "text/x-nginx-conf";
 

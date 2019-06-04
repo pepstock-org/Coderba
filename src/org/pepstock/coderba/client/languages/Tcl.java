@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTcl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tcl extends Language{
+public final class Tcl extends Language {
 
 	private static final String NAME = "text/x-tcl";
 

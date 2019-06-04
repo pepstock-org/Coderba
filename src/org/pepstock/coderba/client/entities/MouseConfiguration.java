@@ -256,8 +256,7 @@ public final class MouseConfiguration extends BaseEntity {
 	/**
 	 * Returns the native object as result.
 	 * 
-	 * @return the native object as result
-	 * FIXME
+	 * @return the native object as result FIXME
 	 */
 	public NativeObject exportedObject() {
 		return getNativeObject();

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeBrainfuck;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Brainfuck extends Language{
+public final class Brainfuck extends Language {
 
 	private static final String NAME = "text/x-brainfuck";
 

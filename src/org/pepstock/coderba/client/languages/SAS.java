@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSas;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SAS extends Language{
+public final class SAS extends Language {
 
 	private static final String NAME = "text/x-sas";
 

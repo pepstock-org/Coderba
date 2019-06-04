@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCypher;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Cypher extends Language{
+public final class Cypher extends Language {
 
 	private static final String NAME = "application/x-cypher-query";
 

@@ -30,7 +30,7 @@ import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
  *
  */
 public final class HistoryItem extends BaseEntity {
-	
+
 	static final HistoryItemFactory FACTORY = new HistoryItemFactory();
 
 	/**
@@ -70,7 +70,7 @@ public final class HistoryItem extends BaseEntity {
 	HistoryItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -88,7 +88,7 @@ public final class HistoryItem extends BaseEntity {
 		ArrayEntity<HistoryChangeItem> array = getArrayValue(Property.CHANGES);
 		return ArrayListHelper.unmodifiableList(array);
 	}
-	
+
 	/**
 	 * 
 	 * @author Andrea "Stock" Stocchero

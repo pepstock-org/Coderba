@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJavascript;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class JavaScript extends Language{
+public final class JavaScript extends Language {
 
 	private static final String NAME = "text/javascript";
 

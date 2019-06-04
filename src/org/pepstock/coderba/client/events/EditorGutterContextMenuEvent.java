@@ -35,9 +35,9 @@ public final class EditorGutterContextMenuEvent extends AbstractEditorWithNative
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "gutterContextMenu";
-	
+
 	private final int line;
-	
+
 	private final String gutter;
 
 	/**

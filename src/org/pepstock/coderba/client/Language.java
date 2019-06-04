@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.utils.Window;
  *
  */
 public abstract class Language extends NamedItem {
-	
+
 	// mode specification instance
 	private ModeSpecification modeSpecification = null;
 	// flag if mode specification is already loaded

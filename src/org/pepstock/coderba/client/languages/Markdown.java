@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMarkdown;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Markdown extends Language{
+public final class Markdown extends Language {
 
 	private static final String NAME = "text/x-markdown";
 

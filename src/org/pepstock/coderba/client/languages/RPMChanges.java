@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeRpm;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RPMChanges extends Language{
+public final class RPMChanges extends Language {
 
 	private static final String NAME = "text/x-rpm-changes";
 

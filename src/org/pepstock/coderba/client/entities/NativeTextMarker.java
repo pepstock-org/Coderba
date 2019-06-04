@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeTextMarker extends NativeCastableObject{
+public final class NativeTextMarker extends NativeCastableObject {
 
 	// /** Returns an object representing the options for the marker. If copyWidget is given true, it will clone the value of
 	// the replacedWith option, if any. */

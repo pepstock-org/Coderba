@@ -25,7 +25,7 @@ public enum TextMarkerType implements Key
 {
 	RANGE("range"),
 	BOOKMARK("bookmark");
-	
+
 	private final String value;
 
 	/**
@@ -41,5 +41,5 @@ public enum TextMarkerType implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

@@ -84,6 +84,7 @@ public interface IsDefaultOptions {
 	 * @return extra key bindings for the editor
 	 */
 	NativeObject getExtraKeys();
+
 	/**
 	 * At which number to start counting lines.
 	 * 
@@ -133,7 +134,7 @@ public interface IsDefaultOptions {
 	 * @return the language to apply to the editor
 	 */
 	Language getLanguage();
-	
+
 	/**
 	 * Explicitly set the line separator for the editor.<br>
 	 * By default (value null), the document will be split on CRLFs as well as lone CRs and LFs, and a single LF will be used as
@@ -226,13 +227,14 @@ public interface IsDefaultOptions {
 	 * @return The maximum number of undo levels that the editor stores.
 	 */
 	int getUndoDepth();
+
 	/**
 	 * The starting value of the editor
 	 * 
 	 * @return The starting value of the editor
 	 */
 	String getValue();
-	
+
 	/**
 	 * Specifies the amount of lines that are rendered above and below the part of the document that's currently scrolled into
 	 * view. This affects the amount of updates needed when scrolling, and the amount of work that such an update does.
@@ -241,6 +243,7 @@ public interface IsDefaultOptions {
 	 *         view
 	 */
 	int getViewportMargin();
+
 	/**
 	 * Highlighting is done by a pseudo background-thread that will work for workTime milliseconds, and then use timeout to
 	 * sleep for workDelay milliseconds.
@@ -371,6 +374,7 @@ public interface IsDefaultOptions {
 	 *         disable that behavior.
 	 */
 	boolean isPasteLinesPerSelection();
+
 	/**
 	 * This disables editing of the editor content by the user. If the special value "nocursor" is given (instead of simply
 	 * true), focusing of the editor is also disallowed.

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeErlang;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Erlang extends Language{
+public final class Erlang extends Language {
 
 	private static final String NAME = "text/x-erlang";
 

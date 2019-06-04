@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePowershell;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PowerShell extends Language{
+public final class PowerShell extends Language {
 
 	private static final String NAME = "application/x-powershell";
 

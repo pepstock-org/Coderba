@@ -26,7 +26,7 @@ public enum StickyPosition implements Key
 	NULL("null"),
 	AFTER("after"),
 	BEFORE("before");
-	
+
 	private final String value;
 
 	/**
@@ -42,5 +42,5 @@ public enum StickyPosition implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

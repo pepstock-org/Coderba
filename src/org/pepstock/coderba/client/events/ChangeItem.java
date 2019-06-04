@@ -54,12 +54,12 @@ public final class ChangeItem extends Range {
 	native ArrayString nativeGetRemoved();
 
 	@JsOverlay
-	public List<String> getText(){
+	public List<String> getText() {
 		return ArrayListHelper.unmodifiableList(nativeGetText());
 	}
 
 	@JsOverlay
-	public List<String> getRemoved(){
+	public List<String> getRemoved() {
 		return ArrayListHelper.unmodifiableList(nativeGetRemoved());
 	}
 

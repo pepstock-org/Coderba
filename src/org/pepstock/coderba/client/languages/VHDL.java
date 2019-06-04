@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVhdl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class VHDL extends Language{
+public final class VHDL extends Language {
 
 	private static final String NAME = "text/x-vhdl";
 

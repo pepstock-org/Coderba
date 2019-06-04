@@ -19,6 +19,7 @@ import org.pepstock.coderba.client.commons.Key;
 
 /**
  * Name of properties of native object.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

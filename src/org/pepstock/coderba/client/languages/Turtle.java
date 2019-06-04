@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTurtle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Turtle extends Language{
+public final class Turtle extends Language {
 
 	private static final String NAME = "text/turtle";
 

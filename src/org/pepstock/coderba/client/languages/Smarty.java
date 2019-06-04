@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSmarty;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Smarty extends Language{
+public final class Smarty extends Language {
 
 	private static final String NAME = "text/x-smarty";
 

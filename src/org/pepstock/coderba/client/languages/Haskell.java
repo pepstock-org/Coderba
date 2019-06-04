@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHaskell;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Haskell extends Language{
+public final class Haskell extends Language {
 
 	private static final String NAME = "text/x-haskell";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeForth;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Forth extends Language{
+public final class Forth extends Language {
 
 	private static final String NAME = "text/x-forth";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeStex;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class STeX extends Language{
+public final class STeX extends Language {
 
 	private static final String NAME = "text/x-stex";
 

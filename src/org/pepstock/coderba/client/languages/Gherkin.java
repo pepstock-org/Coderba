@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeGherkin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Gherkin extends Language{
+public final class Gherkin extends Language {
 
 	private static final String NAME = "text/x-feature";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeRst;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ReStructuredText extends Language{
+public final class ReStructuredText extends Language {
 
 	private static final String NAME = "text/x-rst";
 

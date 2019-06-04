@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTiki;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tikiwiki extends Language{
+public final class Tikiwiki extends Language {
 
 	private static final String NAME = "text/tiki";
 

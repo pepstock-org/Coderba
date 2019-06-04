@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.resources.StyleResource;
 import org.pepstock.coderba.client.resources.ThemeResources;
 
 /**
- * Is the "lucario"  theme to enable the editor to apply the theme.
+ * Is the "lucario" theme to enable the editor to apply the theme.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -35,9 +35,9 @@ import com.google.gwt.event.shared.UmbrellaException;
 public abstract class EventManager {
 
 	private final HandlerManager eventHandlerManager;
-	
+
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
-	
+
 	/**
 	 * 
 	 */
@@ -50,7 +50,7 @@ public abstract class EventManager {
 			handler.removeHandler();
 		}
 	}
-	
+
 	/**
 	 * Gets the number of handlers listening to the event type.
 	 * 
@@ -60,27 +60,24 @@ public abstract class EventManager {
 	protected final int getHandlerCount(GwtEvent.Type<?> type) {
 		return eventHandlerManager.getHandlerCount(type);
 	}
-	
-	 /**
-	   * Fires the given event to the handlers listening to the event's type.
-	   * <p>
-	   * Any exceptions thrown by handlers will be bundled into a
-	   * {@link UmbrellaException} and then re-thrown after all handlers have
-	   * completed. An exception thrown by a handler will not prevent other handlers
-	   * from executing.
-	   * <p>
-	   * Note, any subclass should be very careful about overriding this method, as
-	   * adds/removes of handlers will not be safe except within this
-	   * implementation.
-	   * 
-	   * @param event the event
-	   */
-	  protected final void fireEvent(GwtEvent<?> event) {
-		  if (event != null) {
-			  eventHandlerManager.fireEvent(event);
-		  }
-	  }
-	
+
+	/**
+	 * Fires the given event to the handlers listening to the event's type.
+	 * <p>
+	 * Any exceptions thrown by handlers will be bundled into a {@link UmbrellaException} and then re-thrown after all handlers
+	 * have completed. An exception thrown by a handler will not prevent other handlers from executing.
+	 * <p>
+	 * Note, any subclass should be very careful about overriding this method, as adds/removes of handlers will not be safe
+	 * except within this implementation.
+	 * 
+	 * @param event the event
+	 */
+	protected final void fireEvent(GwtEvent<?> event) {
+		if (event != null) {
+			eventHandlerManager.fireEvent(event);
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,9 +96,12 @@ public abstract class EventManager {
 		// returns registration
 		return registration;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.gwt.event.shared.HandlerManager#removeHandler(com.google.gwt.event.shared.GwtEvent.Type, com.google.gwt.event.shared.EventHandler)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.HandlerManager#removeHandler(com.google.gwt.event.shared.GwtEvent.Type,
+	 * com.google.gwt.event.shared.EventHandler)
 	 */
 	private final <H extends EventHandler> void removeHandler(Type<H> type, H handler) {
 		// removes handler
@@ -109,21 +109,22 @@ public abstract class EventManager {
 		// sends the event
 		eventHandlerManager.fireEvent(new RemoveHandlerEvent(type));
 	}
-	
+
 	/**
 	 * FIXME
+	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 * @param <H>
 	 */
-	private static class InternalHandlerRegistration<H extends EventHandler> implements HandlerRegistration{
-		
+	private static class InternalHandlerRegistration<H extends EventHandler> implements HandlerRegistration {
+
 		private final EventManager manager;
-		
+
 		private final Type<H> type;
-		
+
 		private final H handler;
-		
+
 		private HandlerRegistration delegate;
 
 		/**
@@ -136,7 +137,9 @@ public abstract class EventManager {
 			this.delegate = registration;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see com.google.web.bindery.event.shared.HandlerRegistration#removeHandler()
 		 */
 		@Override
@@ -144,7 +147,7 @@ public abstract class EventManager {
 			delegate.removeHandler();
 			manager.removeHandler(type, handler);
 		}
-		
+
 	}
-	
+
 }

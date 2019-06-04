@@ -34,7 +34,7 @@ public final class DocumentChangeEvent extends AbstractDocumentEvent<DocumentCha
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "change";
-	
+
 	private final ChangeItem item;
 
 	/**

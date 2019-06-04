@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCss;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LESS extends Language{
+public final class LESS extends Language {
 
 	private static final String NAME = "text/x-less";
 

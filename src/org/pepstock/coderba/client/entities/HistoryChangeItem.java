@@ -49,9 +49,9 @@ public final class HistoryChangeItem extends Range {
 	 */
 	@JsProperty(name = "text")
 	private native ArrayString nativeGetText();
-	
+
 	@JsOverlay
-	public List<String> getText(){
+	public List<String> getText() {
 		ArrayString array = nativeGetText();
 		return ArrayListHelper.unmodifiableList(array);
 	}

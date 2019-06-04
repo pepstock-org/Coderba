@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeJinja2;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Jinja2 extends Language{
+public final class Jinja2 extends Language {
 
 	private static final String NAME = "text/jinja2";
 

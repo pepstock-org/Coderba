@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeEcl;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ECL extends Language{
+public final class ECL extends Language {
 
 	private static final String NAME = "text/x-ecl";
 

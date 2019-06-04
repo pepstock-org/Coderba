@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMscgen;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Xu extends Language{
+public final class Xu extends Language {
 
 	private static final String NAME = "text/x-xu";
 

@@ -29,7 +29,7 @@ import com.google.gwt.event.shared.EventHandler;
 public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
 
 	private final NativeEvent event;
-	
+
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 

@@ -31,7 +31,7 @@ public final class ArrayListHelper {
 	private ArrayListHelper() {
 		// nothing
 	}
-	
+
 	/**
 	 * Creates a array list of doubles by a java script array of doubles.
 	 * 
@@ -44,7 +44,7 @@ public final class ArrayListHelper {
 		// creates an empty list
 		return new ArrayDoubleList(values);
 	}
-	
+
 	/**
 	 * Creates a array list of integers by a java script array of integers.
 	 * 
@@ -70,7 +70,7 @@ public final class ArrayListHelper {
 		// creates an empty list
 		return new ArrayStringList(values);
 	}
-	
+
 	/**
 	 * Creates a array list of generic java script objects by a java script array.
 	 * 
@@ -96,7 +96,7 @@ public final class ArrayListHelper {
 		// creates an empty list
 		return new ArrayEntityList<>(values);
 	}
-	
+
 	/**
 	 * Creates a array list of java script native object container by a java script array and a factory.
 	 * 
@@ -112,7 +112,6 @@ public final class ArrayListHelper {
 		return new ArrayObjectContainerList<>(array, factory);
 	}
 
-	
 	/**
 	 * Creates an unmodifiable array list of doubles by a java script array of doubles.
 	 * 
@@ -122,7 +121,7 @@ public final class ArrayListHelper {
 	public static List<Double> unmodifiableList(ArrayDouble values) {
 		return Collections.unmodifiableList(list(values));
 	}
-	
+
 	/**
 	 * Creates an unmodifiable array list of integers by a java script array of integers.
 	 * 
@@ -132,7 +131,7 @@ public final class ArrayListHelper {
 	public static List<Integer> unmodifiableList(ArrayInteger values) {
 		return Collections.unmodifiableList(list(values));
 	}
-	
+
 	/**
 	 * Creates a array list of strings by a java script array of strings.
 	 * 
@@ -142,7 +141,7 @@ public final class ArrayListHelper {
 	public static List<String> unmodifiableList(ArrayString values) {
 		return Collections.unmodifiableList(list(values));
 	}
-	
+
 	/**
 	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * 
@@ -162,7 +161,7 @@ public final class ArrayListHelper {
 	public static <E extends NativeEntity> List<E> unmodifiableList(ArrayEntity<E> values) {
 		return Collections.unmodifiableList(list(values));
 	}
-	
+
 	/**
 	 * Creates an unmodifiable array list of java script native object container by a java script array and a factory.
 	 * 
@@ -174,6 +173,5 @@ public final class ArrayListHelper {
 	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		return Collections.unmodifiableList(list(array, factory));
 	}
-
 
 }

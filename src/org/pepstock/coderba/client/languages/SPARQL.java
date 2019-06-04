@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSparql;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SPARQL extends Language{
+public final class SPARQL extends Language {
 
 	private static final String NAME = "application/sparql-query";
 

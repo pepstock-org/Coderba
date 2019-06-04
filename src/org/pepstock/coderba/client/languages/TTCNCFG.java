@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTtcnCfg;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TTCNCFG extends Language{
+public final class TTCNCFG extends Language {
 
 	private static final String NAME = "text/x-ttcn-cfg";
 

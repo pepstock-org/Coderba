@@ -38,7 +38,7 @@ public final class Anchor extends NativeEntity {
 	private Anchor() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Creates an EMPTY anchor, to use as default.
 	 * 

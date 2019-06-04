@@ -22,7 +22,7 @@ package org.pepstock.coderba.client;
  *
  */
 public final class Themes extends InjectedItems<Theme> {
-	
+
 	// singleton instance
 	private static final Themes INSTANCE = new Themes();
 
@@ -32,7 +32,7 @@ public final class Themes extends InjectedItems<Theme> {
 	private Themes() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the cache.
 	 * 

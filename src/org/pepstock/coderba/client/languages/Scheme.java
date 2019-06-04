@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeScheme;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Scheme extends Language{
+public final class Scheme extends Language {
 
 	private static final String NAME = "text/x-scheme";
 

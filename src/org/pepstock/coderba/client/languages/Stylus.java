@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeStylus;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Stylus extends Language{
+public final class Stylus extends Language {
 
 	private static final String NAME = "text/x-styl";
 

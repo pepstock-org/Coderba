@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeElm;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elm extends Language{
+public final class Elm extends Language {
 
 	private static final String NAME = "text/x-elm";
 

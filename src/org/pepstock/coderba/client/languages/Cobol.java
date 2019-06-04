@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCobol;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Cobol extends Language{
+public final class Cobol extends Language {
 
 	private static final String NAME = "text/x-cobol";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePug;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Pug extends Language{
+public final class Pug extends Language {
 
 	private static final String NAME = "text/x-pug";
 

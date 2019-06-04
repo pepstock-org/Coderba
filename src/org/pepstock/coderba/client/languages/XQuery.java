@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeXquery;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class XQuery extends Language{
+public final class XQuery extends Language {
 
 	private static final String NAME = "application/xquery";
 

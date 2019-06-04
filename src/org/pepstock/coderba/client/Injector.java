@@ -92,7 +92,7 @@ public final class Injector {
 			Modes.get().add(mode);
 		}
 	}
-	
+
 	/**
 	 * Injects an addon object.This is not visible because the addon must be loaded by "inject" method of AddOn class.
 	 * 

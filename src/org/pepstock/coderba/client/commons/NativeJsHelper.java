@@ -75,7 +75,7 @@ final class NativeJsHelper {
 	 * @param key the string name of the property to remove.
 	 */
 	static native void remove(NativeObject object, String key);
-	
+
 	/**
 	 * Removes a property from a java script object.
 	 * 
@@ -92,7 +92,7 @@ final class NativeJsHelper {
 	 * @param key The property key to clone
 	 */
 	static native void cloneProperty(Object source, Object target, String key);
-	
+
 	/**
 	 * Cast an object to a native object in order to be able to use into a native object container.
 	 * 

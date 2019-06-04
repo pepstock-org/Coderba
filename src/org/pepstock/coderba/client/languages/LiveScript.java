@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeLivescript;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LiveScript extends Language{
+public final class LiveScript extends Language {
 
 	private static final String NAME = "text/x-livescript";
 

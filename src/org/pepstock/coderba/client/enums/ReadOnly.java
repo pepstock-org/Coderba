@@ -26,7 +26,7 @@ public enum ReadOnly implements Key
 	TRUE("true"),
 	FALSE("false"),
 	NO_CURSOR("nocursor");
-	
+
 	private final String value;
 
 	/**
@@ -42,5 +42,5 @@ public enum ReadOnly implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

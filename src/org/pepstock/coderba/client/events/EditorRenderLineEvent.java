@@ -36,9 +36,9 @@ public final class EditorRenderLineEvent extends AbstractEditorEvent<EditorRende
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "renderLine";
-	
+
 	private final LineHandle lineHandle;
-	
+
 	private final Element element;
 
 	/**

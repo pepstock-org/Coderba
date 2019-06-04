@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTiddlywiki;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TiddlyWiki extends Language{
+public final class TiddlyWiki extends Language {
 
 	private static final String NAME = "text/x-tiddlywiki";
 

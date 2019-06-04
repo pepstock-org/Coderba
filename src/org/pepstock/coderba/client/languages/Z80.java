@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeZ80;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Z80 extends Language{
+public final class Z80 extends Language {
 
 	private static final String NAME = "text/x-z80";
 

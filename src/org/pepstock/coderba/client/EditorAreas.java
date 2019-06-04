@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * Cache which collects all editor area instances to be able to enable callbacks.<br>
- * Manages also the user life cycle listeners on editor area. 
+ * Manages also the user life cycle listeners on editor area.
  * 
  * @author Andrea "Stock" Stocchero
  *

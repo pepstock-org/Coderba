@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTwig;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Twig extends Language{
+public final class Twig extends Language {
 
 	private static final String NAME = "text/x-twig";
 

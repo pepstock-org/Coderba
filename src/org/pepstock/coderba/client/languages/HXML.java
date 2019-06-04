@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHaxe;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HXML extends Language{
+public final class HXML extends Language {
 
 	private static final String NAME = "text/x-hxml";
 

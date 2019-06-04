@@ -33,7 +33,7 @@ public final class EditorChangeEvent extends AbstractEditorEvent<EditorChangeEve
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "change";
-	
+
 	private final ChangeItem item;
 
 	/**

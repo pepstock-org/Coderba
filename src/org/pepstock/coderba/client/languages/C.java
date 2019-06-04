@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class C extends Language{
+public final class C extends Language {
 
 	private static final String NAME = "text/x-csrc";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSwift;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Swift extends Language{
+public final class Swift extends Language {
 
 	private static final String NAME = "text/x-swift";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeClike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Cpp extends Language{
+public final class Cpp extends Language {
 
 	private static final String NAME = "text/x-c++src";
 

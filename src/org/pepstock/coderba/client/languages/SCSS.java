@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCss;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SCSS extends Language{
+public final class SCSS extends Language {
 
 	private static final String NAME = "text/x-scss";
 

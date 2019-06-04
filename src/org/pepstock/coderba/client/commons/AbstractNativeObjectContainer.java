@@ -52,13 +52,13 @@ public abstract class AbstractNativeObjectContainer {
 	protected final boolean has(Key key) {
 		// checks arguments if consistent
 		// if not consistent, returns not found
-		if (Key.isValid(key)){ 
+		if (Key.isValid(key)) {
 			return hasProperty(key.value());
 		}
 		// if here, key is not consistent
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if the embedded JavaScript object contains an element at all properties.
 	 * 
@@ -88,7 +88,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return the list of properties names of the object.
 	 */
 	protected abstract List<Key> keys();
-	
+
 	/**
 	 * Returns the java script type of the property.
 	 * 
@@ -96,7 +96,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return the java script type of the property.
 	 */
 	protected abstract ObjectType getType(String key);
-	
+
 	/**
 	 * Returns the java script type of the property.
 	 * 
@@ -108,7 +108,7 @@ public abstract class AbstractNativeObjectContainer {
 		// if not consistent, returns undefined
 		return Key.isValid(key) ? getType(key.value()) : ObjectType.UNDEFINED;
 	}
-	
+
 	/**
 	 * Removes an element (by key) from the embedded JavaScript object.
 	 * 
@@ -161,7 +161,7 @@ public abstract class AbstractNativeObjectContainer {
 	// ------------------------------------------
 	// --- INTEGERS
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (int) into embedded JavaScript object at specific property.
 	 * 
@@ -178,7 +178,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property
 	 */
 	protected abstract int getIntProperty(String key, int defaultValue);
-	
+
 	/**
 	 * Sets a value (int) into embedded JavaScript object at specific property.
 	 * 
@@ -192,7 +192,7 @@ public abstract class AbstractNativeObjectContainer {
 		// if here, key is consistent
 		defineIntProperty(key.value(), value);
 	}
-	
+
 	/**
 	 * Returns a value (int) into embedded JavaScript object at specific property.
 	 * 
@@ -266,7 +266,7 @@ public abstract class AbstractNativeObjectContainer {
 	// ------------------------------------------
 	// --- DOUBLES
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (double) into embedded JavaScript object at specific property.
 	 * 
@@ -371,7 +371,7 @@ public abstract class AbstractNativeObjectContainer {
 	// ------------------------------------------
 	// --- BOOLEANS
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (boolean) into embedded JavaScript object at specific property.
 	 * 
@@ -388,7 +388,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property
 	 */
 	protected abstract boolean getBooleanProperty(String key, boolean defaultValue);
-	
+
 	/**
 	 * Sets a value (boolean) into embedded JavaScript object at specific property.
 	 * 
@@ -428,7 +428,7 @@ public abstract class AbstractNativeObjectContainer {
 	// ------------------------------------------
 	// --- STRINGS
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (string) into embedded JavaScript object at specific property.
 	 * 
@@ -445,7 +445,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property
 	 */
 	protected abstract String getStringProperty(String key, String defaultValue);
-	
+
 	/**
 	 * Returns a value (string) into embedded JavaScript object at specific property.
 	 * 
@@ -534,11 +534,10 @@ public abstract class AbstractNativeObjectContainer {
 		return ArrayString.fromOrEmpty(defaultValue);
 	}
 
-
 	// ------------------------------------------
 	// --- NATIVE OBJECTS
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
 	 * 
@@ -554,7 +553,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract NativeObject getObjectProperty(String key);
-	
+
 	/**
 	 * Returns a value (JavaScript Object) into embedded JavaScript object at specific property.
 	 * 
@@ -618,11 +617,10 @@ public abstract class AbstractNativeObjectContainer {
 		}
 	}
 
-
 	// ------------------------------------------
 	// --- CALLBACKS
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
 	 * 
@@ -630,7 +628,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected abstract void defineCallbackProperty(String key, CallbackProxy.Proxy value);
-	
+
 	/**
 	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
 	 * 
@@ -764,7 +762,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property or <code>null</code> if not exist
 	 */
 	protected abstract <T extends Array> T getArrayProperty(String key);
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.
 	 * 
@@ -804,11 +802,11 @@ public abstract class AbstractNativeObjectContainer {
 			defineArrayProperty(key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- REGEXP
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (RegExp) into embedded JavaScript object at specific property.
 	 * 
@@ -824,7 +822,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract RegExp getRegExpProperty(String key, RegExp defaultValue);
-	
+
 	/**
 	 * Returns a value (regExp) into embedded JavaScript object at specific property.
 	 * 
@@ -862,11 +860,11 @@ public abstract class AbstractNativeObjectContainer {
 			defineRegExpProperty(key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- DOM ELEMENT
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
@@ -882,7 +880,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract Element getElementProperty(String key, Element defaultValue);
-	
+
 	/**
 	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
@@ -920,11 +918,11 @@ public abstract class AbstractNativeObjectContainer {
 			defineElementProperty(key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- NATIVE ENTITY
 	// ------------------------------------------
-	
+
 	/**
 	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
@@ -941,7 +939,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract <T extends NativeEntity> T getEntityProperty(String key, T defaultValue);
-	
+
 	/**
 	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
@@ -980,13 +978,14 @@ public abstract class AbstractNativeObjectContainer {
 			defineEntityProperty(key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- CLONE
 	// ------------------------------------------
-	
+
 	/**
 	 * Clones a property from source to target object, by property name.
+	 * 
 	 * @param source source object
 	 * @param target target object
 	 * @param key property name

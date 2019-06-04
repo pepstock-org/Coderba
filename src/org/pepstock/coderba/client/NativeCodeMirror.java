@@ -65,7 +65,7 @@ public final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "defaults")
 	static native NativeObject getDefaults();
-	
+
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
 	 * 
@@ -77,8 +77,8 @@ public final class NativeCodeMirror {
 	/**
 	 * This method provides another way to initialize an editor.<br>
 	 * It takes a text area DOM node as first argument and an optional configuration object as second.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
-	 * editor contents are put into the text area when the form is submitted.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
+	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
 	 * @param element a text area DOM node, already attached to body
@@ -90,8 +90,8 @@ public final class NativeCodeMirror {
 	/**
 	 * This method provides another way to initialize an editor.<br>
 	 * It takes a text area DOM node as argument.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure the
-	 * editor contents are put into the text area when the form is submitted.<br>
+	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
+	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
 	 * @param element a text area DOM node, already attached to body

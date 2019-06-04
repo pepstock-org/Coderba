@@ -86,11 +86,11 @@ public final class LineWidget extends LineWidgetOptions {
 		setValue(Property.ID, COUNTER.getAndIncrement());
 		this.handle = new LineHandle(nativeObject.getLine());
 	}
-	
+
 	static int getId(NativeObject nativeObject) {
 		return Id.get(Property.ID, nativeObject);
 	}
-	
+
 	public int getId() {
 		return getValue(Property.ID, UndefinedValues.INTEGER);
 	}
@@ -125,7 +125,5 @@ public final class LineWidget extends LineWidgetOptions {
 	public void changed() {
 		nativeObject.changed();
 	}
-	
-	
-	
+
 }

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSql;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SQLite extends Language{
+public final class SQLite extends Language {
 
 	private static final String NAME = "text/x-sqlite";
 

@@ -36,7 +36,7 @@ final class CodeMirrorCode extends InjectableItem {
 	static final CodeMirrorCode CODE = new CodeMirrorCode();
 
 	/**
-	 * Creates the object adding the java script and CSS style resources to be loaded 
+	 * Creates the object adding the java script and CSS style resources to be loaded
 	 */
 	CodeMirrorCode() {
 		super(NAME);

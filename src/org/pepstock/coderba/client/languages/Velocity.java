@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeVelocity;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Velocity extends Language{
+public final class Velocity extends Language {
 
 	private static final String NAME = "text/velocity";
 

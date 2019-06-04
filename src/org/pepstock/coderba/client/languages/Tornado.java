@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeTornado;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tornado extends Language{
+public final class Tornado extends Language {
 
 	private static final String NAME = "text/x-tornado";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeToml;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TOML extends Language{
+public final class TOML extends Language {
 
 	private static final String NAME = "text/x-toml";
 

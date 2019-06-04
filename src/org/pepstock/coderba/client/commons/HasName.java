@@ -22,5 +22,5 @@ package org.pepstock.coderba.client.commons;
 public interface HasName {
 
 	String getName();
-	
+
 }

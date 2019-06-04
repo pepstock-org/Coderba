@@ -26,7 +26,7 @@ public enum Direction implements Key
 	// HasDirection.Direction.
 	LEFT_TO_RIGHT("ltr"),
 	RIGHT_TO_LEFT("rtl");
-	
+
 	private final String value;
 
 	/**
@@ -42,5 +42,5 @@ public enum Direction implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

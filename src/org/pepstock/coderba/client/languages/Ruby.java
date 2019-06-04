@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeRuby;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ruby extends Language{
+public final class Ruby extends Language {
 
 	private static final String NAME = "text/x-ruby";
 

@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeCmake;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class CMake extends Language{
+public final class CMake extends Language {
 
 	private static final String NAME = "text/x-cmake";
 

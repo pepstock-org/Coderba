@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeHtmlmixed;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HTML extends Language{
+public final class HTML extends Language {
 
 	private static final String NAME = "text/html";
 

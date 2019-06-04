@@ -35,7 +35,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineWidget extends NativeCastableObject{
+public final class NativeLineWidget extends NativeCastableObject {
 
 	/**
 	 * To avoid any instantiation

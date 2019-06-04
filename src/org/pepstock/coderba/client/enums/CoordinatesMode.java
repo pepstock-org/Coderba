@@ -26,7 +26,7 @@ public enum CoordinatesMode implements Key
 	WINDOW("window"),
 	PAGE("page"),
 	LOCAL("local");
-	
+
 	private final String value;
 
 	/**
@@ -42,5 +42,5 @@ public enum CoordinatesMode implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

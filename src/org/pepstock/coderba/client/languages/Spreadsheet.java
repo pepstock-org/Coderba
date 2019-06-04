@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeSpreadsheet;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Spreadsheet extends Language{
+public final class Spreadsheet extends Language {
 
 	private static final String NAME = "text/x-spreadsheet";
 

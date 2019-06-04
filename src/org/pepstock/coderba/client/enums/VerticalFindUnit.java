@@ -25,7 +25,7 @@ public enum VerticalFindUnit implements Key
 {
 	LINE("line"),
 	PAGE("page");
-	
+
 	private final String value;
 
 	/**
@@ -41,5 +41,5 @@ public enum VerticalFindUnit implements Key
 	public String value() {
 		return value;
 	}
-	
+
 }

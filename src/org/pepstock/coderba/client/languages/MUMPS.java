@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMumps;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class MUMPS extends Language{
+public final class MUMPS extends Language {
 
 	private static final String NAME = "text/x-mumps";
 

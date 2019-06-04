@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeYacas;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Yacas extends Language{
+public final class Yacas extends Language {
 
 	private static final String NAME = "text/x-yacas";
 

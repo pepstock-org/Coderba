@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModePython;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Python extends Language{
+public final class Python extends Language {
 
 	private static final String NAME = "text/x-python";
 

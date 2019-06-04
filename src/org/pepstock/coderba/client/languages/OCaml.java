@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.modes.ModeMllike;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class OCaml extends Language{
+public final class OCaml extends Language {
 
 	private static final String NAME = "text/x-ocaml";
 

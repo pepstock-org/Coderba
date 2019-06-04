@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public abstract class NativeEntity {
-	
+
 	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.
 	 * 
@@ -85,7 +85,7 @@ public abstract class NativeEntity {
 		// returns the value of object
 		return value;
 	}
-	
+
 	/**
 	 * Removes a property from this object.
 	 * 
@@ -95,7 +95,7 @@ public abstract class NativeEntity {
 	protected final void removeProperty(String key) {
 		JsHelper.get().remove(this, key);
 	}
-	
+
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
@@ -113,10 +113,10 @@ public abstract class NativeEntity {
 		// defines the property
 		NativeObject.defineProperty(this, key, descriptor);
 	}
-	
+
 	/**
-	 * Returns a string value for an own property (that is, one directly present on an object and not in the object's
-	 * prototype chain) of a given object.
+	 * Returns a string value for an own property (that is, one directly present on an object and not in the object's prototype
+	 * chain) of a given object.
 	 * 
 	 * @param key the name of the property to test.
 	 * @return string value of the given property if it exists on the object, <code>null</code> otherwise.
