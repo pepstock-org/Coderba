@@ -19,6 +19,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.LineHandle;
 
 /**
+ * FIXME
  * @author Andrea "Stock" Stocchero
  *
  */

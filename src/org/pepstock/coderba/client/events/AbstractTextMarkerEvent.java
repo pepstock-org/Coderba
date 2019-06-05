@@ -13,26 +13,38 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.callbacks;
+package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
+import org.pepstock.coderba.client.entities.TextMarker;
+
+import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Will call the given function for all documents linked to the target document.
- * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface LinkedDocumentsHandler {
+public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends AbstractDocumentEvent<H> {
+
+	private final TextMarker textmarker;
 
 	/**
-	 * Will call the given function for all documents linked to the target document.
-	 * 
-	 * @param editorArea editor area instance
-	 * @param document the linked document instance
-	 * @param sharedHistory <code>true</code> whether that document shares history with the target
+	 * @param handlerType
 	 */
-	void handle(EditorArea editorArea, Document document, boolean sharedHistory);
+	public AbstractTextMarkerEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document, TextMarker textMarker) {
+		super(handlerType, editorArea, document);
+		if (textMarker == null) {
+			throw new IllegalArgumentException("[AbstarctTextMarkerEvent] Text marker handle is null");
+		}
+		this.textmarker = textMarker;
+	}
+
+	/**
+	 * @return the textmarker
+	 */
+	public final TextMarker getTextmarker() {
+		return textmarker;
+	}
 
 }

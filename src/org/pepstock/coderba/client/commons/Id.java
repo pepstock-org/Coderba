@@ -26,7 +26,7 @@ public enum Id implements Key
 	/**
 	 * Name of java script property
 	 */
-	CODERBA_ID("_coderbaId");
+	CODERBA_ID(Id.CODERBA_ID_AS_STRING);
 
 	// name value of property
 	private final String value;
@@ -49,6 +49,11 @@ public enum Id implements Key
 	public String value() {
 		return value;
 	}
+
+	/**
+	 * Coderba ID as string
+	 */
+	public static final String CODERBA_ID_AS_STRING = "_coderbaId";
 
 	/**
 	 * Returns the ID from java script object (CodeMirror options).
@@ -81,7 +86,7 @@ public enum Id implements Key
 			nativeObject.defineStringProperty(CODERBA_ID.value(), id);
 		}
 	}
-
+	
 	/**
 	 * Returns the property value from java script object, when the ID is stored as integer
 	 * 

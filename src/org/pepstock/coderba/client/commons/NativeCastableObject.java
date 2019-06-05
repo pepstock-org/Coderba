@@ -19,8 +19,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Base object for all native objects implemented in Coderba.<br>
- * It implements some common methods and wraps some native methods.
+ * Base object for some native objects implemented in Coderba, which can be cast to a native object.<br>
  * 
  * @author Andrea "Stock" Stocchero
  */

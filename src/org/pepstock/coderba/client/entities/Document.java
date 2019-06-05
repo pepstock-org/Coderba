@@ -228,6 +228,7 @@ public final class Document implements IsEventManager {
 	private LinkedDocumentsHandler linkedDocumentsHandler = null;
 
 	/**
+	 * FIXME visibility
 	 * @param nativeObject
 	 */
 	public Document(NativeDocument nativeObject) {

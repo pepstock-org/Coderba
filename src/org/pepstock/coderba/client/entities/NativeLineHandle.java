@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineHandle {
+public final class NativeLineHandle extends NativeIdable {
 
 	/**
 	 * to avoid any instantiation
@@ -39,22 +39,6 @@ public final class NativeLineHandle {
 	private NativeLineHandle() {
 		// do nothing
 	}
-
-	/**
-	 * Returns the id of object.
-	 * 
-	 * @return the id of object
-	 */
-	@JsProperty
-	public native int getId();
-
-	/**
-	 * Sets the id of object
-	 * 
-	 * @param id the id of object
-	 */
-	@JsProperty
-	native void setId(int id);
 
 	/**
 	 * Get the content of the document.

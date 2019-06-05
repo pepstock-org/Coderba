@@ -22,8 +22,8 @@ import org.pepstock.coderba.client.enums.MouseRepeat;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse button is
- * pressed.
+ * Allow you to configure the behavior of mouse selection and dragging.<br>
+ * The function is called when the left mouse button is pressed.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -31,8 +31,8 @@ import com.google.gwt.dom.client.NativeEvent;
 public interface ConfigureMouseHandler {
 
 	/**
-	 * Allow you to configure the behavior of mouse selection and dragging. The function is called when the left mouse button is
-	 * pressed.
+	 * Allow you to configure the behavior of mouse selection and dragging.<br>
+	 * The function is called when the left mouse button is pressed.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param repeat type of click by mouse

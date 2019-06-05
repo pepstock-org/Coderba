@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.ArrayString;
+import org.pepstock.coderba.client.commons.Id;
 
 /**
  * 
@@ -88,7 +89,7 @@ public final class LineInfo {
 		ArrayObject array = nativeObject.getWidgets();
 		if (array != null) {
 			for (int i = 0; i < array.length(); i++) {
-				int id = LineWidget.getId(array.get(i));
+				int id = Id.get(Id.CODERBA_ID, array.get(i));
 				LineWidget widget = document.getLineWidget(id);
 				if (widget != null) {
 					widgets.add(widget);

@@ -25,7 +25,6 @@ import org.pepstock.coderba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.Element;
 
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -36,7 +35,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = NativeName.CODE_MIRROR, name = NativeName.DOCUMENT)
-public final class NativeDocument {
+public final class NativeDocument extends NativeIdable{
 
 	/**
 	 * to avoid any instantiation
@@ -52,22 +51,6 @@ public final class NativeDocument {
 	NativeDocument(String text, Object mode, int firstLineNumber, String lineSeparator, String direction) {
 		// do nothing
 	}
-
-	/**
-	 * Returns the id of object.
-	 * 
-	 * @return the id of object
-	 */
-	@JsProperty
-	public native int getId();
-
-	/**
-	 * Sets the id of object
-	 * 
-	 * @param id the id of object
-	 */
-	@JsProperty
-	native void setId(int id);
 	
 	/**
 	 * Get the content of the document.

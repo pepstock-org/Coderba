@@ -16,8 +16,8 @@
 package org.pepstock.coderba.client.callbacks;
 
 /**
- * A function used to format line numbers. The function is passed the line number, and should return a string that will be shown
- * in the gutter.
+ * A function used to format line numbers.<br>
+ * The function is passed the line number, and should return a string that will be shown in the gutter.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -25,8 +25,8 @@ package org.pepstock.coderba.client.callbacks;
 public interface LineNumberFormatterHandler {
 
 	/**
-	 * A function used to format line numbers. The function is passed the line number, and should return a string that will be
-	 * shown in the gutter.
+	 * A function used to format line numbers.<br>
+	 * The function is passed the line number, and should return a string that will be shown in the gutter.
 	 * 
 	 * @param line line number to format
 	 * @return string that will be shown in the gutter

@@ -20,8 +20,8 @@ import org.pepstock.coderba.client.entities.Position;
 import org.pepstock.coderba.client.entities.Range;
 
 /**
- * Allow you to configure the behavior of mouse configuration unit. The function takes a position and returns a range around
- * that, for a custom unit.
+ * Allow you to configure the behavior of mouse configuration unit.<br>
+ * The function takes a position and returns a range around that, for a custom unit.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -29,8 +29,8 @@ import org.pepstock.coderba.client.entities.Range;
 public interface MouseUnitHandler {
 
 	/**
-	 * Allow you to configure the behavior of mouse configuration unit. The function takes a position and returns a range around
-	 * that, for a custom unit.
+	 * Allow you to configure the behavior of mouse configuration unit.<br>
+	 * The function takes a position and returns a range around that, for a custom unit.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param position position of mouse

@@ -16,7 +16,6 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.CallbackProxy;
-import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsPackage;
@@ -36,7 +35,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineWidget extends NativeCastableObject {
+public final class NativeLineWidget extends NativeIdable {
 
 	/**
 	 * To avoid any instantiation
@@ -44,15 +43,6 @@ public final class NativeLineWidget extends NativeCastableObject {
 	private NativeLineWidget() {
 		// do nothing
 	}
-
-	/**
-	 * Returns the id of widget.<br>
-	 * It has been implemented because it must be checked before creating a line widget.
-	 * 
-	 * @return the id of widget
-	 */
-	@JsProperty
-	public native int getId();
 
 	/**
 	 * Returns the line handle.

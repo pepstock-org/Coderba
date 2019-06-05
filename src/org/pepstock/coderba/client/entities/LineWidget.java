@@ -22,7 +22,6 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.EventManager;
@@ -45,11 +44,11 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
 	 * change.
@@ -64,6 +63,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		 */
 		void call();
 	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -85,7 +85,6 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	private enum Property implements Key
 	{
-		ID("id"),
 		NODE("node"),
 		HEIGHT("height");
 
@@ -122,7 +121,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		this.nativeObject = nativeObject;
 		this.document = document;
 		// stores the id based on a counter
-		setValue(Property.ID, COUNTER.getAndIncrement());
+		setValue(Id.CODERBA_ID, COUNTER.getAndIncrement());
 		NativeLineHandle nativeHandle = nativeObject.getLine();
 		if (nativeHandle != null) {
 			this.handle = document.getLineHandleById(nativeHandle.getId());
@@ -137,12 +136,8 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		lineWidgetRedrawFunctionProxy.setCallback(() -> onRedraw());
 	}
 
-	static int getId(NativeObject nativeObject) {
-		return Id.get(Property.ID, nativeObject);
-	}
-
 	public int getId() {
-		return getValue(Property.ID, UndefinedValues.INTEGER);
+		return nativeObject.getId();
 	}
 
 	public int getHeight() {
@@ -175,7 +170,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	public void changed() {
 		nativeObject.changed();
 	}
-	
+
 	// ---------------------------------
 	// --- EVENTS METHODS
 	// ---------------------------------
@@ -207,7 +202,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
 			}
-		} 
+		}
 	}
 
 	/*
@@ -225,7 +220,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.off(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
 			}
-		} 
+		}
 	}
 
 	/*

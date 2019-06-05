@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains the callbacks to implement to interact with CodeMirror entities.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

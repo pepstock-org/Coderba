@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
 
@@ -35,23 +36,7 @@ public final class NativeTextMarker extends NativeCastableObject {
 	// /** Returns an object representing the options for the marker. If copyWidget is given true, it will clone the value of
 	// the replacedWith option, if any. */
 	// getOptions(copyWidget: boolean): CodeMirror.TextMarkerOptions;
-	//
-	// /** Fired when the cursor enters the marked range */
-	// on(eventName: 'beforeCursorEnter', handler: () => void) : void;
-	// off(eventName: 'beforeCursorEnter', handler: () => void) : void;
-	//
-	// /** Fired when the range is cleared, either through cursor movement in combination with clearOnEnter or through a call to
-	// its clear() method */
-	// on(eventName: 'clear', handler: (from: Position, to: Position) => void) : void;
-	// off(eventName: 'clear', handler: () => void) : void;
-	//
-	// /** Fired when the last part of the marker is removed from the document by editing operations */
-	// on(eventName: 'hide', handler: () => void) : void;
-	// off(eventname: 'hide', handler: () => void) : void;
-	//
-	// /** Fired when, after the marker was removed by editing, a undo operation brough the marker back */
-	// on(eventName: 'unhide', handler: () => void) : void;
-	// off(eventname: 'unhide', handler: () => void) : void;
+
 
 	/**
 	 * To avoid any instantiation
@@ -86,4 +71,20 @@ public final class NativeTextMarker extends NativeCastableObject {
 	 * Called when you've done something that might change the size of the marker and want to cheaply update the display.
 	 */
 	native void changed();
+	
+	/**
+	 * Register an event handler for the given event type (a string) on the text marker instance.
+	 * 
+	 * @param type event name to activate
+	 * @param function callback proxy function
+	 */
+	native void on(String type, CallbackProxy.Proxy function);
+
+	/**
+	 * Remove an event handler on the text marker instance.
+	 * 
+	 * @param type event name to activate
+	 * @param function callback proxy function
+	 */
+	native void off(String type, CallbackProxy.Proxy function);
 }
