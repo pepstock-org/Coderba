@@ -15,6 +15,8 @@
 */
 package org.pepstock.coderba.client.commons;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Enums the property ID used by CODERBA to identify the editor area.
  * 
@@ -54,6 +56,11 @@ public enum Id implements Key
 	 * Coderba ID as string
 	 */
 	public static final String CODERBA_ID_AS_STRING = "_coderbaId";
+	
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
+	// string prefix for generated id 
+	private static final String PREFIX_ID = "coderba-";
 
 	/**
 	 * Returns the ID from java script object (CodeMirror options).
@@ -72,11 +79,29 @@ public enum Id implements Key
 		// property doesn't exist
 		return UndefinedValues.STRING;
 	}
+	
+	/**
+	 * Sets the property value to java script object.
+	 * 
+	 * @param nativeObject java script object
+	 */
+	public static String generate() {
+		return PREFIX_ID+COUNTER.incrementAndGet(); 
+	}
+	
+	/**
+	 * Sets the property value to java script object.
+	 * 
+	 * @param nativeObject java script object
+	 */
+	public static void set(NativeObject nativeObject) {
+		set(nativeObject, generate()); 
+	}
 
 	/**
-	 * Sets the property value to java script object (CodeMirror options).
+	 * Sets the property value to java script object.
 	 * 
-	 * @param nativeObject java script object (CodeMirror options)
+	 * @param nativeObject java script object
 	 * @param id editor area id
 	 */
 	public static void set(NativeObject nativeObject, String id) {
@@ -87,23 +112,23 @@ public enum Id implements Key
 		}
 	}
 	
-	/**
-	 * Returns the property value from java script object, when the ID is stored as integer
-	 * 
-	 * @param key the key to search inside the object
-	 * @param nativeObject java script object
-	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
-	 */
-	public static int get(Key key, NativeObject nativeObject) {
-		// checks if argument is consistent and property exists
-		if (nativeObject != null && nativeObject.hasProperty(key.value())) {
-			// gets descriptor
-			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
-			// if descriptor is consistent, return value
-			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
-		}
-		// property doesn't exist
-		return UndefinedValues.INTEGER;
-	}
+//	/**
+//	 * Returns the property value from java script object, when the ID is stored as integer
+//	 * 
+//	 * @param key the key to search inside the object
+//	 * @param nativeObject java script object
+//	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
+//	 */
+//	public static int get(Key key, NativeObject nativeObject) {
+//		// checks if argument is consistent and property exists
+//		if (nativeObject != null && nativeObject.hasProperty(key.value())) {
+//			// gets descriptor
+//			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
+//			// if descriptor is consistent, return value
+//			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
+//		}
+//		// property doesn't exist
+//		return UndefinedValues.INTEGER;
+//	}
 
 }

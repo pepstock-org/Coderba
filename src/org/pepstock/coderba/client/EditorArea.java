@@ -15,6 +15,10 @@
 */
 package org.pepstock.coderba.client;
 
+import org.pepstock.coderba.client.entities.CodeMirror;
+import org.pepstock.coderba.client.entities.Editor;
+import org.pepstock.coderba.client.entities.EditorOptions;
+
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TextAreaElement;
@@ -44,8 +48,6 @@ public class EditorArea extends Widget {
 	private Initiliazer initializer = null;
 	// editor instance
 	private Editor editor = null;
-	// init options
-	private final UserOptions initOptions;
 	// editor configuration
 	private final EditorOptions options;
 
@@ -71,11 +73,8 @@ public class EditorArea extends Widget {
 		super.setElement(element);
 		// injects codemirror.js java script source
 		Injector.ensureInjected();
-		// creates a user options
-		// before creating the editor
-		initOptions = new UserOptions(Defaults.get());
 		// creates the option wrapper
-		options = new EditorOptions(initOptions);
+		options = new EditorOptions();
 	}
 
 	/**
@@ -222,11 +221,7 @@ public class EditorArea extends Widget {
 			// stores the editor area instance into cache
 			EditorAreas.add(this);
 			// creates the code mirror editor
-			this.editor = CodeMirror.get().fromTextArea(element, initOptions);
-			// sets the unique id to editor
-			editor.setId(getId());
-			// switches the configuration from user to runtime
-			options.setDelegatedOptions(new RuntimeOptions(editor.getNativeObject(), Defaults.get()));
+			this.editor = CodeMirror.get().fromTextArea(getId(), element, options);
 			// checks an initializer instance has been set
 			if (initializer != null) {
 				// invokes the custom implementation

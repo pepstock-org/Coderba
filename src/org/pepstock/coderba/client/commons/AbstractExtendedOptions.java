@@ -15,9 +15,9 @@
 */
 package org.pepstock.coderba.client.commons;
 
+import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.commons.CallbackProxy.Proxy;
-import org.pepstock.coderba.client.defaults.IsDefaultOptions;
-import org.pepstock.coderba.client.defaults.IsExtendedOptions;
+import org.pepstock.coderba.client.entities.IsExtendedOptions;
 import org.pepstock.coderba.client.enums.Options;
 
 /**

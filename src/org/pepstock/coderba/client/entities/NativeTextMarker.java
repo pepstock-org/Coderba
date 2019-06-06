@@ -16,11 +16,10 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.CallbackProxy;
-import org.pepstock.coderba.client.commons.NativeCastableObject;
 import org.pepstock.coderba.client.commons.NativeName;
+import org.pepstock.coderba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -31,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeTextMarker extends NativeCastableObject {
+public final class NativeTextMarker extends NativeObject {
 
 	// /** Returns an object representing the options for the marker. If copyWidget is given true, it will clone the value of
 	// the replacedWith option, if any. */
@@ -44,15 +43,6 @@ public final class NativeTextMarker extends NativeCastableObject {
 	private NativeTextMarker() {
 		// do nothing
 	}
-
-	/**
-	 * Returns the id of marker.<br>
-	 * It has been implemented because it must be checked before creating a TextMarker.
-	 * 
-	 * @return the id of marker
-	 */
-	@JsProperty
-	public native int getId();
 
 	/**
 	 * Remove the mark.

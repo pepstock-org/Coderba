@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
@@ -41,9 +39,6 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public final class LineWidget extends LineWidgetOptions implements IsEventManager {
-
-	// internal count
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -121,10 +116,10 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		this.nativeObject = nativeObject;
 		this.document = document;
 		// stores the id based on a counter
-		setValue(Id.CODERBA_ID, COUNTER.getAndIncrement());
+		Id.set(nativeObject);
 		NativeLineHandle nativeHandle = nativeObject.getLine();
 		if (nativeHandle != null) {
-			this.handle = document.getLineHandleById(nativeHandle.getId());
+			this.handle = document.getLineHandleById(Id.get(nativeHandle));
 		} else {
 			this.handle = null;
 		}
@@ -136,8 +131,8 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		lineWidgetRedrawFunctionProxy.setCallback(() -> onRedraw());
 	}
 
-	public int getId() {
-		return nativeObject.getId();
+	public String getId() {
+		return Id.get(nativeObject);
 	}
 
 	public int getHeight() {

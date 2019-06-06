@@ -17,8 +17,8 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
+import org.pepstock.coderba.client.commons.NativeObject;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineHandle extends NativeIdable {
+public final class NativeLineHandle extends NativeObject {
 
 	/**
 	 * to avoid any instantiation
@@ -62,7 +62,6 @@ public final class NativeLineHandle extends NativeIdable {
 	 * @param position position into document.
 	 * @return value is relative to the start of the editor's text
 	 */
-	@JsMethod
 	native int lineTo();
 	
 	/**

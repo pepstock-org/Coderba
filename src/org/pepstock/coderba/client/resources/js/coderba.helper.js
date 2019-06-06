@@ -57,16 +57,6 @@
     CoderbaJsHelper.type = function(obj, key) {
     	return typeof obj[key];
     }
-   /*
-	 Returns the java script object type of a property.
-	  
-	 @param object the object on which to search the property.
-	 @param key the string name of the property to test.
-	 @return the object type
-    */
-    CoderbaJsHelper.cast = function(obj) {
-    	return obj;
-    }
     /*
 	 Returns the java script object type of a property.
 	  

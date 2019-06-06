@@ -15,10 +15,9 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.commons.CallbackProxy;
+import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.ChangeItem;
@@ -39,9 +38,6 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public final class LineHandle implements IsEventManager {
-
-	// internal count
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -100,7 +96,7 @@ public final class LineHandle implements IsEventManager {
 		this.nativeObject = nativeObject;
 		this.document = document;
 		// stores the id based on a counter
-		this.nativeObject.setId(COUNTER.getAndIncrement());
+		Id.set(nativeObject);
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// -------------------------------
@@ -110,8 +106,8 @@ public final class LineHandle implements IsEventManager {
 		lineHandleDeleteFunctionProxy.setCallback(() -> onDelete());
 	}
 	
-	public int getId() {
-		return nativeObject.getId();
+	public String getId() {
+		return Id.get(nativeObject);
 	}
 
 	/**
@@ -164,7 +160,7 @@ public final class LineHandle implements IsEventManager {
 	private void onChange(NativeLineHandle nativeLineHandle, ChangeItem item) {
 		EditorArea area = document.getEditorArea();
 		if (area != null) {
-			LineHandle lineHandle = document.getLineHandleById(nativeLineHandle.getId());
+			LineHandle lineHandle = document.getLineHandleById(Id.get(nativeLineHandle));
 			eventManager.fireEvent(new LineHandleChangeEvent(area, document, lineHandle, item));
 		}
 	}

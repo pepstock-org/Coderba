@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.defaults;
+package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.CallbackProxy;
 

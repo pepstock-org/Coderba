@@ -22,11 +22,11 @@ import java.util.Map;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Documents {
-	
+final class Documents {
+
 	private static final Documents INSTANCE = new Documents();
-	
-	private final Map<Integer, Document> documents = new HashMap<>(); 
+
+	private final Map<String, Document> documents = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -34,7 +34,7 @@ public final class Documents {
 	private Documents() {
 		// do nothing
 	}
-	
+
 	public static Documents get() {
 		return INSTANCE;
 	}
@@ -45,12 +45,18 @@ public final class Documents {
 		}
 	}
 
-	public boolean has(int id) {
-		return documents.containsKey(id);
+	boolean has(String id) {
+		if (id != null) {
+			return documents.containsKey(id);
+		}
+		return false;
 	}
 
-	public Document retrieve(int id) {
-		return documents.get(id);
+	Document retrieve(String id) {
+		if (id != null) {
+			return documents.get(id);
+		}
+		return null;
 	}
 
 }

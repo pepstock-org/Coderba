@@ -49,7 +49,7 @@ public final class LineInfo {
 		this.document = document;
 		NativeLineHandle handle = nativeObject.getHandle();
 		if (handle != null) {
-			this.handle = this.document.getLineHandleById(handle.getId());
+			this.handle = this.document.getLineHandleById(Id.get(handle));
 		} else {
 			this.handle = null;
 		}
@@ -89,7 +89,7 @@ public final class LineInfo {
 		ArrayObject array = nativeObject.getWidgets();
 		if (array != null) {
 			for (int i = 0; i < array.length(); i++) {
-				int id = Id.get(Id.CODERBA_ID, array.get(i));
+				String id = Id.get(array.get(i));
 				LineWidget widget = document.getLineWidget(id);
 				if (widget != null) {
 					widgets.add(widget);

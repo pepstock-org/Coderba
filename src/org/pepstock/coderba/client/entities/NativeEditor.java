@@ -13,8 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.EditorAreas;
 import org.pepstock.coderba.client.commons.Array;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -22,15 +24,6 @@ import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.entities.Anchor;
-import org.pepstock.coderba.client.entities.Area;
-import org.pepstock.coderba.client.entities.Coordinate;
-import org.pepstock.coderba.client.entities.NativeDocument;
-import org.pepstock.coderba.client.entities.OverlayOptions;
-import org.pepstock.coderba.client.entities.Point;
-import org.pepstock.coderba.client.entities.Position;
-import org.pepstock.coderba.client.entities.ScrollArea;
-import org.pepstock.coderba.client.entities.Token;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
@@ -405,7 +398,7 @@ public final class NativeEditor {
 	 * @param mode can be a mode specification or a mode object
 	 * @param options overlay options
 	 */
-	native void addOverlay(String mode, OverlayOptions options);
+	native void addOverlay(String mode, NativeObject options);
 
 	/**
 	 * Pass this the exact value passed for the mode parameter to addOverlay, or a string that corresponds to the name property
@@ -479,7 +472,7 @@ public final class NativeEditor {
 	 * @return an scroll area object that represents the current scroll position, the size of the scrollable area, and the size
 	 *         of the visible area (minus scrollbars).
 	 */
-	native ScrollArea getScrollInfo();
+	native NativeObject getScrollInfo();
 
 	/**
 	 * Scrolls the given position into view. what may be null to scroll the cursor into view, a position to scroll a character
@@ -597,7 +590,7 @@ public final class NativeEditor {
 	 * @return a coordinate object indicating the start (inclusive) and end (exclusive) of the currently rendered part of the
 	 *         document
 	 */
-	native Coordinate getViewport();
+	native NativeObject getViewport();
 
 	/**
 	 * If your code does something to change the size of the editor element (window resizes are already listened for), or

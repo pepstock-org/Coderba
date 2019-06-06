@@ -13,35 +13,43 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.AbstractExtendedOptions;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.defaults.IsDefaultOptions;
+import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
 /**
- * Core class to manage USER options.<br>
+ * Manages set and get of all options by a native object container instance and its set and get methods.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class UserOptions extends AbstractExtendedOptions<UserOptionsContainer> {
+final class UserOptionsContainer extends NativeObjectContainer {
 
 	/**
-	 * Creates a new options manager for user, with an empty native object and default values.
-	 * 
-	 * @param defaultsValue default values
+	 * Creates an empty user options.
 	 */
-	UserOptions(IsDefaultOptions defaultsValue) {
-		super(new UserOptionsContainer(), defaultsValue);
+	public UserOptionsContainer() {
+		this(null);
 	}
 
 	/**
-	 * Returns the native object to apply to editor during its creation.
+	 * Creates a container wrapping a native object.<br>
+	 * This is used by DEFAULT options.
 	 * 
-	 * @return the native object to apply to editor during its creation
+	 * @param nativeObject native object to wrap. The instance is getting by <code>CodeMirror.defaults</code> property.
+	 */
+	UserOptionsContainer(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
 	 */
 	final NativeObject getObject() {
-		return getNativeObjectContainer().getObject();
+		return super.getNativeObject();
 	}
+
 }

@@ -20,14 +20,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.coderba.client.Defaults;
-import org.pepstock.coderba.client.Editor;
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.GlobalDefaults;
 import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.Modes;
-import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.callbacks.DocumentEachLineHandler;
 import org.pepstock.coderba.client.callbacks.DocumentExtendSelectionsHandler;
 import org.pepstock.coderba.client.callbacks.LinkedDocumentsHandler;
@@ -36,9 +33,9 @@ import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
+import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.UndefinedValues;
-import org.pepstock.coderba.client.defaults.GlobalDefaults;
 import org.pepstock.coderba.client.enums.CursorPosition;
 import org.pepstock.coderba.client.enums.LineClassLocation;
 import org.pepstock.coderba.client.enums.Select;
@@ -66,9 +63,6 @@ import jsinterop.annotations.JsFunction;
  */
 public final class Document implements IsEventManager {
 
-	// internal count
-	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -215,11 +209,11 @@ public final class Document implements IsEventManager {
 
 	private final EventManager eventManager;
 
-	private final Map<Integer, TextMarker> markers = new HashMap<>();
+	private final Map<String, TextMarker> markers = new HashMap<>();
 
-	private final Map<Integer, LineWidget> lineWidgets = new HashMap<>();
+	private final Map<String, LineWidget> lineWidgets = new HashMap<>();
 
-	private final Map<Integer, LineHandle> lineHandles = new HashMap<>();
+	private final Map<String, LineHandle> lineHandles = new HashMap<>();
 
 	private DocumentEachLineHandler documentEachLineHandler = null;
 
@@ -228,15 +222,15 @@ public final class Document implements IsEventManager {
 	private LinkedDocumentsHandler linkedDocumentsHandler = null;
 
 	/**
-	 * FIXME visibility
+	 * 
 	 * @param nativeObject
 	 */
-	public Document(NativeDocument nativeObject) {
+	Document(NativeDocument nativeObject) {
 		this.nativeObject = nativeObject;
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// stores id
-		this.nativeObject.setId(COUNTER.getAndIncrement());
+		Id.set(nativeObject);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -254,16 +248,16 @@ public final class Document implements IsEventManager {
 	/**
 	 * @return the nativeObject
 	 */
-	public NativeDocument getNativeDocument() {
+	NativeDocument getObject() {
 		return nativeObject;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public int getId() {
-		return nativeObject.getId();
+	public String getId() {
+		return Id.get(nativeObject);
 	}
 
 	/**
@@ -498,8 +492,9 @@ public final class Document implements IsEventManager {
 		if (isValidLine(line)) {
 			NativeLineHandle nativeLineHandle = nativeObject.getLineHandle(line);
 			if (nativeLineHandle != null) {
-				if (lineHandles.containsKey(nativeLineHandle.getId())) {
-					return lineHandles.get(nativeLineHandle.getId());
+				String lineHandleId = Id.get(nativeLineHandle);
+				if (lineHandles.containsKey(lineHandleId)) {
+					return lineHandles.get(lineHandleId);
 				} else {
 					LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
 					lineHandles.put(lineHandle.getId(), lineHandle);
@@ -1236,7 +1231,7 @@ public final class Document implements IsEventManager {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the (outer) mode object for the editor.<br>
 	 * Note that this is distinct from getOption("mode"), which gives you the mode specification, rather than the resolved,
@@ -1644,7 +1639,7 @@ public final class Document implements IsEventManager {
 	 * @param id id of text marker
 	 * @return an existing text marker or <code>null</code> if not exists
 	 */
-	public TextMarker getMarkerById(int id) {
+	public TextMarker getMarkerById(String id) {
 		return markers.get(id);
 	}
 
@@ -1737,7 +1732,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @param markerId the marker id.
 	 */
-	void clearTextMarker(int markerId) {
+	void clearTextMarker(String markerId) {
 		markers.remove(markerId);
 	}
 
@@ -1791,7 +1786,7 @@ public final class Document implements IsEventManager {
 	 * @param id
 	 * @return
 	 */
-	public LineHandle getLineHandleById(int id) {
+	public LineHandle getLineHandleById(String id) {
 		return lineHandles.get(id);
 	}
 
@@ -1975,7 +1970,7 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @param widgetId the line widget id.
 	 */
-	void clearLineWidget(int widgetId) {
+	void clearLineWidget(String widgetId) {
 		lineWidgets.remove(widgetId);
 	}
 
@@ -2081,7 +2076,7 @@ public final class Document implements IsEventManager {
 	 * @param id line widget id.
 	 * @return line widget instance or <code>null</code> if not exists
 	 */
-	LineWidget getLineWidget(int id) {
+	LineWidget getLineWidget(String id) {
 		return lineWidgets.get(id);
 	}
 
@@ -2231,10 +2226,13 @@ public final class Document implements IsEventManager {
 			List<TextMarker> result = new LinkedList<>();
 			for (int i = 0; i < array.length(); i++) {
 				NativeTextMarker nativeMarker = array.get(i);
-				if (!markers.containsKey(nativeMarker.getId())) {
-					markers.put(nativeMarker.getId(), new TextMarker(nativeMarker, this));
+				String storedId = Id.get(nativeMarker);
+				if (storedId == null) {
+					TextMarker newTextMarker = new TextMarker(nativeMarker, this);
+					storedId = newTextMarker.getId();
+					markers.put(storedId, newTextMarker);
 				}
-				result.add(markers.get(nativeMarker.getId()));
+				result.add(markers.get(storedId));
 			}
 			return Collections.unmodifiableList(result);
 		}
@@ -2256,8 +2254,9 @@ public final class Document implements IsEventManager {
 			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
 				LineHandle lineHandle;
-				if (lineHandles.containsKey(nativeLineHandle.getId())) {
-					lineHandle = lineHandles.get(nativeLineHandle.getId());
+				String lineHandleId = Id.get(nativeLineHandle);
+				if (lineHandles.containsKey(lineHandleId)) {
+					lineHandle = lineHandles.get(lineHandleId);
 				} else {
 					lineHandle = new LineHandle(nativeLineHandle, this);
 				}
@@ -2298,7 +2297,7 @@ public final class Document implements IsEventManager {
 		if (linkedDocumentsHandler != null && nativeEditor != null) {
 			EditorArea area = nativeEditor.getEditorArea();
 			if (area != null) {
-				Document storedDocument = Documents.get().retrieve(document.getId());
+				Document storedDocument = Documents.get().retrieve(Id.get(document));
 				linkedDocumentsHandler.handle(area, storedDocument, sharedHistory);
 			}
 		}

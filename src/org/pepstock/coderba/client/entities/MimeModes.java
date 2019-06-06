@@ -13,8 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;

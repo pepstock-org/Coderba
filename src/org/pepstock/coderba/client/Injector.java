@@ -19,6 +19,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.pepstock.coderba.client.entities.CodeMirror;
+import org.pepstock.coderba.client.entities.ModeSpecification;
 import org.pepstock.coderba.client.resources.InjectableResource;
 
 import com.google.gwt.dom.client.Document;
@@ -70,7 +72,7 @@ public final class Injector {
 			// injects mode of language
 			ensureInjected(language.getMode());
 			// gets the mode specification, loaded in the previous statement
-			ModeSpecification modeSpec = CodeMirror.get().getMimeModes().getMode(language);
+			ModeSpecification modeSpec = CodeMirror.get().getModeSpecification(language);
 			// loads the the mode specification into language
 			language.setModeSpecification(modeSpec);
 			// adds language into cache

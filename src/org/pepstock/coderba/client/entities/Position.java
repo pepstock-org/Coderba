@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.Defaults;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;

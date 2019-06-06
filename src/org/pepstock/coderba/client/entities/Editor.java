@@ -13,30 +13,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
 import java.util.List;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.KeyMap;
+import org.pepstock.coderba.client.Language;
+import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.UndefinedValues;
-import org.pepstock.coderba.client.entities.Anchor;
-import org.pepstock.coderba.client.entities.Area;
-import org.pepstock.coderba.client.entities.Coordinate;
-import org.pepstock.coderba.client.entities.Document;
-import org.pepstock.coderba.client.entities.Documents;
-import org.pepstock.coderba.client.entities.LineHandle;
-import org.pepstock.coderba.client.entities.NativeDocument;
-import org.pepstock.coderba.client.entities.NativeLineHandle;
-import org.pepstock.coderba.client.entities.OverlayOptions;
-import org.pepstock.coderba.client.entities.Point;
-import org.pepstock.coderba.client.entities.Position;
-import org.pepstock.coderba.client.entities.Range;
-import org.pepstock.coderba.client.entities.ScrollArea;
-import org.pepstock.coderba.client.entities.Token;
 import org.pepstock.coderba.client.enums.CoordinatesMode;
 import org.pepstock.coderba.client.enums.HorizontalFindUnit;
 import org.pepstock.coderba.client.enums.IndentLineMode;
@@ -734,7 +724,7 @@ public final class Editor implements IsEventManager {
 		if (language != null) {
 			// checks if options are consistent
 			if (options != null) {
-				nativeObject.addOverlay(language.getName(), options);
+				nativeObject.addOverlay(language.getName(), options.getObject());
 			} else {
 				// applies without options
 				nativeObject.addOverlay(language.getName());
@@ -776,7 +766,7 @@ public final class Editor implements IsEventManager {
 		// checks if argument is consistent
 		if (doc != null) {
 			// swaps document
-			nativeObject.swapDoc(doc.getNativeDocument());
+			nativeObject.swapDoc(doc.getObject());
 			// and stores into this editor
 			this.document = doc;
 		}
@@ -826,7 +816,7 @@ public final class Editor implements IsEventManager {
 	 *         of the visible area (minus scrollbars).
 	 */
 	public ScrollArea getScrollInfo() {
-		return nativeObject.getScrollInfo();
+		return new ScrollArea(nativeObject.getScrollInfo());
 	}
 
 	/**
@@ -1071,7 +1061,7 @@ public final class Editor implements IsEventManager {
 	 *         document
 	 */
 	public Coordinate getViewport() {
-		return nativeObject.getViewport();
+		return new Coordinate(nativeObject.getViewport());
 	}
 
 	/**
@@ -1871,7 +1861,7 @@ public final class Editor implements IsEventManager {
 		// checks if area is consistent
 		if (area != null) {
 			Document doc = area.getEditor().getDocument();
-			LineHandle lineHandle = doc.getLineHandleById(line.getId());
+			LineHandle lineHandle = doc.getLineHandleById(Id.get(line));
 			if (lineHandle != null) {
 				// fires the event
 				eventManager.fireEvent(new EditorRenderLineEvent(area, lineHandle, element));
@@ -1921,8 +1911,9 @@ public final class Editor implements IsEventManager {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
-		if (area != null && Documents.get().has(oldDoc.getId())) {
-			Document oldDocument = Documents.get().retrieve(oldDoc.getId());
+		String oldDocId = Id.get(oldDoc);
+		if (area != null && Documents.get().has(oldDocId)) {
+			Document oldDocument = Documents.get().retrieve(oldDocId);
 			// fires the event
 			eventManager.fireEvent(new EditorSwapDocEvent(area, oldDocument));
 		}

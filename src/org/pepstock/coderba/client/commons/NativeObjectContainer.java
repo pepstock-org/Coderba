@@ -50,15 +50,6 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
 	}
 
-	/**
-	 * Creates the object with native object instance to be wrapped.
-	 * 
-	 * @param nativeObject native object instance to be wrapped.
-	 */
-	protected NativeObjectContainer(NativeCastableObject nativeObject) {
-		this.nativeObject = (nativeObject == null ? new NativeObject() : JsHelper.get().cast(nativeObject));
-	}
-
 	// ------------------------------------------
 	// --- COMMONS
 	// ------------------------------------------

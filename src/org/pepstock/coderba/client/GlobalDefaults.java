@@ -13,14 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.defaults;
+package org.pepstock.coderba.client;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.coderba.client.KeyMap;
-import org.pepstock.coderba.client.Language;
-import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.entities.Phrases;
@@ -295,6 +292,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
+		// FIXME
 		return null;
 	}
 

@@ -15,6 +15,7 @@
 */
 package org.pepstock.coderba.client;
 
+import org.pepstock.coderba.client.entities.ModeSpecification;
 import org.pepstock.coderba.client.utils.Window;
 
 /**

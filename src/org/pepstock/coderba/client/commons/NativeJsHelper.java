@@ -92,12 +92,4 @@ final class NativeJsHelper {
 	 * @param key The property key to clone
 	 */
 	static native void cloneProperty(Object source, Object target, String key);
-
-	/**
-	 * Cast an object to a native object in order to be able to use into a native object container.
-	 * 
-	 * @param object object to cast
-	 * @return a native object instance
-	 */
-	static native NativeObject cast(Object object);
 }

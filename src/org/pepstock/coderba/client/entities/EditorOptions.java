@@ -13,10 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
 import java.util.List;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.KeyMap;
+import org.pepstock.coderba.client.Language;
+import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.callbacks.ConfigureMouseHandler;
 import org.pepstock.coderba.client.callbacks.LineNumberFormatterHandler;
 import org.pepstock.coderba.client.callbacks.SpecialCharPlaceholderHandler;
@@ -24,10 +28,6 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.defaults.IsExtendedOptions;
-import org.pepstock.coderba.client.defaults.IsOptions;
-import org.pepstock.coderba.client.entities.MouseConfiguration;
-import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.MouseRepeat;
@@ -151,8 +151,8 @@ public class EditorOptions implements IsOptions {
 	 * @param delegated native object which contains the configuration
 	 * @see UserOptions
 	 */
-	EditorOptions(IsExtendedOptions delegated) {
-		this.delegated = delegated;
+	public EditorOptions() {
+		this.delegated = new UserOptions(Defaults.get());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -409,6 +409,7 @@ public class EditorOptions implements IsOptions {
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
+		//FIXME
 		return delegated.getExtraKeys();
 	}
 
@@ -899,6 +900,7 @@ public class EditorOptions implements IsOptions {
 	 */
 	@Override
 	public void setExtraKeys(NativeObject extraKeys) {
+		//FIXME
 		delegated.setExtraKeys(extraKeys);
 	}
 
@@ -1280,6 +1282,19 @@ public class EditorOptions implements IsOptions {
 	public final String toJSON() {
 		return delegated.toJSON();
 	}
+	
+	/**
+	 * FIXME
+	 * @return
+	 */
+	final NativeObject getObject() {
+		if (delegated instanceof UserOptions) {
+			UserOptions userOptions = (UserOptions) delegated;
+			return userOptions.getObject();
+		}
+		throw new UnsupportedOperationException("Unbale to provide the natie object when editor is already initialized");
+	}
+	
 
 	// --------------------------------
 	// --- PRIVATE EVENT METHODS
@@ -1346,13 +1361,13 @@ public class EditorOptions implements IsOptions {
 			MouseConfiguration result = configureMouse.handle(area, confMouseRepeat, event);
 			// checks if result is consistent
 			if (result != null) {
-				return result.exportedObject();
+				return result.getObject();
 			}
 		}
 		// creates a default mouse configuratio
 		MouseConfiguration result = new MouseConfiguration(confMouseRepeat);
 		// returns the native object
-		return result.exportedObject();
+		return result.getObject();
 	}
 
 }

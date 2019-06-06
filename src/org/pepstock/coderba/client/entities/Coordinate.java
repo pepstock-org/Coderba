@@ -15,48 +15,87 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.NativeEntity;
-import org.pepstock.coderba.client.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
  * 
+ * FIXME change into baseEntity
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class Coordinate extends NativeEntity {
+public final class Coordinate extends BaseEntity {
 
+	public static final int DEFAULT_COORDINATE = 0;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		FROM("from"),
+		TO("to");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.coderba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
+	
 	/**
 	 * To avoid any instantiation
 	 */
-	private Coordinate() {
-		// do nothing
+	private Coordinate(){
+		this(null);
 	}
 
-	@JsOverlay
+	/**
+	 * 
+	 * @param nativeObject
+	 */
+	Coordinate(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+
 	public static Coordinate create(int from, int to) {
-		Coordinate range = new Coordinate();
-		range.setFrom(from);
-		range.setTo(to);
-		return range;
+		Coordinate coordinate = new Coordinate();
+		coordinate.setFrom(from);
+		coordinate.setTo(to);
+		return coordinate;
 	}
 
-	@JsProperty
-	public native int getFrom();
+	public int getFrom() {
+		return getValue(Property.FROM, DEFAULT_COORDINATE);
+	}
 
-	@JsProperty
-	private native void setFrom(int from);
+	private void setFrom(int from) {
+		setValue(Property.FROM, from);
+	}
 
-	@JsProperty
-	public native int getTo();
+	public int getTo() {
+		return getValue(Property.TO, DEFAULT_COORDINATE);
+	}
 
-	@JsProperty
-	private native void setTo(int to);
+	private void setTo(int to) {
+		setValue(Property.TO, to);
+	}
 
 }

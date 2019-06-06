@@ -121,14 +121,4 @@ public final class JsHelper {
 		NativeJsHelper.cloneProperty(source, target, key.value());
 	}
 
-	/**
-	 * Cast an object to a native object in order to be able to use into a native object container.
-	 * 
-	 * @param object object to cast
-	 * @return a native object instance
-	 */
-	NativeObject cast(Object object) {
-		return NativeJsHelper.cast(object);
-	}
-
 }

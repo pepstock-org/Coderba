@@ -13,16 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.defaults;
+package org.pepstock.coderba.client.entities;
 
 import java.util.List;
 
+import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.KeyMap;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
-import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.ReadOnly;
@@ -142,6 +142,7 @@ public interface IsOptions extends IsDefaultOptions {
 	 * 
 	 * @param extraKeys extra key bindings for the editor
 	 */
+	//FIXME
 	void setExtraKeys(NativeObject extraKeys);
 
 	/**

@@ -13,8 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.Injector;
+import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.TextAreaElement;
@@ -53,7 +55,7 @@ public final class CodeMirror {
 	 * 
 	 * @return the singleton instance of the code mirror
 	 */
-	static CodeMirror get() {
+	public static CodeMirror get() {
 		return INSTANCE;
 	}
 
@@ -86,6 +88,16 @@ public final class CodeMirror {
 	MimeModes getMimeModes() {
 		return mimeModes;
 	}
+	
+	/**
+	 * Returns the mode specification related to the language (by mime of language).
+	 * 
+	 * @param language language to use to get the mode specification
+	 * @return the mode specification related to the language or <code>null</code> if not exists.
+	 */
+	public ModeSpecification getModeSpecification(Language language) {
+		return getMimeModes().getMode(language);
+	}
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
@@ -97,8 +109,8 @@ public final class CodeMirror {
 	 * @param element a text area DOM node, already attached to body
 	 * @return an initialized editor with default configuration
 	 */
-	Editor fromTextArea(TextAreaElement element) {
-		return fromTextArea(element, null);
+	public Editor fromTextArea(String id, TextAreaElement element) {
+		return fromTextArea(id, element, null);
 	}
 
 	/**
@@ -112,17 +124,25 @@ public final class CodeMirror {
 	 * @param options user configuration object instance
 	 * @return an initialized editor
 	 */
-	Editor fromTextArea(TextAreaElement element, UserOptions configuration) {
+	public Editor fromTextArea(String id, TextAreaElement element, EditorOptions configuration) {
 		// checks if text area element is consistent
-		if (element != null) {
+		if (element != null && id != null && id.trim().length() > 0) {
+			// instance to create
+			Editor editor;
 			// checks if a configuration object is passed
 			if (configuration != null) {
 				// if yes, initialized the editor by configuration
-				return new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
+				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
 			} else {
 				// if no, initialized the editor by default configuration
-				return new Editor(NativeCodeMirror.fromTextArea(element));
+				editor =  new Editor(NativeCodeMirror.fromTextArea(element));
 			}
+			// sets the unique id to editor
+			editor.setId(id);
+			// switches the configuration from user to runtime
+			configuration.setDelegatedOptions(new RuntimeOptions(editor.getNativeObject(), Defaults.get()));
+			// returns editor instance
+			return editor;
 		}
 		// if here, the text area is not consistent
 		// then exception

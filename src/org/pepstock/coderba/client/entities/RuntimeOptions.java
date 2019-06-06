@@ -13,10 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client;
+package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.commons.AbstractExtendedOptions;
-import org.pepstock.coderba.client.defaults.IsDefaultOptions;
 
 /**
  * Manages the options of an editor already instantiated.<br< It uses a native editor to set and get options.

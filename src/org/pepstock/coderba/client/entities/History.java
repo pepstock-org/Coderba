@@ -15,15 +15,16 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * 
+ * FIXME
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -67,12 +68,22 @@ public final class History extends BaseEntity {
 
 	public List<HistoryItem> getDone() {
 		ArrayObject array = getArrayValue(Property.DONE);
-		return ArrayListHelper.unmodifiableList(array, HistoryItem.FACTORY);
+		return createListFromArray(array);
 	}
 
 	public List<HistoryItem> getUndone() {
 		ArrayObject array = getArrayValue(Property.UNDONE);
-		return ArrayListHelper.unmodifiableList(array, HistoryItem.FACTORY);
+		return createListFromArray(array);
 	}
 
+	private List<HistoryItem> createListFromArray(ArrayObject array){
+		List<HistoryItem> items = new LinkedList<>();
+		if (array != null && !array.isEmpty()) {
+			for (int i=0; i<array.length(); i++) {
+				items.add(new HistoryItem(array.get(i)));
+			}
+		}
+		return Collections.unmodifiableList(items);
+	}
+	
 }

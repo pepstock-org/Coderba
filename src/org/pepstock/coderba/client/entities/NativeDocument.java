@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.ArrayTextMarker;
@@ -35,7 +34,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = NativeName.CODE_MIRROR, name = NativeName.DOCUMENT)
-public final class NativeDocument extends NativeIdable{
+public final class NativeDocument extends NativeObject{
 
 	/**
 	 * to avoid any instantiation

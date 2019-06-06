@@ -16,12 +16,10 @@
 package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.NativeEditor;
 import org.pepstock.coderba.client.callbacks.MouseUnitHandler;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.enums.MouseRepeat;
 import org.pepstock.coderba.client.enums.MouseUnit;
 
@@ -253,12 +251,4 @@ public final class MouseConfiguration extends BaseEntity {
 		return getValue(Property.MODE_ON_DRAG, false);
 	}
 
-	/**
-	 * Returns the native object as result.
-	 * 
-	 * @return the native object as result FIXME
-	 */
-	public NativeObject exportedObject() {
-		return getNativeObject();
-	}
 }

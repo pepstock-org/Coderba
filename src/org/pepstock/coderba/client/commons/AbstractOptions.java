@@ -17,16 +17,16 @@ package org.pepstock.coderba.client.commons;
 
 import java.util.List;
 
+import org.pepstock.coderba.client.GlobalDefaults;
 import org.pepstock.coderba.client.Injector;
+import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.KeyMap;
 import org.pepstock.coderba.client.KeyMaps;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Languages;
 import org.pepstock.coderba.client.Theme;
 import org.pepstock.coderba.client.Themes;
-import org.pepstock.coderba.client.defaults.GlobalDefaults;
-import org.pepstock.coderba.client.defaults.IsDefaultOptions;
-import org.pepstock.coderba.client.defaults.IsOptions;
+import org.pepstock.coderba.client.entities.IsOptions;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
@@ -137,6 +137,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
+		//FIXME
 		return nativeObjectContainer.getValue(Options.EXTRA_KEYS);
 	}
 
@@ -745,6 +746,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public void setExtraKeys(NativeObject extraKeys) {
+		//FIXME
 		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
 	}
 

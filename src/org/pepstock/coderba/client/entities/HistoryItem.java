@@ -21,7 +21,6 @@ import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
 
 /**
  * 
@@ -30,8 +29,6 @@ import org.pepstock.coderba.client.commons.NativeObjectContainerFactory;
  *
  */
 public final class HistoryItem extends BaseEntity {
-
-	static final HistoryItemFactory FACTORY = new HistoryItemFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -87,27 +84,6 @@ public final class HistoryItem extends BaseEntity {
 	public List<HistoryChangeItem> getChanges() {
 		ArrayEntity<HistoryChangeItem> array = getArrayValue(Property.CHANGES);
 		return ArrayListHelper.unmodifiableList(array);
-	}
-
-	/**
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static class HistoryItemFactory implements NativeObjectContainerFactory<HistoryItem> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.pepstock.coderba.client.cm.commons.NativeObjectContainerFactory#create(org.pepstock.coderba.client.cm.commons.
-		 * NativeObject)
-		 */
-		@Override
-		public HistoryItem create(NativeObject nativeObject) {
-			return new HistoryItem(nativeObject);
-		}
-
 	}
 
 }

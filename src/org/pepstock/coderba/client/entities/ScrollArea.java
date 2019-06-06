@@ -15,27 +15,59 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.NativeEntity;
-import org.pepstock.coderba.client.commons.NativeName;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeObject;
+import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
- * 
+ * FIXME
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ScrollArea extends NativeEntity {
+public final class ScrollArea extends BaseEntity {
 
 	/**
-	 * To avoid any instantiation
+	 * Name of properties of object.
 	 */
-	ScrollArea() {
-		// do nothing
+	private enum Property implements Key
+	{
+		TOP("top"),
+		LEFT("left"),
+		HEIGHT("height"),
+		WIDTH("width"),
+		CLIENT_HEIGHT("clientHeight"),
+		CLIENT_WIDTH("clientWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.coderba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
+
+	/**
+	 * 
+	 * @paramObject
+	 */
+	ScrollArea(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -43,47 +75,59 @@ public final class ScrollArea extends NativeEntity {
 	 * 
 	 * @return the top of area.
 	 */
-	@JsProperty
-	public native int getTop();
+
+	public int getTop() {
+		return getValue(Property.TOP, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Returns the left of area.
 	 * 
 	 * @return the left of area.
 	 */
-	@JsProperty
-	public native int getLeft();
+
+	public int getLeft(){
+		return getValue(Property.LEFT, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Returns the height of area.
 	 * 
 	 * @return the height of area.
 	 */
-	@JsProperty
-	public native int getHeight();
+
+	public int getHeight(){
+		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Returns the width of area.
 	 * 
 	 * @return the width of area.
 	 */
-	@JsProperty
-	public native int getWidth();
+
+	public int getWidth(){
+		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Returns the client height of area.
 	 * 
 	 * @return the client height of area.
 	 */
-	@JsProperty
-	public native int getClientHeight();
+
+	public int getClientHeight(){
+		return getValue(Property.CLIENT_HEIGHT, UndefinedValues.INTEGER);
+	}
 
 	/**
 	 * Returns the client width of area.
 	 * 
 	 * @return the client width of area.
 	 */
-	@JsProperty
-	public native int getClientWidth();
+
+	public int getClientWidth(){
+		return getValue(Property.CLIENT_WIDTH, UndefinedValues.INTEGER);
+	}
 
 }

@@ -98,21 +98,6 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a array list of java script native object container by a java script array and a factory.
-	 * 
-	 * @param array array of elements to load when the list is creating.
-	 * @param factory factory implementation to create containers by a single native object of the array.
-	 * @param <E> type of native object container
-	 * @return the instance of updated list
-	 */
-	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
-		// creates the list
-		// if values not consistent
-		// creates an empty list
-		return new ArrayObjectContainerList<>(array, factory);
-	}
-
-	/**
 	 * Creates an unmodifiable array list of doubles by a java script array of doubles.
 	 * 
 	 * @param values array of elements to load when the list is creating.
@@ -143,16 +128,6 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates an unmodifiable array list of generic java script objects by a java script array.
-	 * 
-	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance
-	 */
-	public static List<NativeObject> unmodifiableList(ArrayObject values) {
-		return Collections.unmodifiableList(list(values));
-	}
-
-	/**
 	 * Creates an unmodifiable array list of native entity java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
@@ -160,18 +135,6 @@ public final class ArrayListHelper {
 	 */
 	public static <E extends NativeEntity> List<E> unmodifiableList(ArrayEntity<E> values) {
 		return Collections.unmodifiableList(list(values));
-	}
-
-	/**
-	 * Creates an unmodifiable array list of java script native object container by a java script array and a factory.
-	 * 
-	 * @param array array of elements to load when the list is creating.
-	 * @param factory factory implementation to create containers by a single native object of the array.
-	 * @param <E> type of native object container
-	 * @return the instance of updated list
-	 */
-	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
-		return Collections.unmodifiableList(list(array, factory));
 	}
 
 }

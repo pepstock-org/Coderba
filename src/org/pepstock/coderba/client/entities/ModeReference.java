@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ModeReference {
+final class ModeReference {
 
 	/**
 	 * to avoid any instantiation
@@ -38,6 +38,6 @@ public final class ModeReference {
 	}
 
 	@JsProperty
-	public native String getName();
+	native String getName();
 
 }

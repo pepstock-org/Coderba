@@ -17,9 +17,9 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.commons.CallbackProxy;
+import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
-import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
@@ -127,7 +127,6 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	 */
 	private enum Property implements Key
 	{
-		ID("id"),
 		EXPLICITLY_CLEARED("explicitlyCleared");
 
 		// name value of property
@@ -162,6 +161,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		this.document = document;
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		Id.set(nativeObject);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -171,8 +171,8 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		textMarkerUnhideFunctionProxy.setCallback(() -> onUnhide());
 	}
 
-	public int getId() {
-		return getValue(Property.ID, UndefinedValues.INTEGER);
+	public String getId() {
+		return Id.get(nativeObject);
 	}
 
 	public boolean isCleared() {
