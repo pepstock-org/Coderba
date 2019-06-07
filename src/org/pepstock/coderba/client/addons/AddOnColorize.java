@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.resources.AddOnResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "colorize" addon to enable this capability int the editor.
+ * Is the "colorize" addon to enable this capability into editor.
  * 
  * @author Andrea "Stock" Stocchero
  *
