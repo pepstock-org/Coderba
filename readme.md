@@ -8,7 +8,7 @@ What's Coderba
 
 [Google Web toolkit](http://www.gwtproject.org/) doesn't have a code editor available out of the box.
 
-For all these reasons, **Coderba** has been developed, leveraging on [CodeMirror](https://codemirror.net/) capabilities which will be available to GWT developers.
+For this reason, **Coderba** has been developed, leveraging on [CodeMirror](https://codemirror.net/) capabilities which will be available to GWT developers.
 
 Building
 --------
