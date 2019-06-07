@@ -15,11 +15,13 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.EditorAreaId;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.NativeObject;
 
-import com.google.gwt.dom.client.TextAreaElement;
+import com.google.gwt.dom.client.Element;
 
 /**
  * CodeMirror is a code-editor component that can be embedded in Web pages.<br>
@@ -37,6 +39,9 @@ public final class CodeMirror {
 	private final NativeObject defaults;
 	// MIME modes object
 	private final MimeModes mimeModes;
+	// stores CodeMirror Version
+	private final String version;
+	
 
 	/**
 	 * To avoid any instantiation
@@ -48,6 +53,8 @@ public final class CodeMirror {
 		defaults = NativeCodeMirror.getDefaults();
 		// gets mime modes object
 		mimeModes = new MimeModes(NativeCodeMirror.getMimeModes());
+		// stores the version
+		version = NativeCodeMirror.getVersion();
 	}
 
 	/**
@@ -66,8 +73,8 @@ public final class CodeMirror {
 	 * 
 	 * @return It contains a string that indicates the version of the library.
 	 */
-	public static String getVersion() {
-		return NativeCodeMirror.getVersion();
+	public String getVersion() {
+		return version; 
 	}
 
 	/**
@@ -88,7 +95,7 @@ public final class CodeMirror {
 	MimeModes getMimeModes() {
 		return mimeModes;
 	}
-	
+
 	/**
 	 * Returns the mode specification related to the language (by mime of language).
 	 * 
@@ -109,8 +116,18 @@ public final class CodeMirror {
 	 * @param element a text area DOM node, already attached to body
 	 * @return an initialized editor with default configuration
 	 */
-	public Editor fromTextArea(String id, TextAreaElement element) {
-		return fromTextArea(id, element, null);
+	public Editor fromTextArea(EditorAreaId id, EditorArea editorArea) {
+		// checks if id is consistent
+		if (id == null) {
+			// if not exception
+			throw new IllegalArgumentException("Editor area id is null");
+		}
+		// checks if editor area is consistent
+		if (editorArea == null) {
+			// if not exception
+			throw new IllegalArgumentException("Editor area is null");
+		}
+		return fromTextArea(id.getId(), editorArea.getElement(), editorArea.getOptions());
 	}
 
 	/**
@@ -124,18 +141,18 @@ public final class CodeMirror {
 	 * @param options user configuration object instance
 	 * @return an initialized editor
 	 */
-	public Editor fromTextArea(String id, TextAreaElement element, EditorOptions configuration) {
+	private Editor fromTextArea(String id, Element element, EditorOptions configuration) {
 		// checks if text area element is consistent
-		if (element != null && id != null && id.trim().length() > 0) {
+		if (element != null) {
 			// instance to create
 			Editor editor;
-			// checks if a configuration object is passed
-			if (configuration != null) {
+			// checks if a configuration object has been changed
+			if (configuration.isEmpty()) {
+				// if no, initialized the editor by default configuration
+				editor = new Editor(NativeCodeMirror.fromTextArea(element));
+			} else {
 				// if yes, initialized the editor by configuration
 				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
-			} else {
-				// if no, initialized the editor by default configuration
-				editor =  new Editor(NativeCodeMirror.fromTextArea(element));
 			}
 			// sets the unique id to editor
 			editor.setId(id);

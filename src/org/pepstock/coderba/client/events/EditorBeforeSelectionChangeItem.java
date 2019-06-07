@@ -76,6 +76,7 @@ public final class EditorBeforeSelectionChangeItem {
 
 	/**
 	 * FIXME
+	 * 
 	 * @return
 	 */
 	@JsProperty

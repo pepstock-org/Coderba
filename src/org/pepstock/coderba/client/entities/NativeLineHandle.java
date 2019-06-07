@@ -19,6 +19,7 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -62,14 +63,16 @@ public final class NativeLineHandle extends NativeObject {
 	 * @param position position into document.
 	 * @return value is relative to the start of the editor's text
 	 */
-	native int lineTo();
-	
+	@JsMethod
+	native int lineNo();
+
 	/**
 	 * Register an event handler for the given event type (a string) on the line handle instance.
 	 * 
 	 * @param type event name to activate
 	 * @param function callback proxy function
 	 */
+	@JsMethod
 	native void on(String type, CallbackProxy.Proxy function);
 
 	/**
@@ -78,6 +81,7 @@ public final class NativeLineHandle extends NativeObject {
 	 * @param type event name to activate
 	 * @param function callback proxy function
 	 */
+	@JsMethod
 	native void off(String type, CallbackProxy.Proxy function);
 
 }

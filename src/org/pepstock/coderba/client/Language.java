@@ -16,7 +16,6 @@
 package org.pepstock.coderba.client;
 
 import org.pepstock.coderba.client.entities.ModeSpecification;
-import org.pepstock.coderba.client.utils.Window;
 
 /**
  * Defines a programming language to use inside the editor.<br>
@@ -72,7 +71,6 @@ public abstract class Language extends NamedItem {
 	 * @param modeSpecification the mode specification for this language.
 	 */
 	final void setModeSpecification(ModeSpecification modeSpecification) {
-		Window.getConsole().log("eccome");
 		// checks if mode specification is already loaded
 		if (!isModeSpecLoaded) {
 			// if not, it stores it

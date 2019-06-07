@@ -20,12 +20,20 @@ import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Position;
 
 /**
- * FIXME
+ * Applies the given implementation of this interface to all existing selections.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface DocumentExtendSelectionsHandler {
 
-	Position handle(EditorArea are, Anchor anchor);
+	/**
+	 * Called to extend the selections on the document.
+	 * 
+	 * @param editorArea editor area instance
+	 * @param anchor anchor of extended selections
+	 * @return position instance of the selection
+	 */
+	Position handle(EditorArea editorArea, Anchor anchor);
 
 }

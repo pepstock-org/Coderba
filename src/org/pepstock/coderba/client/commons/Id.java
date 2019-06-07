@@ -24,7 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public enum Id implements Key
 {
-
 	/**
 	 * Name of java script property
 	 */
@@ -56,10 +55,10 @@ public enum Id implements Key
 	 * Coderba ID as string
 	 */
 	public static final String CODERBA_ID_AS_STRING = "_coderbaId";
-	
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
-	// string prefix for generated id 
+	// string prefix for generated id
 	private static final String PREFIX_ID = "coderba-";
 
 	/**
@@ -79,23 +78,23 @@ public enum Id implements Key
 		// property doesn't exist
 		return UndefinedValues.STRING;
 	}
-	
+
 	/**
 	 * Sets the property value to java script object.
 	 * 
 	 * @param nativeObject java script object
 	 */
 	public static String generate() {
-		return PREFIX_ID+COUNTER.incrementAndGet(); 
+		return PREFIX_ID + COUNTER.incrementAndGet();
 	}
-	
+
 	/**
 	 * Sets the property value to java script object.
 	 * 
 	 * @param nativeObject java script object
 	 */
 	public static void set(NativeObject nativeObject) {
-		set(nativeObject, generate()); 
+		set(nativeObject, generate());
 	}
 
 	/**
@@ -111,24 +110,5 @@ public enum Id implements Key
 			nativeObject.defineStringProperty(CODERBA_ID.value(), id);
 		}
 	}
-	
-//	/**
-//	 * Returns the property value from java script object, when the ID is stored as integer
-//	 * 
-//	 * @param key the key to search inside the object
-//	 * @param nativeObject java script object
-//	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
-//	 */
-//	public static int get(Key key, NativeObject nativeObject) {
-//		// checks if argument is consistent and property exists
-//		if (nativeObject != null && nativeObject.hasProperty(key.value())) {
-//			// gets descriptor
-//			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
-//			// if descriptor is consistent, return value
-//			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
-//		}
-//		// property doesn't exist
-//		return UndefinedValues.INTEGER;
-//	}
 
 }

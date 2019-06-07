@@ -40,7 +40,7 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public final class TextMarker extends TextMarkerOptions implements IsEventManager {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -59,7 +59,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		 */
 		void call();
 	}
-	
+
 	/**
 	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
 	 * change.
@@ -74,7 +74,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		 */
 		void call(Position from, Position to);
 	}
-	
+
 	/**
 	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
 	 * change.
@@ -89,7 +89,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		 */
 		void call();
 	}
-	
+
 	/**
 	 * Java script FUNCTION that is called before a change is applied, and its handler may choose to modify or cancel the
 	 * change.
@@ -104,6 +104,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		 */
 		void call();
 	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -206,7 +207,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 			nativeObject.changed();
 		}
 	}
-	
+
 	// ---------------------------------
 	// --- EVENTS METHODS
 	// ---------------------------------
@@ -236,7 +237,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 			eventManager.fireEvent(new TextMarkerClearEvent(area, document, this, Range.create(from, to)));
 		}
 	}
-	
+
 	/**
 	 * FIXME
 	 * 
@@ -249,7 +250,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 			eventManager.fireEvent(new TextMarkerHideEvent(area, document, this));
 		}
 	}
-	
+
 	/**
 	 * FIXME
 	 * 
@@ -262,7 +263,6 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 			eventManager.fireEvent(new TextMarkerUnhideEvent(area, document, this));
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)

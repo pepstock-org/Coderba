@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = NativeName.CODE_MIRROR, name = NativeName.DOCUMENT)
-public final class NativeDocument extends NativeObject{
+public final class NativeDocument extends NativeObject {
 
 	/**
 	 * to avoid any instantiation
@@ -42,7 +42,7 @@ public final class NativeDocument extends NativeObject{
 	NativeDocument(String text) {
 		// do nothing
 	}
-	
+
 	/**
 	 * The last three arguments are optional and can be used to set a mode for the document, make it start at a line number
 	 * other than 0, and set a specific line separator respectively. FIXME
@@ -50,7 +50,7 @@ public final class NativeDocument extends NativeObject{
 	NativeDocument(String text, Object mode, int firstLineNumber, String lineSeparator, String direction) {
 		// do nothing
 	}
-	
+
 	/**
 	 * Get the content of the document.
 	 * 

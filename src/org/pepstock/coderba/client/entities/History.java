@@ -76,14 +76,14 @@ public final class History extends BaseEntity {
 		return createListFromArray(array);
 	}
 
-	private List<HistoryItem> createListFromArray(ArrayObject array){
+	private List<HistoryItem> createListFromArray(ArrayObject array) {
 		List<HistoryItem> items = new LinkedList<>();
 		if (array != null && !array.isEmpty()) {
-			for (int i=0; i<array.length(); i++) {
+			for (int i = 0; i < array.length(); i++) {
 				items.add(new HistoryItem(array.get(i)));
 			}
 		}
 		return Collections.unmodifiableList(items);
 	}
-	
+
 }

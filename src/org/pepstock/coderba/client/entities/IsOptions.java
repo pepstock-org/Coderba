@@ -142,7 +142,7 @@ public interface IsOptions extends IsDefaultOptions {
 	 * 
 	 * @param extraKeys extra key bindings for the editor
 	 */
-	//FIXME
+	// FIXME
 	void setExtraKeys(NativeObject extraKeys);
 
 	/**

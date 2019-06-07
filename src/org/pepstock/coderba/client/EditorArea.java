@@ -45,11 +45,13 @@ public class EditorArea extends Widget {
 	// flag if must be destroy on detach
 	private boolean destroyOnDetach = true;
 	// initializer instance
-	private Initiliazer initializer = null;
+	private Initializer initializer = null;
 	// editor instance
 	private Editor editor = null;
 	// editor configuration
 	private final EditorOptions options;
+	// id object needed to create the editor
+	private final EditorAreaId editorAreaId = new EditorAreaId(id);
 
 	/**
 	 * Creates the widget initializing all needed elements to manage the editing.
@@ -155,7 +157,7 @@ public class EditorArea extends Widget {
 	 * 
 	 * @return the initializer instance
 	 */
-	public Initiliazer getInitializer() {
+	public Initializer getInitializer() {
 		return initializer;
 	}
 
@@ -164,7 +166,7 @@ public class EditorArea extends Widget {
 	 * 
 	 * @param initializer new initializer instance
 	 */
-	public void setInitializer(Initiliazer initializer) {
+	public void setInitializer(Initializer initializer) {
 		this.initializer = initializer;
 	}
 
@@ -221,12 +223,13 @@ public class EditorArea extends Widget {
 			// stores the editor area instance into cache
 			EditorAreas.add(this);
 			// creates the code mirror editor
-			this.editor = CodeMirror.get().fromTextArea(getId(), element, options);
+			this.editor = CodeMirror.get().fromTextArea(editorAreaId, this);
 			// checks an initializer instance has been set
 			if (initializer != null) {
 				// invokes the custom implementation
 				initializer.afterInit(this);
 			}
+			this.editor.refresh();
 			// notify after initialization
 			EditorAreas.fireAfterInit(this);
 		}

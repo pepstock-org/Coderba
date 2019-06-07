@@ -26,6 +26,7 @@ import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.LineHandleChangeEvent;
 import org.pepstock.coderba.client.events.LineHandleDeleteEvent;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
+import org.pepstock.coderba.client.utils.Window;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -38,11 +39,11 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public final class LineHandle implements IsEventManager {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION that is called every time the content of the document is changed.
 	 * 
@@ -74,6 +75,7 @@ public final class LineHandle implements IsEventManager {
 		 */
 		void call();
 	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -81,11 +83,11 @@ public final class LineHandle implements IsEventManager {
 	private final CallbackProxy<LineHandleChangeFunction> lineHandleChangeFunctionProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the LineHandleDelete function
 	private final CallbackProxy<LineHandleDeleteFunction> lineHandleDeleteFunctionProxy = JsHelper.get().newCallbackProxy();
-	
+
 	private final NativeLineHandle nativeObject;
 
 	private final EventManager eventManager;
-	
+
 	private final Document document;
 
 	/**
@@ -94,6 +96,7 @@ public final class LineHandle implements IsEventManager {
 	 */
 	LineHandle(NativeLineHandle nativeObject, Document document) {
 		this.nativeObject = nativeObject;
+		Window.getConsole().log(nativeObject);
 		this.document = document;
 		// stores the id based on a counter
 		Id.set(nativeObject);
@@ -105,7 +108,7 @@ public final class LineHandle implements IsEventManager {
 		lineHandleChangeFunctionProxy.setCallback((lineHandle, item) -> onChange(lineHandle, item));
 		lineHandleDeleteFunctionProxy.setCallback(() -> onDelete());
 	}
-	
+
 	public String getId() {
 		return Id.get(nativeObject);
 	}
@@ -134,8 +137,8 @@ public final class LineHandle implements IsEventManager {
 	 * @param position position into document.
 	 * @return value is relative to the start of the editor's text
 	 */
-	public int lineTo() {
-		return nativeObject.lineTo();
+	public int lineNo() {
+		return nativeObject.lineNo();
 	}
 
 	/**
@@ -146,7 +149,7 @@ public final class LineHandle implements IsEventManager {
 	final NativeLineHandle getObject() {
 		return nativeObject;
 	}
-	
+
 	// ---------------------------------
 	// --- EVENTS METHODS
 	// ---------------------------------
@@ -177,7 +180,6 @@ public final class LineHandle implements IsEventManager {
 			eventManager.fireEvent(new LineHandleDeleteEvent(area, document, this));
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)

@@ -32,7 +32,7 @@ import com.google.gwt.event.shared.UmbrellaException;
 public final class EventManager {
 
 	private final HandlerManager eventHandlerManager;
-	
+
 	private final IsEventManager eventManager;
 
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();

@@ -46,6 +46,16 @@ public abstract class AbstractExtendedOptions<T extends AbstractNativeObjectCont
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.coderba.client.entities.IsExtendedOptions#isEmpty()
+	 */
+	@Override
+	public boolean isEmpty() {
+		return getNativeObjectContainer().keys().isEmpty();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.cm.entities.IsOptions#setLineNumberFormatter(org.pepstock.coderba.client.cm.commons.
 	 * CallbackProxy.Proxy)
 	 */

@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
  * 
- * FIXME change into baseEntity
+ * FIXME 
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -59,11 +59,11 @@ public final class Coordinate extends BaseEntity {
 			return value;
 		}
 	}
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
-	private Coordinate(){
+	private Coordinate() {
 		this(null);
 	}
 

@@ -83,7 +83,7 @@ public class NativeObject {
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay
-	final List<String> propertyKeys() {
+	public final List<String> propertyKeys() {
 		return ArrayListHelper.unmodifiableList(keys(this));
 	}
 

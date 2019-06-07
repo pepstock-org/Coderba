@@ -34,6 +34,7 @@ import org.pepstock.coderba.client.enums.MouseRepeat;
 import org.pepstock.coderba.client.enums.ReadOnly;
 import org.pepstock.coderba.client.utils.RegExp;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -159,6 +160,15 @@ public class EditorOptions implements IsOptions {
 		specialCharPlaceholderFunctionProxy.setCallback((character) -> onSpecialCharPlaceholder(character));
 		lineNumberFormatterFunctionProxy.setCallback((line) -> onLineNumberFormatter(line));
 		configureMouseFunctionProxy.setCallback((editor, repeat, event) -> onConfigureMouse(editor, repeat, event));
+	}
+	
+	/**
+	 * Returns <code>true</code> if no property has been set as option.
+	 * 
+	 * @return <code>true</code> if no property has been set as option.
+	 */
+	public final boolean isEmpty() {
+		return delegated.isEmpty();
 	}
 
 	/**
@@ -409,7 +419,7 @@ public class EditorOptions implements IsOptions {
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
-		//FIXME
+		// FIXME
 		return delegated.getExtraKeys();
 	}
 
@@ -900,7 +910,7 @@ public class EditorOptions implements IsOptions {
 	 */
 	@Override
 	public void setExtraKeys(NativeObject extraKeys) {
-		//FIXME
+		// FIXME
 		delegated.setExtraKeys(extraKeys);
 	}
 
@@ -1282,19 +1292,27 @@ public class EditorOptions implements IsOptions {
 	public final String toJSON() {
 		return delegated.toJSON();
 	}
-	
+
 	/**
-	 * FIXME
-	 * @return
+	 * Returns the native object of the options to create an editor.<br>
+	 * This is applicable and ONLY when a editor instance is creating and at that time the options are the USER one.<br>
+	 * If not, it throws an exception.
+	 * 
+	 * @return the native object of the options to create an editor
 	 */
 	final NativeObject getObject() {
+		// checks if the current delegate is a USER options
+		// USER options are mandatory to create an editor
 		if (delegated instanceof UserOptions) {
+			// casts
 			UserOptions userOptions = (UserOptions) delegated;
+			// returns native object
 			return userOptions.getObject();
 		}
+		// if here, there is an invalid call to this method
+		// then exception
 		throw new UnsupportedOperationException("Unbale to provide the natie object when editor is already initialized");
 	}
-	
 
 	// --------------------------------
 	// --- PRIVATE EVENT METHODS
@@ -1305,7 +1323,7 @@ public class EditorOptions implements IsOptions {
 	 * represent the character.
 	 * 
 	 * @param character a special character identified by the specialChars option
-	 * @return a DOM node that is used to represent the character.
+	 * @return a DOM node that is used to represent the character
 	 */
 	private Element onSpecialCharPlaceholder(char character) {
 		// checks if callback is consistent
@@ -1314,9 +1332,8 @@ public class EditorOptions implements IsOptions {
 			return specialCharPlaceholder.handle(character);
 		}
 		// if here, callback is not set
-		// then returns element
-		// FIXME
-		return null;
+		// then returns an empty DIV element
+		return Document.get().createDivElement();
 	}
 
 	/**

@@ -36,7 +36,6 @@ public final class NativeTextMarker extends NativeObject {
 	// the replacedWith option, if any. */
 	// getOptions(copyWidget: boolean): CodeMirror.TextMarkerOptions;
 
-
 	/**
 	 * To avoid any instantiation
 	 */
@@ -61,7 +60,7 @@ public final class NativeTextMarker extends NativeObject {
 	 * Called when you've done something that might change the size of the marker and want to cheaply update the display.
 	 */
 	native void changed();
-	
+
 	/**
 	 * Register an event handler for the given event type (a string) on the text marker instance.
 	 * 

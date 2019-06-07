@@ -63,7 +63,7 @@ public final class NativeLineWidget extends NativeObject {
 	 * It'll force CodeMirror to update the height of the line that contains the widget.
 	 */
 	native void changed();
-	
+
 	/**
 	 * Register an event handler for the given event type (a string) on the line widget instance.
 	 * 

@@ -86,7 +86,7 @@ public final class ScrollArea extends BaseEntity {
 	 * @return the left of area.
 	 */
 
-	public int getLeft(){
+	public int getLeft() {
 		return getValue(Property.LEFT, UndefinedValues.INTEGER);
 	}
 
@@ -96,7 +96,7 @@ public final class ScrollArea extends BaseEntity {
 	 * @return the height of area.
 	 */
 
-	public int getHeight(){
+	public int getHeight() {
 		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
 
@@ -106,7 +106,7 @@ public final class ScrollArea extends BaseEntity {
 	 * @return the width of area.
 	 */
 
-	public int getWidth(){
+	public int getWidth() {
 		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
 	}
 
@@ -116,7 +116,7 @@ public final class ScrollArea extends BaseEntity {
 	 * @return the client height of area.
 	 */
 
-	public int getClientHeight(){
+	public int getClientHeight() {
 		return getValue(Property.CLIENT_HEIGHT, UndefinedValues.INTEGER);
 	}
 
@@ -126,7 +126,7 @@ public final class ScrollArea extends BaseEntity {
 	 * @return the client width of area.
 	 */
 
-	public int getClientWidth(){
+	public int getClientWidth() {
 		return getValue(Property.CLIENT_WIDTH, UndefinedValues.INTEGER);
 	}
 

@@ -47,5 +47,4 @@ public abstract class AbstractLineHandleEvent<H extends EventHandler> extends Ab
 		return lineHandle;
 	}
 
-
 }

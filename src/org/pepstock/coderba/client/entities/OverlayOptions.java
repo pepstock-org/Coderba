@@ -32,7 +32,7 @@ import org.pepstock.coderba.client.commons.Key;
  *
  */
 public final class OverlayOptions extends BaseEntity {
-	
+
 	public static final boolean DEFAULT_OPAQUE = true;
 
 	public static final int DEFAULT_PRIORITY = 0;

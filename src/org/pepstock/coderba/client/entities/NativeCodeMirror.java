@@ -19,7 +19,7 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
 
-import com.google.gwt.dom.client.TextAreaElement;
+import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -85,7 +85,7 @@ public final class NativeCodeMirror {
 	 * @param options user configuration object instance
 	 * @return an initialized editor
 	 */
-	static native NativeEditor fromTextArea(TextAreaElement element, NativeObject options);
+	static native NativeEditor fromTextArea(Element element, NativeObject options);
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
@@ -97,7 +97,7 @@ public final class NativeCodeMirror {
 	 * @param element a text area DOM node, already attached to body
 	 * @return an initialized editor with default configuration
 	 */
-	static native NativeEditor fromTextArea(TextAreaElement element);
+	static native NativeEditor fromTextArea(Element element);
 
 	/**
 	 * FIXME Can be used to define new options for CodeMirror. The updateFunc will be called with the editor instance and the

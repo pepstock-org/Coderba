@@ -23,7 +23,7 @@ package org.pepstock.coderba.client;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface Initiliazer {
+public interface Initializer {
 
 	/**
 	 * Invoked before the editor will be created.<br>

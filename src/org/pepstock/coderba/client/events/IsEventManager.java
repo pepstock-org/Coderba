@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  */
 public interface IsEventManager extends AddHandlerEventHandler, RemoveHandlerEventHandler {
-	
+
 	<H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);
 
 }

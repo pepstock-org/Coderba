@@ -36,7 +36,7 @@ public final class TextMarkerClearEvent extends AbstractTextMarkerEvent<TextMark
 	 * Event name of CodeMirror
 	 */
 	public static final String NAME = "clear";
-	
+
 	private final Range range;
 
 	/**

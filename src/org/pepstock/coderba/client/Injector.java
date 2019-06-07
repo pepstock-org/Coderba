@@ -154,7 +154,21 @@ public final class Injector {
 	 * @param resource script resource
 	 */
 	public static void ensureInjected(ResourcePrototype resource) {
-		ensureInjected(resource, Document.get().createScriptElement());
+		ensureInjected(resource, false);
+	}
+
+	/**
+	 * Injects a script or a style resource if not injected yet.
+	 * 
+	 * @param resource text resource
+	 * @param asStyle if <code>true</code>, the text resource is injected as STYLE, otherwise SCRIPT.
+	 */
+	public static void ensureInjected(ResourcePrototype resource, boolean asStyle) {
+		if (asStyle) {
+			ensureInjected(resource, Document.get().createStyleElement());
+		} else {
+			ensureInjected(resource, Document.get().createScriptElement());
+		}
 	}
 
 	/**

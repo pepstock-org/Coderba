@@ -22,6 +22,13 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
  *
  */
 public interface IsExtendedOptions extends IsOptions {
+	
+	/**
+	 * Returns <code>true</code> if no property has been set as option.
+	 * 
+	 * @return <code>true</code> if no property has been set as option.
+	 */
+	boolean isEmpty();
 
 	/**
 	 * Sets a function used to format line numbers. The function is passed the line number, and should return a string that will

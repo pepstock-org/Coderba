@@ -15,7 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.coderba.client.commons.AbstractNativeObjectContainer;
@@ -73,7 +73,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	 */
 	@Override
 	protected boolean hasProperty(String key) {
-		ObjectType type = JsHelper.get().typeOf(nativeEditor, key);
+		ObjectType type = JsHelper.get().typeOf(nativeEditor.getOptions(), key);
 		return !ObjectType.UNDEFINED.equals(type);
 	}
 
@@ -84,8 +84,14 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	 */
 	@Override
 	protected List<Key> keys() {
-		// not implemented because not used
-		return Collections.emptyList();
+		// creates the result
+		List<Key> keys = new ArrayList<>();
+		// scans all properties names of object
+		for (String key : nativeEditor.getOptions().propertyKeys()) {
+			// adds a key object by name of the property
+			keys.add(Key.create(key));
+		}
+		return keys;
 	}
 
 	/*
@@ -95,7 +101,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	 */
 	@Override
 	protected ObjectType getType(String key) {
-		return JsHelper.get().typeOf(nativeEditor, key);
+		return JsHelper.get().typeOf(nativeEditor.getOptions(), key);
 	}
 
 	/*

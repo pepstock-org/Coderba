@@ -1639,8 +1639,14 @@ public final class Document implements IsEventManager {
 	 * @param id id of text marker
 	 * @return an existing text marker or <code>null</code> if not exists
 	 */
-	public TextMarker getMarkerById(String id) {
-		return markers.get(id);
+	TextMarker getMarkerById(String id) {
+		// checks if argument is consistent
+		if (id != null) {
+			return markers.get(id);
+		}
+		// if here, id is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -1730,10 +1736,13 @@ public final class Document implements IsEventManager {
 	/**
 	 * Called by "clear" of text marker when it's clearing.
 	 * 
-	 * @param markerId the marker id.
+	 * @param id the marker id.
 	 */
-	void clearTextMarker(String markerId) {
-		markers.remove(markerId);
+	void clearTextMarker(String id) {
+		// checks if argument is consistent
+		if (id != null) {
+			markers.remove(id);
+		}
 	}
 
 	/**
@@ -1781,13 +1790,19 @@ public final class Document implements IsEventManager {
 	}
 
 	/**
-	 * FIXME
+	 * Returns a line handle by its id.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id the id of line handle
+	 * @return already existing line handle or <code>null</code> if not exists
 	 */
-	public LineHandle getLineHandleById(String id) {
-		return lineHandles.get(id);
+	LineHandle getLineHandleById(String id) {
+		// checks if argument is consistent
+		if (id != null) {
+			return lineHandles.get(id);
+		}
+		// if here, id is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -1968,10 +1983,13 @@ public final class Document implements IsEventManager {
 	/**
 	 * Called by "clear" of line widget when it's clearing.
 	 * 
-	 * @param widgetId the line widget id.
+	 * @param id the line widget id.
 	 */
-	void clearLineWidget(String widgetId) {
-		lineWidgets.remove(widgetId);
+	void clearLineWidget(String id) {
+		// checks if id is consistent
+		if (id != null) {
+			lineWidgets.remove(id);
+		}
 	}
 
 	/**
@@ -2077,7 +2095,13 @@ public final class Document implements IsEventManager {
 	 * @return line widget instance or <code>null</code> if not exists
 	 */
 	LineWidget getLineWidget(String id) {
-		return lineWidgets.get(id);
+		// checks if argument is consistent
+		if (id != null) {
+			return lineWidgets.get(id);
+		}
+		// if here, id is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
