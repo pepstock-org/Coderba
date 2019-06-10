@@ -94,7 +94,7 @@ public interface IsOptions extends IsDefaultOptions {
 	/**
 	 * Whether, when indenting, the first N*tabSize spaces should be replaced by N tabs.
 	 * 
-	 * @param indentWithTabsif <code>true</code> the first N*tabSize spaces should be replaced by N tabs
+	 * @param indentWithTabs if <code>true</code> the first N*tabSize spaces should be replaced by N tabs
 	 */
 	void setIndentWithTabs(boolean indentWithTabs);
 

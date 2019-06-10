@@ -25,6 +25,7 @@ import com.google.gwt.event.shared.GwtEvent;
  * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <H> type of event handler
  */
 public abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> {
 

@@ -107,13 +107,11 @@ public final class CodeMirror {
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a text area DOM node as argument.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
-	 * the editor contents are put into the text area when the form is submitted.<br>
-	 * The text in the text area will provide the content for the editor.
+	 * It takes a editor area and its id as arguments.
 	 * 
-	 * @param element a text area DOM node, already attached to body
-	 * @return an initialized editor with default configuration
+	 * @param id editor area id instance
+	 * @param editorArea editor area id instance
+	 * @return an initialized editor with editor area configuration
 	 */
 	public Editor fromTextArea(EditorAreaId id, EditorArea editorArea) {
 		// checks if id is consistent
@@ -136,6 +134,7 @@ public final class CodeMirror {
 	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
+	 * @param id editor area id value
 	 * @param element a text area DOM node, already attached to body
 	 * @param options user configuration object instance
 	 * @return an initialized editor

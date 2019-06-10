@@ -496,6 +496,7 @@ public final class Editor implements IsEventManager {
 	 * Creates an editor instance wrapping a native code mirror object.
 	 * 
 	 * @param nativeObject a native code mirror object
+	 * @param language language to apply to the document
 	 */
 	Editor(NativeEditor nativeObject, Language language) {
 		this.nativeObject = nativeObject;
@@ -604,10 +605,13 @@ public final class Editor implements IsEventManager {
 	}
 
 	/**
+	 * Used to find the target position for horizontal cursor motion.
 	 * 
+	 * @param start a position object
+	 * @param amount an integer (may be negative)
+	 * @param unit one of the string "char", "column" or "word"
 	 * @param visually When visually is true, motion in right-to-left text will be visual rather than logical
-	 * @return a position that is produced by moving amount times the distance specified by unit. When the motion was clipped by
-	 *         hitting the end or start of the document, the returned value will have a hitSide property set to true
+	 * @return the target position for horizontal cursor motion
 	 */
 	public Position findPosH(Position start, int amount, HorizontalFindUnit unit, boolean visually) {
 		// checks if argument is consistent
@@ -702,8 +706,7 @@ public final class Editor implements IsEventManager {
 
 	/**
 	 * Enable a highlighting overlay.<br>
-	 * This is a stateless mini-mode that can be used to add extra highlighting.<br>
-	 * For example, the search addon uses it to highlight the term that's currently being searched.
+	 * This is a stateless mini-mode that can be used to add extra highlighting.
 	 * 
 	 * @param language can be a mode spec or a mode object (an object with a token method)
 	 */
@@ -713,10 +716,9 @@ public final class Editor implements IsEventManager {
 
 	/**
 	 * Enable a highlighting overlay.<br>
-	 * This is a stateless mini-mode that can be used to add extra highlighting.<br>
-	 * For example, the search addon uses it to highlight the term that's currently being searched.
+	 * This is a stateless mini-mode that can be used to add extra highlighting.
 	 * 
-	 * @param lanaguage can be a mode spec or a mode object (an object with a token method)
+	 * @param language can be a mode spec or a mode object (an object with a token method)
 	 * @param options overlay options
 	 */
 	public void addOverlay(Language language, OverlayOptions options) {
@@ -913,7 +915,7 @@ public final class Editor implements IsEventManager {
 	 * This differs from cursorCoords in that it'll give the size of the whole character, rather than just the position that the
 	 * cursor would have when it would sit at that position.
 	 * 
-	 * @param pos a position object
+	 * @param position a position object
 	 * @param mode coordinates mode, If mode is "local", they will be relative to the top-left corner of the editable
 	 *            document.<br>
 	 *            If it is "page" or not given, they are relative to the top-left corner of the page.<br>

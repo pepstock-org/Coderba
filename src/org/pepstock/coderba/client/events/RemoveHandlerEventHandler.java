@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for removing an event handler.
  * 
  * @author Andrea "Stock" Stocchero
  */

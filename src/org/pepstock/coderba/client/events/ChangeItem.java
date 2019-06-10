@@ -22,6 +22,7 @@ import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.entities.Range;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -39,9 +40,10 @@ import jsinterop.annotations.JsType;
 public final class ChangeItem extends Range {
 
 	/**
-	 * to avoid any instantiation
+	 * To avoid any instantiation
 	 */
-	ChangeItem() {
+	private ChangeItem() {
+		// do nothing
 	}
 
 	/**
@@ -89,4 +91,14 @@ public final class ChangeItem extends Range {
 	 */
 	@JsProperty
 	public native String getOrigin();
+
+	/**
+	 * It can be called to cancel the change, and, if the change isn't coming from an undo or redo event, an update(from, to,
+	 * text) method, which may be used to modify the change.
+	 */
+	@JsMethod
+	native void cancel();
+	
+	// FIXME
+//	native void update()
 }

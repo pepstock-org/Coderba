@@ -21,19 +21,21 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Abstract class for all events of editors where a native event is laways passed as argument.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <H> type of event handler
  */
 public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
 
 	private final NativeEvent event;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param handlerType event handler type
+	 * @param editorArea editor area instance
+	 * @param event native event instance
 	 */
 	public AbstractEditorWithNativeEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, NativeEvent event) {
 		super(handlerType, editorArea);
@@ -41,7 +43,9 @@ public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> exte
 	}
 
 	/**
-	 * @return the event
+	 * Returns the native event instance.
+	 * 
+	 * @return the native event instance
 	 */
 	public final NativeEvent getEvent() {
 		return event;

@@ -20,22 +20,11 @@ import org.pepstock.coderba.client.entities.Document;
 
 /**
  * This event is fired before a change is applied, and its handler may choose to modify or cancel the change.<br>
- * <br>
- * The changeObj object has from, to, and text properties, as with the "change" event.<br>
- * <br>
  * It also has a cancel() method, which can be called to cancel the change, and, if the change isn't coming from an undo or redo
  * event, an update(from, to, text) method, which may be used to modify the change.<br>
  * <br>
- * Undo or redo changes can't be modified, because they hold some metainformation for restoring old marked ranges that is only
- * valid for that specific change.<br>
- * <br>
- * All three arguments to update are optional, and can be left off to leave the existing value for that field intact.<br>
- * <br>
- * Note: you may not do anything from a "beforeChange" handler that would cause changes to the document or its visualization.
- * <br>
- * <br>
- * Doing so will, since this handler is called directly from the bowels of the CodeMirror implementation, probably cause the
- * editor to become corrupted. FIXME missing methods
+ * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is only
+ * valid for that specific change.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -46,30 +35,43 @@ public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<Docum
 	 */
 	public static final Type<DocumentBeforeChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeChange";
-
+	// change item instance
 	private final ChangeItem item;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a document "beforeChange" event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param item change item instance
 	 */
 	public DocumentBeforeChangeEvent(EditorArea editorArea, Document document, ChangeItem item) {
 		super(TYPE, editorArea, document);
+		// checks if item is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("[DocumentBeforeChangeEvent] Editor change item is null");
+			// if no, exception
+			throw new IllegalArgumentException("Change item is null");
 		}
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the change item.
+	 * 
+	 * @return the change item
 	 */
 	public final ChangeItem getItem() {
 		return item;
+	}
+
+	/**
+	 * It can be called to cancel the change.
+	 */
+	public final void cancel() {
+		item.cancel();
 	}
 
 	/*

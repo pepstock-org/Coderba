@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for changing events on a document.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface DocumentChangeEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when a document will change.
 	 * 
 	 * @param event event to be consumed
 	 */

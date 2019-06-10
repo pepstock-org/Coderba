@@ -35,7 +35,7 @@ import com.google.gwt.dom.client.Element;
  * cursor inside of them. In atomic ranges, inclusiveLeft and inclusiveRight have a different meaning-they will prevent the
  * cursor from being placed respectively directly before and directly after the range.
  * <li>collapsed: boolean. Collapsed ranges do not show up in the display. Setting a range to be collapsed will automatically
- * make it atomic.>
+ * make it atomic.
  * <li>clearOnEnter: boolean. When enabled, will cause the mark to clear itself whenever the cursor enters its range. This is
  * mostly useful for text-replacement widgets that need to 'snap open' when the user tries to edit them. The "clear" event fired
  * on the range handle can be used to be notified when this happens.
@@ -76,7 +76,7 @@ import com.google.gwt.dom.client.Element;
 public class TextMarkerOptions extends BaseEntity {
 
 	/**
-	 * Default value of CSS style classname, {@value DEFAULT_CLASS_NAME}.
+	 * Default value of CSS style classname, {@link UndefinedValues#STRING}.
 	 */
 	public static final String DEFAULT_CLASS_NAME = UndefinedValues.STRING;
 
@@ -138,18 +138,18 @@ public class TextMarkerOptions extends BaseEntity {
 
 	/**
 	 * Default value which can be used to specify an extra CSS class to be applied to the leftmost span that is part of the
-	 * marker, {@value DEFAULT_START_STYLE}.
+	 * marker, {@link UndefinedValues#STRING}.
 	 */
 	public static final String DEFAULT_START_STYLE = UndefinedValues.STRING;
 
 	/**
 	 * Default value which can be used to specify an extra CSS class to be applied to the rightmost span that is part of the
-	 * marker, {@value DEFAULT_END_STYLE}.
+	 * marker, {@link UndefinedValues#STRING}.
 	 */
 	public static final String DEFAULT_END_STYLE = UndefinedValues.STRING;
 
 	/**
-	 * Default value of CSS to be applied to the covered text, {@value DEFAULT_CSS}.
+	 * Default value of CSS to be applied to the covered text, {@link UndefinedValues#STRING}.
 	 */
 	public static final String DEFAULT_CSS = UndefinedValues.STRING;
 

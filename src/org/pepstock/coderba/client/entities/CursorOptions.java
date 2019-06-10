@@ -37,7 +37,7 @@ import org.pepstock.coderba.client.commons.Key;
 public final class CursorOptions extends BaseEntity {
 
 	/**
-	 * Default value for scolling, {@value DEFAULT_SCROLl}.
+	 * Default value for scrolling, {@value DEFAULT_SCROLL}.
 	 */
 	public static final boolean DEFAULT_SCROLL = true;
 

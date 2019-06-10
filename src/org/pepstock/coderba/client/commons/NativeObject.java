@@ -79,7 +79,6 @@ public class NativeObject {
 	/**
 	 * Returns an list of a given object's own property names, in the same order as we get with a normal loop.
 	 * 
-	 * @param source the object of which the enumerable's own properties are to be returned.
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay

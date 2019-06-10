@@ -149,7 +149,6 @@ public class EditorOptions implements IsOptions {
 	 * Before a editor creation, the delegate is always and user options.<br>
 	 * After editor creation, a runtime options will be set.
 	 * 
-	 * @param delegated native object which contains the configuration
 	 * @see UserOptions
 	 */
 	public EditorOptions() {

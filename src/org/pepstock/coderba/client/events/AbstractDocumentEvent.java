@@ -21,26 +21,37 @@ import org.pepstock.coderba.client.entities.Document;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * Abstract class for all events of documents.
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <H> type of event handler
  */
 public abstract class AbstractDocumentEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
 
+	// document instance
 	private final Document document;
 
 	/**
-	 * @param handlerType
+	 * Creates a document event.
+	 * 
+	 * @param handlerType event handler type
+	 * @param editorArea editor area instance
+	 * @param document document instance
 	 */
 	public AbstractDocumentEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document) {
 		super(handlerType, editorArea);
+		// checks if document is consistent
 		if (document == null) {
-			throw new IllegalArgumentException("[AbstarctDocumentEvent] Document is null");
+			// if no, exception
+			throw new IllegalArgumentException("Document is null");
 		}
 		this.document = document;
 	}
 
 	/**
-	 * @return the document
+	 * Returns the document instance.
+	 * 
+	 * @return the document instance
 	 */
 	public final Document getDocument() {
 		return document;

@@ -22,26 +22,38 @@ import org.pepstock.coderba.client.entities.LineWidget;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * Abstract class for all events of line widgets of a document.
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <H> type of event handler
  */
 public abstract class AbstractLineWidgetEvent<H extends EventHandler> extends AbstractDocumentEvent<H> {
 
+	// line widget instance
 	private final LineWidget lineWidget;
 
 	/**
-	 * @param handlerType
+	 * Creates a line widget event.
+	 * 
+	 * @param handlerType event handler type
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param lineWidget line widget instance
 	 */
 	public AbstractLineWidgetEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document, LineWidget lineWidget) {
 		super(handlerType, editorArea, document);
+		// checks if line widget is consistent
 		if (lineWidget == null) {
-			throw new IllegalArgumentException("[AbstarctLineWidgetEvent] Line widget is null");
+			// if no, exception
+			throw new IllegalArgumentException("Line widget is null");
 		}
 		this.lineWidget = lineWidget;
 	}
 
 	/**
-	 * @return the lineWidget
+	 * Returns the line widget instance
+	 * 
+	 * @return the line widget instance
 	 */
 	public final LineWidget getLineWidget() {
 		return lineWidget;

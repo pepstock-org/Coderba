@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event which is fired when new event handler has been added to the chart.<br>
+ * Event which is fired when new event handler has been added to an event manager.<br>
  * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero

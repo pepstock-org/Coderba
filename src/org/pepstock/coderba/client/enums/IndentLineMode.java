@@ -24,7 +24,7 @@ import org.pepstock.coderba.client.commons.Key;
  * <li>"prev" Base indentation on the indentation of the previous line.
  * <li>"smart" Use the mode's smart indentation if available, behave like "prev" otherwise.
  * <li>"add" Increase the indentation of the line by one indent unit.
- * <li>"subtract" Reduce the indentation of the line.>
+ * <li>"subtract" Reduce the indentation of the line.
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
