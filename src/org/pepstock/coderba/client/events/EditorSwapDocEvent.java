@@ -31,7 +31,7 @@ public final class EditorSwapDocEvent extends AbstractEditorEvent<EditorSwapDocE
 	 */
 	public static final Type<EditorSwapDocEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "swapDoc";
 

@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains all events and handlers to apply to CODERBA to listen events.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

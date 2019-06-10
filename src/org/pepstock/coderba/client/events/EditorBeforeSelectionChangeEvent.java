@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * This event is fired before the selection is moved.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,27 +29,32 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 */
 	public static final Type<EditorBeforeSelectionChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeSelectionChange";
-
+	// change item instance
 	private final EditorBeforeSelectionChangeItem item;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param item change item instance
 	 */
 	public EditorBeforeSelectionChangeEvent(EditorArea editorArea, EditorBeforeSelectionChangeItem item) {
 		super(TYPE, editorArea);
+		// checks if item is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("[EditorBeforeSelectionChangeEvent] Editor change item is null");
+			// if no, exception
+			throw new IllegalArgumentException("Change item is null");
 		}
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the change item.
+	 * 
+	 * @return the change item
 	 */
 	public final EditorBeforeSelectionChangeItem getItem() {
 		return item;

@@ -32,7 +32,7 @@ public final class EditorScrollCursorIntoViewEvent extends AbstractEditorWithNat
 	 */
 	public static final Type<EditorScrollCursorIntoViewEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "scrollCursorIntoView";
 

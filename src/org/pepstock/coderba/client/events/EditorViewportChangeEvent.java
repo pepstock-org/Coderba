@@ -30,7 +30,7 @@ public final class EditorViewportChangeEvent extends AbstractEditorEvent<EditorV
 	 */
 	public static final Type<EditorViewportChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "viewportChange";
 

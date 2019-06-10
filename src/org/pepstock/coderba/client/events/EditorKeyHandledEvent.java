@@ -32,7 +32,7 @@ public final class EditorKeyHandledEvent extends AbstractEditorEvent<EditorKeyHa
 	 */
 	public static final Type<EditorKeyHandledEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "keyHandled";
 

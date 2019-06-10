@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired if text input matched the mode's electric patterns, and this caused the line's indentation to change.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,16 +29,17 @@ public final class EditorElectrictInputEvent extends AbstractEditorEvent<EditorE
 	 */
 	public static final Type<EditorElectrictInputEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "electricInput";
-
+	// line number
 	private final int line;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param line line number
 	 */
 	public EditorElectrictInputEvent(EditorArea editorArea, int line) {
 		super(TYPE, editorArea);
@@ -47,7 +47,8 @@ public final class EditorElectrictInputEvent extends AbstractEditorEvent<EditorE
 	}
 
 	/**
-	 * @return the line
+	 * Returns the line number.
+	 * @return the line number
 	 */
 	public final int getLine() {
 		return line;

@@ -30,7 +30,7 @@ public final class EditorRefreshEvent extends AbstractEditorEvent<EditorRefreshE
 	 */
 	public static final Type<EditorRefreshEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "refresh";
 

@@ -33,7 +33,7 @@ public final class TextMarkerClearEvent extends AbstractTextMarkerEvent<TextMark
 	 */
 	public static final Type<TextMarkerClearEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "clear";
 

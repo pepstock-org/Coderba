@@ -32,7 +32,7 @@ public final class TextMarkerHideEvent extends AbstractTextMarkerEvent<TextMarke
 	 */
 	public static final Type<TextMarkerHideEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "hide";
 

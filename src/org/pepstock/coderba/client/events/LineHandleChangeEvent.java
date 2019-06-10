@@ -32,7 +32,7 @@ public final class LineHandleChangeEvent extends AbstractLineHandleEvent<LineHan
 	 */
 	public static final Type<LineHandleChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "change";
 

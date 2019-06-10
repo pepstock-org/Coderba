@@ -30,7 +30,7 @@ public final class EditorScrollEvent extends AbstractEditorEvent<EditorScrollEve
 	 */
 	public static final Type<EditorScrollEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "scroll";
 

@@ -32,7 +32,7 @@ public final class TextMarkerUnhideEvent extends AbstractTextMarkerEvent<TextMar
 	 */
 	public static final Type<TextMarkerUnhideEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "unhide";
 

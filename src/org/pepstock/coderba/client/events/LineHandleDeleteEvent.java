@@ -32,7 +32,7 @@ public final class LineHandleDeleteEvent extends AbstractLineHandleEvent<LineHan
 	 */
 	public static final Type<LineHandleDeleteEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "delete";
 

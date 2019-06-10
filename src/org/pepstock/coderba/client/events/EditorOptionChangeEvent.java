@@ -30,7 +30,7 @@ public final class EditorOptionChangeEvent extends AbstractEditorEvent<EditorOpt
 	 */
 	public static final Type<EditorOptionChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "optionChange";
 

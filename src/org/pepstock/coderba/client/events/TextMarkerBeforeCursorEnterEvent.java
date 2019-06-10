@@ -32,7 +32,7 @@ public final class TextMarkerBeforeCursorEnterEvent extends AbstractTextMarkerEv
 	 */
 	public static final Type<TextMarkerBeforeCursorEnterEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeCursorEnter";
 

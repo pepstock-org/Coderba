@@ -32,7 +32,7 @@ public final class LineWidgetRedrawEvent extends AbstractLineWidgetEvent<LineWid
 	 */
 	public static final Type<LineWidgetRedrawEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "redraw";
 
