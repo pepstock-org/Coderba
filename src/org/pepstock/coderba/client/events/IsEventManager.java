@@ -20,11 +20,21 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
+ * Interface to implement for objects which must fire events.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface IsEventManager extends AddHandlerEventHandler, RemoveHandlerEventHandler {
 
+	/**
+	 * Adds a handler.
+	 * 
+	 * @param <H> The type of handler
+	 * @param type the event type associated with this handler
+	 * @param handler the handler
+	 * @return the handler registration, can be stored in order to remove the handler later
+	 */
 	<H extends EventHandler> HandlerRegistration addHandler(Type<H> type, H handler);
 
 }

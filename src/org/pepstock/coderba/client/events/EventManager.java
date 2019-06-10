@@ -26,29 +26,47 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.UmbrellaException;
 
 /**
+ * Common event manager, responsible for adding handlers to event sources and firing those
+ * handlers on passed in events.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class EventManager {
-
+	// GWT manager
 	private final HandlerManager eventHandlerManager;
-
+	// event manager instance
 	private final IsEventManager eventManager;
-
+	// list of created handler registration
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 
+	/**
+	 * Creates an event manager by an object which must fire events.
+	 * 
+	 * @param eventManager object which must fire events
+	 */
 	public EventManager(IsEventManager eventManager) {
+		// checks if event manager is consistent
 		if (eventManager == null) {
+			// if no, exception
 			throw new IllegalArgumentException("Event manager is null");
 		}
+		// streos event manager
 		this.eventManager = eventManager;
+		// creates GWT manager
 		eventHandlerManager = new HandlerManager(this.eventManager, false);
+		// adds to event manager as handler to add and remove handlers
 		eventHandlerManager.addHandler(AddHandlerEvent.TYPE, eventManager);
 		eventHandlerManager.addHandler(RemoveHandlerEvent.TYPE, eventManager);
 	}
 
+	/**
+	 * Removes all handlers
+	 */
 	public void removeAllHandlers() {
+		// scans all handle registration
 		for (HandlerRegistration handler : handlerRegistrations) {
+			// removes handler
 			handler.removeHandler();
 		}
 	}
@@ -75,7 +93,9 @@ public final class EventManager {
 	 * @param event the event
 	 */
 	public void fireEvent(GwtEvent<?> event) {
+		// if event is consistent
 		if (event != null) {
+			// fires event
 			eventHandlerManager.fireEvent(event);
 		}
 	}
@@ -117,24 +137,28 @@ public final class EventManager {
 	}
 
 	/**
-	 * FIXME
+	 * Custom implementation of handle registration in order to clean the list with all handle registration.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
-	 * @param <H>
+	 * @param <H> event handler type
 	 */
 	private static class InternalHandlerRegistration<H extends EventHandler> implements HandlerRegistration {
-
+		// event manager
 		private final EventManager manager;
-
+		// handler type
 		private final Type<H> type;
-
+		// handle instance
 		private final H handler;
-
+		// hadnel registration to wrap
 		private HandlerRegistration delegate;
 
 		/**
-		 * @param manager
+		 * Creates a custom handle registration.
+		 * @param manager event manager
+		 * @param registration handler registration instance
+		 * @param type type of handler
+		 * @param handler handler instance
 		 */
 		private InternalHandlerRegistration(EventManager manager, HandlerRegistration registration, Type<H> type, H handler) {
 			this.manager = manager;
@@ -150,7 +174,9 @@ public final class EventManager {
 		 */
 		@Override
 		public void removeHandler() {
+			// invokes remove handler of handler registration
 			delegate.removeHandler();
+			// remove the handler
 			manager.removeHandler(type, handler);
 		}
 

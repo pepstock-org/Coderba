@@ -43,7 +43,7 @@ public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEv
 	private final Anchor anchor;
 
 	/**
-	 * Creates a document "beforeSelectionChange" event.
+	 * Creates a document {@value NAME} event.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param document document instance

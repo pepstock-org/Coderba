@@ -42,7 +42,7 @@ public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<Docum
 	private final ChangeItem item;
 
 	/**
-	 * Creates a document "beforeChange" event.
+	 * Creates a document {@value NAME} event.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param document document instance

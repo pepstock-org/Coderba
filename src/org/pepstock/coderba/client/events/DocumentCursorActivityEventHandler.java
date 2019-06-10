@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for changing cursor or selection events on a document.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface DocumentCursorActivityEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked for the cursor or selection in this document changes.
 	 * 
 	 * @param event event to be consumed
 	 */
