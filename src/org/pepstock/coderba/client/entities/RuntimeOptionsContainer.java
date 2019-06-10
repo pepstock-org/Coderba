@@ -172,8 +172,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String,
-	 * boolean)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String, boolean)
 	 */
 	@Override
 	protected void defineBooleanProperty(String key, boolean value) {

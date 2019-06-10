@@ -28,11 +28,11 @@ import org.pepstock.coderba.client.commons.Key;
 public enum InputStyle implements Key
 {
 	/**
-	 * Input and focus manage by a text area element. 
+	 * Input and focus manage by a text area element.
 	 */
 	TEXT_AREA("textarea"),
 	/**
-	 * Input and focus manage by a content editable element. 
+	 * Input and focus manage by a content editable element.
 	 */
 	CONTENT_EDITABLE("contenteditable");
 

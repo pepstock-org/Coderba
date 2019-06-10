@@ -383,7 +383,7 @@ final class NativeDocument extends NativeObject {
 	 * @param head ending position
 	 * @param options options instance
 	 */
-	native void setSelection(Position anchor, Position head, NativeObject options); 
+	native void setSelection(Position anchor, Position head, NativeObject options);
 
 	/**
 	 * Sets a new set of selections.<br>

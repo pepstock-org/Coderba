@@ -56,13 +56,14 @@ public enum CursorPosition implements Key
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
 	@Override
 	public String value() {
 		return value;
 	}
-
 
 }

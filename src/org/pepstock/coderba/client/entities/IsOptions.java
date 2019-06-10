@@ -392,7 +392,7 @@ public interface IsOptions extends IsDefaultOptions {
 
 	/**
 	 * When highlighting long lines, in order to stay responsive, the editor will give up and simply style the rest of the line
-	 * as plain text when it reaches a certain position. 
+	 * as plain text when it reaches a certain position.
 	 * 
 	 * @param maxHighlightLength When highlighting long lines, in order to stay responsive, the editor will give up and simply
 	 *            style the rest of the line as plain text when it reaches a certain position. The default is 10 000.

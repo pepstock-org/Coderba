@@ -161,7 +161,7 @@ public class EditorOptions implements IsOptions {
 		lineNumberFormatterFunctionProxy.setCallback((line) -> onLineNumberFormatter(line));
 		configureMouseFunctionProxy.setCallback((editor, repeat, event) -> onConfigureMouse(editor, repeat, event));
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if no property has been set as option.
 	 * 

@@ -51,6 +51,7 @@ final class Documents {
 
 	/**
 	 * Adds a document into cache.
+	 * 
 	 * @param document document instance to be added into cache
 	 */
 	void add(Document document) {
@@ -61,8 +62,9 @@ final class Documents {
 
 	/**
 	 * Returns <code>true</code> if the document id is present into cache.
+	 * 
 	 * @param id document id.
-	 * @return <code>true</code> if the document id is present into cache 
+	 * @return <code>true</code> if the document id is present into cache
 	 */
 	boolean has(String id) {
 		// checks if id is consistent
@@ -77,13 +79,14 @@ final class Documents {
 
 	/**
 	 * Returns the document instance by its id from cache.
+	 * 
 	 * @param id document id
-	 * @return the document instance from cache 
+	 * @return the document instance from cache
 	 */
 	Document retrieve(String id) {
 		// checks if id is consistent
 		if (id != null) {
-			// returns the stored document 
+			// returns the stored document
 			return documents.get(id);
 		}
 		// if here, id is not consistent

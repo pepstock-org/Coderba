@@ -20,7 +20,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference Ace code editor and other java script codes, always needed to CODERBA.
+ * Client bundle to reference Code Mirror code editor and other java script codes, always needed to CODERBA.
  * 
  * @author Marco "Cuc" Cuccato
  */

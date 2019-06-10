@@ -48,7 +48,8 @@ public final class NativeName {
 	public static final String CODE_MIRROR = "CodeMirror";
 
 	/**
-	 * Constant to bind java script object as Code mirror document with name <b>{@value DOCUMENT}</b>, (internal of Code Mirror).
+	 * Constant to bind java script object as Code mirror document with name <b>{@value DOCUMENT}</b>, (internal of Code
+	 * Mirror).
 	 */
 	public static final String DOCUMENT = "Doc";
 

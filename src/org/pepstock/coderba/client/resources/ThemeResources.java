@@ -20,7 +20,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CodeMirror code editor and other java script codes, always needed to Acerba.
+ * Client bundle to reference THEME CodeMirror instances, always needed to CODERBA.
  * 
  * @author Andrea "Stock" Stocchero
  */

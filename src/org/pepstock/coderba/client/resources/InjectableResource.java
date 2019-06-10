@@ -19,12 +19,24 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.TextResource;
 
 /**
+ * Defines how the resource, to be injected, must be implemented.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface InjectableResource {
 
+	/**
+	 * Returns a text resource instance which must be injected.
+	 * 
+	 * @return a text resource instance which must be injected
+	 */
 	TextResource getResource();
 
+	/**
+	 * Returns a DOM element which must wrap the text resource.
+	 * 
+	 * @return a DOM element which must wrap the text resource
+	 */
 	Element getElement();
 }

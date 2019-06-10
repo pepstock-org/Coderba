@@ -132,7 +132,7 @@ public final class LineInfo {
 	 * @return an unmodifiable list of line widget associated to this line
 	 */
 	public List<LineWidget> getWidgets() {
-		// FIXME makes this into constructor 
+		// FIXME makes this into constructor
 		// creates the list to return
 		List<LineWidget> widgets = new LinkedList<>();
 		// gets the array of line widgets by Code Mirror

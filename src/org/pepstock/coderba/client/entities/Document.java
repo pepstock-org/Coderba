@@ -209,7 +209,7 @@ public final class Document implements IsEventManager {
 	private final NativeDocument nativeObject;
 
 	private final EventManager eventManager;
-	
+
 	private final Language language;
 
 	private final Map<String, TextMarker> markers = new HashMap<>();
@@ -1238,9 +1238,10 @@ public final class Document implements IsEventManager {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the language set to the document.
+	 * 
 	 * @return the language set to the document
 	 */
 	public Language getLanguage() {

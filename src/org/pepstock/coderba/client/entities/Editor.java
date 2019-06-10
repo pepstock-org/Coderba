@@ -489,7 +489,7 @@ public final class Editor implements IsEventManager {
 	private final NativeEditor nativeObject;
 	// event manager instance
 	private final EventManager eventManager;
-	// the current document managed by editor 
+	// the current document managed by editor
 	private Document document = null;
 
 	/**

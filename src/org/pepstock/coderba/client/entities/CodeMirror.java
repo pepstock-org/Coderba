@@ -73,7 +73,7 @@ public final class CodeMirror {
 	 * @return It contains a string that indicates the version of the library.
 	 */
 	public String getVersion() {
-		return version; 
+		return version;
 	}
 
 	/**
@@ -151,7 +151,7 @@ public final class CodeMirror {
 				editor = new Editor(NativeCodeMirror.fromTextArea(element), configuration.getLanguage());
 			} else {
 				// if yes, initialized the editor by configuration
-				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()),configuration.getLanguage());
+				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()), configuration.getLanguage());
 			}
 			// sets the unique id to editor
 			editor.setId(id);

@@ -31,7 +31,7 @@ public enum ReadOnly implements Key
 	 */
 	TRUE("true"),
 	/**
-	 * Enables editing. 
+	 * Enables editing.
 	 */
 	FALSE("false"),
 	/**
@@ -50,6 +50,7 @@ public enum ReadOnly implements Key
 	private ReadOnly(String value) {
 		this.value = value;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

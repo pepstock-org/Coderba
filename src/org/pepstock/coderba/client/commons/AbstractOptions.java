@@ -143,7 +143,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
-		//FIXME
+		// FIXME
 		return nativeObjectContainer.getValue(Options.EXTRA_KEYS);
 	}
 
@@ -771,7 +771,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public void setExtraKeys(NativeObject extraKeys) {
-		//FIXME
+		// FIXME
 		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
 	}
 

@@ -18,7 +18,8 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
- * Adjust the indentation of the given line.<br>The argument (which defaults to "smart") may be one of: <br>
+ * Adjust the indentation of the given line.<br>
+ * The argument (which defaults to "smart") may be one of: <br>
  * <ul>
  * <li>"prev" Base indentation on the indentation of the previous line.
  * <li>"smart" Use the mode's smart indentation if available, behave like "prev" otherwise.
