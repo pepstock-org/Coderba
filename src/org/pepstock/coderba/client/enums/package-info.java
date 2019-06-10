@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains all enumeration to use to configure and manage CODERBA.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

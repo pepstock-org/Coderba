@@ -44,20 +44,25 @@ public enum CursorPosition implements Key
 	 */
 	START("start");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private CursorPosition(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}
+
 
 }

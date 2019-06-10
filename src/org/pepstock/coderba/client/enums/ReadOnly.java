@@ -18,27 +18,44 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Enumeration to disable editing of the editor content by the user.<br>
+ * If the special value "nocursor" is given (instead of simply true), focusing of the editor is also disallowed.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum ReadOnly implements Key
 {
+	/**
+	 * Disables editing.
+	 */
 	TRUE("true"),
+	/**
+	 * Enables editing. 
+	 */
 	FALSE("false"),
+	/**
+	 * Disables editing and focusing of the editor is also disallowed.
+	 */
 	NO_CURSOR("nocursor");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private ReadOnly(String value) {
 		this.value = value;
 	}
-
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

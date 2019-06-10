@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all entities of Code Mirror in order to act with it to set and manage editors.
+ * Contains all entities of CODERBA in order to act with it to set and manage editors.
  * 
  * @author Andrea "Stock" Stocchero
  *

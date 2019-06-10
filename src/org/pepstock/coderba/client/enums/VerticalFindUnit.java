@@ -18,26 +18,40 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Unit of measurement of vertical find operation into document.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum VerticalFindUnit implements Key
 {
+	/**
+	 * Line unit.
+	 */
 	LINE("line"),
+	/**
+	 * Page unit.
+	 */
 	PAGE("page");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private VerticalFindUnit(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

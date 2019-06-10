@@ -18,26 +18,40 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Defines the type of a text marker.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum TextMarkerType implements Key
 {
+	/**
+	 * Normal text marker.
+	 */
 	RANGE("range"),
+	/**
+	 * Bookmark marker.
+	 */
 	BOOKMARK("bookmark");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private TextMarkerType(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

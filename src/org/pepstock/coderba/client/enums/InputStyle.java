@@ -18,26 +18,42 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Enumeration to define the way CodeMirror handles input and focus.<br>
+ * On mobile browsers, the default is "contenteditable".<br>
+ * On desktop browsers, the default is "textarea".
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum InputStyle implements Key
 {
+	/**
+	 * Input and focus manage by a text area element. 
+	 */
 	TEXT_AREA("textarea"),
+	/**
+	 * Input and focus manage by a content editable element. 
+	 */
 	CONTENT_EDITABLE("contenteditable");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private InputStyle(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}
