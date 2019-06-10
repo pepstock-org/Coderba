@@ -285,7 +285,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getValue()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getValue()
 	 */
 	@Override
 	public String getValue() {
@@ -295,7 +295,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getLanguage()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getLanguage()
 	 */
 	@Override
 	public Language getLanguage() {
@@ -305,7 +305,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getLineSeparator()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getLineSeparator()
 	 */
 	@Override
 	public String getLineSeparator() {
@@ -315,7 +315,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTheme()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTheme()
 	 */
 	@Override
 	public Theme getTheme() {
@@ -325,7 +325,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getIndentUnit()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getIndentUnit()
 	 */
 	@Override
 	public int getIndentUnit() {
@@ -335,7 +335,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSmartIndent()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSmartIndent()
 	 */
 	@Override
 	public boolean isSmartIndent() {
@@ -345,7 +345,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTabSize()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTabSize()
 	 */
 	@Override
 	public int getTabSize() {
@@ -355,7 +355,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isIndentWithTabs()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isIndentWithTabs()
 	 */
 	@Override
 	public boolean isIndentWithTabs() {
@@ -365,7 +365,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isElectricChars()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isElectricChars()
 	 */
 	@Override
 	public boolean isElectricChars() {
@@ -375,7 +375,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getSpecialChars()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getSpecialChars()
 	 */
 	@Override
 	public RegExp getSpecialChars() {
@@ -385,7 +385,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getDirection()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getDirection()
 	 */
 	@Override
 	public Direction getDirection() {
@@ -395,7 +395,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isRtlMoveVisually()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isRtlMoveVisually()
 	 */
 	@Override
 	public boolean isRtlMoveVisually() {
@@ -405,7 +405,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getKeyMap()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getKeyMap()
 	 */
 	@Override
 	public KeyMap getKeyMap() {
@@ -415,7 +415,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getExtraKeys()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
 	 */
 	@Override
 	public NativeObject getExtraKeys() {
@@ -426,7 +426,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineWrapping()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineWrapping()
 	 */
 	@Override
 	public boolean isLineWrapping() {
@@ -436,7 +436,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineNumbers()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineNumbers()
 	 */
 	@Override
 	public boolean isLineNumbers() {
@@ -446,7 +446,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getFirstLineNumber()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getFirstLineNumber()
 	 */
 	@Override
 	public int getFirstLineNumber() {
@@ -456,7 +456,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getGutters()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getGutters()
 	 */
 	@Override
 	public List<String> getGutters() {
@@ -466,7 +466,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isFixedGutter()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isFixedGutter()
 	 */
 	@Override
 	public boolean isFixedGutter() {
@@ -476,7 +476,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getScrollbarStyle()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getScrollbarStyle()
 	 */
 	@Override
 	public String getScrollbarStyle() {
@@ -486,7 +486,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isCoverGutterNextToScrollbar()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isCoverGutterNextToScrollbar()
 	 */
 	@Override
 	public boolean isCoverGutterNextToScrollbar() {
@@ -496,7 +496,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getInputStyle()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getInputStyle()
 	 */
 	@Override
 	public InputStyle getInputStyle() {
@@ -506,7 +506,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isReadOnly()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isReadOnly()
 	 */
 	@Override
 	public boolean isReadOnly() {
@@ -516,7 +516,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getReadOnly()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getReadOnly()
 	 */
 	@Override
 	public ReadOnly getReadOnly() {
@@ -526,7 +526,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isShowCursorWhenSelecting()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isShowCursorWhenSelecting()
 	 */
 	@Override
 	public boolean isShowCursorWhenSelecting() {
@@ -536,7 +536,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineWiseCopyCut()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineWiseCopyCut()
 	 */
 	@Override
 	public boolean isLineWiseCopyCut() {
@@ -546,7 +546,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isPasteLinesPerSelection()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isPasteLinesPerSelection()
 	 */
 	@Override
 	public boolean isPasteLinesPerSelection() {
@@ -556,7 +556,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSelectionsMayTouch()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSelectionsMayTouch()
 	 */
 	@Override
 	public boolean isSelectionsMayTouch() {
@@ -566,7 +566,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getUndoDepth()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getUndoDepth()
 	 */
 	@Override
 	public int getUndoDepth() {
@@ -576,7 +576,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getHistoryEventDelay()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getHistoryEventDelay()
 	 */
 	@Override
 	public int getHistoryEventDelay() {
@@ -586,7 +586,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTabindex()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTabindex()
 	 */
 	@Override
 	public int getTabindex() {
@@ -596,7 +596,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutofocus()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutofocus()
 	 */
 	@Override
 	public boolean isAutofocus() {
@@ -606,7 +606,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getPhrases()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getPhrases()
 	 */
 	@Override
 	public Phrases getPhrases() {
@@ -616,7 +616,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isDragDrop()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isDragDrop()
 	 */
 	@Override
 	public boolean isDragDrop() {
@@ -626,7 +626,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getAllowDropFileTypes()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getAllowDropFileTypes()
 	 */
 	@Override
 	public List<String> getAllowDropFileTypes() {
@@ -636,7 +636,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorBlinkRate()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorBlinkRate()
 	 */
 	@Override
 	public int getCursorBlinkRate() {
@@ -646,7 +646,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorScrollMargin()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorScrollMargin()
 	 */
 	@Override
 	public int getCursorScrollMargin() {
@@ -656,7 +656,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorHeight()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorHeight()
 	 */
 	@Override
 	public int getCursorHeight() {
@@ -666,7 +666,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isResetSelectionOnContextMenu()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isResetSelectionOnContextMenu()
 	 */
 	@Override
 	public boolean isResetSelectionOnContextMenu() {
@@ -676,7 +676,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getPollInterval()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getPollInterval()
 	 */
 	@Override
 	public int getPollInterval() {
@@ -686,7 +686,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isFlattenSpans()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isFlattenSpans()
 	 */
 	@Override
 	public boolean isFlattenSpans() {
@@ -696,7 +696,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAddModeClass()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAddModeClass()
 	 */
 	@Override
 	public boolean isAddModeClass() {
@@ -706,7 +706,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getMaxHighlightLength()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getMaxHighlightLength()
 	 */
 	@Override
 	public int getMaxHighlightLength() {
@@ -716,7 +716,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getViewportMargin()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getViewportMargin()
 	 */
 	@Override
 	public int getViewportMargin() {
@@ -726,7 +726,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSpellcheck()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSpellcheck()
 	 */
 	@Override
 	public boolean isSpellcheck() {
@@ -736,7 +736,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutocorrect()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutocorrect()
 	 */
 	@Override
 	public boolean isAutocorrect() {
@@ -746,7 +746,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutocapitalize()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutocapitalize()
 	 */
 	@Override
 	public boolean isAutocapitalize() {
@@ -756,7 +756,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getWorkTime()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getWorkTime()
 	 */
 	@Override
 	public int getWorkTime() {
@@ -766,7 +766,7 @@ public class EditorOptions implements IsOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getWorkDelay()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getWorkDelay()
 	 */
 	@Override
 	public int getWorkDelay() {

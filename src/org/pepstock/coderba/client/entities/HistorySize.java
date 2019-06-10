@@ -17,15 +17,18 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
-import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
- * History size. // { undo: number; redo: number; };
+ * Entity which maps the current size of history of document.<br>
+ * It contains the <code>redo</code> and <code>undo</code> amounts.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class HistorySize extends BaseEntity {
 
+	/**
+	 * Default value of amount of changes, {@value EMPTY_HISTORY}.
+	 */
 	public static final int EMPTY_HISTORY = 0;
 
 	/**
@@ -59,23 +62,29 @@ public final class HistorySize extends BaseEntity {
 		}
 	}
 
+	/**
+	 * Creates a container with a native object instance.<br>
+	 * Not visible because must be created internally by the document.
+	 * 
+	 * @param nativeObject a native object instance
+	 */
 	HistorySize(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Returns the top of area.
+	 * Returns the amount of <code>undo</code> changes.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the amount of <code>undo</code> changes.
 	 */
 	public int getUndo() {
 		return getValue(Property.UNDO, EMPTY_HISTORY);
 	}
 
 	/**
-	 * Returns the top of area.
+	 * Returns the amount of <code>redo</code> changes.
 	 * 
-	 * @return the top of area. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the amount of <code>redo</code> changes.
 	 */
 	public int getRedo() {
 		return getValue(Property.REDO, EMPTY_HISTORY);

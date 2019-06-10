@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Array object which maps the java script object.<br>
- * A simple wrapper around a homogeneous native array of object (NativeTextMarker) values.
+ * A simple wrapper around a native array of object (NativeTextMarker) values.
  * 
  * @author Andrea "Stock" Stocchero
  */

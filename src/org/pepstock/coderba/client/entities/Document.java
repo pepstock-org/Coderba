@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.GlobalDefaults;
+import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.Modes;
 import org.pepstock.coderba.client.callbacks.DocumentEachLineHandler;
@@ -208,6 +209,8 @@ public final class Document implements IsEventManager {
 	private final NativeDocument nativeObject;
 
 	private final EventManager eventManager;
+	
+	private final Language language;
 
 	private final Map<String, TextMarker> markers = new HashMap<>();
 
@@ -225,8 +228,12 @@ public final class Document implements IsEventManager {
 	 * 
 	 * @param nativeObject
 	 */
-	Document(NativeDocument nativeObject) {
+	Document(NativeDocument nativeObject, Language language) {
+		if (language == null) {
+			throw new IllegalArgumentException("Language is null");
+		}
 		this.nativeObject = nativeObject;
+		this.language = language;
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// stores id
@@ -1231,11 +1238,17 @@ public final class Document implements IsEventManager {
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns the language set to the document.
+	 * @return the language set to the document
+	 */
+	public Language getLanguage() {
+		return language;
+	}
 
 	/**
-	 * Gets the (outer) mode object for the editor.<br>
-	 * Note that this is distinct from getOption("mode"), which gives you the mode specification, rather than the resolved,
-	 * instantiated mode object
+	 * Gets the (outer) mode object for the editor.
 	 * 
 	 * @return the (outer) mode object for the editor
 	 */
@@ -1267,7 +1280,7 @@ public final class Document implements IsEventManager {
 	 * @return an identical copy of the given doc
 	 */
 	public Document copy(boolean copyHistory) {
-		Document copiedDocument = new Document(nativeObject.copy(copyHistory));
+		Document copiedDocument = new Document(nativeObject.copy(copyHistory), language);
 		copiedDocument.setDocumentEachLineHandler(documentEachLineHandler);
 		copiedDocument.setDocumentExtendSelectionsHandler(documentExtendSelectionsHandler);
 		copiedDocument.setLinkedDocumentsHandler(linkedDocumentsHandler);
@@ -1295,8 +1308,11 @@ public final class Document implements IsEventManager {
 	 * @return new document that's linked to the target document
 	 */
 	public Document linkedDocument(LinkedDocumentOptions options) {
-		Document newDocument = new Document(nativeObject.linkedDoc(checkOptions(options).getObject()));
-		return newDocument;
+		if (options.getLanguage() != null) {
+			return new Document(nativeObject.linkedDoc(checkOptions(options).getObject()), options.getLanguage());
+		} else {
+			return new Document(nativeObject.linkedDoc(checkOptions(options).getObject()), language);
+		}
 	}
 
 	/**

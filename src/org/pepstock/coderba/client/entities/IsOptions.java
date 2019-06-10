@@ -361,11 +361,11 @@ public interface IsOptions extends IsDefaultOptions {
 	void setResetSelectionOnContextMenu(boolean resetSelectionOnContextMenu);
 
 	/**
-	 * Indicates how quickly CodeMirror should poll its input textarea for changes (when focused). Most input is captured by
+	 * Indicates how quickly CodeMirror should poll its input text area for changes (when focused). Most input is captured by
 	 * events, but some things, like IME input on some browsers, don't generate events that allow CodeMirror to properly detect
 	 * it. Thus, it polls.
 	 * 
-	 * @param pollInterval Indicates how quickly CodeMirror should poll its input textarea for changes (when focused)
+	 * @param pollInterval Indicates how quickly CodeMirror should poll its input text area for changes (when focused)
 	 */
 	void setPollInterval(int pollInterval);
 
@@ -392,7 +392,7 @@ public interface IsOptions extends IsDefaultOptions {
 
 	/**
 	 * When highlighting long lines, in order to stay responsive, the editor will give up and simply style the rest of the line
-	 * as plain text when it reaches a certain position. The default is 10 000.
+	 * as plain text when it reaches a certain position. 
 	 * 
 	 * @param maxHighlightLength When highlighting long lines, in order to stay responsive, the editor will give up and simply
 	 *            style the rest of the line as plain text when it reaches a certain position. The default is 10 000.
@@ -409,23 +409,23 @@ public interface IsOptions extends IsDefaultOptions {
 	void setViewportMargin(int viewportMargin);
 
 	/**
-	 * Specifies whether or not spellcheck will be enabled on the input.
+	 * Specifies whether or not spell check will be enabled on the input.
 	 * 
-	 * @param spellcheck Specifies whether or not spellcheck will be enabled on the input.
+	 * @param spellcheck Specifies whether or not spell check will be enabled on the input.
 	 */
 	void setSpellcheck(boolean spellcheck);
 
 	/**
-	 * Specifies whether or not autocorrect will be enabled on the input.
+	 * Specifies whether or not auto correct will be enabled on the input.
 	 * 
-	 * @param autocorrect Specifies whether or not autocorrect will be enabled on the input.
+	 * @param autocorrect Specifies whether or not auto correct will be enabled on the input.
 	 */
 	void setAutocorrect(boolean autocorrect);
 
 	/**
-	 * Specifies whether or not autocapitalization will be enabled on the input.
+	 * Specifies whether or not auto capitalization will be enabled on the input.
 	 * 
-	 * @param autocapitalize Specifies whether or not autocapitalization will be enabled on the input.
+	 * @param autocapitalize Specifies whether or not auto capitalization will be enabled on the input.
 	 */
 	void setAutocapitalize(boolean autocapitalize);
 

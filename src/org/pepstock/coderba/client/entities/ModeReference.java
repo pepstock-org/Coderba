@@ -22,7 +22,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Native object which contains the link to a mode, providing its name.<br>
+ * All others properties and methods are hidden because not used.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -37,6 +38,11 @@ final class ModeReference {
 		// do nothing
 	}
 
+	/**
+	 * Returns the name of the mode.
+	 * 
+	 * @return the name of the mode
+	 */
 	@JsProperty
 	native String getName();
 

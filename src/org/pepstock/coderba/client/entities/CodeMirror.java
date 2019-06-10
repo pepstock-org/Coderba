@@ -41,7 +41,6 @@ public final class CodeMirror {
 	private final MimeModes mimeModes;
 	// stores CodeMirror Version
 	private final String version;
-	
 
 	/**
 	 * To avoid any instantiation
@@ -149,10 +148,10 @@ public final class CodeMirror {
 			// checks if a configuration object has been changed
 			if (configuration.isEmpty()) {
 				// if no, initialized the editor by default configuration
-				editor = new Editor(NativeCodeMirror.fromTextArea(element));
+				editor = new Editor(NativeCodeMirror.fromTextArea(element), configuration.getLanguage());
 			} else {
 				// if yes, initialized the editor by configuration
-				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
+				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()),configuration.getLanguage());
 			}
 			// sets the unique id to editor
 			editor.setId(id);

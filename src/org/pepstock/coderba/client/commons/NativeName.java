@@ -43,12 +43,12 @@ public final class NativeName {
 	public static final String WINDOW = "window";
 
 	/**
-	 * Constant to bind java script object as ace with name <b>{@value ACE}</b>, (internal of ACE).
+	 * Constant to bind java script object as Code mirror with name <b>{@value CODE_MIRROR}</b>, (internal of Code Mirror).
 	 */
 	public static final String CODE_MIRROR = "CodeMirror";
 
 	/**
-	 * Constant to bind java script object as ace with name <b>{@value ACE}</b>, (internal of ACE).
+	 * Constant to bind java script object as Code mirror document with name <b>{@value DOCUMENT}</b>, (internal of Code Mirror).
 	 */
 	public static final String DOCUMENT = "Doc";
 

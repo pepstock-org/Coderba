@@ -80,8 +80,7 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
-	 * method.
+	 * Creates new proxy for callback.
 	 * 
 	 * @param <T> type of callback wrapped by proxy
 	 * @return new proxy for callback.

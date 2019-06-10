@@ -32,7 +32,9 @@ public final class StandardKey implements Key {
 	 * @param key key as string
 	 */
 	StandardKey(String key) {
+		// checks if key is consistent
 		if (key == null) {
+			// if no, exception
 			throw new IllegalArgumentException("Key is null");
 		}
 		this.value = key;

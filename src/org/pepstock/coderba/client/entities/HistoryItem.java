@@ -23,7 +23,8 @@ import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * 
+ * Entity which maps the history item of Code Mirror document.<br>
+ * It contains the changes and the ranges where the changes are applied.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -62,27 +63,45 @@ public final class HistoryItem extends BaseEntity {
 	}
 
 	/**
+	 * Creates a container with a native object instance.<br>
+	 * Not visible because must be created internally by the document.
 	 * 
+	 * @param nativeObject a native object instance
 	 */
 	HistoryItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
+	 * Returns <code>true</code> if the item contains changes.
 	 * 
-	 * @return
+	 * @return <code>true</code> if the item contains changes
 	 */
 	public boolean hasChanges() {
 		return has(Property.CHANGES);
 	}
 
+	/**
+	 * Returns an unmodifiable list of anchors which represents the ranges of changes.
+	 * 
+	 * @return an unmodifiable list of anchors
+	 */
 	public List<Anchor> getRanges() {
+		// gets array
 		ArrayEntity<Anchor> array = getArrayValue(Property.RANGES);
+		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
+	/**
+	 * Returns an unmodifiable list of changes.
+	 * 
+	 * @return an unmodifiable list of changes
+	 */
 	public List<HistoryChangeItem> getChanges() {
+		// gets array
 		ArrayEntity<HistoryChangeItem> array = getArrayValue(Property.CHANGES);
+		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 

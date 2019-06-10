@@ -19,7 +19,8 @@ import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.commons.AbstractExtendedOptions;
 
 /**
- * Manages the options of an editor already instantiated.<br< It uses a native editor to set and get options.
+ * Manages the options of an editor already instantiated.<br>
+ * It uses a native editor to set and get options.
  * 
  * @author Andrea "Stock" Stocchero
  *

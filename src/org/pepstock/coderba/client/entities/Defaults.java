@@ -34,7 +34,7 @@ public final class Defaults extends AbstractOptions<UserOptionsContainer> {
 
 	/**
 	 * Creates the wrapper to the <code>CodeMirror.defaults</code> using the default values.<br>
-	 * Uses a USER options container anche the global defaults for internal defaults.
+	 * Uses a USER options container as the global defaults for internal defaults.
 	 */
 	Defaults() {
 		super(new UserOptionsContainer(CodeMirror.get().getDefaults()), GlobalDefaults.get());

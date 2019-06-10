@@ -28,7 +28,7 @@ import org.pepstock.coderba.client.commons.HasName;
  * @param <T> type of injectable items to cache
  *
  */
-abstract class InjectedItems<T extends HasName> {
+public abstract class InjectedItems<T extends HasName> {
 
 	// buffer with all injectable items instances
 	// K = injectable item name

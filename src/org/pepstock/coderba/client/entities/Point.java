@@ -24,7 +24,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Object which contains 2 values to identify a point: top and left.<br>
+ * It is used by Code Mirror methods.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -39,15 +40,26 @@ public class Point extends NativeEntity {
 		// do nothing
 	}
 
+	/**
+	 * Creates a point using all fields.
+	 * 
+	 * @param top top field
+	 * @param left left field
+	 * @return a point instance
+	 */
 	@JsOverlay
 	public static Point create(int top, int left) {
+		// creates a point instance
 		Point point = new Point();
+		// sets all values
 		point.setTop(top);
 		point.setLeft(left);
+		// returns point instance
 		return point;
 	}
 
 	/**
+	 * <b>INTERNAL</b><br>
 	 * Sets the top location in pixel
 	 * 
 	 * @param top the top location in pixel
@@ -64,6 +76,7 @@ public class Point extends NativeEntity {
 	public final native int getTop();
 
 	/**
+	 * <b>INTERNAL</b><br>
 	 * Sets the left location in pixel
 	 * 
 	 * @param left the left location in pixel

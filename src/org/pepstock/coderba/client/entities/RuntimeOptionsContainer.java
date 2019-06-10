@@ -69,7 +69,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#hasProperty(java.lang.String)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#hasProperty(java.lang.String)
 	 */
 	@Override
 	protected boolean hasProperty(String key) {
@@ -80,7 +80,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#keys()
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#keys()
 	 */
 	@Override
 	protected List<Key> keys() {
@@ -97,7 +97,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getType(java.lang.String)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getType(java.lang.String)
 	 */
 	@Override
 	protected ObjectType getType(String key) {
@@ -107,20 +107,20 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#removeProperty(java.lang.String)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#removeProperty(java.lang.String)
 	 */
 	@Override
 	protected void removeProperty(String key) {
+		// creates the key
 		Key keyObject = Key.create(key);
-		// do nothing
-		// the runtime options NEVER remove keys
+		// clones the value from default into this options
 		cloneFromDefaults(Defaults.get().getObject(), nativeEditor.getOptions(), keyObject);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineIntProperty(java.lang.String, int)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineIntProperty(java.lang.String, int)
 	 */
 	@Override
 	protected void defineIntProperty(String key, int value) {
@@ -131,7 +131,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getIntProperty(java.lang.String, int)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getIntProperty(java.lang.String, int)
 	 */
 	@Override
 	protected int getIntProperty(String key, int defaultValue) {
@@ -146,7 +146,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineDoubleProperty(java.lang.String, double)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineDoubleProperty(java.lang.String, double)
 	 */
 	@Override
 	protected void defineDoubleProperty(String key, double value) {
@@ -157,7 +157,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getDoubleProperty(java.lang.String, double)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getDoubleProperty(java.lang.String, double)
 	 */
 	@Override
 	protected double getDoubleProperty(String key, double defaultValue) {
@@ -172,7 +172,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineBooleanProperty(java.lang.String,
 	 * boolean)
 	 */
 	@Override
@@ -184,7 +184,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getBooleanProperty(java.lang.String, boolean)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getBooleanProperty(java.lang.String, boolean)
 	 */
 	@Override
 	protected boolean getBooleanProperty(String key, boolean defaultValue) {
@@ -199,7 +199,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineStringProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineStringProperty(java.lang.String,
 	 * java.lang.String)
 	 */
 	@Override
@@ -211,7 +211,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getStringProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getStringProperty(java.lang.String,
 	 * java.lang.String)
 	 */
 	@Override
@@ -227,7 +227,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineObjectProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineObjectProperty(java.lang.String,
 	 * org.pepstock.coderba.client.cm.commons.NativeObject)
 	 */
 	@Override
@@ -239,7 +239,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getObjectProperty(java.lang.String)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getObjectProperty(java.lang.String)
 	 */
 	@Override
 	protected NativeObject getObjectProperty(String key) {
@@ -250,7 +250,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineCallbackProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineCallbackProperty(java.lang.String,
 	 * org.pepstock.coderba.client.cm.commons.CallbackProxy.Proxy)
 	 */
 	@Override
@@ -262,7 +262,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineArrayProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineArrayProperty(java.lang.String,
 	 * org.pepstock.coderba.client.cm.commons.Array)
 	 */
 	@Override
@@ -274,7 +274,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getArrayProperty(java.lang.String)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getArrayProperty(java.lang.String)
 	 */
 	@Override
 	protected <T extends Array> T getArrayProperty(String key) {
@@ -285,7 +285,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#defineRegExpProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineRegExpProperty(java.lang.String,
 	 * org.pepstock.coderba.client.utils.RegExp)
 	 */
 	@Override
@@ -297,7 +297,7 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.commons.AbstractNativeObjectContainer#getRegExpProperty(java.lang.String,
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getRegExpProperty(java.lang.String,
 	 * org.pepstock.coderba.client.utils.RegExp)
 	 */
 	@Override

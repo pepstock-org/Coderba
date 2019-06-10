@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.CODE_MIRROR)
-public final class NativeCodeMirror {
+final class NativeCodeMirror {
 
 	/**
 	 * to avoid any instantiation
@@ -52,7 +52,7 @@ public final class NativeCodeMirror {
 	 * This is a triple of integers "major.minor.patch", where patch is zero for releases, and something else (usually one) for
 	 * development snapshots.
 	 * 
-	 * @return It contains a string that indicates the version of the library.
+	 * @return a string that indicates the version of the library.
 	 */
 	@JsProperty(name = "version")
 	static native String getVersion();

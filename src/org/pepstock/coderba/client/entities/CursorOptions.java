@@ -21,25 +21,34 @@ import org.pepstock.coderba.client.commons.Key;
  * Options to use to set a cursor.<br>
  * These options are supported:<br>
  * <br>
- * scroll: boolean. Determines whether the selection head should be scrolled into view. Defaults to true.<br>
- * <br>
- * origin: string. Determines whether the selection history event may be merged with the previous one. When an origin starts
+ * <ul>
+ * <li>scroll: boolean. Determines whether the selection head should be scrolled into view.
+ * <li>origin: string. Determines whether the selection history event may be merged with the previous one. When an origin starts
  * with the character +, and the last recorded selection had the same origin and was similar (close in time, both collapsed or
  * both non-collapsed), the new one will replace the old one. When it starts with *, it will always replace the previous event
- * (if that had the same origin). Built-in motion uses the "+move" origin. User input uses the "+input" origin.<br>
- * <br>
- * bias: number. Determine the direction into which the selection endpoints should be adjusted when they fall inside an atomic
- * range. Can be either -1 (backward) or 1 (forward). When not given, the bias will be based on the relative position of the old
- * selection-the editor will try to move further away from that, to prevent getting stuck.<br>
+ * (if that had the same origin). Built-in motion uses the "+move" origin. User input uses the "+input" origin.
+ * <li>bias: integer. Determine the direction into which the selection end points should be adjusted when they fall inside an
+ * atomic range. Can be either -1 (backward) or 1 (forward). When not given, the bias will be based on the relative position of
+ * the old selection-the editor will try to move further away from that, to prevent getting stuck.
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class CursorOptions extends BaseEntity {
 
+	/**
+	 * Default value for scolling, {@value DEFAULT_SCROLl}.
+	 */
 	public static final boolean DEFAULT_SCROLL = true;
 
+	/**
+	 * Default value of origin, {@value DEFAULT_ORIGIN}.
+	 */
 	public static final String DEFAULT_ORIGIN = "+input";
 
+	/**
+	 * Default value for direction, {@value DEFAULT_BIAS} means <b>forward</b>.
+	 */
 	public static final int DEFAULT_BIAS = 1;
 
 	/**
@@ -74,10 +83,6 @@ public final class CursorOptions extends BaseEntity {
 		}
 	}
 
-	public CursorOptions() {
-		super();
-	}
-
 	/**
 	 * Determines whether the selection head should be scrolled into view.
 	 * 
@@ -87,22 +92,61 @@ public final class CursorOptions extends BaseEntity {
 		return getValue(Property.SCROLL, DEFAULT_SCROLL);
 	}
 
+	/**
+	 * Determines whether the selection head should be scrolled into view.
+	 * 
+	 * @param scroll <code>true</code> whether the selection head should be scrolled into view
+	 */
 	public void setScroll(boolean scroll) {
 		setValue(Property.SCROLL, scroll);
 	}
 
+	/**
+	 * Determines whether the selection history event may be merged with the previous one.<br>
+	 * When an origin starts with the character +, and the last recorded selection had the same origin and was similar (close in
+	 * time, both collapsed or both non-collapsed), the new one will replace the old one.<br>
+	 * When it starts with *, it will always replace the previous event (if that had the same origin).<br>
+	 * Built-in motion uses the "+move" origin. User input uses the "+input" origin.
+	 * 
+	 * @return the selection history event may be merged with the previous one
+	 */
 	public String getOrigin() {
 		return getValue(Property.ORIGIN, DEFAULT_ORIGIN);
 	}
 
+	/**
+	 * Determines whether the selection history event may be merged with the previous one.<br>
+	 * When an origin starts with the character +, and the last recorded selection had the same origin and was similar (close in
+	 * time, both collapsed or both non-collapsed), the new one will replace the old one.<br>
+	 * When it starts with *, it will always replace the previous event (if that had the same origin).<br>
+	 * Built-in motion uses the "+move" origin. User input uses the "+input" origin.
+	 * 
+	 * @param origin the selection history event may be merged with the previous one
+	 */
 	public void setOrigin(String origin) {
 		setValue(Property.ORIGIN, origin);
 	}
 
+	/**
+	 * Determine the direction into which the selection end points should be adjusted when they fall inside an atomic range.<br>
+	 * Can be either -1 (backward) or 1 (forward).<br>
+	 * When not given, the bias will be based on the relative position of the old selection-the editor will try to move further
+	 * away from that, to prevent getting stuck.
+	 * 
+	 * @return the direction into which the selection end points should be adjusted when they fall inside an atomic range
+	 */
 	public int getBias() {
 		return getValue(Property.BIAS, DEFAULT_BIAS);
 	}
 
+	/**
+	 * Determine the direction into which the selection end points should be adjusted when they fall inside an atomic range.<br>
+	 * Can be either -1 (backward) or 1 (forward).<br>
+	 * When not given, the bias will be based on the relative position of the old selection-the editor will try to move further
+	 * away from that, to prevent getting stuck.
+	 * 
+	 * @param bias the direction into which the selection end points should be adjusted when they fall inside an atomic range
+	 */
 	public void setBias(int bias) {
 		setValue(Property.BIAS, bias);
 	}

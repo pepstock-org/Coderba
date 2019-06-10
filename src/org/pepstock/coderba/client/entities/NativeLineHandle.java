@@ -25,14 +25,13 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Each editor is associated with an instance of CodeMirror.Doc, its document. A document represents the editor content, plus a
- * selection, an undo history, and a mode. A document can only be associated with a single editor at a time.
+ * Native object, provided by CodeMirror, which represents a single line of document.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeLineHandle extends NativeObject {
+final class NativeLineHandle extends NativeObject {
 
 	/**
 	 * to avoid any instantiation
@@ -42,26 +41,25 @@ public final class NativeLineHandle extends NativeObject {
 	}
 
 	/**
-	 * Get the content of the document.
+	 * Gets the content of the document related to this line handle.
 	 * 
-	 * @return he content of the document
+	 * @return the content of the document related to this line handle
 	 */
 	@JsProperty
 	native String getText();
 
 	/**
-	 * Get the content of the document.
+	 * Gets the height of the line.
 	 * 
-	 * @return he content of the document
+	 * @return the height of the line
 	 */
 	@JsProperty
 	native double getHeight();
 
 	/**
-	 * The reverse of posFromIndex.
+	 * Returns the line number of the handle into document.
 	 * 
-	 * @param position position into document.
-	 * @return value is relative to the start of the editor's text
+	 * @return the line number of the handle into document
 	 */
 	@JsMethod
 	native int lineNo();

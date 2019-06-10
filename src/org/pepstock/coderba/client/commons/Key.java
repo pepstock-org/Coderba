@@ -52,7 +52,9 @@ public interface Key {
 	 * @param key key to be checked
 	 */
 	static void checkIfValid(Key key) {
+		// checks if key is valid
 		if (!isValid(key)) {
+			// if no, exception
 			throw new IllegalArgumentException("Key implementation instance is null or not consistent");
 		}
 	}

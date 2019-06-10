@@ -46,7 +46,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.CODE_MIRROR)
-public final class NativeEditor {
+final class NativeEditor {
 
 	/**
 	 * to avoid any instantiation
