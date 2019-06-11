@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event every time an option is changed with <code>setOption</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorOptionChangeEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event every time an option is changed with <code>setOption</code>.
 	 * 
 	 * @param event event to be consumed
 	 */

@@ -15,7 +15,12 @@
 */
 package org.pepstock.coderba.client.events;
 
+import java.util.List;
+
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.commons.ArrayString;
+import org.pepstock.coderba.client.entities.Position;
+import org.pepstock.coderba.client.entities.Range;
 
 /**
  * This event is fired before a change is applied, and its handler may choose to modify or cancel the change.<br>
@@ -61,17 +66,89 @@ public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBef
 	 * 
 	 * @return the change item
 	 */
-	public final ChangeItem getItem() {
+	public ChangeItem getItem() {
 		return item;
 	}
 
 	/**
 	 * It can be called to cancel the change.
 	 */
-	public final void cancel() {
+	public void cancel() {
 		item.cancel();
 	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param range starting and ending change position
+	 * @param text a list of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Range range, List<String> text) {
+		// checks if range is consistent
+		if (range != null) {
+			update(range.getFrom(), range.getTo(), ArrayString.fromOrEmpty(text));
+		}
+	}
 
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param range starting and ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Range range, String... text) {
+		// checks if range is consistent
+		if (range != null) {
+			update(range.getFrom(), range.getTo(), ArrayString.fromOrEmpty(text));
+		}
+	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text a list of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Position from, Position to, List<String> text) {
+		update(from, to, ArrayString.fromOrEmpty(text));
+	}
+
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Position from, Position to, String... text) {
+		update(from, to, ArrayString.fromOrEmpty(text));
+	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	private void update(Position from, Position to, ArrayString text) {
+		// checks if arguments are consistent
+		if (from != null && to != null && text != null) {
+			item.update(from, to, text);
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

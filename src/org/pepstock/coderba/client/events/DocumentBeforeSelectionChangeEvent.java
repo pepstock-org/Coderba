@@ -64,7 +64,7 @@ public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEv
 	 * 
 	 * @return the anchor instance to selection
 	 */
-	public final Anchor getSelectionAnchor() {
+	public Anchor getSelectionAnchor() {
 		return anchor;
 	}
 

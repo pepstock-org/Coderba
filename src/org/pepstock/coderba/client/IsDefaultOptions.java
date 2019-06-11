@@ -421,9 +421,9 @@ public interface IsDefaultOptions {
 	boolean isSmartIndent();
 
 	/**
-	 * Specifies whether or not spellcheck will be enabled on the input.
+	 * Specifies whether or not spell check will be enabled on the input.
 	 * 
-	 * @return Specifies whether or not spellcheck will be enabled on the input.
+	 * @return <code>true</code> whether spell check will be enabled on the input
 	 */
 	boolean isSpellcheck();
 

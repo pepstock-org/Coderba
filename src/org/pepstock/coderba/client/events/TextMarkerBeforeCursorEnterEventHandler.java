@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event when the cursor enters the marked range.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface TextMarkerBeforeCursorEnterEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event when the cursor enters the marked range.
 	 * 
 	 * @param event event to be consumed
 	 */

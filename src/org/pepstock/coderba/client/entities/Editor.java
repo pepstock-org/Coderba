@@ -35,7 +35,7 @@ import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.EditorBeforeChangeEvent;
 import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeEvent;
-import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeItem;
+import org.pepstock.coderba.client.events.BeforeSelectionChangeItem;
 import org.pepstock.coderba.client.events.EditorBlurEvent;
 import org.pepstock.coderba.client.events.EditorChangeEvent;
 import org.pepstock.coderba.client.events.EditorChangesEvent;
@@ -186,7 +186,7 @@ public final class Editor implements IsEventManager {
 		 * @param editor native editor instance
 		 * @param item editor change item
 		 */
-		void call(NativeEditor editor, EditorBeforeSelectionChangeItem item);
+		void call(NativeEditor editor, BeforeSelectionChangeItem item);
 	}
 
 	/**
@@ -1697,7 +1697,7 @@ public final class Editor implements IsEventManager {
 		// checks if area is consistent
 		if (area != null) {
 			// fires the event
-			eventManager.fireEvent(new EditorKeyHandledEvent(area, name, event));
+			eventManager.fireEvent(new EditorKeyHandledEvent(area, event, name));
 		}
 	}
 
@@ -1707,7 +1707,7 @@ public final class Editor implements IsEventManager {
 	 * @param editor native editor instance
 	 * @param item selection change item instance
 	 */
-	private void onBeforeSelectionChange(NativeEditor editor, EditorBeforeSelectionChangeItem item) {
+	private void onBeforeSelectionChange(NativeEditor editor, BeforeSelectionChangeItem item) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent

@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Fires every time the content of the editor is changed. 
+ * Fires every time the content of the editor is changed.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Dispatched every time an option is changed with <code>setOption</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,21 +32,29 @@ public final class EditorOptionChangeEvent extends AbstractEditorEvent<EditorOpt
 	 * Event name
 	 */
 	public static final String NAME = "optionChange";
-
+	// property name instance
 	private final String property;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param property property name
 	 */
 	public EditorOptionChangeEvent(EditorArea editorArea, String property) {
 		super(TYPE, editorArea);
+		// checks if argument is consistent
+		if (property == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Property is null");
+		}
 		this.property = property;
 	}
 
 	/**
-	 * @return the property
+	 * Returns the property name.
+	 * 
+	 * @return the property name
 	 */
 	public String getProperty() {
 		return property;

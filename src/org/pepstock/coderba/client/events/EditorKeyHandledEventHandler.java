@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event after a key is handled through a key map.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorKeyHandledEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked firing event after a key is handled through a key map.
 	 * 
 	 * @param event event to be consumed
 	 */

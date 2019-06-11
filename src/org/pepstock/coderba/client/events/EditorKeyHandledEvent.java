@@ -20,12 +20,11 @@ import org.pepstock.coderba.client.EditorArea;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired after a key is handled through a key map.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EditorKeyHandledEvent extends AbstractEditorEvent<EditorKeyHandledEventHandler> {
+public final class EditorKeyHandledEvent extends AbstractEditorWithNativeEvent<EditorKeyHandledEventHandler> {
 
 	/**
 	 * Event type
@@ -35,40 +34,33 @@ public final class EditorKeyHandledEvent extends AbstractEditorEvent<EditorKeyHa
 	 * Event name
 	 */
 	public static final String NAME = "keyHandled";
-
+	// key map instance
 	private final String name;
 
-	private final NativeEvent event;
-
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param event native DOM keydown or keypress event instance
+	 * @param name the name of the handled key (for example "Ctrl-X" or "'q'")
 	 */
-	public EditorKeyHandledEvent(EditorArea editorArea, String name, NativeEvent event) {
-		super(TYPE, editorArea);
+	public EditorKeyHandledEvent(EditorArea editorArea, NativeEvent event, String name) {
+		super(TYPE, editorArea, event);
+		// checks if name is consistent
 		if (name == null) {
-			throw new IllegalArgumentException("[EditorKeyHandledEvent] Name is null");
-		}
-		if (event == null) {
-			throw new IllegalArgumentException("[EditorKeyHandledEvent] Event is null");
+			// if no, exception
+			throw new IllegalArgumentException("Name is null");
 		}
 		this.name = name;
-		this.event = event;
 	}
 
 	/**
-	 * @return the name
+	 * Returns the name of handled key
+	 * 
+	 * @return the name of handled key
 	 */
-	public final String getName() {
+	public String getName() {
 		return name;
-	}
-
-	/**
-	 * @return the event
-	 */
-	public final NativeEvent getEvent() {
-		return event;
 	}
 
 	/*

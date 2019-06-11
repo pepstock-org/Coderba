@@ -19,7 +19,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
- * Fired whenever a change occurs to the document. 
+ * Fired whenever a change occurs to the document.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -58,7 +58,7 @@ public final class DocumentChangeEvent extends AbstractDocumentEvent<DocumentCha
 	 * 
 	 * @return the change item
 	 */
-	public final ChangeItem getItem() {
+	public ChangeItem getItem() {
 		return item;
 	}
 

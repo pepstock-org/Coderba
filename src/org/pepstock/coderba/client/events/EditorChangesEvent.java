@@ -60,7 +60,7 @@ public final class EditorChangesEvent extends AbstractEditorEvent<EditorChangesE
 	 * 
 	 * @return the list of change items
 	 */
-	public final List<ChangeItem> getItems() {
+	public List<ChangeItem> getItems() {
 		return items;
 	}
 

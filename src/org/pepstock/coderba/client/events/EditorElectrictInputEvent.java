@@ -48,9 +48,10 @@ public final class EditorElectrictInputEvent extends AbstractEditorEvent<EditorE
 
 	/**
 	 * Returns the line number.
+	 * 
 	 * @return the line number
 	 */
-	public final int getLine() {
+	public int getLine() {
 		return line;
 	}
 

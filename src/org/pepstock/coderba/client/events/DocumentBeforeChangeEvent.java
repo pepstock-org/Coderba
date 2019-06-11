@@ -63,14 +63,14 @@ public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<Docum
 	 * 
 	 * @return the change item
 	 */
-	public final ChangeItem getItem() {
+	public ChangeItem getItem() {
 		return item;
 	}
 
 	/**
 	 * It can be called to cancel the change.
 	 */
-	public final void cancel() {
+	public void cancel() {
 		item.cancel();
 	}
 

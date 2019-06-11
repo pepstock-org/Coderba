@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires when the editor is scrolled.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -35,9 +34,9 @@ public final class EditorScrollEvent extends AbstractEditorEvent<EditorScrollEve
 	public static final String NAME = "scroll";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
 	 */
 	public EditorScrollEvent(EditorArea editorArea) {
 		super(TYPE, editorArea);

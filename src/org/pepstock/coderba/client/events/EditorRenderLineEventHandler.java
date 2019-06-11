@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event whenever a line is (re-)rendered to the DOM element.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorRenderLineEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event whenever a line is (re-)rendered to the DOM element.
 	 * 
 	 * @param event event to be consumed
 	 */

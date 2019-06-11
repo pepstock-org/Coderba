@@ -39,12 +39,12 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class EditorBeforeSelectionChangeItem {
+public final class BeforeSelectionChangeItem {
 
 	/**
 	 * to avoid any instantiation
 	 */
-	EditorBeforeSelectionChangeItem() {
+	BeforeSelectionChangeItem() {
 	}
 
 	/**
@@ -75,11 +75,11 @@ public final class EditorBeforeSelectionChangeItem {
 	public native String getOrigin();
 
 	/**
-	 * FIXME
+	 * Enables changes on the item before firing the change selection event.
 	 * 
-	 * @return
+	 * @param ranges array of anchors
 	 */
 	@JsProperty
-	public native Object getUpdate();
+	native void update(ArrayEntity<Anchor> ranges);
 
 }

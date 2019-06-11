@@ -26,8 +26,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.UmbrellaException;
 
 /**
- * Common event manager, responsible for adding handlers to event sources and firing those
- * handlers on passed in events.
+ * Common event manager, responsible for adding handlers to event sources and firing those handlers on passed in events.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -155,6 +154,7 @@ public final class EventManager {
 
 		/**
 		 * Creates a custom handle registration.
+		 * 
 		 * @param manager event manager
 		 * @param registration handler registration instance
 		 * @param type type of handler

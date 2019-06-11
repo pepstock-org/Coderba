@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires whenever the view port of the editor changes (due to scrolling, editing, or any other factor).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,15 +32,17 @@ public final class EditorViewportChangeEvent extends AbstractEditorEvent<EditorV
 	 * Event name
 	 */
 	public static final String NAME = "viewportChange";
-
+	// starting line number
 	private final int from;
-
+	// ending line number
 	private final int to;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param from starting line number
+	 * @param to ending line number
 	 */
 	public EditorViewportChangeEvent(EditorArea editorArea, int from, int to) {
 		super(TYPE, editorArea);
@@ -50,14 +51,18 @@ public final class EditorViewportChangeEvent extends AbstractEditorEvent<EditorV
 	}
 
 	/**
-	 * @return the from
+	 * Returns the starting line number.
+	 * 
+	 * @return the starting line number.
 	 */
 	public int getFrom() {
 		return from;
 	}
 
 	/**
-	 * @return the to
+	 * Returns the ending line number
+	 * 
+	 * @return the ending line number
 	 */
 	public int getTo() {
 		return to;

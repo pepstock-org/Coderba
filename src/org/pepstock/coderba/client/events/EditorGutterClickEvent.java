@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.EditorArea;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Fires when the editor gutter (the line-number area) is clicked. 
+ * Fires when the editor gutter (the line-number area) is clicked.
  * 
  * @author Andrea "Stock" Stocchero
  */

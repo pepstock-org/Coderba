@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event whenever the editor re-adds the widget to the DOM.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface LineWidgetRedrawEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event whenever the editor re-adds the widget to the DOM.
 	 * 
 	 * @param event event to be consumed
 	 */

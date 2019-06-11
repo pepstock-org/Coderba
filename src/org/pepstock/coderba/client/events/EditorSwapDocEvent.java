@@ -19,8 +19,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * This is signalled when the editor's document is replaced using the <code>swapDoc</code> method.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -34,21 +33,29 @@ public final class EditorSwapDocEvent extends AbstractEditorEvent<EditorSwapDocE
 	 * Event name
 	 */
 	public static final String NAME = "swapDoc";
-
+	// document instance
 	private final Document document;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document old document instance
 	 */
 	public EditorSwapDocEvent(EditorArea editorArea, Document document) {
 		super(TYPE, editorArea);
+		// checks if argument is consistent
+		if (document == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Document is null");
+		}
 		this.document = document;
 	}
 
 	/**
-	 * @return the document
+	 * Returns the old document instance.
+	 * 
+	 * @return the old document instance
 	 */
 	public Document getDocument() {
 		return document;

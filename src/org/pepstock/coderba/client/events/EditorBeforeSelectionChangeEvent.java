@@ -15,7 +15,11 @@
 */
 package org.pepstock.coderba.client.events;
 
+import java.util.List;
+
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.commons.ArrayEntity;
+import org.pepstock.coderba.client.entities.Anchor;
 
 /**
  * This event is fired before the selection is moved.
@@ -33,7 +37,7 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 */
 	public static final String NAME = "beforeSelectionChange";
 	// change item instance
-	private final EditorBeforeSelectionChangeItem item;
+	private final BeforeSelectionChangeItem item;
 
 	/**
 	 * Creates an editor {@value NAME} event.
@@ -41,7 +45,7 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 * @param editorArea editor area instance
 	 * @param item change item instance
 	 */
-	public EditorBeforeSelectionChangeEvent(EditorArea editorArea, EditorBeforeSelectionChangeItem item) {
+	public EditorBeforeSelectionChangeEvent(EditorArea editorArea, BeforeSelectionChangeItem item) {
 		super(TYPE, editorArea);
 		// checks if item is consistent
 		if (item == null) {
@@ -56,8 +60,21 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 * 
 	 * @return the change item
 	 */
-	public final EditorBeforeSelectionChangeItem getItem() {
+	public BeforeSelectionChangeItem getItem() {
 		return item;
+	}
+	
+	/**
+	 * Enables changes on the item before firing the change selection event.
+	 * 
+	 * @param ranges array of anchors
+	 */
+	public void update(List<Anchor> ranges) {
+		// checks if ranges is consistent
+		if (ranges != null && !ranges.isEmpty()) {
+			ArrayEntity<Anchor> nativeRanges = ArrayEntity.fromOrEmpty(ranges);
+			item.update(nativeRanges);
+		}
 	}
 
 	/*

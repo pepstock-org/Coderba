@@ -20,8 +20,9 @@ import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.LineHandle;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Will be fired when the line object is deleted.<br>
+ * A line object is associated with the start of the line.<br>
+ * Mostly useful when you need to find out when your gutter markers on a given line are removed.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -31,15 +32,18 @@ public final class LineHandleDeleteEvent extends AbstractLineHandleEvent<LineHan
 	 * Event type
 	 */
 	public static final Type<LineHandleDeleteEventHandler> TYPE = new Type<>();
+	
 	/**
 	 * Event name
 	 */
 	public static final String NAME = "delete";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a line handle {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param lineHandle line handle instance
 	 */
 	public LineHandleDeleteEvent(EditorArea editorArea, Document document, LineHandle lineHandle) {
 		super(TYPE, editorArea, document, lineHandle);

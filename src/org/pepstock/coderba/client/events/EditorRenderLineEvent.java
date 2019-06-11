@@ -21,8 +21,8 @@ import org.pepstock.coderba.client.entities.LineHandle;
 import com.google.gwt.dom.client.Element;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired whenever a line is (re-)rendered to the DOM element.<br>
+ * Fired right after the DOM element is built, before it is added to the document.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,35 +32,52 @@ public final class EditorRenderLineEvent extends AbstractEditorEvent<EditorRende
 	 * Event type
 	 */
 	public static final Type<EditorRenderLineEventHandler> TYPE = new Type<>();
+
 	/**
 	 * Event name
 	 */
 	public static final String NAME = "renderLine";
-
+	// line handle instance
 	private final LineHandle lineHandle;
-
+	// DOM element instance
 	private final Element element;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param lineHandle line handle instance
+	 * @param element DOM element to render into line
 	 */
 	public EditorRenderLineEvent(EditorArea editorArea, LineHandle lineHandle, Element element) {
 		super(TYPE, editorArea);
+		// checks if line handle is consistent
+		if (lineHandle == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Line handle is null");
+		}
+		// checks if element is consistent
+		if (element == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Element is null");
+		}
 		this.lineHandle = lineHandle;
 		this.element = element;
 	}
 
 	/**
-	 * @return the lineHandle
+	 * Returns the line handle.
+	 * 
+	 * @return the line handle instance
 	 */
 	public LineHandle getLineHandle() {
 		return lineHandle;
 	}
 
 	/**
-	 * @return the element
+	 * Returns the DOM element.
+	 * 
+	 * @return the element instance
 	 */
 	public Element getElement() {
 		return element;
