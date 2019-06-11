@@ -17,15 +17,12 @@ package org.pepstock.coderba.client.commons;
 
 import java.util.List;
 
-import org.pepstock.coderba.client.GlobalDefaults;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.KeyMap;
-import org.pepstock.coderba.client.KeyMaps;
 import org.pepstock.coderba.client.Language;
-import org.pepstock.coderba.client.Languages;
 import org.pepstock.coderba.client.Theme;
-import org.pepstock.coderba.client.Themes;
+import org.pepstock.coderba.client.entities.IsExtendedOptions;
 import org.pepstock.coderba.client.entities.IsOptions;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
@@ -53,6 +50,12 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	// native object container which manage all set and get
 	// by key
 	private final T nativeObjectContainer;
+	// language instance
+	private Language language = null;
+	// key map instance
+	private KeyMap keyMap = null;
+	// theme instance
+	private Theme theme = null;
 
 	/**
 	 * Creates the options manager by a container and default values.
@@ -63,6 +66,17 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	protected AbstractOptions(T nativeObjectContainer, IsDefaultOptions defaultsValue) {
 		this.nativeObjectContainer = nativeObjectContainer;
 		this.defaultsValue = defaultsValue;
+	}
+	
+	/**
+	 * Copies the entities which can not be retrieved by java script object, like language or theme.
+	 * 
+	 * @param options options from copy the entities.
+	 */
+	protected final void copyItems(IsExtendedOptions options) {
+		this.language = options.getLanguage();
+		this.keyMap = options.getKeyMap();
+		this.theme = options.getTheme();
 	}
 
 	/**
@@ -216,18 +230,10 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public KeyMap getKeyMap() {
-		// gets the key map name
-		String value = nativeObjectContainer.getValue(Options.KEY_MAP, defaultsValue.getKeyMap().getName());
-		// gets default key map name
-		String defaultKeyMapName = GlobalDefaults.get().getKeyMap().getName();
-		// if the map name are the same and the defaults one is not loaded
-		if (defaultKeyMapName.equalsIgnoreCase(value) && KeyMaps.get().retrieve(defaultKeyMapName) == null) {
-			// inject the key map of default
-			// loading into the cache
-			GlobalDefaults.get().getKeyMap().inject();
+		if (keyMap != null) {
+			return keyMap;		
 		}
-		// returns the loaded key map
-		return KeyMaps.get().retrieve(value);
+		return defaultsValue.getKeyMap();
 	}
 
 	/*
@@ -237,17 +243,10 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public Language getLanguage() {
-		// gets name of language if set or default one
-		String value = nativeObjectContainer.getValue(Options.MODE, defaultsValue.getLanguage().getName());
-		// gets default language name
-		String defaultLanguageName = GlobalDefaults.get().getLanguage().getName();
-		// if the language is default one and not loaded
-		if (defaultLanguageName.equalsIgnoreCase(value) && Languages.get().retrieve(defaultLanguageName) == null) {
-			// injects and loads the default language
-			Injector.ensureInjected(GlobalDefaults.get().getLanguage());
+		if (language != null) {
+			return language;
 		}
-		// returns language
-		return Languages.get().retrieve(value);
+		return defaultsValue.getLanguage();
 	}
 
 	/*
@@ -358,13 +357,10 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	@Override
 	public Theme getTheme() {
-		String value = nativeObjectContainer.getValue(Options.THEME, defaultsValue.getTheme().getName());
-		Theme defaultTheme = GlobalDefaults.get().getTheme();
-		if (defaultTheme.getName().equalsIgnoreCase(value)) {
-			Injector.ensureInjected(defaultTheme);
-			return defaultTheme;
+		if (theme != null) {
+			return theme;
 		}
-		return Themes.get().retrieve(value);
+		return defaultsValue.getTheme();
 	}
 
 	/*
@@ -875,6 +871,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (keyMap != null) {
 			keyMap.inject();
 			nativeObjectContainer.setValue(Options.KEY_MAP, keyMap.getName());
+			this.keyMap = keyMap;
 		}
 	}
 
@@ -888,6 +885,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (language != null) {
 			Injector.ensureInjected(language);
 			nativeObjectContainer.setValue(Options.MODE, language.getName());
+			this.language = language;
 		}
 	}
 
@@ -1111,6 +1109,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (theme != null && theme.getName() != null) {
 			Injector.ensureInjected(theme);
 			nativeObjectContainer.setValue(Options.THEME, theme.getName());
+			this.theme = theme;
 		}
 	}
 

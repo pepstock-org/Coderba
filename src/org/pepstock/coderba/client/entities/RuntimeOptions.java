@@ -37,4 +37,13 @@ final class RuntimeOptions extends AbstractExtendedOptions<RuntimeOptionsContain
 		super(new RuntimeOptionsContainer(nativeObject), defaultsValue);
 	}
 
+	/**
+	 * Copies the entities which can not be retrieved by java script object, like language or theme.
+	 * 
+	 * @param options options from copy the entities.
+	 */
+	void copy(IsExtendedOptions options) {
+		super.copyItems(options);
+	}
+
 }

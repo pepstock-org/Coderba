@@ -100,6 +100,17 @@ final class NativeCodeMirror {
 	static native NativeEditor fromTextArea(Element element);
 
 	/**
+	 * When a map contains multi-stoke bindings or keys with modifiers that are not specified in the default order
+	 * (Shift-Cmd-Ctrl-Alt), you must call CodeMirror.normalizeKeyMap on it before it can be used.<br>
+	 * This function takes a keymap and modifies it to normalize modifier order and properly recognize multi-stroke
+	 * bindings.<br>
+	 * 
+	 * @param map a key map to normalize
+	 * @return It will return the keymap itself
+	 */
+	static native NativeObject normalizeKeyMap(NativeObject map);
+
+	/**
 	 * FIXME Can be used to define new options for CodeMirror. The updateFunc will be called with the editor instance and the
 	 * new value when an editor is initialized, and whenever the option is modified through <code>setOption</code>.
 	 * 

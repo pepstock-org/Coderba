@@ -22,6 +22,7 @@ import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.entities.Anchor;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -79,7 +80,7 @@ public final class BeforeSelectionChangeItem {
 	 * 
 	 * @param ranges array of anchors
 	 */
-	@JsProperty
+	@JsMethod
 	native void update(ArrayEntity<Anchor> ranges);
 
 }

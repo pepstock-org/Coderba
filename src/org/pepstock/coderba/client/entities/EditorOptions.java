@@ -177,9 +177,11 @@ public class EditorOptions implements IsOptions {
 	 * @param delegated a runtime options instance
 	 * @see RuntimeOptions
 	 */
-	final void setDelegatedOptions(IsExtendedOptions delegated) {
+	final void setDelegatedOptions(RuntimeOptions delegated) {
 		// checks if argument is consistent
 		if (delegated != null) {
+			// copies the fixed attributes like languages and themes
+			delegated.copy(this.delegated);
 			// sets the options
 			this.delegated = delegated;
 		}
