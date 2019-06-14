@@ -357,4 +357,24 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineFunctionProperty(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	protected <T> void defineFunctionProperty(String key, T value) {
+		// sets value
+		nativeObject.defineFunctionProperty(key, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getFunctionProperty(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	protected <T> T getFunctionProperty(String key, T defaultValue) {
+		// gets descriptor
+		NativeFunctionDescriptor<T> descriptor = nativeObject.getFunctionProperty(key);
+		// returns value
+		return descriptor == null ? defaultValue : descriptor.getValue();
+	}
+
 }

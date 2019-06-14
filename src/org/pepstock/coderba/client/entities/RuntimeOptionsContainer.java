@@ -365,6 +365,28 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		return nativeEditor.getOptionValueAsEntity(key);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineFunctionProperty(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	protected <T> void defineFunctionProperty(String key, T value) {
+		// if here, key is consistent
+		nativeEditor.setOptionValue(key, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getFunctionProperty(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	protected <T> T getFunctionProperty(String key, T defaultValue) {
+		// checks if the value of property is undefined
+		if (!hasProperty(key)) {
+			return defaultValue;
+		}
+		// returns value
+		return nativeEditor.getOptionValueAsFunction(key);
+	}
+
 	/**
 	 * Clones the property from an object to another.
 	 * 

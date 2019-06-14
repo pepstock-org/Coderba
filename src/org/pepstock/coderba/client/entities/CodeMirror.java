@@ -37,6 +37,8 @@ public final class CodeMirror {
 	private static final CodeMirror INSTANCE = new CodeMirror();
 	// native object of DEFAULT
 	private final NativeObject defaults;
+	// native object of KEYMPAS
+	private final NativeObject keyMaps;
 	// MIME modes object
 	private final MimeModes mimeModes;
 	// stores CodeMirror Version
@@ -50,6 +52,8 @@ public final class CodeMirror {
 		Injector.ensureInjected();
 		// gets default object
 		defaults = NativeCodeMirror.getDefaults();
+		// gets key maps object
+		keyMaps = NativeCodeMirror.getKeyMaps();
 		// gets mime modes object
 		mimeModes = new MimeModes(NativeCodeMirror.getMimeModes());
 		// stores the version
@@ -86,6 +90,17 @@ public final class CodeMirror {
 		return defaults;
 	}
 
+	/**
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
+	 * 
+	 * @return the object containing the default options.
+	 */
+	NativeObject getKeyMaps() {
+		return keyMaps;
+	}
+
+	
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
 	 * 

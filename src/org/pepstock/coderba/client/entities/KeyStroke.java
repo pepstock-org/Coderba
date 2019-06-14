@@ -15,13 +15,11 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.enums.KeyModifier;
 import org.pepstock.coderba.client.enums.KeyName;
 
@@ -29,11 +27,11 @@ import org.pepstock.coderba.client.enums.KeyName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SequenceKey implements Key {
+public final class KeyStroke implements Stroke {
 
-	private static final String SEPARATOR = "-";
+	static final String SEPARATOR = "-";
 
-	private static final KeyModifier[] EMPTY_MODIFIERS = new KeyModifier[0];
+	static final KeyModifier[] EMPTY_MODIFIERS = new KeyModifier[0];
 
 	// internal comparator to sort colors by own offset
 	private static final Comparator<KeyModifier> COMPARATOR = (KeyModifier o1, KeyModifier o2) -> Integer.compare(o1.order(), o2.order());
@@ -47,14 +45,14 @@ public final class SequenceKey implements Key {
 	/**
 	 * @param name
 	 */
-	public SequenceKey(KeyName name) {
+	public KeyStroke(KeyName name) {
 		this(name, EMPTY_MODIFIERS);
 	}
 
 	/**
 	 * @param name
 	 */
-	public SequenceKey(KeyName name, KeyModifier... modifiers) {
+	public KeyStroke(KeyName name, KeyModifier... modifiers) {
 		if (name == null) {
 			throw new IllegalArgumentException("Key name is null");
 		}
@@ -68,25 +66,7 @@ public final class SequenceKey implements Key {
 		}
 		buildValue();
 	}
-	
-	public static final SequenceKey parse(String value) {
-		String[] values = value.split(SEPARATOR);
-		if (values.length > 1) {
-			List<KeyModifier> modifiers = new ArrayList<>();
-			for (int i = 0; i < values.length - 1; i++) {
-				KeyModifier modifier = Key.getKeyByValue(KeyModifier.class, values[i]);
-				if (modifier == null) {
-					throw new IllegalArgumentException("Key '"+values[i]+"' is not a modifier");
-				}
-				modifiers.add(modifier);
-			}
-			KeyName name = Key.getKeyByValue(KeyName.class, values[values.length - 1]);
-			return new SequenceKey(name, modifiers.toArray(EMPTY_MODIFIERS));
-		} else {
-			KeyName name = Key.getKeyByValue(KeyName.class, values[0]);
-			return new SequenceKey(name);
-		}
-	}
+
 
 
 	/**
@@ -125,6 +105,16 @@ public final class SequenceKey implements Key {
 		}
 		sb.append(name.value());
 		value = sb.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return value();
 	}
 
 }

@@ -65,6 +65,16 @@ final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "defaults")
 	static native NativeObject getDefaults();
+	
+	/**
+	 * FIXME
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
+	 * 
+	 * @return the object containing the default options.
+	 */
+	@JsProperty(name = "keyMap")
+	static native NativeObject getKeyMaps();
 
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.

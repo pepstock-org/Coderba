@@ -268,6 +268,24 @@ public class NativeObject {
 		// defines the property
 		defineProperty(this, key, descriptor);
 	}
+	
+	/**
+	 * Defines a new property directly on this object, or modifies an existing property.
+	 * 
+	 * @param key the name of the property to be defined or modified.
+	 * @param object the object associated with the property.
+	 */
+	@JsOverlay
+	final <T> void defineFunctionProperty(String key, T value) {
+		// creates a descriptor
+		NativeFunctionDescriptor<T> descriptor = new NativeFunctionDescriptor<>();
+		// sets value
+		descriptor.setValue(value);
+		// sets attributes of descriptor to true
+		resetPropertyDescriptor(descriptor);
+		// defines the property
+		defineProperty(this, key, descriptor);
+	}
 
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
@@ -431,6 +449,24 @@ public class NativeObject {
 		return null;
 	}
 
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
+	 * prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	final <T> NativeFunctionDescriptor<T> getFunctionProperty(String key) {
+		// checks if the property is present
+		if (ObjectType.FUNCTION.equals(JsHelper.get().typeOf(this, key))) {
+			// returns the descriptor
+			return getOwnPropertyDescriptor(this, key);
+		}
+		// if here, property does not exist
+		return null;
+	}
+	
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.

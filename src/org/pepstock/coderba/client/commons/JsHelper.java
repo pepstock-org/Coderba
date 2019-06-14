@@ -16,7 +16,7 @@
 package org.pepstock.coderba.client.commons;
 
 import org.pepstock.coderba.client.Injector;
-import org.pepstock.coderba.client.resources.Resources;
+import org.pepstock.coderba.client.resources.ResourcesType;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CODERBA java script object implementation with some
@@ -34,7 +34,7 @@ public final class JsHelper {
 	 */
 	private JsHelper() {
 		// to be sure that EDIRBA java script object is injected
-		Injector.ensureInjected(Resources.INSTANCE.coderba());
+		Injector.ensureInjected(ResourcesType.getClientBundle().coderba());
 	}
 
 	/**
