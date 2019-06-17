@@ -57,7 +57,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	private KeyMap keyMap = null;
 	// theme instance
 	private Theme theme = null;
-	// extra map key
+ 	// extra map key
 	private ExtraKeyMapTable extraKeyMapTable = null;
 
 	/**
@@ -70,7 +70,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		this.nativeObjectContainer = nativeObjectContainer;
 		this.defaultsValue = defaultsValue;
 	}
-	
+
 	/**
 	 * Copies the entities which can not be retrieved by java script object, like language or theme.
 	 * 
@@ -80,6 +80,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		this.language = options.getLanguage();
 		this.keyMap = options.getKeyMap();
 		this.theme = options.getTheme();
+		this.extraKeyMapTable = options.getExtraKeys();
 	}
 
 	/**
@@ -89,6 +90,27 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 */
 	protected final T getNativeObjectContainer() {
 		return nativeObjectContainer;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
+	 */
+	@Override
+	public ExtraKeyMapTable getExtraKeys() {
+		return extraKeyMapTable;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
+	 */
+	@Override
+	public void setExtraKeys(ExtraKeyMapTable extraKeys) {
+		// sets the native object
+		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
+		// and stores locally
+		this.extraKeyMapTable = extraKeys;
 	}
 
 	/*
@@ -151,24 +173,6 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	@Override
 	public Direction getDirection() {
 		return nativeObjectContainer.getValue(Options.DIRECTION, Direction.class, defaultsValue.getDirection());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
-	 */
-	@Override
-	public ExtraKeyMapTable getExtraKeys() {
-		// checks if table already passed
-		// or existing into native object 
-		if (extraKeyMapTable == null && nativeObjectContainer.has(Options.EXTRA_KEYS)) {
-			// gets native object
-			NativeObject object = nativeObjectContainer.getValue(Options.EXTRA_KEYS);
-			// creates and sets extra map into object
-			extraKeyMapTable = new ExtraKeyMapTable(object);	
-		}
-		return extraKeyMapTable;
 	}
 
 	/*
@@ -241,7 +245,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	@Override
 	public KeyMap getKeyMap() {
 		if (keyMap != null) {
-			return keyMap;		
+			return keyMap;
 		}
 		return defaultsValue.getKeyMap();
 	}
@@ -768,17 +772,6 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	@Override
 	public void setElectricChars(boolean electricChars) {
 		nativeObjectContainer.setValue(Options.ELECTRIC_CHARS, electricChars);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
-	 */
-	@Override
-	public void setExtraKeys(ExtraKeyMapTable extraKeys) {
-		// sets the native object
-		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
-		// and stores locally
-		this.extraKeyMapTable = extraKeys;
 	}
 
 	/*

@@ -49,7 +49,7 @@ public final class ExtraKeyMapTable extends KeyMapTable {
 	 * 
 	 * @param nativeObject native object which defines whole key map
 	 */
-	public ExtraKeyMapTable(NativeObject nativeObject) {
+	ExtraKeyMapTable(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
