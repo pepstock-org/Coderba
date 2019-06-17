@@ -26,7 +26,7 @@ import com.google.gwt.dom.client.Document;
  */
 public final class EditorAreaId {
 
-	private final String id = Document.get().createUniqueId();;
+	private final String id = Document.get().createUniqueId();
 
 	/**
 	 * Creates the object. It is implemented to reduce the visibility.

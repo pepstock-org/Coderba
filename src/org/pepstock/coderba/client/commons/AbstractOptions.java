@@ -991,10 +991,8 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	public void setReadOnly(ReadOnly readOnly) {
 		if (ReadOnly.NO_CURSOR.equals(readOnly)) {
 			nativeObjectContainer.setValue(Options.READ_ONLY, readOnly);
-		} else if (ReadOnly.TRUE.equals(readOnly)) {
-			setReadOnly(true);
 		} else {
-			setReadOnly(false);
+			setReadOnly(ReadOnly.TRUE.equals(readOnly));
 		}
 	}
 

@@ -42,7 +42,7 @@ public final class ArrayEntityList<T extends NativeEntity> extends AbstractArray
 	ArrayEntityList(ArrayEntity<T> array) {
 		// if null, creates a new array
 		if (array == null) {
-			this.array = new ArrayEntity<T>();
+			this.array = new ArrayEntity<>();
 		} else {
 			// uses an existing array
 			this.array = array;
