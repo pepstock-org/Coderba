@@ -247,7 +247,7 @@ public final class Document implements IsEventManager {
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// stores id
-		Id.set(nativeObject);
+		Id.applyTo(nativeObject);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -277,7 +277,7 @@ public final class Document implements IsEventManager {
 	 * @return the unique ID of document
 	 */
 	public String getId() {
-		return Id.get(nativeObject);
+		return Id.retrieveFrom(nativeObject);
 	}
 
 	/**
@@ -541,7 +541,7 @@ public final class Document implements IsEventManager {
 			// checks if consistent
 			if (nativeLineHandle != null) {
 				// checks if there is an id
-				String lineHandleId = Id.get(nativeLineHandle);
+				String lineHandleId = Id.retrieveFrom(nativeLineHandle);
 				// if line handle already in cache
 				if (lineHandles.containsKey(lineHandleId)) {
 					// returns from cache
@@ -2207,7 +2207,7 @@ public final class Document implements IsEventManager {
 				// gets marker
 				NativeTextMarker nativeMarker = array.get(i);
 				// gets its ID
-				String storedId = Id.get(nativeMarker);
+				String storedId = Id.retrieveFrom(nativeMarker);
 				// if it has not got an ID
 				if (storedId == null) {
 					// creates new marker
@@ -2248,7 +2248,7 @@ public final class Document implements IsEventManager {
 			if (area != null) {
 				// gets line handle ID
 				LineHandle lineHandle;
-				String lineHandleId = Id.get(nativeLineHandle);
+				String lineHandleId = Id.retrieveFrom(nativeLineHandle);
 				// if contains into cache
 				if (lineHandles.containsKey(lineHandleId)) {
 					lineHandle = lineHandles.get(lineHandleId);
@@ -2308,7 +2308,7 @@ public final class Document implements IsEventManager {
 			// checks area is consistent
 			if (area != null) {
 				// gets the document by document id
-				Document storedDocument = Documents.get().retrieve(Id.get(document));
+				Document storedDocument = Documents.get().retrieve(Id.retrieveFrom(document));
 				// invokes the handler
 				linkedDocumentsHandler.handle(area, storedDocument, sharedHistory);
 			}

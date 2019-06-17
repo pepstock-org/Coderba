@@ -540,7 +540,7 @@ public final class Editor implements IsEventManager {
 	 * @param id the CODERBA id
 	 */
 	void setId(String id) {
-		Id.set(nativeObject.getOptions(), id);
+		Id.applyTo(nativeObject.getOptions(), id);
 	}
 
 	/**
@@ -549,7 +549,7 @@ public final class Editor implements IsEventManager {
 	 * @return the CODERBA id
 	 */
 	public String getid() {
-		return Id.get(nativeObject.getOptions());
+		return Id.retrieveFrom(nativeObject.getOptions());
 	}
 
 	/**
@@ -1874,7 +1874,7 @@ public final class Editor implements IsEventManager {
 		// checks if area is consistent
 		if (area != null) {
 			Document doc = area.getEditor().getDocument();
-			LineHandle lineHandle = doc.getLineHandleById(Id.get(line));
+			LineHandle lineHandle = doc.getLineHandleById(Id.retrieveFrom(line));
 			if (lineHandle != null) {
 				// fires the event
 				eventManager.fireEvent(new EditorRenderLineEvent(area, lineHandle, element));
@@ -1924,7 +1924,7 @@ public final class Editor implements IsEventManager {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
-		String oldDocId = Id.get(oldDoc);
+		String oldDocId = Id.retrieveFrom(oldDoc);
 		if (area != null && Documents.get().has(oldDocId)) {
 			Document oldDocument = Documents.get().retrieve(oldDocId);
 			// fires the event

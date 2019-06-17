@@ -774,7 +774,7 @@ final class NativeEditor {
 	 */
 	@JsOverlay
 	public String getId() {
-		return Id.get(getOptions());
+		return Id.retrieveFrom(getOptions());
 	}
 
 	/**

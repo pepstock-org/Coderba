@@ -101,7 +101,7 @@ public final class LineHandle implements IsEventManager {
 		this.nativeObject = nativeObject;
 		this.document = document;
 		// stores the id based on a counter
-		Id.set(nativeObject);
+		Id.applyTo(nativeObject);
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// -------------------------------
@@ -117,7 +117,7 @@ public final class LineHandle implements IsEventManager {
 	 * @return the line handle unique ID
 	 */
 	public String getId() {
-		return Id.get(nativeObject);
+		return Id.retrieveFrom(nativeObject);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public final class LineHandle implements IsEventManager {
 		// if area is consistent
 		if (area != null) {
 			// gets the line handle instance by the document cache and by its id
-			LineHandle lineHandle = document.getLineHandleById(Id.get(nativeLineHandle));
+			LineHandle lineHandle = document.getLineHandleById(Id.retrieveFrom(nativeLineHandle));
 			// fires event
 			eventManager.fireEvent(new LineHandleChangeEvent(area, document, lineHandle, item));
 		}

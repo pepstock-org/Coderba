@@ -67,7 +67,7 @@ public enum Id implements Key
 	 * @param nativeObject java script object (CodeMirror options)
 	 * @return the property value or {@link UndefinedValues#STRING} if not exist
 	 */
-	public static String get(NativeObject nativeObject) {
+	public static String retrieveFrom(NativeObject nativeObject) {
 		// checks if argument is consistent and property exists
 		if (nativeObject != null && nativeObject.hasProperty(CODERBA_ID.value())) {
 			// gets descriptor
@@ -93,8 +93,8 @@ public enum Id implements Key
 	 * 
 	 * @param nativeObject java script object
 	 */
-	public static void set(NativeObject nativeObject) {
-		set(nativeObject, generate());
+	public static void applyTo(NativeObject nativeObject) {
+		applyTo(nativeObject, generate());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public enum Id implements Key
 	 * @param nativeObject java script object
 	 * @param id editor area id
 	 */
-	public static void set(NativeObject nativeObject, String id) {
+	public static void applyTo(NativeObject nativeObject, String id) {
 		// checks if argument is consistent and property exists
 		if (nativeObject != null && id != null) {
 			// sets id

@@ -375,7 +375,6 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 		Window.getConsole().log("KEY: "+key);
 		// gets descriptor
 		NativeFunctionDescriptor<T> descriptor = nativeObject.getFunctionProperty(key);
-		Window.getConsole().log("KEY: "+descriptor.getValue());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}

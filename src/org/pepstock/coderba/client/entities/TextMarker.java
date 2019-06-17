@@ -176,7 +176,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// stores the id of the marker
-		Id.set(nativeObject);
+		Id.applyTo(nativeObject);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -192,7 +192,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	 * @return the text marker unique ID
 	 */
 	public String getId() {
-		return Id.get(nativeObject);
+		return Id.retrieveFrom(nativeObject);
 	}
 
 	/**

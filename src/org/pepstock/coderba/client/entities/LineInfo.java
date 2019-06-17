@@ -54,7 +54,7 @@ public final class LineInfo {
 		// if line handle is consistent consistent
 		if (handle != null) {
 			// gets the line handle by document cache
-			this.handle = this.document.getLineHandleById(Id.get(handle));
+			this.handle = this.document.getLineHandleById(Id.retrieveFrom(handle));
 		} else {
 			// otherwise it sets to null
 			// FIXME if correct
@@ -142,7 +142,7 @@ public final class LineInfo {
 			// scans the array
 			for (int i = 0; i < array.length(); i++) {
 				// gets the id of line widget
-				String id = Id.get(array.get(i));
+				String id = Id.retrieveFrom(array.get(i));
 				// gets the line widget object by the document cache
 				LineWidget widget = document.getLineWidget(id);
 				// if widget is consistent

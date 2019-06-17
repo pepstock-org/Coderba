@@ -125,7 +125,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		this.nativeObject = nativeObject;
 		this.document = document;
 		// stores the id based on a counter
-		Id.set(nativeObject);
+		Id.applyTo(nativeObject);
 		// sets event manager
 		this.eventManager = new EventManager(this);
 		// gets line handle from native object
@@ -133,7 +133,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// checks if line handle is consistent
 		if (nativeHandle != null) {
 			// gets the line handle by document cache
-			this.handle = document.getLineHandleById(Id.get(nativeHandle));
+			this.handle = document.getLineHandleById(Id.retrieveFrom(nativeHandle));
 		} else {
 			// otherwise it sets to null
 			// FIXME if correct
@@ -151,7 +151,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 * @return the line widget unique ID
 	 */
 	public String getId() {
-		return Id.get(nativeObject);
+		return Id.retrieveFrom(nativeObject);
 	}
 
 	/**
