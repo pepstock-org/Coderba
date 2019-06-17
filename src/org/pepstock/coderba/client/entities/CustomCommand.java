@@ -73,7 +73,7 @@ public final class CustomCommand extends Command {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		commandFunctionProxy.setCallback((editorArae) -> onExecute(editorArae));
+		commandFunctionProxy.setCallback(this::onExecute);
 	}
 
 	/**
