@@ -2300,7 +2300,7 @@ public final class Document implements IsEventManager {
 	 */
 	private void onLinkedDcouments(NativeDocument document, boolean sharedHistory) {
 		// gets the native editor
-		NativeEditor nativeEditor = nativeObject.getEditor();
+		NativeEditor nativeEditor = document.getEditor();
 		// checks if handler and native editor are consistent
 		if (linkedDocumentsHandler != null && nativeEditor != null) {
 			// gets editor area
@@ -2327,7 +2327,7 @@ public final class Document implements IsEventManager {
 	 */
 	private void onChange(NativeDocument document, ChangeItem item) {
 		// gets editor instance
-		NativeEditor editor = nativeObject.getEditor();
+		NativeEditor editor = document.getEditor();
 		// checks if editor is consistent
 		if (editor != null) {
 			// gets editor area
@@ -2348,7 +2348,7 @@ public final class Document implements IsEventManager {
 	 */
 	private void onBeforeChange(NativeDocument document, ChangeItem item) {
 		// gets editor instance
-		NativeEditor editor = nativeObject.getEditor();
+		NativeEditor editor = document.getEditor();
 		// checks if editor is consistent
 		if (editor != null) {
 			// gets editor area
@@ -2368,7 +2368,7 @@ public final class Document implements IsEventManager {
 	 */
 	private void onCursorActivity(NativeDocument document) {
 		// gets editor instance
-		NativeEditor editor = nativeObject.getEditor();
+		NativeEditor editor = document.getEditor();
 		// checks if editor is consistent
 		if (editor != null) {
 			// gets editor area
@@ -2389,7 +2389,7 @@ public final class Document implements IsEventManager {
 	 */
 	private void onBeforeSelectionChange(NativeDocument document, Anchor anchor) {
 		// gets editor instance
-		NativeEditor editor = nativeObject.getEditor();
+		NativeEditor editor = document.getEditor();
 		// checks if editor is consistent
 		if (editor != null) {
 			// gets editor area
