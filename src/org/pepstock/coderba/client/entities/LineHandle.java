@@ -210,20 +210,16 @@ public final class LineHandle implements IsEventManager {
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(LineHandleChangeEvent.TYPE)) {
+		if (event.isRecognize(LineHandleChangeEvent.TYPE) && eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 0) {
 			// checks if type of removed event handler is LineHandleChangeEvent
 			// if there is not any LineHandleChangeEvent handler
-			if (eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE)) {
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.off(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
+		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE) && eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 0) {
 			// checks if type of removed event handler is LineHandleDeleteEvent
 			// if there is not any LineHandleDeleteEvent handler
-			if (eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.off(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
 		}
 	}
 
@@ -234,20 +230,16 @@ public final class LineHandle implements IsEventManager {
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(LineHandleChangeEvent.TYPE)) {
+		if (event.isRecognize(LineHandleChangeEvent.TYPE) && eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 1) {
 			// checks if type of added event handler is LineHandleChangeEvent
 			// if there is not any LineHandleChangeEvent handler
-			if (eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE)) {
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.on(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
+		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE) && eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 1) {
 			// checks if type of added event handler is LineHandleDeleteEvent
 			// if there is not any LineHandleDeleteEvent handler
-			if (eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.on(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
 		}
 	}
 

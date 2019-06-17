@@ -31,7 +31,7 @@ public class Commands {
 	// buffer with all custom command instances
 	// K = commands name id
 	// V = commands instance
-	private static final Map<String, CustomCommand> COMMANDS = new HashMap<>();
+	private static final Map<String, CustomCommand> COMMANDS_CACHE = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -48,7 +48,7 @@ public class Commands {
 		// checks if command is consistent
 		if (command != null) {
 			// puts into chace
-			COMMANDS.put(command.getName().value(), command);
+			COMMANDS_CACHE.put(command.getName().value(), command);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class Commands {
 		// checks if argument is consistent
 		if (Key.isValid(name)) {
 			// remove
-			COMMANDS.remove(name.value());
+			COMMANDS_CACHE.remove(name.value());
 		}
 	}
 
@@ -74,7 +74,7 @@ public class Commands {
 	static CustomCommand get(Key name) {
 		// checks if argument is consistent
 		if (Key.isValid(name)) {
-			return COMMANDS.get(name.value());
+			return COMMANDS_CACHE.get(name.value());
 		}
 		// if here editor area id is not consistent
 		return null;

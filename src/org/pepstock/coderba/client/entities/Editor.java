@@ -1465,13 +1465,11 @@ public final class Editor implements IsEventManager {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(EditorUpdateEvent.NAME, editorUpdateFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE)) {
+		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE) && eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 0) {
 			// checks if type of removed event handler is EditorViewportChangeEvent
 			// if there is not any EditorViewportChangeEvent handler
-			if (eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
-			}
+			// sets OFF the callback proxy in order to call the user event interface
+			nativeObject.off(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
 		}
 	}
 
@@ -1615,13 +1613,11 @@ public final class Editor implements IsEventManager {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(EditorUpdateEvent.NAME, editorUpdateFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE)) {
+		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE) && eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 1) {
 			// checks if type of added event handler is EditorViewportChangeEvent
 			// if there is not any EditorViewportChangeEvent handler
-			if (eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.on(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
 		}
 	}
 

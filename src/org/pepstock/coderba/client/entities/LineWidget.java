@@ -224,13 +224,11 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(LineWidgetRedrawEvent.TYPE)) {
+		if (event.isRecognize(LineWidgetRedrawEvent.TYPE) && eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 1) {
 			// checks if type of added event handler is LineWidgetRedrawEvent
 			// if there is not any LineWidgetRedrawEvent handler
-			if (eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.on(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
 		}
 	}
 
@@ -242,13 +240,11 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(LineWidgetRedrawEvent.TYPE)) {
+		if (event.isRecognize(LineWidgetRedrawEvent.TYPE) && eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 0) {
 			// checks if type of removed event handler is LineWidgetRedrawEvent
 			// if there is not any LineWidgetRedrawEvent handler
-			if (eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.off(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
 		}
 	}
 

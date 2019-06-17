@@ -325,13 +325,11 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(TextMarkerHideEvent.NAME, textMarkerHideFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE)) {
+		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE) && eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 1) {
 			// checks if type of added event handler is TextMarkerUnhideEvent
 			// if there is not any TextMarkerUnhideEvent handler
-			if (eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.on(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
 		}
 	}
 
@@ -364,13 +362,11 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.off(TextMarkerHideEvent.NAME, textMarkerHideFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE)) {
+		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE) && eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 0) {
 			// checks if type of removed event handler is TextMarkerUnhideEvent
 			// if there is not any TextMarkerUnhideEvent handler
-			if (eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
-			}
+			// sets the callback proxy in order to call the user event interface
+			nativeObject.off(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
 		}
 	}
 

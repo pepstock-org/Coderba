@@ -30,14 +30,6 @@ import jsinterop.annotations.JsType;
 public final class ArrayObject extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
-	 * 
-	 * @param items objects items to create new array
-	 * @return new array instance of objects.
-	 */
-	private static native ArrayObject of(NativeObject... items);
-
-	/**
 	 * To avoid any instantiation
 	 */
 	ArrayObject() {

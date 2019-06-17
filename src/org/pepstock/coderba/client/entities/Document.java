@@ -2442,13 +2442,11 @@ public final class Document implements IsEventManager {
 				// sets OFF the callback proxy in order to call the user event interface
 				nativeObject.off(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
+		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE) && eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
 			// checks if type of removed event handler is DocumentCursorActivityEvent
 			// if there is not any DocumentCursorActivityEvent handler
-			if (eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
-			}
+			// sets OFF the callback proxy in order to call the user event interface
+			nativeObject.off(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
 		}
 	}
 
@@ -2480,13 +2478,11 @@ public final class Document implements IsEventManager {
 				// sets the callback proxy in order to call the user event interface
 				nativeObject.on(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
 			}
-		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE)) {
+		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE) && eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
 			// checks if type of added event handler is DocumentCursorActivityEvent
 			// if there is not any DocumentCursorActivityEvent handler
-			if (eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
 				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
-			}
+			nativeObject.on(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
 		}
 	}
 

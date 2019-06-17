@@ -35,23 +35,23 @@ public final class EditorKeyHandledEvent extends AbstractEditorWithNativeEvent<E
 	 */
 	public static final String NAME = "keyHandled";
 	// key map instance
-	private final String name;
+	private final String keyName;
 
 	/**
 	 * Creates an editor {@value NAME} event.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param event native DOM keydown or keypress event instance
-	 * @param name the name of the handled key (for example "Ctrl-X" or "'q'")
+	 * @param keyName the name of the handled key (for example "Ctrl-X" or "'q'")
 	 */
-	public EditorKeyHandledEvent(EditorArea editorArea, NativeEvent event, String name) {
+	public EditorKeyHandledEvent(EditorArea editorArea, NativeEvent event, String keyName) {
 		super(TYPE, editorArea, event);
 		// checks if name is consistent
-		if (name == null) {
+		if (keyName == null) {
 			// if no, exception
 			throw new IllegalArgumentException("Name is null");
 		}
-		this.name = name;
+		this.keyName = keyName;
 	}
 
 	/**
@@ -59,8 +59,8 @@ public final class EditorKeyHandledEvent extends AbstractEditorWithNativeEvent<E
 	 * 
 	 * @return the name of handled key
 	 */
-	public String getName() {
-		return name;
+	public String getKeyName() {
+		return keyName;
 	}
 
 	/*
