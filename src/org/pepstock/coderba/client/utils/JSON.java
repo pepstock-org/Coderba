@@ -45,6 +45,13 @@ public final class JSON {
 	static native String stringify(Object obj, Object function, int spaces);
 
 	/**
+	 * To avoid any instantiation
+	 */
+	private JSON() {
+		// do nothing
+	}
+
+	/**
 	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be
 	 * used.
 	 * 
