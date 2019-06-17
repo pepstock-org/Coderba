@@ -35,7 +35,7 @@ public final class EventManager {
 	// GWT manager
 	private final HandlerManager eventHandlerManager;
 	// event manager instance
-	private final IsEventManager eventManager;
+	private final IsEventManager eventManagerImpl;
 	// list of created handler registration
 	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 
@@ -51,9 +51,9 @@ public final class EventManager {
 			throw new IllegalArgumentException("Event manager is null");
 		}
 		// streos event manager
-		this.eventManager = eventManager;
+		this.eventManagerImpl = eventManager;
 		// creates GWT manager
-		eventHandlerManager = new HandlerManager(this.eventManager, false);
+		eventHandlerManager = new HandlerManager(this.eventManagerImpl, false);
 		// adds to event manager as handler to add and remove handlers
 		eventHandlerManager.addHandler(AddHandlerEvent.TYPE, eventManager);
 		eventHandlerManager.addHandler(RemoveHandlerEvent.TYPE, eventManager);

@@ -31,7 +31,7 @@ final class Documents {
 	// maps which contains all documents
 	// K = document id
 	// V = document instance
-	private final Map<String, Document> documents = new HashMap<>();
+	private final Map<String, Document> documentsCache = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -55,8 +55,8 @@ final class Documents {
 	 * @param document document instance to be added into cache
 	 */
 	void add(Document document) {
-		if (!documents.containsKey(document.getId())) {
-			documents.put(document.getId(), document);
+		if (!documentsCache.containsKey(document.getId())) {
+			documentsCache.put(document.getId(), document);
 		}
 	}
 
@@ -70,7 +70,7 @@ final class Documents {
 		// checks if id is consistent
 		if (id != null) {
 			// returns if id is consistent
-			return documents.containsKey(id);
+			return documentsCache.containsKey(id);
 		}
 		// if here, id is not consistent
 		// then returns always false
@@ -87,7 +87,7 @@ final class Documents {
 		// checks if id is consistent
 		if (id != null) {
 			// returns the stored document
-			return documents.get(id);
+			return documentsCache.get(id);
 		}
 		// if here, id is not consistent
 		// then returns always null
