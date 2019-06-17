@@ -107,9 +107,8 @@ public final class LineHandle implements IsEventManager {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// FIXME hand of Eclipse
-		//lineHandleChangeFunctionProxy.setCallback((this::onChange);
-		//lineHandleDeleteFunctionProxy.setCallback(this::onDelete);
+		lineHandleChangeFunctionProxy.setCallback(this::onChange);
+		lineHandleDeleteFunctionProxy.setCallback(this::onDelete);
 	}
 
 	/**
