@@ -117,9 +117,7 @@ public final class CommandSet extends NativeObjectContainer {
 			// if is function
 			if (ObjectType.FUNCTION.equals(type)) {
 				// gets function
-				Command.CommandFunction function = getValue(name, (Command.CommandFunction) null);
-				// and returns it
-				return function;
+				return getValue(name, (Command.CommandFunction) null);
 			}
 		}
 		// if here, the name is not consistent

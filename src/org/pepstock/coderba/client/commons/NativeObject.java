@@ -492,7 +492,7 @@ public class NativeObject {
 	 * @param descriptor the descriptor to be set
 	 */
 	@JsOverlay
-	final static void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {
+	static final void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {
 		// configures the property
 		descriptor.setConfigurable(true);
 		descriptor.setEnumerable(true);

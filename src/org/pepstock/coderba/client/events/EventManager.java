@@ -128,7 +128,7 @@ public final class EventManager {
 	 * @see com.google.gwt.event.shared.HandlerManager#removeHandler(com.google.gwt.event.shared.GwtEvent.Type,
 	 * com.google.gwt.event.shared.EventHandler)
 	 */
-	private <H extends EventHandler> void removeHandler(Type<H> type, H handler) {
+	<H extends EventHandler> void removeHandler(Type<H> type, H handler) {
 		// removes handler
 		eventHandlerManager.removeHandler(type, handler);
 		// sends the event

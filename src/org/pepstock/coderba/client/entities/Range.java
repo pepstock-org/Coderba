@@ -48,7 +48,7 @@ public class Range extends NativeEntity {
 	 * @return a range of positions
 	 */
 	@JsOverlay
-	public final static Range create(Position from, Position to) {
+	public static final Range create(Position from, Position to) {
 		// checks if FROM argument is consistent
 		if (from == null) {
 			// if not exception

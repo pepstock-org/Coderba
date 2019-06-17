@@ -142,7 +142,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		lineWidgetRedrawFunctionProxy.setCallback(() -> onRedraw());
+		lineWidgetRedrawFunctionProxy.setCallback(this::onRedraw);
 	}
 
 	/**

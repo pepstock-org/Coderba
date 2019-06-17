@@ -251,13 +251,13 @@ public final class Document implements IsEventManager {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		documentEachLineFunctionProxy.setCallback((handle) -> onDocumentEachLine(handle));
-		documentExtendSelectionsFunctionProxy.setCallback((anchor) -> onDocumentExtendSelections(anchor));
-		linkedDocumentsFunctionProxy.setCallback((document, sharedHistory) -> onLinkedDcouments(document, sharedHistory));
-		documentChangeFunctionProxy.setCallback((document, item) -> onChange(document, item));
-		documentBeforeChangeFunctionProxy.setCallback((document, item) -> onBeforeChange(document, item));
-		documentCursorActivityFunctionProxy.setCallback((document) -> onCursorActivity(document));
-		documentBeforeSelectionChangeFunctionProxy.setCallback((document, item) -> onBeforeSelectionChange(document, item));
+		documentEachLineFunctionProxy.setCallback(this::onDocumentEachLine);
+		documentExtendSelectionsFunctionProxy.setCallback(this::onDocumentExtendSelections);
+		linkedDocumentsFunctionProxy.setCallback(this::onLinkedDcouments);
+		documentChangeFunctionProxy.setCallback(this::onChange);
+		documentBeforeChangeFunctionProxy.setCallback(this::onBeforeChange);
+		documentCursorActivityFunctionProxy.setCallback(this::onCursorActivity);
+		documentBeforeSelectionChangeFunctionProxy.setCallback(this::onBeforeSelectionChange);
 		// adds to cache
 		Documents.get().add(this);
 	}

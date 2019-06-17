@@ -156,9 +156,9 @@ public class EditorOptions implements IsOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		specialCharPlaceholderFunctionProxy.setCallback((character) -> onSpecialCharPlaceholder(character));
-		lineNumberFormatterFunctionProxy.setCallback((line) -> onLineNumberFormatter(line));
-		configureMouseFunctionProxy.setCallback((editor, repeat, event) -> onConfigureMouse(editor, repeat, event));
+		specialCharPlaceholderFunctionProxy.setCallback(this::onSpecialCharPlaceholder);
+		lineNumberFormatterFunctionProxy.setCallback(this::onLineNumberFormatter);
+		configureMouseFunctionProxy.setCallback(this::onConfigureMouse);
 	}
 
 	/**

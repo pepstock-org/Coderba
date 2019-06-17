@@ -107,8 +107,9 @@ public final class LineHandle implements IsEventManager {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		lineHandleChangeFunctionProxy.setCallback((lineHandle, item) -> onChange(lineHandle, item));
-		lineHandleDeleteFunctionProxy.setCallback(() -> onDelete());
+		// FIXME
+//		lineHandleChangeFunctionProxy.setCallback((this::onChange);
+//		lineHandleDeleteFunctionProxy.setCallback(this::onDelete);
 	}
 
 	/**

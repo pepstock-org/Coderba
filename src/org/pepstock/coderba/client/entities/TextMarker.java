@@ -180,10 +180,10 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		textMarkerBeforeCursorEnterFunctionProxy.setCallback(() -> onBeforeCursorEnter());
-		textMarkerClearFunctionProxy.setCallback((from, to) -> onClear(from, to));
-		textMarkerHideFunctionProxy.setCallback(() -> onHide());
-		textMarkerUnhideFunctionProxy.setCallback(() -> onUnhide());
+		textMarkerBeforeCursorEnterFunctionProxy.setCallback(this::onBeforeCursorEnter);
+		textMarkerClearFunctionProxy.setCallback(this::onClear);
+		textMarkerHideFunctionProxy.setCallback(this::onHide);
+		textMarkerUnhideFunctionProxy.setCallback(this::onUnhide);
 	}
 
 	/**

@@ -508,26 +508,26 @@ public final class Editor implements IsEventManager {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		editorChangeFunctionProxy.setCallback((editor, item) -> onChange(editor, item));
-		editorChangesFunctionProxy.setCallback((editor, items) -> onChanges(editor, items));
-		editorBeforeChangeFunctionProxy.setCallback((editor, item) -> onBeforeChange(editor, item));
-		editorCursorActivityFunctionProxy.setCallback((editor) -> onCursorActivity(editor));
-		editorKeyHandledFunctionProxy.setCallback((editor, name, event) -> onKeyHandled(editor, name, event));
-		editorBeforeSelectionChangeFunctionProxy.setCallback((editor, item) -> onBeforeSelectionChange(editor, item));
-		editorBlurFunctionProxy.setCallback((editor, event) -> onBlur(editor, event));
-		editorElectrictInputFunctionProxy.setCallback((editor, line) -> onElectrictInput(editor, line));
-		editorFocusFunctionProxy.setCallback((editor, event) -> onFocus(editor, event));
-		editorGutterClickFunctionProxy.setCallback((editor, line, gutter, event) -> onGutterClick(editor, line, gutter, event));
-		editorGutterContextMenuFunctionProxy.setCallback((editor, line, gutter, event) -> onGutterContextMenu(editor, line, gutter, event));
-		editorInputReadFunctionProxy.setCallback((editor, item) -> onInputRead(editor, item));
-		editorOptionChangeFunctionProxy.setCallback((editor, property) -> onOptionChange(editor, property));
-		editorRefreshFunctionProxy.setCallback((editor) -> onRefresh(editor));
-		editorRenderLineFunctionProxy.setCallback((editor, line, element) -> onRenderLine(editor, line, element));
-		editorScrollCursorIntoViewFunctionProxy.setCallback((editor, event) -> onScrollCursorIntoView(editor, event));
-		editorScrollFunctionProxy.setCallback((editor) -> onScroll(editor));
-		editorSwapDocFunctionProxy.setCallback((editor, oldDoc) -> onSwapDoc(editor, oldDoc));
-		editorUpdateFunctionProxy.setCallback((editor) -> onUpdate(editor));
-		editorViewportChangeFunctionProxy.setCallback((editor, from, to) -> onViewportChange(editor, from, to));
+		editorChangeFunctionProxy.setCallback(this::onChange);
+		editorChangesFunctionProxy.setCallback(this::onChanges);
+		editorBeforeChangeFunctionProxy.setCallback(this::onBeforeChange);
+		editorCursorActivityFunctionProxy.setCallback(this::onCursorActivity);
+		editorKeyHandledFunctionProxy.setCallback(this::onKeyHandled);
+		editorBeforeSelectionChangeFunctionProxy.setCallback(this::onBeforeSelectionChange);
+		editorBlurFunctionProxy.setCallback(this::onBlur);
+		editorElectrictInputFunctionProxy.setCallback(this::onElectrictInput);
+		editorFocusFunctionProxy.setCallback(this::onFocus);
+		editorGutterClickFunctionProxy.setCallback(this::onGutterClick);
+		editorGutterContextMenuFunctionProxy.setCallback(this::onGutterContextMenu);
+		editorInputReadFunctionProxy.setCallback(this::onInputRead);
+		editorOptionChangeFunctionProxy.setCallback(this::onOptionChange);
+		editorRefreshFunctionProxy.setCallback(this::onRefresh);
+		editorRenderLineFunctionProxy.setCallback(this::onRenderLine);
+		editorScrollCursorIntoViewFunctionProxy.setCallback(this::onScrollCursorIntoView);
+		editorScrollFunctionProxy.setCallback(this::onScroll);
+		editorSwapDocFunctionProxy.setCallback(this::onSwapDoc);
+		editorUpdateFunctionProxy.setCallback(this::onUpdate);
+		editorViewportChangeFunctionProxy.setCallback(this::onViewportChange);
 	}
 
 	// ---------------------------------

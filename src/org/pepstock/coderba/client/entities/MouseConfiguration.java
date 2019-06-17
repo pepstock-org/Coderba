@@ -118,7 +118,7 @@ public final class MouseConfiguration extends BaseEntity {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		mouseUnitFunctionnProxy.setCallback((editor, pos) -> onMouseUnit(editor, pos));
+		mouseUnitFunctionnProxy.setCallback(this::onMouseUnit);
 	}
 
 	/**
