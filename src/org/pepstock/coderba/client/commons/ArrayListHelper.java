@@ -88,6 +88,7 @@ public final class ArrayListHelper {
 	 * Creates a array list of native entities java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of native entity
 	 * @return a array list of native entities instance
 	 */
 	public static <E extends NativeEntity> ArrayEntityList<E> list(ArrayEntity<E> values) {
@@ -131,6 +132,7 @@ public final class ArrayListHelper {
 	 * Creates an unmodifiable array list of native entity java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of native entity
 	 * @return a array list of native entities instance
 	 */
 	public static <E extends NativeEntity> List<E> unmodifiableList(ArrayEntity<E> values) {

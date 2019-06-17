@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains the classes to manage external resources (java script or CSS code), to be injected.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

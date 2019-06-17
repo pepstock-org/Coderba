@@ -22,6 +22,7 @@ import java.util.Set;
 import org.pepstock.coderba.client.entities.CodeMirror;
 import org.pepstock.coderba.client.entities.ModeSpecification;
 import org.pepstock.coderba.client.resources.InjectableResource;
+import org.pepstock.coderba.client.resources.ResourcesType;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -56,7 +57,8 @@ public final class Injector {
 	 */
 	public static void ensureInjected() {
 		// check if argument is consistent
-		internalEnsureInjected(CodeMirrorCode.CODE);
+		ensureInjected(ResourcesType.getClientBundle().codemirrorCss(), true);
+		ensureInjected(ResourcesType.getClientBundle().codemirror());
 	}
 
 	/**

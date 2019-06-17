@@ -20,8 +20,9 @@ import org.pepstock.coderba.client.EditorArea;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires when the editor tries to scroll its cursor into view.<br>
+ * Can be hooked into to take care of additional scrollable containers around the editor.<br>
+ * When the event object has its preventDefault method called, it will not itself try to scroll the window.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,14 +33,15 @@ public final class EditorScrollCursorIntoViewEvent extends AbstractEditorWithNat
 	 */
 	public static final Type<EditorScrollCursorIntoViewEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "scrollCursorIntoView";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param event native event instance
 	 */
 	public EditorScrollCursorIntoViewEvent(EditorArea editorArea, NativeEvent event) {
 		super(TYPE, editorArea, event);

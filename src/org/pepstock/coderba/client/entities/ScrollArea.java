@@ -20,7 +20,8 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
- * FIXME
+ * Object, provided by Code Mirror, that represents the current scroll position, the size of the scrollable area, and the size
+ * of the visible area (minus scrollbars).
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -63,8 +64,10 @@ public final class ScrollArea extends BaseEntity {
 	}
 
 	/**
+	 * Creates a container with a native object instance.<br>
+	 * This is used when coordinate has been passed by a method of Code Mirror.
 	 * 
-	 * @paramObject
+	 * @param nativeObject a native object instance
 	 */
 	ScrollArea(NativeObject nativeObject) {
 		super(nativeObject);

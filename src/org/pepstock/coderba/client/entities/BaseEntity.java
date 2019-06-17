@@ -19,20 +19,25 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
 /**
+ * Base object of native object container.<br>
+ * Used for entities classes of Coderba implementation.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 abstract class BaseEntity extends NativeObjectContainer {
 
 	/**
-	 * 
+	 * Creates an empty container.
 	 */
 	BaseEntity() {
 		super();
 	}
 
 	/**
-	 * @param nativeObject
+	 * Creates a container with a native object instance.
+	 * 
+	 * @param nativeObject a native object instance
 	 */
 	BaseEntity(NativeObject nativeObject) {
 		super(nativeObject);

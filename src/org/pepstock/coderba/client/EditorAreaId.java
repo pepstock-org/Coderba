@@ -15,6 +15,8 @@
 */
 package org.pepstock.coderba.client;
 
+import com.google.gwt.dom.client.Document;
+
 /**
  * This class is not implementable because created by EditoArea instance and passed to create an editor.<br>
  * This is done in order to avoid that anyone can create an Editor with having an area.
@@ -24,21 +26,13 @@ package org.pepstock.coderba.client;
  */
 public final class EditorAreaId {
 
-	private final String id;
+	private final String id = Document.get().createUniqueId();;
 
 	/**
-	 * Creates the object with editor area id.
-	 * 
-	 * @param id
+	 * Creates the object. It is implemented to reduce the visibility.
 	 */
-	EditorAreaId(String id) {
-		// checks if id is consistent
-		if (id == null) {
-			// if not exception
-			throw new IllegalArgumentException("Editor area id is null");
-		}
-		// stores id
-		this.id = id;
+	EditorAreaId() {
+		// do nothing
 	}
 
 	/**

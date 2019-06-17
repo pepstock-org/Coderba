@@ -17,9 +17,12 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.commons.AbstractExtendedOptions;
+import org.pepstock.coderba.client.commons.NativeObject;
+import org.pepstock.coderba.client.enums.Options;
 
 /**
- * Manages the options of an editor already instantiated.<br< It uses a native editor to set and get options.
+ * Manages the options of an editor already instantiated.<br>
+ * It uses a native editor to set and get options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,6 +37,37 @@ final class RuntimeOptions extends AbstractExtendedOptions<RuntimeOptionsContain
 	 */
 	RuntimeOptions(NativeEditor nativeObject, IsDefaultOptions defaultsValue) {
 		super(new RuntimeOptionsContainer(nativeObject), defaultsValue);
+	}
+
+	/**
+	 * Copies the entities which can not be retrieved by java script object, like language or theme.
+	 * 
+	 * @param options options from copy the entities.
+	 */
+	void copy(IsExtendedOptions options) {
+		super.copyItems(options);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
+	 */
+	@Override
+	public ExtraKeyMapTable getExtraKeys() {
+		// this methods has been override 
+		// because to reduce the visibility of constructor
+		// of extra key map
+		ExtraKeyMapTable extraKeyMapTable = super.getExtraKeys();
+		// checks if table already passed
+		// or existing into native object 
+		if (extraKeyMapTable == null) {
+			// gets native object
+			NativeObject object = getNativeObjectContainer().getObjectProperty(Options.EXTRA_KEYS.value());
+			// creates and returns extra map into object
+			return new ExtraKeyMapTable(object);	
+		}
+		return extraKeyMapTable;
 	}
 
 }

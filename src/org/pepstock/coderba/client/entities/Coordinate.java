@@ -19,14 +19,17 @@ import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * 
- * FIXME 
+ * Object which contains 2 values to identify a coordinate (as integer): from and to.<br>
+ * It is used by Code Mirror methods
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class Coordinate extends BaseEntity {
 
+	/**
+	 * Default value of <code>from</code> and <code>to</code> when missing.
+	 */
 	public static final int DEFAULT_COORDINATE = 0;
 
 	/**
@@ -64,36 +67,71 @@ public final class Coordinate extends BaseEntity {
 	 * To avoid any instantiation
 	 */
 	private Coordinate() {
+		// creates an empty object
 		this(null);
 	}
 
 	/**
+	 * Creates a container with a native object instance.<br>
+	 * This is used when coordinate has been passed by a method of Code Mirror.
 	 * 
-	 * @param nativeObject
+	 * @param nativeObject a native object instance
 	 */
 	Coordinate(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
+	/**
+	 * Creates a coordinate by a from and to integer values.
+	 * 
+	 * @param from from value
+	 * @param to to value
+	 * @return returns the coordinate
+	 */
 	public static Coordinate create(int from, int to) {
+		// creates a coordinate object
 		Coordinate coordinate = new Coordinate();
+		// sets values
 		coordinate.setFrom(from);
 		coordinate.setTo(to);
+		// returns coordinate instance
 		return coordinate;
 	}
 
+	/**
+	 * Returns the <code>from</code> value.
+	 * 
+	 * @return the <code>from</code> value
+	 */
 	public int getFrom() {
 		return getValue(Property.FROM, DEFAULT_COORDINATE);
 	}
 
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the <code>from</code> value.
+	 * 
+	 * @param from the <code>from</code> value
+	 */
 	private void setFrom(int from) {
 		setValue(Property.FROM, from);
 	}
 
+	/**
+	 * Returns the <code>to</code> value.
+	 * 
+	 * @return the <code>to</code> value
+	 */
 	public int getTo() {
 		return getValue(Property.TO, DEFAULT_COORDINATE);
 	}
 
+	/**
+	 * <b>INTERNAL</b><br>
+	 * Sets the <code>to</code> value.
+	 * 
+	 * @param to the <code>to</code> value
+	 */
 	private void setTo(int to) {
 		setValue(Property.TO, to);
 	}

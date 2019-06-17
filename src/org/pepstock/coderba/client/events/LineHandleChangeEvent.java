@@ -20,8 +20,7 @@ import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.LineHandle;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires when the line's text content is changed in any way (but the line is not deleted outright).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,29 +31,36 @@ public final class LineHandleChangeEvent extends AbstractLineHandleEvent<LineHan
 	 */
 	public static final Type<LineHandleChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "change";
-
+	// change item instance
 	private final ChangeItem item;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a line handle {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param lineHandle line handle instance
+	 * @param item change item instance
 	 */
 	public LineHandleChangeEvent(EditorArea editorArea, Document document, LineHandle lineHandle, ChangeItem item) {
 		super(TYPE, editorArea, document, lineHandle);
+		// checks if item is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("[DocumentChangeEvent] Line handle change item is null");
+			// if no, exception
+			throw new IllegalArgumentException("Change item is null");
 		}
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the change item.
+	 * 
+	 * @return the change item
 	 */
-	public final ChangeItem getItem() {
+	public ChangeItem getItem() {
 		return item;
 	}
 

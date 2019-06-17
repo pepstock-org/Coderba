@@ -17,15 +17,13 @@ package org.pepstock.coderba.client.commons;
 
 import java.util.List;
 
-import org.pepstock.coderba.client.GlobalDefaults;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.KeyMap;
-import org.pepstock.coderba.client.KeyMaps;
 import org.pepstock.coderba.client.Language;
-import org.pepstock.coderba.client.Languages;
 import org.pepstock.coderba.client.Theme;
-import org.pepstock.coderba.client.Themes;
+import org.pepstock.coderba.client.entities.ExtraKeyMapTable;
+import org.pepstock.coderba.client.entities.IsExtendedOptions;
 import org.pepstock.coderba.client.entities.IsOptions;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
@@ -53,6 +51,14 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	// native object container which manage all set and get
 	// by key
 	private final T nativeObjectContainer;
+	// language instance
+	private Language language = null;
+	// key map instance
+	private KeyMap keyMap = null;
+	// theme instance
+	private Theme theme = null;
+ 	// extra map key
+	private ExtraKeyMapTable extraKeyMapTable = null;
 
 	/**
 	 * Creates the options manager by a container and default values.
@@ -66,6 +72,18 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	}
 
 	/**
+	 * Copies the entities which can not be retrieved by java script object, like language or theme.
+	 * 
+	 * @param options options from copy the entities.
+	 */
+	protected final void copyItems(IsExtendedOptions options) {
+		this.language = options.getLanguage();
+		this.keyMap = options.getKeyMap();
+		this.theme = options.getTheme();
+		this.extraKeyMapTable = options.getExtraKeys();
+	}
+
+	/**
 	 * Returns the native object container used at creation time.
 	 * 
 	 * @return the native object container used at creation time
@@ -73,27 +91,54 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	protected final T getNativeObjectContainer() {
 		return nativeObjectContainer;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
+	 */
+	@Override
+	public ExtraKeyMapTable getExtraKeys() {
+		return extraKeyMapTable;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
+	 */
+	@Override
+	public void setExtraKeys(ExtraKeyMapTable extraKeys) {
+		// sets the native object
+		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
+		// and stores locally
+		this.extraKeyMapTable = extraKeys;
+	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getAllowDropFileTypes()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getAllowDropFileTypes()
 	 */
 	@Override
 	public List<String> getAllowDropFileTypes() {
+		// checks if there is the option
 		if (nativeObjectContainer.has(Options.ALLOW_DROP_FILE_TYPES)) {
+			// if yes, gets array instance
 			ArrayString array = ArrayString.fromOrNull(nativeObjectContainer.getArrayValue(Options.ALLOW_DROP_FILE_TYPES));
+			// if consistent
 			if (array != null) {
+				// returns the list
 				return ArrayListHelper.list(array);
 			}
 		}
+		// if here, the property is missing
+		// and then returns the default
 		return defaultsValue.getAllowDropFileTypes();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorBlinkRate()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorBlinkRate()
 	 */
 	@Override
 	public int getCursorBlinkRate() {
@@ -103,7 +148,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorHeight()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorHeight()
 	 */
 	@Override
 	public int getCursorHeight() {
@@ -113,7 +158,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getCursorScrollMargin()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getCursorScrollMargin()
 	 */
 	@Override
 	public int getCursorScrollMargin() {
@@ -123,7 +168,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getDirection()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getDirection()
 	 */
 	@Override
 	public Direction getDirection() {
@@ -133,18 +178,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getExtraKeys()
-	 */
-	@Override
-	public NativeObject getExtraKeys() {
-		//FIXME
-		return nativeObjectContainer.getValue(Options.EXTRA_KEYS);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getFirstLineNumber()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getFirstLineNumber()
 	 */
 	@Override
 	public int getFirstLineNumber() {
@@ -154,21 +188,29 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getGutters()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getGutters()
 	 */
 	@Override
 	public List<String> getGutters() {
+		// checks if there is the option
 		if (nativeObjectContainer.has(Options.GUTTERS)) {
+			// if yes, gets array instance
 			ArrayString array = nativeObjectContainer.getArrayValue(Options.GUTTERS);
-			return ArrayListHelper.list(array);
+			// if consistent
+			if (array != null) {
+				// returns the list
+				return ArrayListHelper.list(array);
+			}
 		}
+		// if here, the property is missing
+		// and then returns the default
 		return defaultsValue.getGutters();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getHistoryEventDelay()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getHistoryEventDelay()
 	 */
 	@Override
 	public int getHistoryEventDelay() {
@@ -178,7 +220,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getIndentUnit()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getIndentUnit()
 	 */
 	@Override
 	public int getIndentUnit() {
@@ -188,7 +230,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getInputStyle()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getInputStyle()
 	 */
 	@Override
 	public InputStyle getInputStyle() {
@@ -198,37 +240,33 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getKeyMap()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getKeyMap()
 	 */
 	@Override
 	public KeyMap getKeyMap() {
-		String value = nativeObjectContainer.getValue(Options.KEY_MAP, defaultsValue.getKeyMap().getName());
-		String defaultKeyMapName = GlobalDefaults.get().getKeyMap().getName();
-		if (defaultKeyMapName.equalsIgnoreCase(value) && KeyMaps.get().retrieve(defaultKeyMapName) == null) {
-			GlobalDefaults.get().getKeyMap().inject();
+		if (keyMap != null) {
+			return keyMap;
 		}
-		return KeyMaps.get().retrieve(value);
+		return defaultsValue.getKeyMap();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getLanguage()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getLanguage()
 	 */
 	@Override
 	public Language getLanguage() {
-		String value = nativeObjectContainer.getValue(Options.MODE, defaultsValue.getLanguage().getName());
-		String defaultLanguageName = GlobalDefaults.get().getLanguage().getName();
-		if (defaultLanguageName.equalsIgnoreCase(value) && Languages.get().retrieve(defaultLanguageName) == null) {
-			Injector.ensureInjected(GlobalDefaults.get().getLanguage());
+		if (language != null) {
+			return language;
 		}
-		return Languages.get().retrieve(value);
+		return defaultsValue.getLanguage();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getLineSeparator()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getLineSeparator()
 	 */
 	@Override
 	public String getLineSeparator() {
@@ -238,7 +276,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getMaxHighlightLength()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getMaxHighlightLength()
 	 */
 	@Override
 	public int getMaxHighlightLength() {
@@ -248,7 +286,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getPhrases()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getPhrases()
 	 */
 	@Override
 	public Phrases getPhrases() {
@@ -258,7 +296,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getPollInterval()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getPollInterval()
 	 */
 	@Override
 	public int getPollInterval() {
@@ -268,7 +306,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getReadOnly()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getReadOnly()
 	 */
 	@Override
 	public ReadOnly getReadOnly() {
@@ -289,7 +327,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getScrollbarStyle()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getScrollbarStyle()
 	 */
 	@Override
 	public String getScrollbarStyle() {
@@ -299,7 +337,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getSpecialChars()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getSpecialChars()
 	 */
 	@Override
 	public RegExp getSpecialChars() {
@@ -309,7 +347,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTabindex()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTabindex()
 	 */
 	@Override
 	public int getTabindex() {
@@ -319,7 +357,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTabSize()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTabSize()
 	 */
 	@Override
 	public int getTabSize() {
@@ -329,23 +367,20 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getTheme()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getTheme()
 	 */
 	@Override
 	public Theme getTheme() {
-		String value = nativeObjectContainer.getValue(Options.THEME, defaultsValue.getTheme().getName());
-		Theme defaultTheme = GlobalDefaults.get().getTheme();
-		if (defaultTheme.getName().equalsIgnoreCase(value)) {
-			Injector.ensureInjected(defaultTheme);
-			return defaultTheme;
+		if (theme != null) {
+			return theme;
 		}
-		return Themes.get().retrieve(value);
+		return defaultsValue.getTheme();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getUndoDepth()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getUndoDepth()
 	 */
 	@Override
 	public int getUndoDepth() {
@@ -355,7 +390,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getValue()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getValue()
 	 */
 	@Override
 	public String getValue() {
@@ -365,7 +400,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getViewportMargin()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getViewportMargin()
 	 */
 	@Override
 	public int getViewportMargin() {
@@ -375,7 +410,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getWorkDelay()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getWorkDelay()
 	 */
 	@Override
 	public int getWorkDelay() {
@@ -385,7 +420,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#getWorkTime()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#getWorkTime()
 	 */
 	@Override
 	public int getWorkTime() {
@@ -395,7 +430,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAddModeClass()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAddModeClass()
 	 */
 	@Override
 	public boolean isAddModeClass() {
@@ -405,7 +440,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutocapitalize()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutocapitalize()
 	 */
 	@Override
 	public boolean isAutocapitalize() {
@@ -415,7 +450,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutocorrect()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutocorrect()
 	 */
 	@Override
 	public boolean isAutocorrect() {
@@ -425,7 +460,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isAutofocus()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isAutofocus()
 	 */
 	@Override
 	public boolean isAutofocus() {
@@ -435,7 +470,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isCoverGutterNextToScrollbar()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isCoverGutterNextToScrollbar()
 	 */
 	@Override
 	public boolean isCoverGutterNextToScrollbar() {
@@ -445,7 +480,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isDragDrop()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isDragDrop()
 	 */
 	@Override
 	public boolean isDragDrop() {
@@ -455,7 +490,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isElectricChars()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isElectricChars()
 	 */
 	@Override
 	public boolean isElectricChars() {
@@ -465,7 +500,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isFixedGutter()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isFixedGutter()
 	 */
 	@Override
 	public boolean isFixedGutter() {
@@ -475,7 +510,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isFlattenSpans()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isFlattenSpans()
 	 */
 	@Override
 	public boolean isFlattenSpans() {
@@ -485,7 +520,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isIndentWithTabs()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isIndentWithTabs()
 	 */
 	@Override
 	public boolean isIndentWithTabs() {
@@ -495,7 +530,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineNumbers()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineNumbers()
 	 */
 	@Override
 	public boolean isLineNumbers() {
@@ -505,7 +540,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineWiseCopyCut()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineWiseCopyCut()
 	 */
 	@Override
 	public boolean isLineWiseCopyCut() {
@@ -515,7 +550,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isLineWrapping()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isLineWrapping()
 	 */
 	@Override
 	public boolean isLineWrapping() {
@@ -525,7 +560,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isPasteLinesPerSelection()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isPasteLinesPerSelection()
 	 */
 	@Override
 	public boolean isPasteLinesPerSelection() {
@@ -535,7 +570,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isReadOnly()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isReadOnly()
 	 */
 	@Override
 	public boolean isReadOnly() {
@@ -552,7 +587,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isResetSelectionOnContextMenu()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isResetSelectionOnContextMenu()
 	 */
 	@Override
 	public boolean isResetSelectionOnContextMenu() {
@@ -562,7 +597,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isRtlMoveVisually()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isRtlMoveVisually()
 	 */
 	@Override
 	public boolean isRtlMoveVisually() {
@@ -572,7 +607,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSelectionsMayTouch()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSelectionsMayTouch()
 	 */
 	@Override
 	public boolean isSelectionsMayTouch() {
@@ -582,7 +617,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isShowCursorWhenSelecting()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isShowCursorWhenSelecting()
 	 */
 	@Override
 	public boolean isShowCursorWhenSelecting() {
@@ -592,7 +627,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSmartIndent()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSmartIndent()
 	 */
 	@Override
 	public boolean isSmartIndent() {
@@ -602,7 +637,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.defaults.IsDefaultOptions#isSpellcheck()
+	 * @see org.pepstock.coderba.client.IsDefaultOptions#isSpellcheck()
 	 */
 	@Override
 	public boolean isSpellcheck() {
@@ -742,17 +777,6 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.cm.commons.NativeObject)
-	 */
-	@Override
-	public void setExtraKeys(NativeObject extraKeys) {
-		//FIXME
-		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.coderba.client.cm.entities.IsOptions#setFirstLineNumber(int)
 	 */
 	@Override
@@ -850,6 +874,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (keyMap != null) {
 			keyMap.inject();
 			nativeObjectContainer.setValue(Options.KEY_MAP, keyMap.getName());
+			this.keyMap = keyMap;
 		}
 	}
 
@@ -863,6 +888,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (language != null) {
 			Injector.ensureInjected(language);
 			nativeObjectContainer.setValue(Options.MODE, language.getName());
+			this.language = language;
 		}
 	}
 
@@ -1086,6 +1112,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 		if (theme != null && theme.getName() != null) {
 			Injector.ensureInjected(theme);
 			nativeObjectContainer.setValue(Options.THEME, theme.getName());
+			this.theme = theme;
 		}
 	}
 

@@ -20,8 +20,12 @@ import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * This event is fired before the selection is moved.<br>
+ * Its handler may inspect the set of selection ranges, present as an array of anchors, and optionally change them by calling
+ * the update method on this object, passing an array of ranges in the same format.<br>
+ * The object also contains an origin property holding the origin string passed to the selection-changing method, if any.<br>
+ * Handlers for this event have the same restriction as "beforeChange" handlers - they should not do anything to directly update
+ * the state of the editor.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,30 +36,36 @@ public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEv
 	 */
 	public static final Type<DocumentBeforeSelectionChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeSelectionChange";
-
-	private final Anchor item;
+	// instance of anchor of selection
+	private final Anchor anchor;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param anchor anhcor of selection
 	 */
-	public DocumentBeforeSelectionChangeEvent(EditorArea editorArea, Document document, Anchor item) {
+	public DocumentBeforeSelectionChangeEvent(EditorArea editorArea, Document document, Anchor anchor) {
 		super(TYPE, editorArea, document);
-		if (item == null) {
-			throw new IllegalArgumentException("[DocumentBeforeSelectionChangeEvent] Anchor is null");
+		// checks if anchor is consistent
+		if (anchor == null) {
+			// if no, excpetion
+			throw new IllegalArgumentException("Selection Anchor is null");
 		}
-		this.item = item;
+		this.anchor = anchor;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the anchor instance to selection.
+	 * 
+	 * @return the anchor instance to selection
 	 */
-	public final Anchor getItem() {
-		return item;
+	public Anchor getSelectionAnchor() {
+		return anchor;
 	}
 
 	/*

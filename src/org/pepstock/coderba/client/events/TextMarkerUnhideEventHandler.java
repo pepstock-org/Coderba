@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event when, after the marker was removed by editing, a undo operation brought the marker back.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface TextMarkerUnhideEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event when, after the marker was removed by editing, a undo operation brought the marker back.
 	 * 
 	 * @param event event to be consumed
 	 */

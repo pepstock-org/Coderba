@@ -20,8 +20,10 @@ import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.LineWidget;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired whenever the editor re-adds the widget to the DOM.<br>
+ * This will happen once right after the widget is added (if it is scrolled into view), and then again whenever it is scrolled
+ * out of view and back in again, or when changes to the editor options or the line the widget is on require the widget to be
+ * redrawn.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,14 +34,16 @@ public final class LineWidgetRedrawEvent extends AbstractLineWidgetEvent<LineWid
 	 */
 	public static final Type<LineWidgetRedrawEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "redraw";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a line widget {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param linewidget line widget instance
 	 */
 	public LineWidgetRedrawEvent(EditorArea editorArea, Document document, LineWidget linewidget) {
 		super(TYPE, editorArea, document, linewidget);

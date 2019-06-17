@@ -24,7 +24,7 @@ import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * FIXME
+ * Entity which maps the history of changes applied on the document.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -62,27 +62,58 @@ public final class History extends BaseEntity {
 		}
 	}
 
+	/**
+	 * Creates a container with a native object instance.<br>
+	 * Not visible because must be created internally by the document.
+	 * 
+	 * @param nativeObject a native object instance
+	 */
 	History(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
+	/**
+	 * Returns the unmodifiable list of <code>DONE</code> changes on document.
+	 * 
+	 * @return the unmodifiable list of <code>DONE</code> changes on document
+	 */
 	public List<HistoryItem> getDone() {
+		// gets the array
 		ArrayObject array = getArrayValue(Property.DONE);
+		// builds the list
 		return createListFromArray(array);
 	}
 
+	/**
+	 * Returns the unmodifiable list of <code>UNDONE</code> changes on document.
+	 * 
+	 * @return the unmodifiable list of <code>UNDONE</code> changes on document
+	 */
 	public List<HistoryItem> getUndone() {
+		// gets the array
 		ArrayObject array = getArrayValue(Property.UNDONE);
+		// builds the list
 		return createListFromArray(array);
 	}
 
+	/**
+	 * Creates an unmodifiable list of history items by a native array from Code Mirror methods.
+	 * 
+	 * @param array array of native items.
+	 * @return an unmodifiable list of history items
+	 */
 	private List<HistoryItem> createListFromArray(ArrayObject array) {
+		// creates an empty list
 		List<HistoryItem> items = new LinkedList<>();
+		// checks if array is consistent
 		if (array != null && !array.isEmpty()) {
+			// scans the array
 			for (int i = 0; i < array.length(); i++) {
+				// loads the list creating new items
 				items.add(new HistoryItem(array.get(i)));
 			}
 		}
+		// returns an unmodifiable list of history items
 		return Collections.unmodifiableList(items);
 	}
 

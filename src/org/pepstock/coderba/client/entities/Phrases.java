@@ -73,10 +73,14 @@ public final class Phrases extends NativeEntity {
 	 */
 	@JsOverlay
 	public void setUserVisibleString(Key key, String value) {
+		// checks if is a valid key
 		if (Key.isValid(key)) {
+			// checks if value is consistent
 			if (value != null) {
+				// defines the property
 				defineStringProperty(key.value(), value);
 			} else {
+				// removes property
 				removeProperty(key.value());
 			}
 		}
@@ -109,9 +113,12 @@ public final class Phrases extends NativeEntity {
 	 */
 	@JsOverlay
 	public String getUserVisibleString(Key key) {
+		// checks if is valid key
 		if (Key.isValid(key)) {
+			// returns value
 			return getStringProperty(key.value());
 		}
+		// returns null because key is not valid
 		return UndefinedValues.STRING;
 	}
 

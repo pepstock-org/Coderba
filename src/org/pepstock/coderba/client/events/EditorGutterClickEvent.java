@@ -20,8 +20,7 @@ import org.pepstock.coderba.client.EditorArea;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires when the editor gutter (the line-number area) is clicked.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,18 +31,21 @@ public final class EditorGutterClickEvent extends AbstractEditorWithNativeEvent<
 	 */
 	public static final Type<EditorGutterClickEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "gutterClick";
-
+	// line number
 	private final int line;
-
+	// gutter CCSS class name
 	private final String gutter;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param line line number
+	 * @param gutter CCS class name
+	 * @param event native event instance
 	 */
 	public EditorGutterClickEvent(EditorArea editorArea, int line, String gutter, NativeEvent event) {
 		super(TYPE, editorArea, event);
@@ -52,14 +54,18 @@ public final class EditorGutterClickEvent extends AbstractEditorWithNativeEvent<
 	}
 
 	/**
-	 * @return the line
+	 * Returns the line number.
+	 * 
+	 * @return the line number
 	 */
 	public int getLine() {
 		return line;
 	}
 
 	/**
-	 * @return the gutter
+	 * Returns the CSS gutter class.
+	 * 
+	 * @return the CSS gutter class
 	 */
 	public String getGutter() {
 		return gutter;

@@ -18,8 +18,8 @@ package org.pepstock.coderba.client;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.entities.ExtraKeyMapTable;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
@@ -30,12 +30,16 @@ import org.pepstock.coderba.client.themes.ThemeDefault;
 import org.pepstock.coderba.client.utils.RegExp;
 
 /**
+ * Defines the out of the box defaults of configuration.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class GlobalDefaults implements IsDefaultOptions {
 
-	private static final GlobalDefaults INSTANCE = new GlobalDefaults();
+	// ---------------------------
+	// CONSTANTS with all defaults
+	// ---------------------------
 
 	private static final String DEFAULT_VALUE = "";
 
@@ -43,9 +47,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 
 	private static final Theme DEFAULT_THEME = ThemeDefault.THEME;
 
-	/**
-	 * The default is "default", which is the only key map defined in codemirror itself.
-	 */
 	private static final KeyMap DEFAULT_KEYMAP = KeyMapDefault.INSTANCE;
 
 	private static final int DEFAULT_INDENT_UNIT = 2;
@@ -60,9 +61,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 
 	private static final Direction DEFAULT_DIRECTION = Direction.LEFT_TO_RIGHT;
 
-	/**
-	 * The default is false on Windows, and true on other platforms.
-	 */
 	private static final boolean DEFAULT_RTL_MOVE_VISUALLY = true;
 
 	private static final boolean DEFAULT_LINE_WRAPPING = false;
@@ -95,10 +93,6 @@ public final class GlobalDefaults implements IsDefaultOptions {
 
 	private static final boolean DEFAULT_DRAG_DROP = true;
 
-	/**
-	 * Defaults to off. When "fromTextArea" is used, and no explicit value is given for this option, it will be set to true when
-	 * either the source textarea is focused, or it has an autofocus attribute and no other element is focused.
-	 */
 	private static final boolean DEFAULT_AUTOFOCUS = false;
 
 	private static final int DEFAULT_CURSOR_BLINK_RATE = 530;
@@ -135,13 +129,26 @@ public final class GlobalDefaults implements IsDefaultOptions {
 
 	private static final List<String> DEFAULT_ALLOW_DROP_FILE_TYPES = Collections.emptyList();
 
+	// singleton instance
+	// PAY ATTENTION: must be defined AFTER all other  constants because
+	// the constants are used into constructor
+	private static final GlobalDefaults INSTANCE = new GlobalDefaults();
+	
 	/**
 	 * To avoid any instantiation
 	 */
 	private GlobalDefaults() {
-		// do nothing
+		// loads default components
+		DEFAULT_KEYMAP.inject();
+		Injector.ensureInjected(DEFAULT_LANGUAGE);
+		Injector.ensureInjected(DEFAULT_THEME);
 	}
 
+	/**
+	 * Singleton method to get the global defaults instance.
+	 * 
+	 * @return the global defaults instance
+	 */
 	public static GlobalDefaults get() {
 		return INSTANCE;
 	}
@@ -181,7 +188,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	}
 
 	/**
-	 * Returns the theme to style the editor with. The default is {@link KeyMapDefault}, for which colors are included in
+	 * Returns the theme to style the editor with. The default is {@link ThemeDefault}, for which colors are included in
 	 * <code>codemirror.css</code>.
 	 * 
 	 * @return the theme to style the editor with
@@ -291,8 +298,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	 * @return extra key bindings for the editor
 	 */
 	@Override
-	public NativeObject getExtraKeys() {
-		// FIXME
+	public ExtraKeyMapTable getExtraKeys() {
 		return null;
 	}
 
@@ -634,9 +640,9 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	}
 
 	/**
-	 * Specifies whether or not spellcheck will be enabled on the input.
+	 * Specifies whether or not spell check will be enabled on the input.
 	 * 
-	 * @return Specifies whether or not spellcheck will be enabled on the input.
+	 * @return specifies whether or not spell check will be enabled on the input.
 	 */
 	@Override
 	public boolean isSpellcheck() {
@@ -644,9 +650,9 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	}
 
 	/**
-	 * Specifies whether or not autocorrect will be enabled on the input.
+	 * Specifies whether or not auto correct will be enabled on the input.
 	 * 
-	 * @return Specifies whether or not autocorrect will be enabled on the input.
+	 * @return Specifies whether or not auto correct will be enabled on the input.
 	 */
 	@Override
 	public boolean isAutocorrect() {
@@ -654,9 +660,9 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	}
 
 	/**
-	 * Specifies whether or not autocapitalization will be enabled on the input.
+	 * Specifies whether or not auto capitalization will be enabled on the input.
 	 * 
-	 * @return Specifies whether or not autocapitalization will be enabled on the input.
+	 * @return Specifies whether or not auto capitalization will be enabled on the input.
 	 */
 	@Override
 	public boolean isAutocapitalize() {

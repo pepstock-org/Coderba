@@ -21,7 +21,7 @@ import org.pepstock.coderba.client.resources.ScriptResource;
 import org.pepstock.coderba.client.resources.StyleResource;
 
 /**
- * Is the "fullscreen" addon to enable this capability int the editor.
+ * Is the "fullscreen" addon to enable this capability into editor.
  * 
  * @author Andrea "Stock" Stocchero
  *

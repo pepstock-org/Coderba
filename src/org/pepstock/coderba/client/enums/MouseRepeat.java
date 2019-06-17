@@ -19,38 +19,58 @@ import org.pepstock.coderba.client.commons.Key;
 
 /**
  * Defines the enumeration of configure mouse repeat values.<br>
- * They could be: "single", "double" or "triple";
+ * They could be: "single", "double" or "triple".<br>
+ * For every kind of mouse repeat item, it has been defined also the default mouse unit.
  * 
+ * @see MouseUnit
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum MouseRepeat implements Key
 {
+	/**
+	 * Single mouse event.
+	 */
 	SINGLE("single", MouseUnit.CHAR),
+	/**
+	 * Double mouse event.
+	 */
 	DOUBLE("double", MouseUnit.WORD),
+	/**
+	 * Triple mouse event.
+	 */
 	TRIPLE("triple", MouseUnit.LINE);
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
-
+	// mouse unit to use into mouse configuration
 	private final MouseUnit defaultUnit;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value and mouse unit.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
+	 * @param defaultUnit mouse unit which is used by CodeMirror as default, related to mouse repeat
 	 */
 	private MouseRepeat(String value, MouseUnit defaultUnit) {
 		this.value = value;
 		this.defaultUnit = defaultUnit;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}
 
 	/**
-	 * @return the defaultUnit
+	 * Returns the mouse unit which is used by CodeMirror as default, related to mouse repeat.
+	 * 
+	 * @return the mouse unit which is used by CodeMirror as default, related to mouse repeat
 	 */
 	public final MouseUnit getDefaultUnit() {
 		return defaultUnit;

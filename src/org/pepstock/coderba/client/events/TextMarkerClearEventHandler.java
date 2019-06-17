@@ -18,14 +18,16 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event when the range is cleared, either through cursor movement in combination with
+ * <code>clearOnEnter</code> or through a call to its <code>clear()</code> method.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface TextMarkerClearEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event when the range is cleared, either through cursor movement in combination with
+	 * <code>clearOnEnter</code> or through a call to its <code>clear()</code> method.
 	 * 
 	 * @param event event to be consumed
 	 */

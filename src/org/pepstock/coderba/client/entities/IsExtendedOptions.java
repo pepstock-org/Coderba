@@ -18,11 +18,13 @@ package org.pepstock.coderba.client.entities;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 
 /**
+ * Interface which maps the options of Code Mirror where you can add native callbacks.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface IsExtendedOptions extends IsOptions {
-	
+
 	/**
 	 * Returns <code>true</code> if no property has been set as option.
 	 * 
@@ -31,8 +33,8 @@ public interface IsExtendedOptions extends IsOptions {
 	boolean isEmpty();
 
 	/**
-	 * Sets a function used to format line numbers. The function is passed the line number, and should return a string that will
-	 * be shown in the gutter.
+	 * Sets a function used to format line numbers.<br>
+	 * The function is passed the line number, and should return a string that will be shown in the gutter.
 	 * 
 	 * @param lineNumberFormatter line number formatter instance
 	 */
@@ -48,22 +50,9 @@ public interface IsExtendedOptions extends IsOptions {
 	void setSpecialCharPlaceholder(CallbackProxy.Proxy specialCharPlaceholder);
 
 	/**
-	 * Allows you to configure the behavior of mouse selection and dragging.<br>
-	 * The function is called when the left mouse button is pressed.<br>
-	 * The returned object may have the following properties:<br>
-	 * <ul>
-	 * <li>unit: "char" | "word" | "line" | "rectangle" | fn(CodeMirror, Pos) --> {from: Pos, to: Pos}.<br>
-	 * The unit by which to select. May be one of the built-in units or a function that takes a position and returns a range
-	 * around that, for a custom unit. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle"
-	 * for alt-clicks (or, on Chrome OS, meta-shift-clicks), and "single" otherwise.
-	 * <li>extend: bool. Whether to extend the existing selection range or start a new one. By default, this is enabled when
-	 * shift clicking.
-	 * <li>addNew: bool. When enabled, this adds a new range to the existing selection, rather than replacing it.<br>
-	 * The default behavior is to enable this for command-click on Mac OS, and control-click on other platforms.
-	 * <li>moveOnDrag: bool. When the mouse even drags content around inside the editor, this controls whether it is copied
-	 * (false) or moved (true). By default, this is enabled by alt-clicking on Mac OS, and ctrl-clicking elsewhere.
-	 * </ul>
+	 * Allows you to configure the behavior of mouse selection and dragging.
 	 * 
+	 * @see MouseConfiguration
 	 * @param configureMouse a callback that allows you to configure the behavior of mouse selection and dragging.
 	 */
 	void setConfigureMouse(CallbackProxy.Proxy configureMouse);

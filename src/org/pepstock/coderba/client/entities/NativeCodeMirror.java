@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.CODE_MIRROR)
-public final class NativeCodeMirror {
+final class NativeCodeMirror {
 
 	/**
 	 * to avoid any instantiation
@@ -52,7 +52,7 @@ public final class NativeCodeMirror {
 	 * This is a triple of integers "major.minor.patch", where patch is zero for releases, and something else (usually one) for
 	 * development snapshots.
 	 * 
-	 * @return It contains a string that indicates the version of the library.
+	 * @return a string that indicates the version of the library.
 	 */
 	@JsProperty(name = "version")
 	static native String getVersion();
@@ -65,6 +65,16 @@ public final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "defaults")
 	static native NativeObject getDefaults();
+	
+	/**
+	 * FIXME
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
+	 * 
+	 * @return the object containing the default options.
+	 */
+	@JsProperty(name = "keyMap")
+	static native NativeObject getKeyMaps();
 
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
@@ -73,6 +83,16 @@ public final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "mimeModes")
 	static native NativeObject getMimeModes();
+	
+	/**
+	 * FIXME
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
+	 * 
+	 * @return the object containing the default options.
+	 */
+	@JsProperty(name = "commands")
+	static native NativeObject getCommands();
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
@@ -98,6 +118,17 @@ public final class NativeCodeMirror {
 	 * @return an initialized editor with default configuration
 	 */
 	static native NativeEditor fromTextArea(Element element);
+
+	/**
+	 * When a map contains multi-stoke bindings or keys with modifiers that are not specified in the default order
+	 * (Shift-Cmd-Ctrl-Alt), you must call CodeMirror.normalizeKeyMap on it before it can be used.<br>
+	 * This function takes a keymap and modifies it to normalize modifier order and properly recognize multi-stroke
+	 * bindings.<br>
+	 * 
+	 * @param map a key map to normalize
+	 * @return It will return the keymap itself
+	 */
+	static native NativeObject normalizeKeyMap(NativeObject map);
 
 	/**
 	 * FIXME Can be used to define new options for CodeMirror. The updateFunc will be called with the editor instance and the

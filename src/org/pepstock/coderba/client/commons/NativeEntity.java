@@ -100,7 +100,7 @@ public abstract class NativeEntity {
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
 	 * @param key the name of the property to be defined or modified.
-	 * @param object the object associated with the property.
+	 * @param value the object associated with the property.
 	 */
 	@JsOverlay
 	protected final void defineStringProperty(String key, String value) {

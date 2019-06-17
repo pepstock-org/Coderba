@@ -94,11 +94,12 @@ public final class MouseConfiguration extends BaseEntity {
 		}
 	}
 
+	// custom handler instance
 	private MouseUnitHandler mouseUnit = null;
 
 	/**
 	 * Creates an empty object.<br>
-	 * The unit by which to select. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for
+	 * It uses the default value and then to return "word" for double clicks, "line" for triple clicks, "rectangle" for
 	 * alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
 	 */
 	public MouseConfiguration() {
@@ -128,20 +129,28 @@ public final class MouseConfiguration extends BaseEntity {
 	 * @return a range around that, for a custom unit
 	 */
 	private Range onMouseUnit(NativeEditor editor, Position pos) {
+		// gets editor area
 		EditorArea area = editor.getEditorArea();
+		// if area nad handler are consistent
 		if (area != null && mouseUnit != null) {
+			// invokes the custom handler
 			Range result = mouseUnit.handle(area, pos);
+			// checks if result is consistent
 			if (result != null) {
+				// if yes, returns it
 				return result;
 			}
 		}
+		// if here, area of handler are not consistent
+		// or the result of handler invocation is null
+		// then returns a default range
 		return Range.create(pos, pos);
 	}
 
 	/**
-	 * A function that takes a position and returns a range around that, for a custom unit.
+	 * Sets the handler that takes a position and returns a range around that, for a custom unit.
 	 * 
-	 * @param mouseUnit mouse unti handler instance
+	 * @param mouseUnit mouse unit handler instance
 	 */
 	public void setUnit(MouseUnitHandler mouseUnit) {
 		this.mouseUnit = mouseUnit;
@@ -149,17 +158,22 @@ public final class MouseConfiguration extends BaseEntity {
 	}
 
 	/**
-	 * A function that takes a position and returns a range around that, for a custom unit.
+	 * Returns the handler that takes a position and returns a range around that, for a custom unit.
 	 * 
-	 * @return the unit by which to select by a repeat instance
+	 * @return the handler that takes a position and returns a range around that, for a custom unit
 	 */
 	public MouseUnitHandler getUnitHandler() {
 		return this.mouseUnit;
 	}
 
 	/**
-	 * The unit by which to select. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for
-	 * alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
+	 * Sets the unit by a mouse repeat definition.<br>
+	 * The default is to return:<br>
+	 * <ul>
+	 * <li>"word" for double clicks {@link MouseRepeat#DOUBLE}
+	 * <li>"line" for triple clicks {@link MouseRepeat#TRIPLE}
+	 * <li>"char" for the rest of cases {@link MouseRepeat#SINGLE}
+	 * </ul>
 	 * 
 	 * @param repeat the unit by which to select by a repeat instance
 	 */
@@ -172,8 +186,14 @@ public final class MouseConfiguration extends BaseEntity {
 	}
 
 	/**
-	 * The unit by which to select. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for
-	 * alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
+	 * Sets the unit by which to select.<br>
+	 * The default is to return:<br>
+	 * <ul>
+	 * <li>"word" for double clicks
+	 * <li>"line" for triple clicks
+	 * <li>"rectangle" for alt-clicks (or, on Chrome OS, meta-shift-clicks)
+	 * <li>"char" for the rest of cases
+	 * </ul>
 	 * 
 	 * @param unit the unit by which to select
 	 */
@@ -182,8 +202,14 @@ public final class MouseConfiguration extends BaseEntity {
 	}
 
 	/**
-	 * The unit by which to select. The default is to return "word" for double clicks, "line" for triple clicks, "rectangle" for
-	 * alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
+	 * Returns the unit by which to select. <br>
+	 * The default is to return:<br>
+	 * <ul>
+	 * <li>"word" for double clicks
+	 * <li>"line" for triple clicks
+	 * <li>"rectangle" for alt-clicks (or, on Chrome OS, meta-shift-clicks)
+	 * <li>"char" for the rest of cases
+	 * </ul>
 	 * 
 	 * @return the unit by which to select
 	 */

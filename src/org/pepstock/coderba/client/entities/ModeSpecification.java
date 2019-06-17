@@ -46,6 +46,7 @@ public final class ModeSpecification extends NativeEntity {
 	}
 
 	/**
+	 * <b>INTERNAL</b><br>
 	 * Returns the name of mode
 	 * 
 	 * @return the name of mode

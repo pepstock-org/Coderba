@@ -37,11 +37,14 @@ public final class CodeMirror {
 	private static final CodeMirror INSTANCE = new CodeMirror();
 	// native object of DEFAULT
 	private final NativeObject defaults;
+	// native object of KEYMAPS
+	private final NativeObject keyMaps;
+	// native object of COMMANDS
+	private final NativeObject commands;
 	// MIME modes object
 	private final MimeModes mimeModes;
 	// stores CodeMirror Version
 	private final String version;
-	
 
 	/**
 	 * To avoid any instantiation
@@ -51,6 +54,10 @@ public final class CodeMirror {
 		Injector.ensureInjected();
 		// gets default object
 		defaults = NativeCodeMirror.getDefaults();
+		// gets key maps object
+		keyMaps = NativeCodeMirror.getKeyMaps();
+		// gets commands object
+		commands = NativeCodeMirror.getCommands();
 		// gets mime modes object
 		mimeModes = new MimeModes(NativeCodeMirror.getMimeModes());
 		// stores the version
@@ -74,7 +81,7 @@ public final class CodeMirror {
 	 * @return It contains a string that indicates the version of the library.
 	 */
 	public String getVersion() {
-		return version; 
+		return version;
 	}
 
 	/**
@@ -87,6 +94,24 @@ public final class CodeMirror {
 		return defaults;
 	}
 
+	/**
+	 * Returns the object containing the loaded key maps.
+	 * 
+	 * @return the object containing the loaded key maps
+	 */
+	NativeObject getKeyMaps() {
+		return keyMaps;
+	}
+
+	/**
+	 * Returns the object containing the defined commands.
+	 * 
+	 * @return the object containing the defined commands
+	 */
+	NativeObject getCommands() {
+		return commands;
+	}
+	
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
 	 * 
@@ -108,13 +133,11 @@ public final class CodeMirror {
 
 	/**
 	 * This method provides another way to initialize an editor.<br>
-	 * It takes a text area DOM node as argument.<br>
-	 * It will replace the text area with a CodeMirror instance, and wire up the form of that text area (if any) to make sure
-	 * the editor contents are put into the text area when the form is submitted.<br>
-	 * The text in the text area will provide the content for the editor.
+	 * It takes a editor area and its id as arguments.
 	 * 
-	 * @param element a text area DOM node, already attached to body
-	 * @return an initialized editor with default configuration
+	 * @param id editor area id instance
+	 * @param editorArea editor area id instance
+	 * @return an initialized editor with editor area configuration
 	 */
 	public Editor fromTextArea(EditorAreaId id, EditorArea editorArea) {
 		// checks if id is consistent
@@ -137,6 +160,7 @@ public final class CodeMirror {
 	 * the editor contents are put into the text area when the form is submitted.<br>
 	 * The text in the text area will provide the content for the editor.
 	 * 
+	 * @param id editor area id value
 	 * @param element a text area DOM node, already attached to body
 	 * @param options user configuration object instance
 	 * @return an initialized editor
@@ -149,10 +173,10 @@ public final class CodeMirror {
 			// checks if a configuration object has been changed
 			if (configuration.isEmpty()) {
 				// if no, initialized the editor by default configuration
-				editor = new Editor(NativeCodeMirror.fromTextArea(element));
+				editor = new Editor(NativeCodeMirror.fromTextArea(element), configuration.getLanguage());
 			} else {
 				// if yes, initialized the editor by configuration
-				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()));
+				editor = new Editor(NativeCodeMirror.fromTextArea(element, configuration.getObject()), configuration.getLanguage());
 			}
 			// sets the unique id to editor
 			editor.setId(id);

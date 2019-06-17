@@ -16,29 +16,49 @@
 package org.pepstock.coderba.client.enums;
 
 import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.entities.Position;
 
 /**
+ * Enumeration that is used as property of Position object, holding "before" or "after", whether the position is associated with
+ * the character before or after it.<br>
+ * This influences, for example, where the cursor is drawn on a line-break or bidi-direction boundary.
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see Position
  */
 public enum StickyPosition implements Key
 {
+	/**
+	 * Not set, uses default.
+	 */
 	NULL("null"),
+	/**
+	 * The position is associated with the character after it.
+	 */
 	AFTER("after"),
+	/**
+	 * The position is associated with the character before it.
+	 */
 	BEFORE("before");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private StickyPosition(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

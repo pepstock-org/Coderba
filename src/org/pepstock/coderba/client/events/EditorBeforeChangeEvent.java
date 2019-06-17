@@ -15,26 +15,20 @@
 */
 package org.pepstock.coderba.client.events;
 
+import java.util.List;
+
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.commons.ArrayString;
+import org.pepstock.coderba.client.entities.Position;
+import org.pepstock.coderba.client.entities.Range;
 
 /**
  * This event is fired before a change is applied, and its handler may choose to modify or cancel the change.<br>
- * <br>
- * The changeObj object has from, to, and text properties, as with the "change" event.<br>
- * <br>
  * It also has a cancel() method, which can be called to cancel the change, and, if the change isn't coming from an undo or redo
  * event, an update(from, to, text) method, which may be used to modify the change.<br>
  * <br>
- * Undo or redo changes can't be modified, because they hold some metainformation for restoring old marked ranges that is only
- * valid for that specific change.<br>
- * <br>
- * All three arguments to update are optional, and can be left off to leave the existing value for that field intact.<br>
- * <br>
- * Note: you may not do anything from a "beforeChange" handler that would cause changes to the document or its visualization.
- * <br>
- * <br>
- * Doing so will, since this handler is called directly from the bowels of the CodeMirror implementation, probably cause the
- * editor to become corrupted. FIXME missing methods
+ * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is only
+ * valid for that specific change.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -45,32 +39,116 @@ public final class EditorBeforeChangeEvent extends AbstractEditorEvent<EditorBef
 	 */
 	public static final Type<EditorBeforeChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeChange";
-
+	// change item instance
 	private final ChangeItem item;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param item change item instance
 	 */
 	public EditorBeforeChangeEvent(EditorArea editorArea, ChangeItem item) {
 		super(TYPE, editorArea);
+		// checks if item is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("[EditorBeforeChangeEvent] Editor change item is null");
+			// if no, exception
+			throw new IllegalArgumentException("Change item is null");
 		}
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the change item.
+	 * 
+	 * @return the change item
 	 */
-	public final ChangeItem getItem() {
+	public ChangeItem getItem() {
 		return item;
 	}
 
+	/**
+	 * It can be called to cancel the change.
+	 */
+	public void cancel() {
+		item.cancel();
+	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param range starting and ending change position
+	 * @param text a list of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Range range, List<String> text) {
+		// checks if range is consistent
+		if (range != null) {
+			update(range.getFrom(), range.getTo(), ArrayString.fromOrEmpty(text));
+		}
+	}
+
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param range starting and ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Range range, String... text) {
+		// checks if range is consistent
+		if (range != null) {
+			update(range.getFrom(), range.getTo(), ArrayString.fromOrEmpty(text));
+		}
+	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text a list of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Position from, Position to, List<String> text) {
+		update(from, to, ArrayString.fromOrEmpty(text));
+	}
+
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	public void update(Position from, Position to, String... text) {
+		update(from, to, ArrayString.fromOrEmpty(text));
+	}
+	
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	private void update(Position from, Position to, ArrayString text) {
+		// checks if arguments are consistent
+		if (from != null && to != null && text != null) {
+			item.update(from, to, text);
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

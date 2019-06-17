@@ -20,8 +20,9 @@ import java.util.List;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Like the "change" event, but batched per operation, passing an array containing all the changes that happened in the
- * operation. This event is fired after the operation finished, and display changes it makes will trigger a new operation.
+ * Like the {@link EditorChangeEvent} event, but batched per operation, passing an array containing all the changes that
+ * happened in the operation.<br>
+ * This event is fired after the operation finished, and display changes it makes will trigger a new operation.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,29 +33,34 @@ public final class EditorChangesEvent extends AbstractEditorEvent<EditorChangesE
 	 */
 	public static final Type<EditorChangesEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "changes";
-
+	// list of change items
 	private final List<ChangeItem> items;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param items list of change items
 	 */
 	public EditorChangesEvent(EditorArea editorArea, List<ChangeItem> items) {
 		super(TYPE, editorArea);
+		// checks if items are consistent
 		if (items == null) {
-			throw new IllegalArgumentException("[EditorChangesEvent] Editor change items is null");
+			// if no, exception
+			throw new IllegalArgumentException("Editor change items is null");
 		}
 		this.items = items;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the list of change items.
+	 * 
+	 * @return the list of change items
 	 */
-	public final List<ChangeItem> getItems() {
+	public List<ChangeItem> getItems() {
 		return items;
 	}
 

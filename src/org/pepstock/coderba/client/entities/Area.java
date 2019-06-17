@@ -19,10 +19,12 @@ import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Object which contains 4 values to identify an area: top, left, bottom and right.<br>
+ * It is used by Code Mirror methods.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -37,16 +39,33 @@ public final class Area extends Point {
 		// do nothing
 	}
 
+	/**
+	 * Creates an area using all fields.
+	 * 
+	 * @param top top field
+	 * @param left left field
+	 * @param bottom bottom field
+	 * @param right right field
+	 * @return an area instance
+	 */
 	@JsOverlay
 	public static Area create(int top, int left, int bottom, int right) {
+		// creates an area
 		Area area = new Area();
+		// sets all values
 		area.setTop(top);
 		area.setLeft(left);
 		area.setBottom(bottom);
 		area.setRight(right);
+		// returns area
 		return area;
 	}
 
+	/**
+	 * Creates a empty area (all values are set to 0).
+	 * 
+	 * @return an empty area instance
+	 */
 	@JsOverlay
 	public static Area empty() {
 		return create(0, 0, 0, 0);
@@ -57,13 +76,16 @@ public final class Area extends Point {
 	 * 
 	 * @return the right of area.
 	 */
+	@JsProperty
 	public native int getRight();
 
 	/**
+	 * <b>INTERNAL</b><br>
 	 * Sets the right location in pixel
 	 * 
 	 * @param right the right location in pixel
 	 */
+	@JsProperty
 	private native void setRight(int right);
 
 	/**
@@ -71,13 +93,16 @@ public final class Area extends Point {
 	 * 
 	 * @return the bottom of area.
 	 */
+	@JsProperty
 	public native int getBottom();
 
 	/**
+	 * <b>INTERNAL</b><br>
 	 * Sets the bottom location in pixel
 	 * 
 	 * @param bottom the bottom location in pixel
 	 */
+	@JsProperty
 	private native void setBottom(int bottom);
 
 }

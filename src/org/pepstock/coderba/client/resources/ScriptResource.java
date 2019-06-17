@@ -21,15 +21,20 @@ import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.resources.client.TextResource;
 
 /**
+ * Defines a SCRIPT element which will wrap a text resource which contains java script code.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ScriptResource extends AbstractInjectableResource {
 
+	// creates a DOM element for SCRIPT
 	private final ScriptElement element = Document.get().createScriptElement();
 
 	/**
-	 * @param resource
+	 * Creates the object with the text resource to be injected.
+	 * 
+	 * @param resource the text resource to be injected
 	 */
 	public ScriptResource(TextResource resource) {
 		super(resource);
@@ -38,10 +43,10 @@ public final class ScriptResource extends AbstractInjectableResource {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.resources.InjectableResource#getElement()
+	 * @see org.pepstock.coderba.client.resources.InjectableResource#getElement()
 	 */
 	@Override
-	public Element getElement() {
+	public final Element getElement() {
 		return element;
 	}
 

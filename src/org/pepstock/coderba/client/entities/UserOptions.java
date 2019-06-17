@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.commons.AbstractExtendedOptions;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * Core class to manage USER options.<br>
+ * Core class to manage USER options.
  * 
  * @author Andrea "Stock" Stocchero
  *

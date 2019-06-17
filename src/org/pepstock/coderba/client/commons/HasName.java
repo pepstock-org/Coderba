@@ -16,11 +16,18 @@
 package org.pepstock.coderba.client.commons;
 
 /**
+ * Maps object with a name.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface HasName {
 
+	/**
+	 * Returns the name of object.
+	 * 
+	 * @return the name of object
+	 */
 	String getName();
 
 }

@@ -22,26 +22,38 @@ import org.pepstock.coderba.client.entities.TextMarker;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * Abstract class for all events of text markers of a document.
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <H> type of event handlerf
  */
 public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends AbstractDocumentEvent<H> {
 
+	// text marker instance
 	private final TextMarker textmarker;
 
 	/**
-	 * @param handlerType
+	 * Creates a text marker event.
+	 * 
+	 * @param handlerType event handler type
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param textMarker text marker instance
 	 */
 	public AbstractTextMarkerEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document, TextMarker textMarker) {
 		super(handlerType, editorArea, document);
+		// checks if text marker is consistent
 		if (textMarker == null) {
-			throw new IllegalArgumentException("[AbstarctTextMarkerEvent] Text marker handle is null");
+			// if no, exception
+			throw new IllegalArgumentException("Text marker handle is null");
 		}
 		this.textmarker = textMarker;
 	}
 
 	/**
-	 * @return the textmarker
+	 * Returns the text marker instance.
+	 * 
+	 * @return the text marker instance
 	 */
 	public final TextMarker getTextmarker() {
 		return textmarker;

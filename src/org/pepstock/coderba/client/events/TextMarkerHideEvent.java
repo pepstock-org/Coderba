@@ -20,8 +20,7 @@ import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.TextMarker;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired when the last part of the marker is removed from the document by editing operations.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,14 +31,16 @@ public final class TextMarkerHideEvent extends AbstractTextMarkerEvent<TextMarke
 	 */
 	public static final Type<TextMarkerHideEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "hide";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a text marker {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param textMarker text marker instance
 	 */
 	public TextMarkerHideEvent(EditorArea editorArea, Document document, TextMarker textMarker) {
 		super(TYPE, editorArea, document, textMarker);

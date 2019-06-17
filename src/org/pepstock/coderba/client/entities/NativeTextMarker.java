@@ -54,7 +54,7 @@ public final class NativeTextMarker extends NativeObject {
 	 * 
 	 * @return
 	 */
-	native Range find(); // {from: CodeMirror.Position, to: CodeMirror.Position};
+	native Range find();
 
 	/**
 	 * Called when you've done something that might change the size of the marker and want to cheaply update the display.

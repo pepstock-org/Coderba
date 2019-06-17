@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
- * Name of properties of native object.
+ * Name of all properties of Code Mirror options object (configuration).
  * 
  * @author Andrea "Stock" Stocchero
  *

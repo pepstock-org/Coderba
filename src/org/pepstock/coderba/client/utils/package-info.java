@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Contains common utilities which are mapping java script objects.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

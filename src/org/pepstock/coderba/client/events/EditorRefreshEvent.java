@@ -18,8 +18,8 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fires when the editor is refreshed or resized.<br>
+ * Mostly useful to invalidate cached values that depend on the editor or character size.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,14 +30,14 @@ public final class EditorRefreshEvent extends AbstractEditorEvent<EditorRefreshE
 	 */
 	public static final Type<EditorRefreshEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "refresh";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
 	 */
 	public EditorRefreshEvent(EditorArea editorArea) {
 		super(TYPE, editorArea);

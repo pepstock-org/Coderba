@@ -818,7 +818,8 @@ public abstract class AbstractNativeObjectContainer {
 	/**
 	 * Returns a value (regExp) into embedded JavaScript object at specific property.
 	 * 
-	 * @param key key of the property of JavaScript object.
+	 * @param key key of the property of JavaScript object
+	 * @param defaultValue default value of the property of RegExp
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract RegExp getRegExpProperty(String key, RegExp defaultValue);
@@ -827,16 +828,17 @@ public abstract class AbstractNativeObjectContainer {
 	 * Returns a value (regExp) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value of the property of RegExp
 	 * @return value of the property or <code>null</code> if not there
 	 */
-	protected final RegExp getValue(Key key, RegExp value) {
+	protected final RegExp getValue(Key key, RegExp defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
-			return null;
+			return defaultValue;
 		}
 		// gets descriptor
-		return getRegExpProperty(key.value(), value);
+		return getRegExpProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -877,6 +879,7 @@ public abstract class AbstractNativeObjectContainer {
 	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value of the property of element
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract Element getElementProperty(String key, Element defaultValue);
@@ -885,16 +888,17 @@ public abstract class AbstractNativeObjectContainer {
 	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value of the property of element
 	 * @return value of the property or <code>null</code> if not there
 	 */
-	protected final Element getValue(Key key, Element value) {
+	protected final Element getValue(Key key, Element defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
-			return null;
+			return defaultValue;
 		}
 		// gets descriptor
-		return getElementProperty(key.value(), value);
+		return getElementProperty(key.value(), defaultValue);
 	}
 
 	/**
@@ -924,27 +928,30 @@ public abstract class AbstractNativeObjectContainer {
 	// ------------------------------------------
 
 	/**
-	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
+	 * Sets a value (native entity) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param <T> type of native entity
 	 * @param value value to be set
 	 */
 	protected abstract <T extends NativeEntity> void defineEntityProperty(String key, T value);
 
 	/**
-	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
+	 * Returns a value (native entity) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of native entity
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected abstract <T extends NativeEntity> T getEntityProperty(String key, T defaultValue);
 
 	/**
-	 * Returns a value (DOM element) into embedded JavaScript object at specific property.
+	 * Returns a value (native entity) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of native entity
 	 * @return value of the property or <code>null</code> if not there
 	 */
 	protected final <T extends NativeEntity> T getValue(Key key, T defaultValue) {
@@ -958,10 +965,11 @@ public abstract class AbstractNativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (DOM element) into embedded JavaScript object at specific property.
+	 * Sets a value (native entity) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
+	 * @param <T> type of native entity
 	 */
 	protected final <T extends NativeEntity> void setValue(Key key, T value) {
 		// if value is null
@@ -979,6 +987,70 @@ public abstract class AbstractNativeObjectContainer {
 		}
 	}
 
+	// ------------------------------------------
+	// --- NATIVE FUNCTION
+	// ------------------------------------------
+
+	/**
+	 * Sets a value (function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param <T> type of native entity
+	 * @param value value to be set
+	 */
+	protected abstract <T> void defineFunctionProperty(String key, T value);
+
+	/**
+	 * Returns a value (function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of native entity
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	protected abstract <T> T getFunctionProperty(String key, T defaultValue);
+
+	/**
+	 * Returns a value (function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of native entity
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	protected final <T> T getValue(Key key, T defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// gets descriptor
+		return getFunctionProperty(key.value(), defaultValue);
+	}
+
+	/**
+	 * Sets a value (function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @param <T> type of native entity
+	 */
+	protected final <T> void setValue(Key key, T value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			removeIfExists(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			defineFunctionProperty(key.value(), value);
+		}
+	}
+	
 	// ------------------------------------------
 	// --- CLONE
 	// ------------------------------------------

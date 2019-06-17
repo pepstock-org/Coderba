@@ -27,7 +27,7 @@ public abstract class AddOn extends InjectableItem {
 	/**
 	 * Creates the object with the mandatory name of addon.
 	 * 
-	 * @param value the mandatory name of addon
+	 * @param name the mandatory name of addon
 	 */
 	protected AddOn(String name) {
 		super(name);

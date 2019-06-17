@@ -20,31 +20,55 @@ import org.pepstock.coderba.client.commons.Key;
 /**
  * Defines the enumeration of configure mouse behaviors.<br>
  * The unit by which to select.<br>
- * May be one of the built-in units for a custom unit. The default is to return "word" for double clicks, "line" for triple
- * clicks, "rectangle" for alt-clicks (or, on Chrome OS, meta-shift-clicks), and "char" otherwise.
+ * May be one of the built-in units for a custom unit.<br>
+ * The default is to return:<br>
+ * <ul>
+ * <li>"word" for double clicks
+ * <li>"line" for triple clicks
+ * <li>"rectangle" for alt-clicks (or, on Chrome OS, meta-shift-clicks)
+ * <li>"char" for the rest of cases
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum MouseUnit implements Key
 {
+	/**
+	 * Single char will be selected.
+	 */
 	CHAR("char"),
+	/**
+	 * Single word will be selected.
+	 */
 	WORD("word"),
+	/**
+	 * Single line will be selected.
+	 */
 	LINE("line"),
+	/**
+	 * A specific area will be selected.
+	 */
 	RECTANGLE("rectangle");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private MouseUnit(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

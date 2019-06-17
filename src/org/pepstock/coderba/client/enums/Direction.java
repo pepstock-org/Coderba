@@ -18,27 +18,43 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Flips overall layout and selects base paragraph direction to be left-to-right or right-to-left.<br>
+ * CodeMirror applies the Unicode Bidirectional Algorithm to each line, but does not auto detect base direction which is set to
+ * the editor direction for all lines.<br>
+ * The resulting order is sometimes wrong when base direction doesn't match user intent
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum Direction implements Key
 {
-	// HasDirection.Direction.
+	/**
+	 * Left-to-right direction.
+	 */
 	LEFT_TO_RIGHT("ltr"),
+	/**
+	 * Right-to-left direction.
+	 */
 	RIGHT_TO_LEFT("rtl");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private Direction(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

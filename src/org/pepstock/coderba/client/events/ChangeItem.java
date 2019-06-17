@@ -20,8 +20,10 @@ import java.util.List;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayString;
 import org.pepstock.coderba.client.commons.NativeName;
+import org.pepstock.coderba.client.entities.Position;
 import org.pepstock.coderba.client.entities.Range;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -39,9 +41,10 @@ import jsinterop.annotations.JsType;
 public final class ChangeItem extends Range {
 
 	/**
-	 * to avoid any instantiation
+	 * To avoid any instantiation
 	 */
-	ChangeItem() {
+	private ChangeItem() {
+		// do nothing
 	}
 
 	/**
@@ -89,4 +92,23 @@ public final class ChangeItem extends Range {
 	 */
 	@JsProperty
 	public native String getOrigin();
+
+	/**
+	 * It can be called to cancel the change, and, if the change isn't coming from an undo or redo event, an update(from, to,
+	 * text) method, which may be used to modify the change.
+	 */
+	@JsMethod
+	native void cancel();
+
+	/**
+	 * If the change isn't coming from an undo or redo event, this method may be used to modify the change.<br>
+	 * Undo or redo changes can't be modified, because they hold some meta information for restoring old marked ranges that is
+	 * only valid for that specific change.
+	 * 
+	 * @param from starting change position
+	 * @param to ending change position
+	 * @param text an array of strings representing the text that replaced the changed range (split by line)
+	 */
+	@JsMethod
+	native void update(Position from, Position to, ArrayString text);
 }

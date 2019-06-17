@@ -19,8 +19,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired whenever the cursor or selection in this document changes.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -31,14 +30,15 @@ public final class DocumentCursorActivityEvent extends AbstractDocumentEvent<Doc
 	 */
 	public static final Type<DocumentCursorActivityEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "cursorActivity";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
 	 */
 	public DocumentCursorActivityEvent(EditorArea editorArea, Document document) {
 		super(TYPE, editorArea, document);

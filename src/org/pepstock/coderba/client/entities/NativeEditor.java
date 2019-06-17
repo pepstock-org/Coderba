@@ -46,7 +46,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.CODE_MIRROR)
-public final class NativeEditor {
+final class NativeEditor {
 
 	/**
 	 * to avoid any instantiation
@@ -294,6 +294,25 @@ public final class NativeEditor {
 	 */
 	@JsMethod(name = "setOption")
 	native <T extends NativeEntity> void setOptionValue(String key, T value);
+
+	// ---Native function
+	/**
+	 * Returns a value (native function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property or <code>null</code> if not there
+	 */
+	@JsMethod(name = "getOption")
+	native <T> T getOptionValueAsFunction(String key);
+
+	/**
+	 * Sets a value (native function) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	@JsMethod(name = "setOption")
+	native <T> void setOptionValue(String key, T value);
 
 	// ------------------------------------------
 	// --- END OPTIONS methods

@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event when the line's text content is changed in any way.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface LineHandleChangeEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when firing event when the line's text content is changed in any way.
 	 * 
 	 * @param event event to be consumed
 	 */

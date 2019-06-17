@@ -18,12 +18,14 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
- * Adjust the indentation of the given line. The second argument (which defaults to "smart") may be one of: <br>
- * "prev" Base indentation on the indentation of the previous line.<br>
- * "smart" Use the mode's smart indentation if available, behave like "prev" otherwise.<br>
- * "add" Increase the indentation of the line by one indent unit.<br>
- * "subtract" Reduce the indentation of the line.<br>
- * <br>
+ * Adjust the indentation of the given line.<br>
+ * The argument (which defaults to "smart") may be one of: <br>
+ * <ul>
+ * <li>"prev" Base indentation on the indentation of the previous line.
+ * <li>"smart" Use the mode's smart indentation if available, behave like "prev" otherwise.
+ * <li>"add" Increase the indentation of the line by one indent unit.
+ * <li>"subtract" Reduce the indentation of the line.
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -47,18 +49,24 @@ public enum IndentLineMode implements Key
 	 */
 	SUBTRACT("subtract");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private IndentLineMode(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

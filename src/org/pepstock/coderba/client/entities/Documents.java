@@ -19,13 +19,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Singleton which contains all created documents using the document unique id as key.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class Documents {
 
+	// singleton instance
 	private static final Documents INSTANCE = new Documents();
-
+	// maps which contains all documents
+	// K = document id
+	// V = document instance
 	private final Map<String, Document> documents = new HashMap<>();
 
 	/**
@@ -35,27 +40,57 @@ final class Documents {
 		// do nothing
 	}
 
+	/**
+	 * Singleton method to get the instance.
+	 * 
+	 * @return the singleton instance.
+	 */
 	public static Documents get() {
 		return INSTANCE;
 	}
 
+	/**
+	 * Adds a document into cache.
+	 * 
+	 * @param document document instance to be added into cache
+	 */
 	void add(Document document) {
 		if (!documents.containsKey(document.getId())) {
 			documents.put(document.getId(), document);
 		}
 	}
 
+	/**
+	 * Returns <code>true</code> if the document id is present into cache.
+	 * 
+	 * @param id document id.
+	 * @return <code>true</code> if the document id is present into cache
+	 */
 	boolean has(String id) {
+		// checks if id is consistent
 		if (id != null) {
+			// returns if id is consistent
 			return documents.containsKey(id);
 		}
+		// if here, id is not consistent
+		// then returns always false
 		return false;
 	}
 
+	/**
+	 * Returns the document instance by its id from cache.
+	 * 
+	 * @param id document id
+	 * @return the document instance from cache
+	 */
 	Document retrieve(String id) {
+		// checks if id is consistent
 		if (id != null) {
+			// returns the stored document
 			return documents.get(id);
 		}
+		// if here, id is not consistent
+		// then returns always null
 		return null;
 	}
 

@@ -80,9 +80,9 @@ public enum Id implements Key
 	}
 
 	/**
-	 * Sets the property value to java script object.
+	 * Generates new unique id.
 	 * 
-	 * @param nativeObject java script object
+	 * @return new unique id.
 	 */
 	public static String generate() {
 		return PREFIX_ID + COUNTER.incrementAndGet();

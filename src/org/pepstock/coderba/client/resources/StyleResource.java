@@ -21,15 +21,20 @@ import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.resources.client.TextResource;
 
 /**
+ * Defines a STYLE element which will wrap a text resource which contains CSS code.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class StyleResource extends AbstractInjectableResource {
 
+	// creates a DOM element for STYLE
 	private final StyleElement element = Document.get().createStyleElement();
 
 	/**
-	 * @param resource
+	 * Creates the object with the text resource to be injected.
+	 * 
+	 * @param resource the text resource to be injected
 	 */
 	public StyleResource(TextResource resource) {
 		super(resource);
@@ -38,10 +43,10 @@ public final class StyleResource extends AbstractInjectableResource {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.resources.InjectableResource#getElement()
+	 * @see org.pepstock.coderba.client.resources.InjectableResource#getElement()
 	 */
 	@Override
-	public Element getElement() {
+	public final Element getElement() {
 		return element;
 	}
 

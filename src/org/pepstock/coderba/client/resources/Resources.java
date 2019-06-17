@@ -15,19 +15,16 @@
 */
 package org.pepstock.coderba.client.resources;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference Ace code editor and other java script codes, always needed to CODERBA.
+ * Client bundle to reference Code Mirror code editor and other java script codes, always needed to CODERBA.
  * 
  * @author Marco "Cuc" Cuccato
  */
-public interface Resources extends ClientBundle {
-
-	// static reference of this resource
-	public static final Resources INSTANCE = GWT.create(Resources.class);
+public interface Resources<T extends ResourcePrototype> extends ClientBundle {
 
 	@Source("/js/coderba.helper.min.js")
 	TextResource coderba();
@@ -37,8 +34,7 @@ public interface Resources extends ClientBundle {
 	 * 
 	 * @return <code>codemirror.js</code> code for CodeMirror
 	 */
-	@Source("/js/lib/codemirror.js")
-	TextResource codemirror();
+	T codemirror();
 
 	/**
 	 * Returns the CSS source code for CodeMirror.

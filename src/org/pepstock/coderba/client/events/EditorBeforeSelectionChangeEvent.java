@@ -15,11 +15,14 @@
 */
 package org.pepstock.coderba.client.events;
 
+import java.util.List;
+
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.commons.ArrayEntity;
+import org.pepstock.coderba.client.entities.Anchor;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * This event is fired before the selection is moved.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,30 +33,48 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	 */
 	public static final Type<EditorBeforeSelectionChangeEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeSelectionChange";
-
-	private final EditorBeforeSelectionChangeItem item;
+	// change item instance
+	private final BeforeSelectionChangeItem item;
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates an editor {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param item change item instance
 	 */
-	public EditorBeforeSelectionChangeEvent(EditorArea editorArea, EditorBeforeSelectionChangeItem item) {
+	public EditorBeforeSelectionChangeEvent(EditorArea editorArea, BeforeSelectionChangeItem item) {
 		super(TYPE, editorArea);
+		// checks if item is consistent
 		if (item == null) {
-			throw new IllegalArgumentException("[EditorBeforeSelectionChangeEvent] Editor change item is null");
+			// if no, exception
+			throw new IllegalArgumentException("Change item is null");
 		}
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the change item.
+	 * 
+	 * @return the change item
 	 */
-	public final EditorBeforeSelectionChangeItem getItem() {
+	public BeforeSelectionChangeItem getItem() {
 		return item;
+	}
+	
+	/**
+	 * Enables changes on the item before firing the change selection event.
+	 * 
+	 * @param ranges array of anchors
+	 */
+	public void update(List<Anchor> ranges) {
+		// checks if ranges is consistent
+		if (ranges != null && !ranges.isEmpty()) {
+			ArrayEntity<Anchor> nativeRanges = ArrayEntity.fromOrEmpty(ranges);
+			item.update(nativeRanges);
+		}
 	}
 
 	/*

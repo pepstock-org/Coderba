@@ -18,27 +18,44 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * Configuration object to define the type of coordinates that Code Mirror should provide.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum CoordinatesMode implements Key
 {
+	/**
+	 * The coordinates are relative to the top-left corner of the currently visible (scrolled) window.
+	 */
 	WINDOW("window"),
+	/**
+	 * The coordinates are relative to the top-left corner of the page.
+	 */
 	PAGE("page"),
+	/**
+	 * The coordinates will be relative to the top-left corner of the editable document.
+	 */
 	LOCAL("local");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private CoordinatesMode(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

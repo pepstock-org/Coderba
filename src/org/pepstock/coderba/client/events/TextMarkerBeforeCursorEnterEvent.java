@@ -20,8 +20,7 @@ import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.TextMarker;
 
 /**
- * Event which is fired when new event handler has been removed to the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Fired when the cursor enters the marked range.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,14 +31,16 @@ public final class TextMarkerBeforeCursorEnterEvent extends AbstractTextMarkerEv
 	 */
 	public static final Type<TextMarkerBeforeCursorEnterEventHandler> TYPE = new Type<>();
 	/**
-	 * Event name of CodeMirror
+	 * Event name
 	 */
 	public static final String NAME = "beforeCursorEnter";
 
 	/**
-	 * Creates the event with the type of removed handler.
+	 * Creates a text marker {@value NAME} event.
 	 * 
-	 * @param handlerType the type of removed handler.
+	 * @param editorArea editor area instance
+	 * @param document document instance
+	 * @param textMarker text marker instance
 	 */
 	public TextMarkerBeforeCursorEnterEvent(EditorArea editorArea, Document document, TextMarker textMarker) {
 		super(TYPE, editorArea, document, textMarker);

@@ -27,7 +27,6 @@ import java.util.List;
  * This implementation uses a java script array as back-end to store objects (strings).
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.coderba.client.commons.RegExpResult.client.commons.ArrayString
  */
 public final class ArrayStringList extends AbstractArrayList<String, ArrayString> {
 

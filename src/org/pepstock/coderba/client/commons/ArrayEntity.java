@@ -39,10 +39,11 @@ public final class ArrayEntity<T extends NativeEntity> extends Array {
 	}
 
 	/**
-	 * Creates a java script array of entitys starting from list of entitys.
+	 * Creates a java script array of entities starting from list of entities.
 	 * 
-	 * @param items list of entitys to load into new java script array.
-	 * @return new array instance of entitys or <code>null</code> if argument is <code>null</code> or empty
+	 * @param items list of entities to load into new java script array.
+	 * @param <T> type of native entity
+	 * @return new array instance of entities or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static <T extends NativeEntity> ArrayEntity<T> fromOrNull(List<T> items) {
@@ -61,10 +62,11 @@ public final class ArrayEntity<T extends NativeEntity> extends Array {
 	}
 
 	/**
-	 * Creates a java script array of entitys starting from list of entitys.
+	 * Creates a java script array of entities starting from list of entities.
 	 * 
-	 * @param items list of entitys to load into new java script array.
-	 * @return new array instance of entitys or an empty array if argument is <code>null</code> or empty
+	 * @param items list of entities to load into new java script array.
+	 * @param <T> type of native entity
+	 * @return new array instance of entities or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static <T extends NativeEntity> ArrayEntity<T> fromOrEmpty(List<T> items) {

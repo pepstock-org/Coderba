@@ -38,8 +38,6 @@ public class EditorArea extends Widget {
 	private static final double DEFAULT_PCT_SIZE = 100D;
 	// text area element to use to highlight
 	private final TextAreaElement element;
-	// text area ID using GWT unique id
-	private final String id = Document.get().createUniqueId();
 	// flag if must be initialized on attach
 	private boolean initOnAttach = true;
 	// flag if must be destroy on detach
@@ -51,7 +49,7 @@ public class EditorArea extends Widget {
 	// editor configuration
 	private final EditorOptions options;
 	// id object needed to create the editor
-	private final EditorAreaId editorAreaId = new EditorAreaId(id);
+	private final EditorAreaId editorAreaId = new EditorAreaId();
 
 	/**
 	 * Creates the widget initializing all needed elements to manage the editing.
@@ -60,7 +58,7 @@ public class EditorArea extends Widget {
 		// creates a text area
 		element = Document.get().createTextAreaElement();
 		// sets unique ID
-		element.setId(id);
+		element.setId(editorAreaId.getId());
 		// sets default width values
 		element.getStyle().setWidth(DEFAULT_PCT_SIZE, Unit.PCT);
 		element.getStyle().setHeight(DEFAULT_PCT_SIZE, Unit.PCT);
@@ -86,7 +84,7 @@ public class EditorArea extends Widget {
 	 * @return the ID of editor
 	 */
 	public final String getId() {
-		return id;
+		return editorAreaId.getId();
 	}
 
 	/**

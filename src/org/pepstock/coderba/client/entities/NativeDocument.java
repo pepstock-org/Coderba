@@ -27,14 +27,15 @@ import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.JsType;
 
 /**
- * Each editor is associated with an instance of CodeMirror.Doc, its document. A document represents the editor content, plus a
- * selection, an undo history, and a mode. A document can only be associated with a single editor at a time.
+ * Each editor is associated with an instance of CodeMirror.Doc, its document.<br>
+ * A document represents the editor content, plus a selection, an undo history, and a mode.<br>
+ * A document can only be associated with a single editor at a time.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, namespace = NativeName.CODE_MIRROR, name = NativeName.DOCUMENT)
-public final class NativeDocument extends NativeObject {
+final class NativeDocument extends NativeObject {
 
 	/**
 	 * to avoid any instantiation
@@ -44,10 +45,15 @@ public final class NativeDocument extends NativeObject {
 	}
 
 	/**
-	 * The last three arguments are optional and can be used to set a mode for the document, make it start at a line number
-	 * other than 0, and set a specific line separator respectively. FIXME
+	 * Creates a document without creating an editor.
+	 * 
+	 * @param text content if the document
+	 * @param mode mode specification related to language
+	 * @param firstLineNumber first line number
+	 * @param lineSeparator line separator to use
+	 * @param direction direction of the document
 	 */
-	NativeDocument(String text, Object mode, int firstLineNumber, String lineSeparator, String direction) {
+	NativeDocument(String text, ModeSpecification mode, int firstLineNumber, String lineSeparator, String direction) {
 		// do nothing
 	}
 
@@ -377,8 +383,7 @@ public final class NativeDocument extends NativeObject {
 	 * @param head ending position
 	 * @param options options instance
 	 */
-	native void setSelection(Position anchor, Position head, NativeObject options); // ?: { bias?: number, origin?:
-																					// string, scroll?: boolean }
+	native void setSelection(Position anchor, Position head, NativeObject options);
 
 	/**
 	 * Sets a new set of selections.<br>

@@ -18,27 +18,34 @@ package org.pepstock.coderba.client.resources;
 import com.google.gwt.resources.client.TextResource;
 
 /**
+ * Abstract object to map a resource (script or style) to be injected.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class AbstractInjectableResource implements InjectableResource {
-
+	// text resource to be injected
 	private final TextResource resource;
 
 	/**
-	 * @param resource
+	 * Creates the object with the text resource to be injected.
+	 * 
+	 * @param resource the text resource to be injected
 	 */
 	public AbstractInjectableResource(TextResource resource) {
+		// checks if resource is consistent
 		if (resource == null) {
+			// if no, exception
 			throw new IllegalArgumentException("Resource instance is null");
 		}
+		// stores the resource
 		this.resource = resource;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.coderba.client.cm.resources.InjectableResource#getResource()
+	 * @see org.pepstock.coderba.client.resources.InjectableResource#getResource()
 	 */
 	@Override
 	public final TextResource getResource() {

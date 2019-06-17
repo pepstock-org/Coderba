@@ -19,11 +19,12 @@ import org.pepstock.coderba.client.commons.Key;
 
 /**
  * Determines to which element this class should be applied, can can be one of:<br>
- * <br>
- * "text" (the text element, which lies in front of the selection),<br>
- * "background" (a background element that will be behind the selection),<br>
- * "gutter" (the line's gutter space), <br>
- * "wrap" (the wrapper node that wraps all of the line's elements, including gutter elements).
+ * <ul>
+ * <li>"text" (the text element, which lies in front of the selection)
+ * <li>"background" (a background element that will be behind the selection)
+ * <li>"gutter" (the line's gutter space)
+ * <li>"wrap" (the wrapper node that wraps all of the line's elements, including gutter elements)
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -31,34 +32,40 @@ import org.pepstock.coderba.client.commons.Key;
 public enum LineClassLocation implements Key
 {
 	/**
-	 * the text element, which lies in front of the selection
+	 * The text element, which lies in front of the selection
 	 */
 	TEXT("text"),
 	/**
-	 * a background element that will be behind the selection
+	 * A background element that will be behind the selection
 	 */
 	BACKGROUND("background"),
 	/**
-	 * the line's gutter space
+	 * The line's gutter space
 	 */
 	GUTTER("gutter"),
 	/**
-	 * the wrapper node that wraps all of the line's elements, including gutter elements
+	 * The wrapper node that wraps all of the line's elements, including gutter elements
 	 */
 	WRAP("wrap");
 
+	// internal value to use into CodeMirror configuration
 	private final String value;
 
 	/**
-	 * @param value
+	 * Creates the enumeration by its value.
+	 * 
+	 * @param value string value to use into Code Mirror configuration
 	 */
 	private LineClassLocation(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
+	@Override
 	public String value() {
 		return value;
 	}

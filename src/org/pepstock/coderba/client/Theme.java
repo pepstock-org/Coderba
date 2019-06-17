@@ -27,7 +27,7 @@ public abstract class Theme extends InjectableItem {
 	/**
 	 * Creates the object with the mandatory name of theme.
 	 * 
-	 * @param value the mandatory name of theme
+	 * @param name the mandatory name of theme
 	 */
 	protected Theme(String name) {
 		super(name);

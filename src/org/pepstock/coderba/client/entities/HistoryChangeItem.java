@@ -27,7 +27,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * 
+ * Entity which maps the change item into the history of a document.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -43,16 +43,24 @@ public final class HistoryChangeItem extends Range {
 	}
 
 	/**
-	 * Returns the starting position of range in editor documents.
+	 * <b>INTERNAL</b><br>
+	 * Returns an array of strings which is representing the changes into document.
 	 * 
-	 * @return the starting position of range in editor documents.
+	 * @return an array of strings which is representing the changes into document.
 	 */
 	@JsProperty(name = "text")
 	private native ArrayString nativeGetText();
 
+	/**
+	 * Returns an unmodifiable list of strings which is representing the changes into document.
+	 * 
+	 * @return an unmodifiable list of strings which is representing the changes into document
+	 */
 	@JsOverlay
 	public List<String> getText() {
+		// gets array
 		ArrayString array = nativeGetText();
+		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
