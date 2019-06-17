@@ -1,6 +1,8 @@
 Coderba - GWT Code editor library based on CodeMirror
 =====================================================
 
+[![License](https://img.shields.io/github/license/pepstock-org/Coderba.svg)](https://github.com/pepstock-org/Coderba/blob/master/LICENSE-2.0.txt) [![Build Status](https://travis-ci.com/pepstock-org/Coderba.svg?branch=master)](https://travis-ci.com/pepstock-org/Coderba)
+
 Version 0.1 (under development)
 
 What's Coderba
