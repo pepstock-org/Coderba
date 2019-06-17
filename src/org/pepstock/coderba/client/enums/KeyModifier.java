@@ -15,39 +15,53 @@
 */
 package org.pepstock.coderba.client.enums;
 
-import java.util.List;
-
 import org.pepstock.coderba.client.commons.Key;
 
 /**
+ * It is a special key (or combination) on a computer keyboard that temporarily modifies the normal action of another key when
+ * pressed together.<br>
+ * By themselves, modifier keys usually do nothing.<br>
+ * Modifiers are <code>Shift</code>, <code>Cmd</code>, <code>Ctrl</code>, and <code>Alt</code>.
  * 
- * Modifiers Shift-, Cmd-, Ctrl-, and Alt- 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum KeyModifier implements Key
 {
-	KEY_SHIFT("Shift", 16, 1),
-	KEY_CTRL("Ctrl", 17, 2),
-	KEY_CMD("Cmd", 17, 2),
-	KEY_ALT("Alt", 18, 3);
-	
-//	private final List<Integer> code;
-	
+	/**
+	 * SHIFT key modifier.
+	 */
+	KEY_SHIFT("Shift", 1),
+	/**
+	 * CTRL key modifier.
+	 */
+	KEY_CTRL("Ctrl", 2),
+	/**
+	 * CMD key modifier (like CTRL for MAC).
+	 */
+	KEY_CMD("Cmd", 2),
+	/**
+	 * ALT key modifier.
+	 */
+	KEY_ALT("Alt", 3);
+
+	// order of modifier
+	// minimum if most important
 	private final int order;
-	
+	// string value of key
 	private final String value;
 
 	/**
-	 * @param code
-	 * @param value
+	 * Creates a modifier with string representation and order number, which is mandatory to specify the default order (Shift-Cmd-Ctrl-Alt).
+	 * 
+	 * @param value string representation of key.
+	 * @param order order of modifier, minimum if most important
 	 */
-	private KeyModifier(String value, int order, int... codes) {
+	private KeyModifier(String value, int order) {
 		this.value = value;
 		this.order = order;
-//		this.code = Collections.unmodifiableList(Arrays.asList(codes));
 	}
-	
+
 	/**
 	 * @return the order
 	 */
@@ -55,21 +69,14 @@ public enum KeyModifier implements Key
 		return order;
 	}
 
-	/**
-	 * FIXME
-	 * @return
-	 */
-	public List<Integer> code() {
-//		return code;
-		return null;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.commons.Key#value()
 	 */
 	@Override
 	public String value() {
 		return value;
 	}
-	
+
 }

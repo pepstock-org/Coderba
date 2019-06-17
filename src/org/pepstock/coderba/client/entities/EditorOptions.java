@@ -419,8 +419,7 @@ public class EditorOptions implements IsOptions {
 	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
 	 */
 	@Override
-	public NativeObject getExtraKeys() {
-		// FIXME
+	public ExtraKeyMapTable getExtraKeys() {
 		return delegated.getExtraKeys();
 	}
 
@@ -904,14 +903,11 @@ public class EditorOptions implements IsOptions {
 		delegated.setKeyMap(keyMap);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.cm.commons.NativeObject)
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
 	 */
 	@Override
-	public void setExtraKeys(NativeObject extraKeys) {
-		// FIXME
+	public void setExtraKeys(ExtraKeyMapTable extraKeys) {
 		delegated.setExtraKeys(extraKeys);
 	}
 

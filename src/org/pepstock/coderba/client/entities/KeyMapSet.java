@@ -27,9 +27,8 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME Defaults options of CodeMirror.<br>
- * It is used to set global options for all editor instances.<br>
- * It wraps the <code>CodeMirror.defaults</code> property.
+ * Maps the key maps object, defined of CodeMirror.<br>
+ * It wraps the <code>CodeMirror.keyMap</code> property.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -40,8 +39,7 @@ public final class KeyMapSet extends NativeObjectContainer {
 	private static final KeyMapSet INSTANCE = new KeyMapSet();
 
 	/**
-	 * FIXME Creates the wrapper to the <code>CodeMirror.defaults</code> using the default values.<br>
-	 * Uses a USER options container as the global defaults for internal defaults.
+	 * Creates the wrapper to the <code>CodeMirror.keyMap</code>.<br>
 	 */
 	KeyMapSet() {
 		super(CodeMirror.get().getKeyMaps());
@@ -57,44 +55,66 @@ public final class KeyMapSet extends NativeObjectContainer {
 	public static KeyMapSet get() {
 		return INSTANCE;
 	}
-	
-	public List<KeyMap> getKeyMaps(){
+
+	/**
+	 * Returns an unmodifiable list of the defined key maps.
+	 * 
+	 * @return an unmodifiable list of the defined key maps
+	 */
+	public List<KeyMap> getKeyMaps() {
+		// creates the result list
 		List<KeyMap> maps = new LinkedList<>();
+		// scans all keys
 		for (Key key : keys()) {
+			// search for key map
 			KeyMap map = KeyMaps.get().retrieve(key.value());
+			// if found
 			if (map != null) {
+				// adds to result
 				maps.add(map);
 			}
 		}
+		// returns the unmodifiable list
 		return Collections.unmodifiableList(maps);
 	}
 
-	public KeyMapTable getTable(KeyMap keyMap){
+	/**
+	 * Returns the key map table for a specific key map, otherwise returns <code>null</code>.
+	 * 
+	 * @param keyMap key map object to search
+	 * @return the key map table for a specific key map, otherwise returns <code>null</code>.
+	 */
+	public KeyMapTable getTable(KeyMap keyMap) {
+		// checks if key map is consistent
 		if (keyMap != null) {
+			// creates a key by key map name
 			Key keyMapKey = Key.create(keyMap.getName());
+			// checks if there is the property
 			if (has(keyMapKey)) {
+				// returns the table
 				return getKeyMapTable(keyMapKey);
 			}
 		}
+		// if here, the key map is not consistent
 		return null;
 	}
 
-	KeyMapTable getKeyMapTable(Key name) {
-		NativeObject table = getValue(name);
-		if (table != null) {
-			return  new KeyMapTable(table);
-		}
-		return null;
-	}
-
-	
 	/**
-	 * Returns the native object.
+	 * Returns a key map table by the key related to key map name or <code>null</code> if no exists.
 	 * 
-	 * @return the native object.
+	 * @param name name of key map as key
+	 * @return a key map table by the key related to key map name or <code>null</code> if no exists
 	 */
-	final NativeObject getObject() {
-		return getNativeObject();
+	KeyMapTable getKeyMapTable(Key name) {
+		// getx native object of key map
+		NativeObject table = getValue(name);
+		// checks if consistent
+		if (table != null) {
+			// returns key map table
+			return new KeyMapTable(table);
+		}
+		// if here key map name no exists
+		return null;
 	}
-	
+
 }

@@ -15,54 +15,86 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Maps a set of strokes which are alias among us.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class KeyMultiStroke implements Stroke {
-
+	// separator among strokes
 	static final String SEPARATOR = " ";
-
+	// constant of empty strokes
+	static final Stroke[] EMPTY_STROKES = new Stroke[0];
+	// list of strokes which defines this multi stroke
 	private final List<Stroke> items = new LinkedList<>();
-
-	private String value = null;
+	// string representation of this stroke
+	private final String value;
 
 	/**
-	 * @param name
+	 * Defines a multi stroke object with a list of all strokes.
+	 * 
+	 * @param strokes list of all strokes which defines this object
 	 */
-	public KeyMultiStroke(Stroke... items) {
-		if (items == null || items.length == 0) {
-			throw new IllegalArgumentException("Items are null or not consistent");
+	public KeyMultiStroke(Stroke... strokes) {
+		// checks if strokes are consistent
+		if (strokes == null || strokes.length == 0) {
+			// if no, exception
+			throw new IllegalArgumentException("Strokes are null or not consistent");
 		}
-		for (Stroke item : items) {
-			if (item.isMulti() && item instanceof KeyMultiStroke) {
-				KeyMultiStroke multiStroke = (KeyMultiStroke) item;
-				this.items.addAll(multiStroke.getItems());
+		// creates a string builder
+		// to create the string representation of this stroke
+		StringBuilder sb = new StringBuilder();
+		// scans all strokes
+		for (Stroke stroke : strokes) {
+			// checks if passed stroke is already a multi one
+			if (stroke.isMulti() && stroke instanceof KeyMultiStroke) {
+				// casts to multi stroke
+				KeyMultiStroke multiStroke = (KeyMultiStroke) stroke;
+				// adds all strokes
+				this.items.addAll(multiStroke.getStrokes());
 			} else {
-				this.items.add(item);
+				// if here, the stroke is simple one
+				// and adds to list
+				this.items.add(stroke);
 			}
+			// if it is not the first
+			if (sb.length() > 0) {
+				// adds separator
+				sb.append(SEPARATOR);
+			}
+			// adds stroke value
+			sb.append(stroke.value());
 		}
-		buildValue();
+		// sets the value of this stroke
+		this.value = sb.toString();
 	}
 
 	/**
-	 * @param name
+	 * Defines a multi stroke object with a list of all strokes.
+	 * 
+	 * @param strokes list of all strokes which defines this object
 	 */
-	KeyMultiStroke(List<Stroke> items) {
-		this(items.toArray(new KeyStroke[0]));
+	KeyMultiStroke(List<Stroke> strokes) {
+		this(strokes.toArray(EMPTY_STROKES));
 	}
 
 	/**
-	 * @return the modifiers
+	 * Returns the unmodifiable list of stroke which defines the multi stroke.
+	 * 
+	 * @return the unmodifiable list of stroke which defines the multi stroke
 	 */
-	public List<Stroke> getItems() {
-		return items;
+	public List<Stroke> getStrokes() {
+		return Collections.unmodifiableList(items);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.entities.Stroke#isMulti()
 	 */
 	@Override
@@ -79,29 +111,5 @@ public final class KeyMultiStroke implements Stroke {
 	public String value() {
 		return value;
 	}
-
-	/**
-	 * FIXME
-	 */
-	private void buildValue() {
-		StringBuilder sb = new StringBuilder();
-		for (Stroke item : items) {
-			if (sb.length() > 0) {
-				sb.append(SEPARATOR);
-			}
-			sb.append(item.value());
-		}
-		value = sb.toString();
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return value();
-	}
-	
-	
 
 }

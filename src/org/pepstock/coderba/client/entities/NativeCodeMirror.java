@@ -83,6 +83,16 @@ final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "mimeModes")
 	static native NativeObject getMimeModes();
+	
+	/**
+	 * FIXME
+	 * Returns the object containing the default options.<br>
+	 * You can update this object to change the defaults on your editor.
+	 * 
+	 * @return the object containing the default options.
+	 */
+	@JsProperty(name = "commands")
+	static native NativeObject getCommands();
 
 	/**
 	 * This method provides another way to initialize an editor.<br>

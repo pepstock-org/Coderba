@@ -37,8 +37,10 @@ public final class CodeMirror {
 	private static final CodeMirror INSTANCE = new CodeMirror();
 	// native object of DEFAULT
 	private final NativeObject defaults;
-	// native object of KEYMPAS
+	// native object of KEYMAPS
 	private final NativeObject keyMaps;
+	// native object of COMMANDS
+	private final NativeObject commands;
 	// MIME modes object
 	private final MimeModes mimeModes;
 	// stores CodeMirror Version
@@ -54,6 +56,8 @@ public final class CodeMirror {
 		defaults = NativeCodeMirror.getDefaults();
 		// gets key maps object
 		keyMaps = NativeCodeMirror.getKeyMaps();
+		// gets commands object
+		commands = NativeCodeMirror.getCommands();
 		// gets mime modes object
 		mimeModes = new MimeModes(NativeCodeMirror.getMimeModes());
 		// stores the version
@@ -91,15 +95,22 @@ public final class CodeMirror {
 	}
 
 	/**
-	 * Returns the object containing the default options.<br>
-	 * You can update this object to change the defaults on your editor.
+	 * Returns the object containing the loaded key maps.
 	 * 
-	 * @return the object containing the default options.
+	 * @return the object containing the loaded key maps
 	 */
 	NativeObject getKeyMaps() {
 		return keyMaps;
 	}
 
+	/**
+	 * Returns the object containing the defined commands.
+	 * 
+	 * @return the object containing the defined commands
+	 */
+	NativeObject getCommands() {
+		return commands;
+	}
 	
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.

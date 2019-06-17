@@ -21,6 +21,7 @@ import java.util.List;
 import org.pepstock.coderba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.coderba.client.utils.JSON;
 import org.pepstock.coderba.client.utils.RegExp;
+import org.pepstock.coderba.client.utils.Window;
 
 import com.google.gwt.dom.client.Element;
 
@@ -371,8 +372,10 @@ public abstract class NativeObjectContainer extends AbstractNativeObjectContaine
 	 */
 	@Override
 	protected <T> T getFunctionProperty(String key, T defaultValue) {
+		Window.getConsole().log("KEY: "+key);
 		// gets descriptor
 		NativeFunctionDescriptor<T> descriptor = nativeObject.getFunctionProperty(key);
+		Window.getConsole().log("KEY: "+descriptor.getValue());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}

@@ -22,6 +22,7 @@ import org.pepstock.coderba.client.IsDefaultOptions;
 import org.pepstock.coderba.client.KeyMap;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Theme;
+import org.pepstock.coderba.client.entities.ExtraKeyMapTable;
 import org.pepstock.coderba.client.entities.IsExtendedOptions;
 import org.pepstock.coderba.client.entities.IsOptions;
 import org.pepstock.coderba.client.entities.Phrases;
@@ -56,6 +57,8 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	private KeyMap keyMap = null;
 	// theme instance
 	private Theme theme = null;
+	// extra map key
+	private ExtraKeyMapTable extraKeyMapTable = null;
 
 	/**
 	 * Creates the options manager by a container and default values.
@@ -156,9 +159,16 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	 * @see org.pepstock.coderba.client.IsDefaultOptions#getExtraKeys()
 	 */
 	@Override
-	public NativeObject getExtraKeys() {
-		// FIXME
-		return nativeObjectContainer.getValue(Options.EXTRA_KEYS);
+	public ExtraKeyMapTable getExtraKeys() {
+		// checks if table already passed
+		// or existing into native object 
+		if (extraKeyMapTable == null && nativeObjectContainer.has(Options.EXTRA_KEYS)) {
+			// gets native object
+			NativeObject object = nativeObjectContainer.getValue(Options.EXTRA_KEYS);
+			// creates and sets extra map into object
+			extraKeyMapTable = new ExtraKeyMapTable(object);	
+		}
+		return extraKeyMapTable;
 	}
 
 	/*
@@ -759,16 +769,16 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	public void setElectricChars(boolean electricChars) {
 		nativeObjectContainer.setValue(Options.ELECTRIC_CHARS, electricChars);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.coderba.client.cm.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.cm.commons.NativeObject)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
 	 */
 	@Override
-	public void setExtraKeys(NativeObject extraKeys) {
-		// FIXME
+	public void setExtraKeys(ExtraKeyMapTable extraKeys) {
+		// sets the native object
 		nativeObjectContainer.setValue(Options.EXTRA_KEYS, extraKeys);
+		// and stores locally
+		this.extraKeyMapTable = extraKeys;
 	}
 
 	/*

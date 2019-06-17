@@ -17,8 +17,8 @@ package org.pepstock.coderba.client;
 
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.entities.ExtraKeyMapTable;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
@@ -80,7 +80,7 @@ public interface IsDefaultOptions {
 	 * 
 	 * @return extra key bindings for the editor
 	 */
-	NativeObject getExtraKeys();
+	ExtraKeyMapTable getExtraKeys();
 
 	/**
 	 * At which number to start counting lines.

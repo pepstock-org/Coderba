@@ -15,11 +15,72 @@
 */
 package org.pepstock.coderba.client.entities;
 
+import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.enums.CommandType;
+
+import jsinterop.annotations.JsFunction;
+
 /**
+ * Base class to define a command.<br>
+ * Commands are parameter-less actions that can be performed on an editor.<br>
+ * Their main use is for key bindings.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Command {
+public abstract class Command {
 
-	// FIXME
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION that is called to invoke the command.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface CommandFunction {
+
+		/**
+		 * A function that is called to invoke the command.
+		 * 
+		 * @param editor editor instance
+		 */
+		void call(NativeEditor editor);
+	}
+
+	// type of command
+	private final CommandType type;
+
+	/**
+	 * Creates a command by its type.
+	 * 
+	 * @param type type of command
+	 */
+	public Command(CommandType type) {
+		// checks if type is consistent
+		if (type == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Type of command is null");
+		}
+		// stores type
+		this.type = type;
+	}
+
+	/**
+	 * Returns the command type
+	 * 
+	 * @return the type of command.
+	 */
+	public final CommandType getType() {
+		return type;
+	}
+
+	/**
+	 * Executes the command instance.
+	 * 
+	 * @param editorArea editor area instance
+	 */
+	public abstract void execute(EditorArea editorArea);
 }

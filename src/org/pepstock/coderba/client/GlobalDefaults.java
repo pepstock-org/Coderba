@@ -18,8 +18,8 @@ package org.pepstock.coderba.client;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
+import org.pepstock.coderba.client.entities.ExtraKeyMapTable;
 import org.pepstock.coderba.client.entities.Phrases;
 import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
@@ -298,8 +298,7 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	 * @return extra key bindings for the editor
 	 */
 	@Override
-	public NativeObject getExtraKeys() {
-		// FIXME
+	public ExtraKeyMapTable getExtraKeys() {
 		return null;
 	}
 

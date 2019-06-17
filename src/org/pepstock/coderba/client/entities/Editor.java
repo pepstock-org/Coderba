@@ -26,16 +26,17 @@ import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
+import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.enums.CoordinatesMode;
 import org.pepstock.coderba.client.enums.HorizontalFindUnit;
 import org.pepstock.coderba.client.enums.IndentLineMode;
 import org.pepstock.coderba.client.enums.VerticalFindUnit;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
+import org.pepstock.coderba.client.events.BeforeSelectionChangeItem;
 import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.EditorBeforeChangeEvent;
 import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeEvent;
-import org.pepstock.coderba.client.events.BeforeSelectionChangeItem;
 import org.pepstock.coderba.client.events.EditorBlurEvent;
 import org.pepstock.coderba.client.events.EditorChangeEvent;
 import org.pepstock.coderba.client.events.EditorChangesEvent;
@@ -1225,16 +1226,26 @@ public final class Editor implements IsEventManager {
 	public boolean isReadOnly() {
 		return nativeObject.isReadOnly();
 	}
+	
+	/**
+	 * Runs the command with the given name on the editor.
+	 * 
+	 * @param name the command with the given name on the editor.
+	 */
+	public void execCommand(String name) {
+		executeCommand(Key.create(name));
+	}
 
 	/**
 	 * Runs the command with the given name on the editor.
 	 * 
 	 * @param name the command with the given name on the editor.
 	 */
-	// FIXME
-	public void execCommand(String name) {
-		if (name != null) {
-			nativeObject.execCommand(name);
+	public void executeCommand(Key name) {
+		// checks if name of command is consistent
+		if (Key.isValid(name)) {
+			// then executes
+			nativeObject.execCommand(name.value());
 		}
 	}
 
