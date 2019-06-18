@@ -30,7 +30,7 @@ public final class LineHandleDeleteEvent extends AbstractHandlerEvent<LineHandle
 	 * Event type
 	 */
 	public static final Type<LineHandleDeleteEventHandler> TYPE = new Type<>();
-	
+
 	/**
 	 * Event name
 	 */
@@ -53,7 +53,7 @@ public final class LineHandleDeleteEvent extends AbstractHandlerEvent<LineHandle
 		}
 		this.lineHandle = lineHandle;
 	}
-	
+
 	/**
 	 * Returns the line handle instance.
 	 * 

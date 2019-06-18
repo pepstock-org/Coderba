@@ -27,6 +27,7 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.TextAreaElement;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -389,7 +390,6 @@ final class NativeEditor extends NativeEventEmitter {
 	 * @param keyMapName name of keymap
 	 * @param bottom if <code>true</code>, it ends up below other key maps added with this method.
 	 */
-	// FIXME
 	native void addKeyMap(String keyMapName, boolean bottom);
 
 	/**
@@ -399,7 +399,6 @@ final class NativeEditor extends NativeEventEmitter {
 	 * 
 	 * @param keyMapName name of keymap
 	 */
-	// FIXME
 	native void removeKeyMap(String keyMapName);
 
 	/**
@@ -750,6 +749,26 @@ final class NativeEditor extends NativeEventEmitter {
 	 * @return the DOM node that contains the editor gutters
 	 */
 	native Element getGutterElement();
+
+	/**
+	 * Copy the content of the editor into the textarea.
+	 */
+	native void save();
+
+	/**
+	 * Remove the editor, and restore the original text area (with the editor's current content).<br>
+	 * If you dynamically create and destroy editors made with `fromTextArea`, without destroying the form they are part of, you
+	 * should make sure to call `toTextArea` to remove the editor, or its `"submit"` handler on the form will cause a memory
+	 * leak.
+	 */
+	native void toTextArea();
+
+	/**
+	 * Returns the text area that the instance was based on.
+	 * 
+	 * @return the text area that the instance was based on.
+	 */
+	native TextAreaElement getTextArea();
 
 	/**
 	 * Returns the CODERBA ID.

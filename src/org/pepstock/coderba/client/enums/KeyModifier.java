@@ -52,7 +52,8 @@ public enum KeyModifier implements Key
 	private final String value;
 
 	/**
-	 * Creates a modifier with string representation and order number, which is mandatory to specify the default order (Shift-Cmd-Ctrl-Alt).
+	 * Creates a modifier with string representation and order number, which is mandatory to specify the default order
+	 * (Shift-Cmd-Ctrl-Alt).
 	 * 
 	 * @param value string representation of key.
 	 * @param order order of modifier, minimum if most important

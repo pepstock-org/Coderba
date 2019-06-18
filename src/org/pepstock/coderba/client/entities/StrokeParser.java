@@ -176,7 +176,7 @@ public final class StrokeParser {
 		if (values.length > 1) {
 			// creates a list of modifiers
 			List<KeyModifier> modifiers = new ArrayList<>();
-			// scans all split values (excluding the last which is the key name) 
+			// scans all split values (excluding the last which is the key name)
 			for (int i = 0; i < values.length - 1; i++) {
 				// gets modifier
 				KeyModifier modifier = Key.getKeyByValue(KeyModifier.class, values[i]);

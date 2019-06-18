@@ -903,7 +903,9 @@ public class EditorOptions implements IsOptions {
 		delegated.setKeyMap(keyMap);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
 	 */
 	@Override

@@ -1356,6 +1356,23 @@ public final class Editor implements IsEventManager {
 		return nativeObject.getGutterElement();
 	}
 
+	/**
+	 * Copy the content of the editor into the textarea.
+	 */
+	public void save() {
+		nativeObject.save();
+	}
+
+	/**
+	 * Remove the editor, and restore the original text area (with the editor's current content).<br>
+	 * If you dynamically create and destroy editors made with `fromTextArea`, without destroying the form they are part of, you
+	 * should make sure to call `toTextArea` to remove the editor, or its `"submit"` handler on the form will cause a memory
+	 * leak.
+	 */
+	public void toTextArea() {
+		nativeObject.toTextArea();
+	}
+
 	// ------------------------------
 	// --- EVENTS
 	// ------------------------------

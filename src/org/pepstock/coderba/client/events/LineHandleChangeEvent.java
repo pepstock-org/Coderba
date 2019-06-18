@@ -58,7 +58,7 @@ public final class LineHandleChangeEvent extends AbstractHandlerEvent<LineHandle
 		this.lineHandle = lineHandle;
 		this.item = item;
 	}
-	
+
 	/**
 	 * Returns the line handle instance.
 	 * 

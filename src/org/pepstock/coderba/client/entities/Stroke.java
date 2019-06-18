@@ -30,7 +30,7 @@ public interface Stroke extends Key {
 	/**
 	 * Returns <code>true</code> if the stroke is a container of other strokes. By default, returns <code>false</code>.
 	 * 
-	 * @return <code>true</code> if the stroke is a container of other strokes.  By default, returns <code>false</code>
+	 * @return <code>true</code> if the stroke is a container of other strokes. By default, returns <code>false</code>
 	 */
 	default boolean isMulti() {
 		return false;

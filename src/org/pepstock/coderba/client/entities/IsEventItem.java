@@ -25,7 +25,7 @@ import org.pepstock.coderba.client.events.RemoveHandlerEvent;
  *
  */
 interface IsEventItem {
-	
+
 	/**
 	 * Checks if this event item is related to add handler event, in order to set ON event listening.
 	 * 

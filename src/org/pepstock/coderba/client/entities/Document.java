@@ -1371,7 +1371,6 @@ public final class Document implements IsEventManager {
 		// creates new document
 		Document copiedDocument = new Document(nativeObject.copy(copyHistory), language);
 		// copies the handlers
-		// FIXME check if other entities (like line handle) must bu copied
 		copiedDocument.setDocumentEachLineHandler(documentEachLineHandler);
 		copiedDocument.setDocumentExtendSelectionsHandler(documentExtendSelectionsHandler);
 		copiedDocument.setLinkedDocumentsHandler(linkedDocumentsHandler);

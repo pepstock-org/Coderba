@@ -47,7 +47,7 @@ final class RuntimeOptions extends AbstractExtendedOptions<RuntimeOptionsContain
 	void copy(IsExtendedOptions options) {
 		super.copyItems(options);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -55,17 +55,17 @@ final class RuntimeOptions extends AbstractExtendedOptions<RuntimeOptionsContain
 	 */
 	@Override
 	public ExtraKeyMapTable getExtraKeys() {
-		// this methods has been override 
+		// this methods has been override
 		// because to reduce the visibility of constructor
 		// of extra key map
 		ExtraKeyMapTable extraKeyMapTable = super.getExtraKeys();
 		// checks if table already passed
-		// or existing into native object 
+		// or existing into native object
 		if (extraKeyMapTable == null) {
 			// gets native object
 			NativeObject object = getNativeObjectContainer().getObjectProperty(Options.EXTRA_KEYS.value());
 			// creates and returns extra map into object
-			return new ExtraKeyMapTable(object);	
+			return new ExtraKeyMapTable(object);
 		}
 		return extraKeyMapTable;
 	}

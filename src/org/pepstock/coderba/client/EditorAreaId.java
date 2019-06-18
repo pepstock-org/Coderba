@@ -18,7 +18,7 @@ package org.pepstock.coderba.client;
 import com.google.gwt.dom.client.Document;
 
 /**
- * This class is not implementable because created by EditoArea instance and passed to create an editor.<br>
+ * This class is not implementable because created by editor area instance and passed to create an editor.<br>
  * This is done in order to avoid that anyone can create an Editor with having an area.
  * 
  * @author Andrea "Stock" Stocchero

@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
 
@@ -65,13 +64,11 @@ final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "defaults")
 	static native NativeObject getDefaults();
-	
+
 	/**
-	 * FIXME
-	 * Returns the object containing the default options.<br>
-	 * You can update this object to change the defaults on your editor.
+	 * Returns the object containing the loaded key maps.
 	 * 
-	 * @return the object containing the default options.
+	 * @return the object containing the loaded key maps
 	 */
 	@JsProperty(name = "keyMap")
 	static native NativeObject getKeyMaps();
@@ -83,13 +80,11 @@ final class NativeCodeMirror {
 	 */
 	@JsProperty(name = "mimeModes")
 	static native NativeObject getMimeModes();
-	
+
 	/**
-	 * FIXME
-	 * Returns the object containing the default options.<br>
-	 * You can update this object to change the defaults on your editor.
+	 * Returns the object containing the defined commands.
 	 * 
-	 * @return the object containing the default options.
+	 * @return the object containing the defined commands
 	 */
 	@JsProperty(name = "commands")
 	static native NativeObject getCommands();
@@ -129,69 +124,5 @@ final class NativeCodeMirror {
 	 * @return It will return the keymap itself
 	 */
 	static native NativeObject normalizeKeyMap(NativeObject map);
-
-	/**
-	 * FIXME Can be used to define new options for CodeMirror. The updateFunc will be called with the editor instance and the
-	 * new value when an editor is initialized, and whenever the option is modified through <code>setOption</code>.
-	 * 
-	 * @param name
-	 * @param defaults
-	 * @param updateFunc
-	 */
-	static native void defineOption(String name, Object defaults, CallbackProxy.Proxy updateFunc);
-
-	/**
-	 * FIXME If you want to define extra methods in terms of the CodeMirror API.<br>
-	 * This will cause the given value (usually a method) to be added to all CodeMirror instances created from then on.
-	 * 
-	 * @param name
-	 * @param value
-	 */
-	static native void defineExtension(String name, Object value);
-
-	/**
-	 * FIXME Like defineExtension, but the method will be added to the interface for Doc objects instead
-	 * 
-	 * @param name
-	 * @param value
-	 */
-	static native void defineDocExtension(String name, Object value);
-
-	/**
-	 * FIXME If your extension just needs to run some code whenever a CodeMirror instance is initialized.<br>
-	 * Give it a function as its only argument, and from then on, that function will be called (with the instance as argument)
-	 * whenever a new CodeMirror instance is initialized.
-	 * 
-	 * @param function
-	 */
-	static native void defineInitHook(CallbackProxy.Proxy function);
-
-	/**
-	 * FIXME Registers a helper value with the given name in the given namespace (type).<br>
-	 * This is used to define functionality that may be looked up by mode.<br>
-	 * Will create (if it doesn't already exist) a property on the CodeMirror object for the given type, pointing to an object
-	 * that maps names to values. I.e. after doing CodeMirror.registerHelper("hint", "foo", myFoo), the value
-	 * CodeMirror.hint.foo will point to myFoo.
-	 * 
-	 * @param type
-	 * @param name
-	 * @param value
-	 */
-	static native void registerHelper(String type, String name, Object value); // value: helper
-
-	/**
-	 * FIXME Acts like registerHelper, but also registers this helper as 'global', meaning that it will be included by
-	 * getHelpers whenever the given predicate returns true when called with the local mode and editor.
-	 * 
-	 * @param type
-	 * @param name
-	 * @param predicate
-	 * @param value
-	 */
-	static native void registerGlobalHelper(String type, String name, CallbackProxy.Proxy predicate, Object value); // predicate:
-																													// fn(mode,
-																													// CodeMirror),
-																													// value:
-																													// helper
 
 }

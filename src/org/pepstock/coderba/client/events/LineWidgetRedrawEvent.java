@@ -52,7 +52,7 @@ public final class LineWidgetRedrawEvent extends AbstractHandlerEvent<LineWidget
 		}
 		this.lineWidget = lineWidget;
 	}
-	
+
 	/**
 	 * Returns the line widget instance
 	 * 

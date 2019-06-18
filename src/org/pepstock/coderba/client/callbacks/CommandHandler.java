@@ -33,5 +33,5 @@ public interface CommandHandler {
 	 * @param editorArea editor area instance where to apply the command
 	 */
 	void execute(EditorArea editorArea);
-	
+
 }

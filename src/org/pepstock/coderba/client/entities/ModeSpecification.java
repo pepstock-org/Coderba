@@ -30,8 +30,6 @@ import jsinterop.annotations.JsType;
  * This is useful when the mime is not enough. like to create a document.<br>
  * It does not contain any visible method or property because is immutable.
  * 
- * FIXME Missing "state" property.
- * 
  * @author Andrea "Stock" Stocchero
  *
  */

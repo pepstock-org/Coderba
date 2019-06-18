@@ -159,6 +159,11 @@ public class TextMarkerOptions extends BaseEntity {
 	public static final Element DEFAULT_WIDGET = null;
 
 	/**
+	 * Default value of a attributes value of element created for the marked text, <code>null</code>.
+	 */
+	public static final TextMarkerAttributes DEFAULT_ATTRIBUTES = null;
+
+	/**
 	 * Default value if the target document is linked to other documents, you can set shared to true to make the marker appear
 	 * in all documents, {@value DEFAULT_SHARED}.
 	 */
@@ -618,8 +623,26 @@ public class TextMarkerOptions extends BaseEntity {
 		}
 	}
 
-	// FIXME
-	// ATTRIBUTES("attributes"),
+	/**
+	 * Returns the attributes to the elements created for the marked text or <code>null</code> if not set.
+	 * 
+	 * @return the attributes to the elements created for the marked text or <code>null</code> if not set
+	 */
+	public final TextMarkerAttributes getAttributes() {
+		return getValue(Property.ATTRIBUTES, DEFAULT_ATTRIBUTES);
+	}
+
+	/**
+	 * Sets the attributes to the elements created for the marked text.
+	 * 
+	 * @param attributes the attributes to the elements created for the marked text
+	 */
+	public final void setAttributes(TextMarkerAttributes attributes) {
+		// checks if type is range (valid only that)
+		if (isRange()) {
+			setValue(Property.ATTRIBUTES, attributes);
+		}
+	}
 
 	/**
 	 * Returns <code>true</code> if you can set shared to true to make the marker appear in all documents. By default, a marker
@@ -653,7 +676,7 @@ public class TextMarkerOptions extends BaseEntity {
 	}
 
 	/**
-	 * Sets the DOM element to display at the current location of the bookmark
+	 * Sets the DOM element to display at the current location of the bookmark.
 	 * 
 	 * @param widget the DOM element to display at the current location of the bookmark
 	 */

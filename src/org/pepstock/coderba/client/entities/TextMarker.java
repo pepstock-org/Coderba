@@ -191,8 +191,9 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		textMarkerClearFunctionProxy.setCallback(this::onClear);
 		textMarkerHideFunctionProxy.setCallback(this::onHide);
 		textMarkerUnhideFunctionProxy.setCallback(this::onUnhide);
-		
-		eventItemManager.addEventItem(new EventItem<TextMarkerBeforeCursorEnterEventHandler, NativeTextMarker>(TextMarkerBeforeCursorEnterEvent.TYPE, nativeObject, TextMarkerBeforeCursorEnterEvent.NAME, eventManager, textMarkerBeforeCursorEnterFunctionProxy.getProxy()));
+
+		eventItemManager.addEventItem(
+				new EventItem<TextMarkerBeforeCursorEnterEventHandler, NativeTextMarker>(TextMarkerBeforeCursorEnterEvent.TYPE, nativeObject, TextMarkerBeforeCursorEnterEvent.NAME, eventManager, textMarkerBeforeCursorEnterFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<TextMarkerClearEventHandler, NativeTextMarker>(TextMarkerClearEvent.TYPE, nativeObject, TextMarkerClearEvent.NAME, eventManager, textMarkerClearFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<TextMarkerHideEventHandler, NativeTextMarker>(TextMarkerHideEvent.TYPE, nativeObject, TextMarkerHideEvent.NAME, eventManager, textMarkerHideFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<TextMarkerUnhideEventHandler, NativeTextMarker>(TextMarkerUnhideEvent.TYPE, nativeObject, TextMarkerUnhideEvent.NAME, eventManager, textMarkerUnhideFunctionProxy.getProxy()));
@@ -206,7 +207,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	public String getId() {
 		return Id.retrieveFrom(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the document which this text marker belongs to.
 	 * 

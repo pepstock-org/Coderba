@@ -57,7 +57,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	private KeyMap keyMap = null;
 	// theme instance
 	private Theme theme = null;
- 	// extra map key
+	// extra map key
 	private ExtraKeyMapTable extraKeyMapTable = null;
 
 	/**
@@ -91,7 +91,7 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	protected final T getNativeObjectContainer() {
 		return nativeObjectContainer;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -101,8 +101,10 @@ public abstract class AbstractOptions<T extends AbstractNativeObjectContainer> i
 	public ExtraKeyMapTable getExtraKeys() {
 		return extraKeyMapTable;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.entities.IsOptions#setExtraKeys(org.pepstock.coderba.client.entities.ExtraKeyMapTable)
 	 */
 	@Override

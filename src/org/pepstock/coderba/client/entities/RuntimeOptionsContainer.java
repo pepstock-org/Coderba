@@ -365,8 +365,11 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		return nativeEditor.getOptionValueAsEntity(key);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineFunctionProperty(java.lang.String, java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#defineFunctionProperty(java.lang.String,
+	 * java.lang.Object)
 	 */
 	@Override
 	protected <T> void defineFunctionProperty(String key, T value) {
@@ -374,8 +377,11 @@ final class RuntimeOptionsContainer extends AbstractNativeObjectContainer {
 		nativeEditor.setOptionValue(key, value);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getFunctionProperty(java.lang.String, java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.commons.AbstractNativeObjectContainer#getFunctionProperty(java.lang.String,
+	 * java.lang.Object)
 	 */
 	@Override
 	protected <T> T getFunctionProperty(String key, T defaultValue) {

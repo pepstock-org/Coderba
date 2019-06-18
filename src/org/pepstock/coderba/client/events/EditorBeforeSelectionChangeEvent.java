@@ -63,7 +63,7 @@ public final class EditorBeforeSelectionChangeEvent extends AbstractEditorEvent<
 	public BeforeSelectionChangeItem getItem() {
 		return item;
 	}
-	
+
 	/**
 	 * Enables changes on the item before firing the change selection event.
 	 * 

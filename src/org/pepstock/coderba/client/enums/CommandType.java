@@ -41,5 +41,5 @@ public enum CommandType
 	 * Command creates by user which will implement {@link CommandHandler} interface
 	 */
 	CUSTOM;
-	
+
 }

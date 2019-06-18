@@ -1050,7 +1050,7 @@ public abstract class AbstractNativeObjectContainer {
 			defineFunctionProperty(key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- CLONE
 	// ------------------------------------------

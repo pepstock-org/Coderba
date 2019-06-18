@@ -130,10 +130,10 @@ public final class GlobalDefaults implements IsDefaultOptions {
 	private static final List<String> DEFAULT_ALLOW_DROP_FILE_TYPES = Collections.emptyList();
 
 	// singleton instance
-	// PAY ATTENTION: must be defined AFTER all other  constants because
+	// PAY ATTENTION: must be defined AFTER all other constants because
 	// the constants are used into constructor
 	private static final GlobalDefaults INSTANCE = new GlobalDefaults();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

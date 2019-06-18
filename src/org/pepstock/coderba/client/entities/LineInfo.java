@@ -39,6 +39,8 @@ public final class LineInfo {
 	private final LineHandle lineHandle;
 	// the current document related to this line info
 	private final Document document;
+	// list of line widget associated to this line
+	private final List<LineWidget> widgets = new LinkedList<>();
 
 	/**
 	 * Creates a line info instance wrapping a native code mirror object and the document which this line info belongs to.
@@ -56,9 +58,25 @@ public final class LineInfo {
 			// gets the line handle by document cache
 			this.lineHandle = this.document.getLineHandleById(Id.retrieveFrom(handle));
 		} else {
-			// otherwise it sets to null
-			// FIXME if correct
-			this.lineHandle = null;
+			// otherwise gets line handle from document by line number
+			this.lineHandle = this.document.getLineHandle(getLineNumber());
+		}
+		// gets the array of line widgets by Code Mirror
+		ArrayObject array = nativeObject.getWidgets();
+		// checks if array is consistent
+		if (array != null && !array.isEmpty()) {
+			// scans the array
+			for (int i = 0; i < array.length(); i++) {
+				// gets the id of line widget
+				String id = Id.retrieveFrom(array.get(i));
+				// gets the line widget object by the document cache
+				LineWidget widget = document.getLineWidget(id);
+				// if widget is consistent
+				if (widget != null) {
+					// adds to the list
+					this.widgets.add(widget);
+				}
+			}
 		}
 	}
 
@@ -132,26 +150,6 @@ public final class LineInfo {
 	 * @return an unmodifiable list of line widget associated to this line
 	 */
 	public List<LineWidget> getWidgets() {
-		// FIXME makes this into constructor
-		// creates the list to return
-		List<LineWidget> widgets = new LinkedList<>();
-		// gets the array of line widgets by Code Mirror
-		ArrayObject array = nativeObject.getWidgets();
-		// checks if array is consistent
-		if (array != null && !array.isEmpty()) {
-			// scans the array
-			for (int i = 0; i < array.length(); i++) {
-				// gets the id of line widget
-				String id = Id.retrieveFrom(array.get(i));
-				// gets the line widget object by the document cache
-				LineWidget widget = document.getLineWidget(id);
-				// if widget is consistent
-				if (widget != null) {
-					// adds to the list
-					widgets.add(widget);
-				}
-			}
-		}
 		return Collections.unmodifiableList(widgets);
 	}
 }

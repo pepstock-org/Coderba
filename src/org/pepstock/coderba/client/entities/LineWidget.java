@@ -139,8 +139,8 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 			// gets the line handle by document cache
 			this.handle = document.getLineHandleById(Id.retrieveFrom(nativeHandle));
 		} else {
-			// otherwise it sets to null
-			// FIXME if correct
+			// otherwise sets to null
+			// but it should not happen
 			this.handle = null;
 		}
 		// -------------------------------
@@ -158,7 +158,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	public String getId() {
 		return Id.retrieveFrom(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the document which this line widget belongs to.
 	 * 

@@ -19,7 +19,9 @@ import org.pepstock.coderba.client.entities.CodeMirror;
 import org.pepstock.coderba.client.entities.Editor;
 import org.pepstock.coderba.client.entities.EditorOptions;
 
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TextAreaElement;
 import com.google.gwt.user.client.ui.Widget;
@@ -36,6 +38,8 @@ public class EditorArea extends Widget {
 
 	// PCT standard for size
 	private static final double DEFAULT_PCT_SIZE = 100D;
+	// wrapper of text area
+	private final DivElement wrapper;
 	// text area element to use to highlight
 	private final TextAreaElement element;
 	// flag if must be initialized on attach
@@ -55,22 +59,29 @@ public class EditorArea extends Widget {
 	 * Creates the widget initializing all needed elements to manage the editing.
 	 */
 	public EditorArea() {
+		// creates wrapper
+		wrapper = Document.get().createDivElement();
+		// sets relative position
+		wrapper.getStyle().setPosition(Position.RELATIVE);
+		// sets default width values
+		wrapper.getStyle().setWidth(DEFAULT_PCT_SIZE, Unit.PCT);
+		wrapper.getStyle().setHeight(DEFAULT_PCT_SIZE, Unit.PCT);
+		// this styles must be set to 0
+		wrapper.getStyle().setMargin(0, Unit.PX);
+		wrapper.getStyle().setTop(0, Unit.PX);
+		wrapper.getStyle().setBottom(0, Unit.PX);
+		wrapper.getStyle().setLeft(0, Unit.PX);
+		wrapper.getStyle().setRight(0, Unit.PX);
+		wrapper.getStyle().setZIndex(0);
+		// wrapper.getStyle().setProperty("boxSizing", "border-box");
+		wrapper.getStyle().setProperty("flex", "1 1 auto");
 		// creates a text area
 		element = Document.get().createTextAreaElement();
 		// sets unique ID
 		element.setId(editorAreaId.getId());
-		// sets default width values
-		element.getStyle().setWidth(DEFAULT_PCT_SIZE, Unit.PCT);
-		element.getStyle().setHeight(DEFAULT_PCT_SIZE, Unit.PCT);
-		// this styles must be set to 0
-		element.getStyle().setMargin(0, Unit.PX);
-		element.getStyle().setTop(0, Unit.PX);
-		element.getStyle().setBottom(0, Unit.PX);
-		element.getStyle().setLeft(0, Unit.PX);
-		element.getStyle().setRight(0, Unit.PX);
-		element.getStyle().setZIndex(0);
+		wrapper.appendChild(element);
 		// set element
-		super.setElement(element);
+		super.setElement(wrapper);
 		// injects codemirror.js java script source
 		Injector.ensureInjected();
 		// creates the option wrapper
@@ -241,6 +252,10 @@ public class EditorArea extends Widget {
 		if (editor != null) {
 			// notify before destroy
 			EditorAreas.fireBeforeDestory(this);
+			// detaches text area
+			editor.toTextArea();
+			// removes wrapper
+			editor.getWrapperElement().removeFromParent();
 			// destroy ...
 			editor = null;
 			// removes editor area instance from cache

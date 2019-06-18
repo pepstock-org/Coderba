@@ -25,8 +25,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * Contains the information for each event (and handler) managed by editor component.
- * It is invoked every time that new handler has been added or removed.
+ * Contains the information for each event (and handler) managed by editor component. It is invoked every time that new handler
+ * has been added or removed.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -48,8 +48,8 @@ final class EventItem<H extends EventHandler, N extends NativeEventEmitter> impl
 	 * 
 	 * @param handlerType event handler type to manage
 	 * @param nativeEventEmitter native object with on and off methods to register events
-	 * @param name  event name to manage
-	 * @param manager event manager instance of editor component 
+	 * @param name event name to manage
+	 * @param manager event manager instance of editor component
 	 * @param proxy the callback proxy to set on or off.
 	 */
 	EventItem(Type<H> handlerType, N nativeEventEmitter, String name, EventManager manager, Proxy proxy) {

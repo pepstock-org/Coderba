@@ -268,7 +268,7 @@ public class NativeObject {
 		// defines the property
 		defineProperty(this, key, descriptor);
 	}
-	
+
 	/**
 	 * Defines a new property directly on this object, or modifies an existing property.
 	 * 
@@ -466,7 +466,7 @@ public class NativeObject {
 		// if here, property does not exist
 		return null;
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.

@@ -21,6 +21,7 @@ import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.NativeObject;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 
 /**
@@ -111,7 +112,7 @@ public final class CodeMirror {
 	NativeObject getCommands() {
 		return commands;
 	}
-	
+
 	/**
 	 * Returns the map of CodeMirror, which maps MIME types to mode specification.
 	 * 
@@ -150,7 +151,14 @@ public final class CodeMirror {
 			// if not exception
 			throw new IllegalArgumentException("Editor area is null");
 		}
-		return fromTextArea(id.getId(), editorArea.getElement(), editorArea.getOptions());
+		// gets the text area element by its id
+		Element textArea = Document.get().getElementById(id.getId());
+		// checks if editor area is consistent
+		if (textArea == null) {
+			// if not exception
+			throw new IllegalArgumentException("Text area element "+id.getId()+" not found");
+		}
+		return fromTextArea(id.getId(), textArea, editorArea.getOptions());
 	}
 
 	/**

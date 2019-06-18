@@ -50,7 +50,7 @@ public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> exte
 		this.editorArea = editorArea;
 		this.event = event;
 	}
-	
+
 	/**
 	 * Returns the editor area instance.
 	 * 
