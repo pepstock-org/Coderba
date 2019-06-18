@@ -2349,7 +2349,7 @@ public final class Document implements IsEventManager {
 			// checks if area is consistent
 			if (area != null) {
 				// fires event
-				eventManager.fireEvent(new DocumentChangeEvent(area, this, item));
+				eventManager.fireEvent(new DocumentChangeEvent(this, item));
 			}
 		}
 	}

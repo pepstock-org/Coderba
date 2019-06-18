@@ -16,6 +16,7 @@
 package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.entities.Editor;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
@@ -26,9 +27,11 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Andrea "Stock" Stocchero
  * @param <H> type of event handler
  */
-public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
+public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
 
 	private final NativeEvent event;
+	// editor area instance
+	private final EditorArea editorArea;
 
 	/**
 	 * Creates an editor event.
@@ -38,8 +41,32 @@ public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> exte
 	 * @param event native event instance
 	 */
 	public AbstractEditorWithNativeEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, NativeEvent event) {
-		super(handlerType, editorArea);
+		super(handlerType);
+		// checks if editor area is consistent
+		if (editorArea == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Editor area is null");
+		}
+		this.editorArea = editorArea;
 		this.event = event;
+	}
+	
+	/**
+	 * Returns the editor area instance.
+	 * 
+	 * @return the editor area instance
+	 */
+	public final EditorArea getEditorArea() {
+		return editorArea;
+	}
+
+	/**
+	 * Returns the editor instance.
+	 * 
+	 * @return the editor instance
+	 */
+	public final Editor getEditor() {
+		return editorArea.getEditor();
 	}
 
 	/**
