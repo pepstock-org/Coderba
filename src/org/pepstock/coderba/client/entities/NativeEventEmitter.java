@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public abstract class NativeEventEmitter extends NativeObject {
+abstract class NativeEventEmitter extends NativeObject {
 
 	/**
 	 * To avoid any instantiation

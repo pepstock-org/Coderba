@@ -34,8 +34,6 @@ public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends Ab
 	 * Creates a text marker event.
 	 * 
 	 * @param handlerType event handler type
-	 * @param editorArea editor area instance
-	 * @param document document instance
 	 * @param textMarker text marker instance
 	 */
 	public AbstractTextMarkerEvent(Type<? extends EventHandler> handlerType, TextMarker textMarker) {

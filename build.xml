@@ -30,6 +30,7 @@
 	<property name="dist.dir" value="dist" />
 	<property name="bin.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}.jar" />
 	<property name="sources.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}-sources.jar" />
+	<property name="all.sources.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}-sources.zip" />
 	<property name="javadoc.archive.file" value="${dist.dir}/coderba-${ivy.pubrevision}-javadoc.jar" />
 	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
 
@@ -107,7 +108,7 @@
 	<!--
         CODERBA - BUILD all jars artifacts: classes, sources and javadoc
     -->
-	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
+	<target name="build-all" depends="build-bin, build-sources, build-javadoc, build-all-sources" />
 
 	<!--
         CODERBA - BUILD sources jar
@@ -155,6 +156,15 @@
 				</section>
 			</manifest>
 		</jar>
+	</target>
+	
+	<!--
+        CODERBA - BUILD all sources ZIP
+    -->
+	<target name="build-all-sources" depends="build-bin">
+		<zip destfile="${all.sources.archive.file}">
+			<fileset dir="${classes.dir}" excludes="**/*.class"/>
+		</zip>
 	</target>
 
 	<!--

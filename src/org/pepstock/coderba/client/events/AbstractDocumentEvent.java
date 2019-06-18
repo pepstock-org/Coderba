@@ -34,7 +34,6 @@ public abstract class AbstractDocumentEvent<H extends EventHandler> extends Abst
 	 * Creates a document event.
 	 * 
 	 * @param handlerType event handler type
-	 * @param editorArea editor area instance
 	 * @param document document instance
 	 */
 	public AbstractDocumentEvent(Type<? extends EventHandler> handlerType, Document document) {

@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeModeSpecification extends NativeEntity {
+final class NativeModeSpecification extends NativeEntity {
 
 	/**
 	 * To avoid any instantiation

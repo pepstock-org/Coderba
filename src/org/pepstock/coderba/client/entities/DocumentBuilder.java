@@ -57,6 +57,7 @@ public final class DocumentBuilder {
 	 * The starting value of the editor.
 	 * 
 	 * @param value The starting value of the editor
+	 * @return builder instance
 	 */
 	public DocumentBuilder setValue(String value) {
 		this.value = value;
@@ -67,6 +68,7 @@ public final class DocumentBuilder {
 	 * Sets the language to apply to the editor.
 	 * 
 	 * @param language the language to apply to the editor
+	 * @return builder instance
 	 */
 	public DocumentBuilder setLanguage(Language language) {
 		this.language = language;
@@ -77,6 +79,7 @@ public final class DocumentBuilder {
 	 * At which number to start counting lines.
 	 * 
 	 * @param firstLineNumber at which number to start counting lines
+	 * @return builder instance
 	 */
 	public DocumentBuilder setFirstLineNumber(int firstLineNumber) {
 		this.firstLineNumber = firstLineNumber;
@@ -91,6 +94,7 @@ public final class DocumentBuilder {
 	 * separator.
 	 * 
 	 * @param lineSeparator the line separator for the editor
+	 * @return builder instance
 	 */
 	public DocumentBuilder setLineSeparator(String lineSeparator) {
 		this.lineSeparator = lineSeparator;
@@ -101,6 +105,7 @@ public final class DocumentBuilder {
 	 * Flips overall layout and selects base paragraph direction to be left-to-right or right-to-left.
 	 * 
 	 * @param direction base paragraph direction to be left-to-right or right-to-left
+	 * @return builder instance
 	 */
 	public DocumentBuilder setDirection(Direction direction) {
 		this.direction = direction;
@@ -109,7 +114,7 @@ public final class DocumentBuilder {
 
 	/**
 	 * Creates a document with options set previously.<br>
-	 * When otions has not been set, it uses the defaults.
+	 * When options has not been set, it uses the defaults.
 	 * 
 	 * @return a document instance
 	 */
