@@ -26,7 +26,7 @@ import org.pepstock.coderba.client.entities.LineHandle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LineHandleDeleteEvent extends AbstractLineHandleEvent<LineHandleDeleteEventHandler> {
+public final class LineHandleDeleteEvent extends AbstractDocumentEvent<LineHandleDeleteEventHandler> {
 
 	/**
 	 * Event type
@@ -38,6 +38,9 @@ public final class LineHandleDeleteEvent extends AbstractLineHandleEvent<LineHan
 	 */
 	public static final String NAME = "delete";
 
+	// line handle instance
+	private final LineHandle lineHandle;
+
 	/**
 	 * Creates a line handle {@value NAME} event.
 	 * 
@@ -46,7 +49,22 @@ public final class LineHandleDeleteEvent extends AbstractLineHandleEvent<LineHan
 	 * @param lineHandle line handle instance
 	 */
 	public LineHandleDeleteEvent(EditorArea editorArea, Document document, LineHandle lineHandle) {
-		super(TYPE, editorArea, document, lineHandle);
+		super(TYPE, editorArea, document);
+		// checks if line handle is consistent
+		if (lineHandle == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Line handle is null");
+		}
+		this.lineHandle = lineHandle;
+	}
+	
+	/**
+	 * Returns the line handle instance.
+	 * 
+	 * @return the line handle instance
+	 */
+	public LineHandle getLineHandle() {
+		return lineHandle;
 	}
 
 	/*

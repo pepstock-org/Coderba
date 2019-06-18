@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import java.util.List;
-
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -43,30 +41,6 @@ public abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEv
 			throw new IllegalArgumentException("Handler type is null");
 		}
 		this.handlerType = handlerType;
-	}
-
-	/**
-	 * Returns <code>true</code> if the type of event handler is inside the list provided as argument, otherwise
-	 * <code>false</code>.
-	 * 
-	 * @param types list of type to use checking if the type of event handler of event is in the list
-	 * @return <code>true</code> if the type of event handler is inside the list provided as argument, otherwise
-	 *         <code>false</code>
-	 */
-	public final boolean isRecognize(List<Type<?>> types) {
-		// checks if argument is consistent
-		if (types != null && !types.isEmpty()) {
-			// scans all types
-			for (Type<?> type : types) {
-				// if types is equals to the type of event
-				if (type.equals(handlerType)) {
-					return true;
-				}
-			}
-		}
-		// if here, the event handler type
-		// is not recognized
-		return false;
 	}
 
 	/**

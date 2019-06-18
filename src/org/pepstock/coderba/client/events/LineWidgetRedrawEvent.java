@@ -27,7 +27,7 @@ import org.pepstock.coderba.client.entities.LineWidget;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LineWidgetRedrawEvent extends AbstractLineWidgetEvent<LineWidgetRedrawEventHandler> {
+public final class LineWidgetRedrawEvent extends AbstractDocumentEvent<LineWidgetRedrawEventHandler> {
 
 	/**
 	 * Event type
@@ -37,16 +37,33 @@ public final class LineWidgetRedrawEvent extends AbstractLineWidgetEvent<LineWid
 	 * Event name
 	 */
 	public static final String NAME = "redraw";
+	// line widget instance
+	private final LineWidget lineWidget;
 
 	/**
 	 * Creates a line widget {@value NAME} event.
 	 * 
 	 * @param editorArea editor area instance
 	 * @param document document instance
-	 * @param linewidget line widget instance
+	 * @param lineWidget line widget instance
 	 */
-	public LineWidgetRedrawEvent(EditorArea editorArea, Document document, LineWidget linewidget) {
-		super(TYPE, editorArea, document, linewidget);
+	public LineWidgetRedrawEvent(EditorArea editorArea, Document document, LineWidget lineWidget) {
+		super(TYPE, editorArea, document);
+		// checks if line widget is consistent
+		if (lineWidget == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Line widget is null");
+		}
+		this.lineWidget = lineWidget;
+	}
+	
+	/**
+	 * Returns the line widget instance
+	 * 
+	 * @return the line widget instance
+	 */
+	public LineWidget getLineWidget() {
+		return lineWidget;
 	}
 
 	/*

@@ -24,7 +24,7 @@ import org.pepstock.coderba.client.entities.LineHandle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LineHandleChangeEvent extends AbstractLineHandleEvent<LineHandleChangeEventHandler> {
+public final class LineHandleChangeEvent extends AbstractDocumentEvent<LineHandleChangeEventHandler> {
 
 	/**
 	 * Event type
@@ -34,6 +34,8 @@ public final class LineHandleChangeEvent extends AbstractLineHandleEvent<LineHan
 	 * Event name
 	 */
 	public static final String NAME = "change";
+	// line handle instance
+	private final LineHandle lineHandle;
 	// change item instance
 	private final ChangeItem item;
 
@@ -46,13 +48,28 @@ public final class LineHandleChangeEvent extends AbstractLineHandleEvent<LineHan
 	 * @param item change item instance
 	 */
 	public LineHandleChangeEvent(EditorArea editorArea, Document document, LineHandle lineHandle, ChangeItem item) {
-		super(TYPE, editorArea, document, lineHandle);
+		super(TYPE, editorArea, document);
+		// checks if line handle is consistent
+		if (lineHandle == null) {
+			// if no, exception
+			throw new IllegalArgumentException("Line handle is null");
+		}
 		// checks if item is consistent
 		if (item == null) {
 			// if no, exception
 			throw new IllegalArgumentException("Change item is null");
 		}
+		this.lineHandle = lineHandle;
 		this.item = item;
+	}
+	
+	/**
+	 * Returns the line handle instance.
+	 * 
+	 * @return the line handle instance
+	 */
+	public LineHandle getLineHandle() {
+		return lineHandle;
 	}
 
 	/**
