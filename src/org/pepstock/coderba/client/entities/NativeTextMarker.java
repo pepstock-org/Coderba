@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeTextMarker extends NativeEventEmitter {
+final class NativeTextMarker extends NativeEventEmitter {
 
 	/**
 	 * To avoid any instantiation

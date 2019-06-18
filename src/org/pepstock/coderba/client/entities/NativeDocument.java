@@ -17,7 +17,6 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayString;
-import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;

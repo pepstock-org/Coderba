@@ -13,9 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.coderba.client.commons;
+package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.entities.NativeTextMarker;
+import org.pepstock.coderba.client.commons.Array;
+import org.pepstock.coderba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -28,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class ArrayTextMarker extends Array {
+final class ArrayTextMarker extends Array {
 
 	/**
 	 * To avoid any instantiation
@@ -167,7 +168,7 @@ public final class ArrayTextMarker extends Array {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public NativeTextMarker get(int index) {
+	NativeTextMarker get(int index) {
 		return slice(index, index + 1).pop();
 	}
 

@@ -33,7 +33,6 @@ import org.pepstock.coderba.client.callbacks.LinkedDocumentsHandler;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayString;
-import org.pepstock.coderba.client.commons.ArrayTextMarker;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
