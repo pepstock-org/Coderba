@@ -31,7 +31,7 @@ public final class ModeSpecification {
 	// field initialized if mode specification is a string
 	private final String name;
 	// field initialized if mode specification is a native object
-	private final NativeModeSpecification modeSpecification;
+	private final NativeModeSpecification nativeModeSpecification;
 
 	/**
 	 * Creates a mode specification with the string name, stored into {@link MimeModes}.
@@ -41,18 +41,18 @@ public final class ModeSpecification {
 	ModeSpecification(String name) {
 		// stores values
 		this.name = name;
-		this.modeSpecification = null;
+		this.nativeModeSpecification = null;
 	}
 
 	/**
 	 * Creates a mode specification with the native object, stored into {@link MimeModes}.
 	 * 
-	 * @param modeSpecification native object of mode specification
+	 * @param nativeModeSpecification native object of mode specification
 	 */
-	ModeSpecification(NativeModeSpecification modeSpecification) {
+	ModeSpecification(NativeModeSpecification nativeModeSpecification) {
 		// stores values
 		this.name = null;
-		this.modeSpecification = modeSpecification;
+		this.nativeModeSpecification = nativeModeSpecification;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public final class ModeSpecification {
 	 *         <code>null</code>
 	 */
 	NativeModeSpecification getModeSpecification() {
-		return modeSpecification;
+		return nativeModeSpecification;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public final class ModeSpecification {
 			return Modes.get().retrieve(name);
 		}
 		// if here, mode is based on native object of mode specification
-		return Modes.get().retrieve(modeSpecification.getName());
+		return Modes.get().retrieve(nativeModeSpecification.getName());
 	}
 
 }
