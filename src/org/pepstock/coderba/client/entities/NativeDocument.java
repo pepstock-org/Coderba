@@ -53,7 +53,20 @@ final class NativeDocument extends NativeEventEmitter {
 	 * @param lineSeparator line separator to use
 	 * @param direction direction of the document
 	 */
-	NativeDocument(String text, ModeSpecification mode, int firstLineNumber, String lineSeparator, String direction) {
+	NativeDocument(String text, NativeModeSpecification mode, int firstLineNumber, String lineSeparator, String direction) {
+		// do nothing
+	}
+
+	/**
+	 * Creates a document without creating an editor.
+	 * 
+	 * @param text content if the document
+	 * @param mode mode specification related to language
+	 * @param firstLineNumber first line number
+	 * @param lineSeparator line separator to use
+	 * @param direction direction of the document
+	 */
+	NativeDocument(String text, String mode, int firstLineNumber, String lineSeparator, String direction) {
 		// do nothing
 	}
 

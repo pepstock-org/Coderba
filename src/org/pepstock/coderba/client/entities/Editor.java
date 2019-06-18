@@ -1133,7 +1133,18 @@ public final class Editor implements IsEventManager {
 	public ModeSpecification getModeAt(Position position) {
 		// checks if position is consistent
 		if (position != null) {
-			return nativeObject.getModeAt(position);
+			// mode specification
+			Object object = nativeObject.getModeAt(position);
+			// checks the type of the mode
+			if (object instanceof String) {
+				// if string 
+				// returns a specification by string
+				return new ModeSpecification((String)object);
+			} else if (object instanceof NativeModeSpecification) {
+				// if object 
+				// returns a specification by string
+				return new ModeSpecification((NativeModeSpecification)object);
+			}
 		}
 		// if here, position is not consistent
 		// then returns the default mode specification

@@ -608,7 +608,7 @@ final class NativeEditor extends NativeEventEmitter {
 	 * @param position position to use
 	 * @return the inner mode at a given position
 	 */
-	native ModeSpecification getModeAt(Position position);
+	native Object getModeAt(Position position);
 
 	/**
 	 * Retrieves information about the token the current mode found before the given position (a position object). The returned

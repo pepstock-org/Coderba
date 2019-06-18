@@ -17,13 +17,6 @@ package org.pepstock.coderba.client.entities;
 
 import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.Modes;
-import org.pepstock.coderba.client.commons.NativeEntity;
-import org.pepstock.coderba.client.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Defines the mode specification of CodeMirror mode.<br>
@@ -33,33 +26,79 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ModeSpecification extends NativeEntity {
+public final class ModeSpecification {
+
+	// field initialized if mode specification is a string
+	private final String name;
+	// field initialized if mode specification is a native object
+	private final NativeModeSpecification modeSpecification;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates a mode specification with the string name, stored into {@link MimeModes}.
+	 * 
+	 * @param name name of mode specification
 	 */
-	private ModeSpecification() {
-		// do nothing
+	ModeSpecification(String name) {
+		// stores values
+		this.name = name;
+		this.modeSpecification = null;
 	}
 
 	/**
-	 * <b>INTERNAL</b><br>
-	 * Returns the name of mode
+	 * Creates a mode specification with the native object, stored into {@link MimeModes}.
 	 * 
-	 * @return the name of mode
+	 * @param modeSpecification native object of mode specification
 	 */
-	@JsProperty
-	private native String getName();
+	ModeSpecification(NativeModeSpecification modeSpecification) {
+		// stores values
+		this.name = null;
+		this.modeSpecification = modeSpecification;
+	}
+
+	/**
+	 * Returns <code>true</code> if this mode specification has been defined by a string of mode.
+	 * 
+	 * @return <code>true</code> if this mode specification has been defined by a string of mode
+	 */
+	boolean isString() {
+		return name != null;
+	}
+
+	/**
+	 * Returns the name of mode specification if this mode specification has been defined by a string, otherwise
+	 * <code>null</code>.
+	 * 
+	 * @return the name of mode specification if this mode specification has been defined by a string, otherwise
+	 *         <code>null</code>
+	 */
+	String getName() {
+		return name;
+	}
+
+	/**
+	 * Returns the native object of mode specification if this mode specification has been defined by a natove object, otherwise
+	 * <code>null</code>.
+	 * 
+	 * @return the native object of mode specification if this mode specification has been defined by a natove object, otherwise
+	 *         <code>null</code>
+	 */
+	NativeModeSpecification getModeSpecification() {
+		return modeSpecification;
+	}
 
 	/**
 	 * Returns the mode instance.
 	 * 
 	 * @return the mode instance
 	 */
-	@JsOverlay
 	public Mode getMode() {
-		return Modes.get().retrieve(getName());
+		// gets the name of mode
+		// checking if must be retrieved by the native object or simply by the string
+		if (isString()) {
+			return Modes.get().retrieve(name);
+		}
+		// if here, mode is based on native object of mode specification
+		return Modes.get().retrieve(modeSpecification.getName());
 	}
 
 }

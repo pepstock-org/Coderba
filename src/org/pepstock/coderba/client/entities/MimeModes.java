@@ -19,6 +19,8 @@ import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.NativeObjectContainer;
+import org.pepstock.coderba.client.commons.ObjectType;
+import org.pepstock.coderba.client.commons.UndefinedValues;
 
 /**
  * Maps the "CodeMirror.mimeModes" property of Code mirror where are stored all mode specification.<br>
@@ -33,7 +35,7 @@ import org.pepstock.coderba.client.commons.NativeObjectContainer;
 final class MimeModes extends NativeObjectContainer {
 
 	// default when is not found
-	private static final ModeSpecification DEFAULT_MODE_SPECIFICATION = null;
+	private static final NativeModeSpecification DEFAULT_MODE_SPECIFICATION = null;
 
 	/**
 	 * Creates the object mapping CodeMirror.mimeModes" property.
@@ -56,11 +58,25 @@ final class MimeModes extends NativeObjectContainer {
 			// creates a key by language name
 			// because the key of the object is the mime type of language
 			Key key = Key.create(language.getName());
-			// returns value or default is not exists
-			return getValue(key, DEFAULT_MODE_SPECIFICATION);
+			// gets type
+			ObjectType type = type(key);
+			// checks if stored as string
+			if (ObjectType.STRING.equals(type)) {
+				// gets string value
+				String value = getValue(key, UndefinedValues.STRING);
+				// returns mode specification
+				return new ModeSpecification(value);
+			} else if (ObjectType.OBJECT.equals(type)) {
+				// if here, is an object
+				// gets object value
+				NativeModeSpecification mode = getValue(key, DEFAULT_MODE_SPECIFICATION);
+				// returns mode specification
+				return new ModeSpecification(mode);
+			}
 		}
 		// if here, language is not consistent
 		// then returns default
-		return DEFAULT_MODE_SPECIFICATION;
-	}
+		return null;
+	}	
+
 }
