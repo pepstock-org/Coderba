@@ -113,7 +113,7 @@ public class KeyMapTable extends NativeObjectContainer {
 			// checks if the key is fall through
 			if (!Key.equals(FALLTHROUGH, key)) {
 				// if not, parses the stroke and loads it
-				maps.add(Stroke.parse(key.value()));
+				maps.add(StrokeBuilder.parse(key.value()));
 			} else {
 				// gets the type of fall through (could be a string or array)
 				ObjectType type = type(FALLTHROUGH);
