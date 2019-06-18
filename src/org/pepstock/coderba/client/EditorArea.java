@@ -73,8 +73,6 @@ public class EditorArea extends Widget {
 		wrapper.getStyle().setLeft(0, Unit.PX);
 		wrapper.getStyle().setRight(0, Unit.PX);
 		wrapper.getStyle().setZIndex(0);
-		// wrapper.getStyle().setProperty("boxSizing", "border-box");
-		wrapper.getStyle().setProperty("flex", "1 1 auto");
 		// creates a text area
 		element = Document.get().createTextAreaElement();
 		// sets unique ID
