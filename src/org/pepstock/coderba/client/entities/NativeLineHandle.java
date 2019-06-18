@@ -61,23 +61,4 @@ final class NativeLineHandle extends NativeEventEmitter {
 	 */
 	@JsMethod
 	native int lineNo();
-
-//	/**
-//	 * Register an event handler for the given event type (a string) on the line handle instance.
-//	 * 
-//	 * @param type event name to activate
-//	 * @param function callback proxy function
-//	 */
-//	@JsMethod
-//	native void on(String type, CallbackProxy.Proxy function);
-//
-//	/**
-//	 * Remove an event handler on the line handle instance.
-//	 * 
-//	 * @param type event name to activate
-//	 * @param function callback proxy function
-//	 */
-//	@JsMethod
-//	native void off(String type, CallbackProxy.Proxy function);
-
 }

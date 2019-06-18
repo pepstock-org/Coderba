@@ -62,19 +62,4 @@ final class NativeLineWidget extends NativeEventEmitter {
 	 */
 	native void changed();
 
-//	/**
-//	 * Register an event handler for the given event type (a string) on the line widget instance.
-//	 * 
-//	 * @param type event name to activate
-//	 * @param function callback proxy function
-//	 */
-//	native void on(String type, CallbackProxy.Proxy function);
-//
-//	/**
-//	 * Remove an event handler on the line widget instance.
-//	 * 
-//	 * @param type event name to activate
-//	 * @param function callback proxy function
-//	 */
-//	native void off(String type, CallbackProxy.Proxy function);
 }

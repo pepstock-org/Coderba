@@ -19,14 +19,25 @@ import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 /**
- * FIXME
+ * Defines an event item, with methods to be invpoke to set on or off the event listening on editor components.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsEventItem {
 	
+	/**
+	 * Checks if this event item is related to add handler event, in order to set ON event listening.
+	 * 
+	 * @param event add event handler instance
+	 */
 	void checkAndOn(AddHandlerEvent event);
-	
+
+	/**
+	 * Checks if this event item is related to remove handler event, in order to set OFF event listening.
+	 * 
+	 * @param event remove event handler instance
+	 */
 	void checkAndOff(RemoveHandlerEvent event);
 
 }

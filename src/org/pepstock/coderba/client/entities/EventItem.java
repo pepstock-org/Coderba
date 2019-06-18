@@ -25,7 +25,9 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * FIXME
+ * Contains the information for each event (and handler) managed by editor component.
+ * It is invoked every time that new handler has been added or removed.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -42,14 +44,16 @@ final class EventItem<H extends EventHandler, N extends NativeEventEmitter> impl
 	private final Proxy proxy;
 
 	/**
-	 * @param handler
-	 * @param nativeEventEmitter
-	 * @param name
-	 * @param manager
-	 * @param proxy
+	 * Creates the time with all data necessary to manage add and remove handler.
+	 * 
+	 * @param handlerType event handler type to manage
+	 * @param nativeEventEmitter native object with on and off methods to register events
+	 * @param name  event name to manage
+	 * @param manager event manager instance of editor component 
+	 * @param proxy the callback proxy to set on or off.
 	 */
-	EventItem(Type<H> handler, N nativeEventEmitter, String name, EventManager manager, Proxy proxy) {
-		this.handler = handler;
+	EventItem(Type<H> handlerType, N nativeEventEmitter, String name, EventManager manager, Proxy proxy) {
+		this.handler = handlerType;
 		this.nativeEventEmitter = nativeEventEmitter;
 		this.name = name;
 		this.manager = manager;
@@ -63,13 +67,11 @@ final class EventItem<H extends EventHandler, N extends NativeEventEmitter> impl
 	 */
 	@Override
 	public void checkAndOn(AddHandlerEvent event) {
-		if (event.isRecognize(handler)) {
-			// checks if type of added event handler is EditorBeforeChangeEvent
-			// if there is not any EditorBeforeChangeEvent handler
-			if (manager.getHandlerCount(handler) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeEventEmitter.on(name, proxy);
-			}
+		// checks if type of added event handler is managed
+		// if there is not any other handler
+		if (event.isRecognize(handler) && manager.getHandlerCount(handler) == 1) {
+			// sets the callback proxy in order to call the user event interface
+			nativeEventEmitter.on(name, proxy);
 		}
 	}
 
@@ -80,13 +82,11 @@ final class EventItem<H extends EventHandler, N extends NativeEventEmitter> impl
 	 */
 	@Override
 	public void checkAndOff(RemoveHandlerEvent event) {
-		if (event.isRecognize(handler)) {
-			// checks if type of removed event handler is EditorBeforeChangeEvent
-			// if there is not any EditorBeforeChangeEvent handler
-			if (manager.getHandlerCount(handler) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeEventEmitter.off(name, proxy);
-			}
+		// checks if type of removed event handler is managed
+		// if there is not any other handler
+		if (event.isRecognize(handler) && manager.getHandlerCount(handler) == 0) {
+			// sets OFF the callback proxy in order to call the user event interface
+			nativeEventEmitter.off(name, proxy);
 		}
 	}
 

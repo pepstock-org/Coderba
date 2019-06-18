@@ -22,37 +22,60 @@ import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 /**
- * FIXME
+ * Manages event item of editor component, storing every item for each event to mange into a list.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class EventItemManager implements IsEventItem{
+final class EventItemManager implements IsEventItem {
 
+	// contains all event items
 	private final List<IsEventItem> items = new LinkedList<>();
-	
+
+	/**
+	 * Adds new event item.
+	 * 
+	 * @param item event item instance
+	 */
 	void addEventItem(IsEventItem item) {
+		// checks if argument is consistent
 		if (item != null) {
+			// adds to list
 			items.add(item);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.entities.IsEventItem#checkAndOn(org.pepstock.coderba.client.events.AddHandlerEvent)
 	 */
 	@Override
 	public void checkAndOn(AddHandlerEvent event) {
-		for (IsEventItem item : items) {
-			item.checkAndOn(event);
+		// checks if argument is consistent
+		if (event != null) {
+			// scans all defined items
+			for (IsEventItem item : items) {
+				// checks and set ON event listening
+				item.checkAndOn(event);
+			}
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.coderba.client.entities.IsEventItem#checkAndOff(org.pepstock.coderba.client.events.RemoveHandlerEvent)
 	 */
 	@Override
 	public void checkAndOff(RemoveHandlerEvent event) {
-		for (IsEventItem item : items) {
-			item.checkAndOff(event);
+		// checks if argument is consistent
+		if (event != null) {
+			// scans all defined items
+			for (IsEventItem item : items) {
+				// checks and set OFF event listening
+				item.checkAndOff(event);
+			}
 		}
 	}
 
