@@ -206,6 +206,15 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	public String getId() {
 		return Id.retrieveFrom(nativeObject);
 	}
+	
+	/**
+	 * Returns the document which this text marker belongs to.
+	 * 
+	 * @return the document which this text marker belongs to
+	 */
+	public Document getDocument() {
+		return document;
+	}
 
 	/**
 	 * Returns <code>true</code> if it has been explicitly cleared by <code>clear()</code> method.
@@ -259,7 +268,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// checks if consistent
 		if (area != null) {
 			// fires events using itself as text marker
-			eventManager.fireEvent(new TextMarkerBeforeCursorEnterEvent(area, document, this));
+			eventManager.fireEvent(new TextMarkerBeforeCursorEnterEvent(this));
 		}
 	}
 
@@ -279,7 +288,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// checks if consistent
 		if (area != null) {
 			// fires events using itself as text marker
-			eventManager.fireEvent(new TextMarkerClearEvent(area, document, this, Range.create(from, to)));
+			eventManager.fireEvent(new TextMarkerClearEvent(this, Range.create(from, to)));
 		}
 	}
 
@@ -292,7 +301,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// checks if consistent
 		if (area != null) {
 			// fires events using itself as text marker
-			eventManager.fireEvent(new TextMarkerHideEvent(area, document, this));
+			eventManager.fireEvent(new TextMarkerHideEvent(this));
 		}
 	}
 
@@ -305,7 +314,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		// checks if consistent
 		if (area != null) {
 			// fires events using itself as text marker
-			eventManager.fireEvent(new TextMarkerUnhideEvent(area, document, this));
+			eventManager.fireEvent(new TextMarkerUnhideEvent(this));
 		}
 	}
 

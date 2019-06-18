@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.LineWidget;
 
 /**
@@ -27,7 +25,7 @@ import org.pepstock.coderba.client.entities.LineWidget;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LineWidgetRedrawEvent extends AbstractDocumentEvent<LineWidgetRedrawEventHandler> {
+public final class LineWidgetRedrawEvent extends AbstractHandlerEvent<LineWidgetRedrawEventHandler> {
 
 	/**
 	 * Event type
@@ -43,12 +41,10 @@ public final class LineWidgetRedrawEvent extends AbstractDocumentEvent<LineWidge
 	/**
 	 * Creates a line widget {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
-	 * @param document document instance
 	 * @param lineWidget line widget instance
 	 */
-	public LineWidgetRedrawEvent(EditorArea editorArea, Document document, LineWidget lineWidget) {
-		super(TYPE, editorArea, document);
+	public LineWidgetRedrawEvent(LineWidget lineWidget) {
+		super(TYPE);
 		// checks if line widget is consistent
 		if (lineWidget == null) {
 			// if no, exception

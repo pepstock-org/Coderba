@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.Range;
 import org.pepstock.coderba.client.entities.TextMarker;
 
@@ -45,13 +43,11 @@ public final class TextMarkerClearEvent extends AbstractTextMarkerEvent<TextMark
 	/**
 	 * Creates a text marker {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
-	 * @param document document instance
 	 * @param textMarker text marker instance
 	 * @param range range instance which gives the part of the document that the range spanned when it was cleared.
 	 */
-	public TextMarkerClearEvent(EditorArea editorArea, Document document, TextMarker textMarker, Range range) {
-		super(TYPE, editorArea, document, textMarker);
+	public TextMarkerClearEvent(TextMarker textMarker, Range range) {
+		super(TYPE, textMarker);
 		// checks if range is consistent
 		if (range == null) {
 			// if no, excpetion

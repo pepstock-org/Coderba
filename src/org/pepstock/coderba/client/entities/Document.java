@@ -2370,7 +2370,7 @@ public final class Document implements IsEventManager {
 			// checks if area is consistent
 			if (area != null) {
 				// fires event
-				eventManager.fireEvent(new DocumentBeforeChangeEvent(area, this, item));
+				eventManager.fireEvent(new DocumentBeforeChangeEvent(this, item));
 			}
 		}
 	}
@@ -2390,7 +2390,7 @@ public final class Document implements IsEventManager {
 			// checks if area is consistent
 			if (area != null) {
 				// fires event
-				eventManager.fireEvent(new DocumentCursorActivityEvent(area, this));
+				eventManager.fireEvent(new DocumentCursorActivityEvent(this));
 			}
 		}
 	}
@@ -2411,7 +2411,7 @@ public final class Document implements IsEventManager {
 			// checks if area is consistent
 			if (area != null) {
 				// fires event
-				eventManager.fireEvent(new DocumentBeforeSelectionChangeEvent(area, this, anchor));
+				eventManager.fireEvent(new DocumentBeforeSelectionChangeEvent(this, anchor));
 			}
 		}
 	}

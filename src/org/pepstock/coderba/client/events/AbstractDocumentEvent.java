@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -26,7 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Andrea "Stock" Stocchero
  * @param <H> type of event handler
  */
-public abstract class AbstractDocumentEvent<H extends EventHandler> extends AbstractEditorEvent<H> {
+public abstract class AbstractDocumentEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
 
 	// document instance
 	private final Document document;
@@ -38,8 +37,8 @@ public abstract class AbstractDocumentEvent<H extends EventHandler> extends Abst
 	 * @param editorArea editor area instance
 	 * @param document document instance
 	 */
-	public AbstractDocumentEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document) {
-		super(handlerType, editorArea);
+	public AbstractDocumentEvent(Type<? extends EventHandler> handlerType, Document document) {
+		super(handlerType);
 		// checks if document is consistent
 		if (document == null) {
 			// if no, exception

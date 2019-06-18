@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.TextMarker;
 
 /**
@@ -38,12 +36,10 @@ public final class TextMarkerUnhideEvent extends AbstractTextMarkerEvent<TextMar
 	/**
 	 * Creates a text marker {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
-	 * @param document document instance
 	 * @param textMarker text marker instance
 	 */
-	public TextMarkerUnhideEvent(EditorArea editorArea, Document document, TextMarker textMarker) {
-		super(TYPE, editorArea, document, textMarker);
+	public TextMarkerUnhideEvent(TextMarker textMarker) {
+		super(TYPE, textMarker);
 	}
 
 	/*

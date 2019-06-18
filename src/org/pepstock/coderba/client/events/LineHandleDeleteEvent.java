@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.LineHandle;
 
 /**
@@ -26,7 +24,7 @@ import org.pepstock.coderba.client.entities.LineHandle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LineHandleDeleteEvent extends AbstractDocumentEvent<LineHandleDeleteEventHandler> {
+public final class LineHandleDeleteEvent extends AbstractHandlerEvent<LineHandleDeleteEventHandler> {
 
 	/**
 	 * Event type
@@ -44,12 +42,10 @@ public final class LineHandleDeleteEvent extends AbstractDocumentEvent<LineHandl
 	/**
 	 * Creates a line handle {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
-	 * @param document document instance
 	 * @param lineHandle line handle instance
 	 */
-	public LineHandleDeleteEvent(EditorArea editorArea, Document document, LineHandle lineHandle) {
-		super(TYPE, editorArea, document);
+	public LineHandleDeleteEvent(LineHandle lineHandle) {
+		super(TYPE);
 		// checks if line handle is consistent
 		if (lineHandle == null) {
 			// if no, exception

@@ -15,8 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
-import org.pepstock.coderba.client.entities.Document;
 import org.pepstock.coderba.client.entities.TextMarker;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -27,7 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Andrea "Stock" Stocchero
  * @param <H> type of event handlerf
  */
-public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends AbstractDocumentEvent<H> {
+public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
 
 	// text marker instance
 	private final TextMarker textmarker;
@@ -40,8 +38,8 @@ public abstract class AbstractTextMarkerEvent<H extends EventHandler> extends Ab
 	 * @param document document instance
 	 * @param textMarker text marker instance
 	 */
-	public AbstractTextMarkerEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, Document document, TextMarker textMarker) {
-		super(handlerType, editorArea, document);
+	public AbstractTextMarkerEvent(Type<? extends EventHandler> handlerType, TextMarker textMarker) {
+		super(handlerType);
 		// checks if text marker is consistent
 		if (textMarker == null) {
 			// if no, exception

@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Anchor;
 import org.pepstock.coderba.client.entities.Document;
 
@@ -45,12 +44,11 @@ public final class DocumentBeforeSelectionChangeEvent extends AbstractDocumentEv
 	/**
 	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
 	 * @param document document instance
-	 * @param anchor anhcor of selection
+	 * @param anchor anchor of selection
 	 */
-	public DocumentBeforeSelectionChangeEvent(EditorArea editorArea, Document document, Anchor anchor) {
-		super(TYPE, editorArea, document);
+	public DocumentBeforeSelectionChangeEvent(Document document, Anchor anchor) {
+		super(TYPE, document);
 		// checks if anchor is consistent
 		if (anchor == null) {
 			// if no, excpetion

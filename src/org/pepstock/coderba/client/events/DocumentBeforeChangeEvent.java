@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
@@ -44,12 +43,11 @@ public final class DocumentBeforeChangeEvent extends AbstractDocumentEvent<Docum
 	/**
 	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
 	 * @param document document instance
 	 * @param item change item instance
 	 */
-	public DocumentBeforeChangeEvent(EditorArea editorArea, Document document, ChangeItem item) {
-		super(TYPE, editorArea, document);
+	public DocumentBeforeChangeEvent(Document document, ChangeItem item) {
+		super(TYPE, document);
 		// checks if item is consistent
 		if (item == null) {
 			// if no, exception

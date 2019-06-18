@@ -158,6 +158,15 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	public String getId() {
 		return Id.retrieveFrom(nativeObject);
 	}
+	
+	/**
+	 * Returns the document which this line widget belongs to.
+	 * 
+	 * @return the document which this line widget belongs to
+	 */
+	public Document getDocument() {
+		return document;
+	}
 
 	/**
 	 * Gets the height of the widget.
@@ -218,7 +227,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// checks if area is consistent
 		if (area != null) {
 			// fires event using this line widget as subject of event
-			eventManager.fireEvent(new LineWidgetRedrawEvent(area, document, this));
+			eventManager.fireEvent(new LineWidgetRedrawEvent(this));
 		}
 	}
 

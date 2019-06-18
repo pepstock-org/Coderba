@@ -114,7 +114,7 @@ public final class LineHandle implements IsEventManager {
 		// -------------------------------
 		lineHandleChangeFunctionProxy.setCallback(this::onChange);
 		lineHandleDeleteFunctionProxy.setCallback(this::onDelete);
-		
+
 		eventItemManager.addEventItem(new EventItem<LineHandleChangeEventHandler, NativeLineHandle>(LineHandleChangeEvent.TYPE, nativeObject, LineHandleChangeEvent.NAME, eventManager, lineHandleChangeFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<LineHandleDeleteEventHandler, NativeLineHandle>(LineHandleDeleteEvent.TYPE, nativeObject, LineHandleDeleteEvent.NAME, eventManager, lineHandleDeleteFunctionProxy.getProxy()));
 
@@ -127,6 +127,15 @@ public final class LineHandle implements IsEventManager {
 	 */
 	public String getId() {
 		return Id.retrieveFrom(nativeObject);
+	}
+
+	/**
+	 * Returns the document which this line handle belongs to.
+	 * 
+	 * @return the document which this line handle belongs to
+	 */
+	public Document getDocument() {
+		return document;
 	}
 
 	/**
@@ -183,7 +192,7 @@ public final class LineHandle implements IsEventManager {
 			// gets the line handle instance by the document cache and by its id
 			LineHandle lineHandle = document.getLineHandleById(Id.retrieveFrom(nativeLineHandle));
 			// fires event
-			eventManager.fireEvent(new LineHandleChangeEvent(area, document, lineHandle, item));
+			eventManager.fireEvent(new LineHandleChangeEvent(lineHandle, item));
 		}
 	}
 
@@ -196,7 +205,7 @@ public final class LineHandle implements IsEventManager {
 		// if area is consistent
 		if (area != null) {
 			// fires event using this line handle as subject of event
-			eventManager.fireEvent(new LineHandleDeleteEvent(area, document, this));
+			eventManager.fireEvent(new LineHandleDeleteEvent(this));
 		}
 	}
 

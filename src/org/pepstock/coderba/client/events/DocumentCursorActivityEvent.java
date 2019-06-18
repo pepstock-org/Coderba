@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Document;
 
 /**
@@ -37,11 +36,10 @@ public final class DocumentCursorActivityEvent extends AbstractDocumentEvent<Doc
 	/**
 	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
 	 * @param document document instance
 	 */
-	public DocumentCursorActivityEvent(EditorArea editorArea, Document document) {
-		super(TYPE, editorArea, document);
+	public DocumentCursorActivityEvent(Document document) {
+		super(TYPE, document);
 	}
 
 	/*

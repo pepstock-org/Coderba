@@ -39,12 +39,11 @@ public final class DocumentChangeEvent extends AbstractDocumentEvent<DocumentCha
 	/**
 	 * Creates a document {@value NAME} event.
 	 * 
-	 * @param editorArea editor area instance
 	 * @param document document instance
 	 * @param item change item instance
 	 */
 	public DocumentChangeEvent(EditorArea editorArea, Document document, ChangeItem item) {
-		super(TYPE, editorArea, document);
+		super(TYPE, document);
 		// checks if item is consistent
 		if (item == null) {
 			// if no, exception
