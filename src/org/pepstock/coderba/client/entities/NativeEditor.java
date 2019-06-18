@@ -46,7 +46,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.CODE_MIRROR)
-final class NativeEditor {
+final class NativeEditor extends NativeEventEmitter {
 
 	/**
 	 * to avoid any instantiation
@@ -428,21 +428,21 @@ final class NativeEditor {
 	 */
 	native void removeOverlay(String mode);
 
-	/**
-	 * Register an event handler for the given event type (a string) on the editor instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	native void on(String type, CallbackProxy.Proxy function);
-
-	/**
-	 * Remove an event handler on the editor instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	native void off(String type, CallbackProxy.Proxy function);
+//	/**
+//	 * Register an event handler for the given event type (a string) on the editor instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	native void on(String type, CallbackProxy.Proxy function);
+//
+//	/**
+//	 * Remove an event handler on the editor instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	native void off(String type, CallbackProxy.Proxy function);
 
 	/**
 	 * Retrieve the currently active document from an editor.

@@ -31,12 +31,12 @@ import org.pepstock.coderba.client.enums.KeyName;
  * @see KeyStroke
  * @see KeyMultiStroke
  */
-public final class StrokeBuilder {
+public final class StrokeParser {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private StrokeBuilder() {
+	private StrokeParser() {
 		// do nothing
 	}
 
@@ -83,14 +83,14 @@ public final class StrokeBuilder {
 			for (int i = 0; i < values.length; i++) {
 				// parses a single stroke
 				// and adds to list
-				items.add(StrokeBuilder.parseSingle(values[i]));
+				items.add(StrokeParser.parseSingle(values[i]));
 			}
 			// creates and returns a multi stroke
 			return new KeyMultiStroke(items);
 		} else {
 			// if here, it's not a multi stroke
 			// bu single one
-			return StrokeBuilder.parseSingle(value);
+			return StrokeParser.parseSingle(value);
 		}
 	}
 

@@ -15,9 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
-import org.pepstock.coderba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -30,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class NativeTextMarker extends NativeObject {
+public final class NativeTextMarker extends NativeEventEmitter {
 
 	/**
 	 * To avoid any instantiation
@@ -57,19 +55,19 @@ public final class NativeTextMarker extends NativeObject {
 	 */
 	native void changed();
 
-	/**
-	 * Register an event handler for the given event type (a string) on the text marker instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	native void on(String type, CallbackProxy.Proxy function);
-
-	/**
-	 * Remove an event handler on the text marker instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	native void off(String type, CallbackProxy.Proxy function);
+//	/**
+//	 * Register an event handler for the given event type (a string) on the text marker instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	native void on(String type, CallbackProxy.Proxy function);
+//
+//	/**
+//	 * Remove an event handler on the text marker instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	native void off(String type, CallbackProxy.Proxy function);
 }

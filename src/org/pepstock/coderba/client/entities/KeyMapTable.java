@@ -75,7 +75,7 @@ public class KeyMapTable extends NativeObjectContainer {
 		if (Key.isValid(stroke)) {
 			// gets the object type of stroke
 			ObjectType type = type(stroke);
-			// if string, is binded to a defined command 
+			// if string, is binded to a defined command
 			if (ObjectType.STRING.equals(type)) {
 				// gets the command name
 				String name = getValue(stroke, UndefinedValues.STRING);
@@ -113,32 +113,66 @@ public class KeyMapTable extends NativeObjectContainer {
 			// checks if the key is fall through
 			if (!Key.equals(FALLTHROUGH, key)) {
 				// if not, parses the stroke and loads it
-				maps.add(StrokeBuilder.parse(key.value()));
+				maps.add(StrokeParser.parse(key.value()));
 			} else {
-				// gets the type of fall through (could be a string or array)
-				ObjectType type = type(FALLTHROUGH);
-				// checks if is a simple string
-				if (ObjectType.STRING.equals(type)) {
-					// gets the value to have the name of the other key map
-					String value = table.getStringProperty(FALLTHROUGH.value(), UndefinedValues.STRING);
-					// checks if is consistent
-					if (value != null) {
-						// loads the key map table by the name of key map
-						load(maps, KeyMapSet.get().getKeyMapTable(Key.create(value)));
-					}
-				} else if (ObjectType.ARRAY.equals(type)) {
-					// if here, fall through is an array
-					// gets the value to have the arry of names of the other key maps
-					ArrayString values = table.getArrayValue(FALLTHROUGH);
-					// checks if is consistent
-					if (values != null) {
-						// scans the array
-						for (int i = 0; i < values.length(); i++) {
-							// loads the key map table by the name of key map
-							load(maps, KeyMapSet.get().getKeyMapTable(Key.create(values.get(i))));
-						}
-					}
-				}
+				// there is fallthough
+				loadFallthrough(maps, table);
+			}
+		}
+	}
+
+	/**
+	 * Recursive methods to load other key map by fall though relation.
+	 * 
+	 * @param maps list of already loaded strokes
+	 * @param table related key map to read for strokes
+	 */
+	private void loadFallthrough(List<Stroke> maps, KeyMapTable table) {
+		// gets the type of fall through (could be a string or array)
+		ObjectType type = type(FALLTHROUGH);
+		// checks if is a simple string
+		if (ObjectType.STRING.equals(type)) {
+			// if here, fall through is a string
+			loadFallthroughByString(maps, table);
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// if here, fall through is an array
+			// gets the value to have the array of names of the other key maps
+			loadFallthroughByArray(maps, table);
+		}
+	}
+
+	/**
+	 * Recursive methods to load other key map by fall though relation, which is defined as a string (single relation).
+	 * 
+	 * @param maps list of already loaded strokes
+	 * @param table related key map to read for strokes
+	 */
+	private void loadFallthroughByString(List<Stroke> maps, KeyMapTable table) {
+		// gets the value to have the name of the other key map
+		String value = table.getStringProperty(FALLTHROUGH.value(), UndefinedValues.STRING);
+		// checks if is consistent
+		if (value != null) {
+			// loads the key map table by the name of key map
+			load(maps, KeyMapSet.get().getKeyMapTable(Key.create(value)));
+		}
+	}
+
+	/**
+	 * Recursive methods to load other key map by fall though relation, which is defined as an array (multiple relation).
+	 * 
+	 * @param maps list of already loaded strokes
+	 * @param table related key map to read for strokes
+	 */
+	private void loadFallthroughByArray(List<Stroke> maps, KeyMapTable table) {
+		// if here, fall through is an array
+		// gets the value to have the array of names of the other key maps
+		ArrayString values = table.getArrayValue(FALLTHROUGH);
+		// checks if is consistent
+		if (values != null) {
+			// scans the array
+			for (int i = 0; i < values.length(); i++) {
+				// loads the key map table by the name of key map
+				load(maps, KeyMapSet.get().getKeyMapTable(Key.create(values.get(i))));
 			}
 		}
 	}

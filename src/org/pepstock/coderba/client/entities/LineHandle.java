@@ -24,7 +24,9 @@ import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.LineHandleChangeEvent;
+import org.pepstock.coderba.client.events.LineHandleChangeEventHandler;
 import org.pepstock.coderba.client.events.LineHandleDeleteEvent;
+import org.pepstock.coderba.client.events.LineHandleDeleteEventHandler;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -90,6 +92,8 @@ public final class LineHandle implements IsEventManager {
 	private final EventManager eventManager;
 	// the current document related to this line handle
 	private final Document document;
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 
 	/**
 	 * Creates a line handle instance wrapping a native code mirror object and the document which this line handle belongs to.
@@ -104,11 +108,16 @@ public final class LineHandle implements IsEventManager {
 		Id.applyTo(nativeObject);
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		this.eventItemManager = new EventItemManager();
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		lineHandleChangeFunctionProxy.setCallback(this::onChange);
 		lineHandleDeleteFunctionProxy.setCallback(this::onDelete);
+		
+		eventItemManager.addEventItem(new EventItem<LineHandleChangeEventHandler, NativeLineHandle>(LineHandleChangeEvent.TYPE, nativeObject, LineHandleChangeEvent.NAME, eventManager, lineHandleChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<LineHandleDeleteEventHandler, NativeLineHandle>(LineHandleDeleteEvent.TYPE, nativeObject, LineHandleDeleteEvent.NAME, eventManager, lineHandleDeleteFunctionProxy.getProxy()));
+
 	}
 
 	/**
@@ -210,17 +219,7 @@ public final class LineHandle implements IsEventManager {
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(LineHandleChangeEvent.TYPE) && eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 0) {
-			// checks if type of removed event handler is LineHandleChangeEvent
-			// if there is not any LineHandleChangeEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.off(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
-		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE) && eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 0) {
-			// checks if type of removed event handler is LineHandleDeleteEvent
-			// if there is not any LineHandleDeleteEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.off(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOff(event);
 	}
 
 	/*
@@ -230,17 +229,7 @@ public final class LineHandle implements IsEventManager {
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(LineHandleChangeEvent.TYPE) && eventManager.getHandlerCount(LineHandleChangeEvent.TYPE) == 1) {
-			// checks if type of added event handler is LineHandleChangeEvent
-			// if there is not any LineHandleChangeEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.on(LineHandleChangeEvent.NAME, lineHandleChangeFunctionProxy.getProxy());
-		} else if (event.isRecognize(LineHandleDeleteEvent.TYPE) && eventManager.getHandlerCount(LineHandleDeleteEvent.TYPE) == 1) {
-			// checks if type of added event handler is LineHandleDeleteEvent
-			// if there is not any LineHandleDeleteEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.on(LineHandleDeleteEvent.NAME, lineHandleDeleteFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOn(event);
 	}
 
 }

@@ -36,25 +36,45 @@ import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.BeforeSelectionChangeItem;
 import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.EditorBeforeChangeEvent;
+import org.pepstock.coderba.client.events.EditorBeforeChangeEventHandler;
 import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeEvent;
+import org.pepstock.coderba.client.events.EditorBeforeSelectionChangeEventHandler;
 import org.pepstock.coderba.client.events.EditorBlurEvent;
+import org.pepstock.coderba.client.events.EditorBlurEventHandler;
 import org.pepstock.coderba.client.events.EditorChangeEvent;
+import org.pepstock.coderba.client.events.EditorChangeEventHandler;
 import org.pepstock.coderba.client.events.EditorChangesEvent;
+import org.pepstock.coderba.client.events.EditorChangesEventHandler;
 import org.pepstock.coderba.client.events.EditorCursorActivityEvent;
+import org.pepstock.coderba.client.events.EditorCursorActivityEventHandler;
 import org.pepstock.coderba.client.events.EditorElectrictInputEvent;
+import org.pepstock.coderba.client.events.EditorElectrictInputEventHandler;
 import org.pepstock.coderba.client.events.EditorFocusEvent;
+import org.pepstock.coderba.client.events.EditorFocusEventHandler;
 import org.pepstock.coderba.client.events.EditorGutterClickEvent;
+import org.pepstock.coderba.client.events.EditorGutterClickEventHandler;
 import org.pepstock.coderba.client.events.EditorGutterContextMenuEvent;
+import org.pepstock.coderba.client.events.EditorGutterContextMenuEventHandler;
 import org.pepstock.coderba.client.events.EditorInputReadEvent;
+import org.pepstock.coderba.client.events.EditorInputReadEventHandler;
 import org.pepstock.coderba.client.events.EditorKeyHandledEvent;
+import org.pepstock.coderba.client.events.EditorKeyHandledEventHandler;
 import org.pepstock.coderba.client.events.EditorOptionChangeEvent;
+import org.pepstock.coderba.client.events.EditorOptionChangeEventHandler;
 import org.pepstock.coderba.client.events.EditorRefreshEvent;
+import org.pepstock.coderba.client.events.EditorRefreshEventHandler;
 import org.pepstock.coderba.client.events.EditorRenderLineEvent;
+import org.pepstock.coderba.client.events.EditorRenderLineEventHandler;
 import org.pepstock.coderba.client.events.EditorScrollCursorIntoViewEvent;
+import org.pepstock.coderba.client.events.EditorScrollCursorIntoViewEventHandler;
 import org.pepstock.coderba.client.events.EditorScrollEvent;
+import org.pepstock.coderba.client.events.EditorScrollEventHandler;
 import org.pepstock.coderba.client.events.EditorSwapDocEvent;
+import org.pepstock.coderba.client.events.EditorSwapDocEventHandler;
 import org.pepstock.coderba.client.events.EditorUpdateEvent;
+import org.pepstock.coderba.client.events.EditorUpdateEventHandler;
 import org.pepstock.coderba.client.events.EditorViewportChangeEvent;
+import org.pepstock.coderba.client.events.EditorViewportChangeEventHandler;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
@@ -492,6 +512,8 @@ public final class Editor implements IsEventManager {
 	private final EventManager eventManager;
 	// the current document managed by editor
 	private Document document = null;
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 
 	/**
 	 * Creates an editor instance wrapping a native code mirror object.
@@ -503,8 +525,9 @@ public final class Editor implements IsEventManager {
 		this.nativeObject = nativeObject;
 		// gets also the document
 		this.document = new Document(nativeObject.getDoc(), language);
-		// sets event manager
+		// sets event managers
 		this.eventManager = new EventManager(this);
+		this.eventItemManager = new EventItemManager();
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -528,6 +551,30 @@ public final class Editor implements IsEventManager {
 		editorSwapDocFunctionProxy.setCallback(this::onSwapDoc);
 		editorUpdateFunctionProxy.setCallback(this::onUpdate);
 		editorViewportChangeFunctionProxy.setCallback(this::onViewportChange);
+
+		eventItemManager.addEventItem(new EventItem<EditorChangeEventHandler, NativeEditor>(EditorChangeEvent.TYPE, nativeObject, EditorChangeEvent.NAME, eventManager, editorChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorChangesEventHandler, NativeEditor>(EditorChangesEvent.TYPE, nativeObject, EditorChangesEvent.NAME, eventManager, editorChangesFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorBeforeChangeEventHandler, NativeEditor>(EditorBeforeChangeEvent.TYPE, nativeObject, EditorBeforeChangeEvent.NAME, eventManager, editorBeforeChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorCursorActivityEventHandler, NativeEditor>(EditorCursorActivityEvent.TYPE, nativeObject, EditorCursorActivityEvent.NAME, eventManager, editorCursorActivityFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorKeyHandledEventHandler, NativeEditor>(EditorKeyHandledEvent.TYPE, nativeObject, EditorKeyHandledEvent.NAME, eventManager, editorKeyHandledFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(
+				new EventItem<EditorBeforeSelectionChangeEventHandler, NativeEditor>(EditorBeforeSelectionChangeEvent.TYPE, nativeObject, EditorBeforeSelectionChangeEvent.NAME, eventManager, editorBeforeSelectionChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorBlurEventHandler, NativeEditor>(EditorBlurEvent.TYPE, nativeObject, EditorBlurEvent.NAME, eventManager, editorBlurFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorElectrictInputEventHandler, NativeEditor>(EditorElectrictInputEvent.TYPE, nativeObject, EditorElectrictInputEvent.NAME, eventManager, editorElectrictInputFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorFocusEventHandler, NativeEditor>(EditorFocusEvent.TYPE, nativeObject, EditorFocusEvent.NAME, eventManager, editorFocusFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorGutterClickEventHandler, NativeEditor>(EditorGutterClickEvent.TYPE, nativeObject, EditorGutterClickEvent.NAME, eventManager, editorGutterClickFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorGutterContextMenuEventHandler, NativeEditor>(EditorGutterContextMenuEvent.TYPE, nativeObject, EditorGutterContextMenuEvent.NAME, eventManager, editorGutterContextMenuFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorInputReadEventHandler, NativeEditor>(EditorInputReadEvent.TYPE, nativeObject, EditorInputReadEvent.NAME, eventManager, editorInputReadFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorOptionChangeEventHandler, NativeEditor>(EditorOptionChangeEvent.TYPE, nativeObject, EditorOptionChangeEvent.NAME, eventManager, editorOptionChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorRefreshEventHandler, NativeEditor>(EditorRefreshEvent.TYPE, nativeObject, EditorRefreshEvent.NAME, eventManager, editorRefreshFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorRenderLineEventHandler, NativeEditor>(EditorRenderLineEvent.TYPE, nativeObject, EditorRenderLineEvent.NAME, eventManager, editorRenderLineFunctionProxy.getProxy()));
+		eventItemManager
+				.addEventItem(new EventItem<EditorScrollCursorIntoViewEventHandler, NativeEditor>(EditorScrollCursorIntoViewEvent.TYPE, nativeObject, EditorScrollCursorIntoViewEvent.NAME, eventManager, editorScrollCursorIntoViewFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorScrollEventHandler, NativeEditor>(EditorScrollEvent.TYPE, nativeObject, EditorScrollEvent.NAME, eventManager, editorScrollFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorSwapDocEventHandler, NativeEditor>(EditorSwapDocEvent.TYPE, nativeObject, EditorSwapDocEvent.NAME, eventManager, editorSwapDocFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorUpdateEventHandler, NativeEditor>(EditorUpdateEvent.TYPE, nativeObject, EditorUpdateEvent.NAME, eventManager, editorUpdateFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorViewportChangeEventHandler, NativeEditor>(EditorViewportChangeEvent.TYPE, nativeObject, EditorViewportChangeEvent.NAME, eventManager, editorViewportChangeFunctionProxy.getProxy()));
+
 	}
 
 	// ---------------------------------
@@ -1226,7 +1273,7 @@ public final class Editor implements IsEventManager {
 	public boolean isReadOnly() {
 		return nativeObject.isReadOnly();
 	}
-	
+
 	/**
 	 * Runs the command with the given name on the editor.
 	 * 
@@ -1332,145 +1379,7 @@ public final class Editor implements IsEventManager {
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(EditorBeforeChangeEvent.TYPE)) {
-			// checks if type of removed event handler is EditorBeforeChangeEvent
-			// if there is not any EditorBeforeChangeEvent handler
-			if (eventManager.getHandlerCount(EditorBeforeChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorBeforeChangeEvent.NAME, editorBeforeChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorBeforeSelectionChangeEvent.TYPE)) {
-			// checks if type of removed event handler is EditorBeforeSelectionChangeEvent
-			// if there is not any EditorBeforeSelectionChangeEvent handler
-			if (eventManager.getHandlerCount(EditorBeforeSelectionChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorBeforeSelectionChangeEvent.NAME, editorBeforeSelectionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorBlurEvent.TYPE)) {
-			// checks if type of removed event handler is EditorBlurEvent
-			// if there is not any EditorBlurEvent handler
-			if (eventManager.getHandlerCount(EditorBlurEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorBlurEvent.NAME, editorBlurFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorChangeEvent.TYPE)) {
-			// checks if type of removed event handler is EditorChangeEvent
-			// if there is not any EditorChangeEvent handler
-			if (eventManager.getHandlerCount(EditorChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorChangeEvent.NAME, editorChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorChangesEvent.TYPE)) {
-			// checks if type of removed event handler is EditorChangesEvent
-			// if there is not any EditorChangesEvent handler
-			if (eventManager.getHandlerCount(EditorChangesEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorChangesEvent.NAME, editorChangesFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorCursorActivityEvent.TYPE)) {
-			// checks if type of removed event handler is EditorCursorActivityEvent
-			// if there is not any EditorCursorActivityEvent handler
-			if (eventManager.getHandlerCount(EditorCursorActivityEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorCursorActivityEvent.NAME, editorCursorActivityFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorElectrictInputEvent.TYPE)) {
-			// checks if type of removed event handler is EditorElectrictInputEvent
-			// if there is not any EditorElectrictInputEvent handler
-			if (eventManager.getHandlerCount(EditorElectrictInputEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorElectrictInputEvent.NAME, editorElectrictInputFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorFocusEvent.TYPE)) {
-			// checks if type of removed event handler is EditorFocusEvent
-			// if there is not any EditorFocusEvent handler
-			if (eventManager.getHandlerCount(EditorFocusEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorFocusEvent.NAME, editorFocusFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorGutterClickEvent.TYPE)) {
-			// checks if type of removed event handler is EditorGutterClickEvent
-			// if there is not any EditorGutterClickEvent handler
-			if (eventManager.getHandlerCount(EditorGutterClickEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorGutterClickEvent.NAME, editorGutterClickFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorGutterContextMenuEvent.TYPE)) {
-			// checks if type of removed event handler is EditorGutterContextMenuEvent
-			// if there is not any EditorGutterContextMenuEvent handler
-			if (eventManager.getHandlerCount(EditorGutterContextMenuEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorGutterContextMenuEvent.NAME, editorGutterContextMenuFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorInputReadEvent.TYPE)) {
-			// checks if type of removed event handler is EditorInputReadEvent
-			// if there is not any EditorInputReadEvent handler
-			if (eventManager.getHandlerCount(EditorInputReadEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorInputReadEvent.NAME, editorInputReadFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorKeyHandledEvent.TYPE)) {
-			// checks if type of removed event handler is EditorKeyHandledEvent
-			// if there is not any EditorKeyHandledEvent handler
-			if (eventManager.getHandlerCount(EditorKeyHandledEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorKeyHandledEvent.NAME, editorKeyHandledFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorOptionChangeEvent.TYPE)) {
-			// checks if type of removed event handler is EditorOptionChangeEvent
-			// if there is not any EditorOptionChangeEvent handler
-			if (eventManager.getHandlerCount(EditorOptionChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorOptionChangeEvent.NAME, editorOptionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorRefreshEvent.TYPE)) {
-			// checks if type of removed event handler is EditorRefreshEvent
-			// if there is not any EditorRefreshEvent handler
-			if (eventManager.getHandlerCount(EditorRefreshEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorRefreshEvent.NAME, editorRefreshFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorRenderLineEvent.TYPE)) {
-			// checks if type of removed event handler is EditorRenderLineEvent
-			// if there is not any EditorRenderLineEvent handler
-			if (eventManager.getHandlerCount(EditorRenderLineEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorRenderLineEvent.NAME, editorRenderLineFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorScrollCursorIntoViewEvent.TYPE)) {
-			// checks if type of removed event handler is EditorScrollCursorIntoViewEvent
-			// if there is not any EditorScrollCursorIntoViewEvent handler
-			if (eventManager.getHandlerCount(EditorScrollCursorIntoViewEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorScrollCursorIntoViewEvent.NAME, editorScrollCursorIntoViewFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorScrollEvent.TYPE)) {
-			// checks if type of removed event handler is EditorScrollEvent
-			// if there is not any EditorScrollEvent handler
-			if (eventManager.getHandlerCount(EditorScrollEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorScrollEvent.NAME, editorScrollFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorSwapDocEvent.TYPE)) {
-			// checks if type of removed event handler is EditorSwapDocEvent
-			// if there is not any EditorSwapDocEvent handler
-			if (eventManager.getHandlerCount(EditorSwapDocEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorSwapDocEvent.NAME, editorSwapDocFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorUpdateEvent.TYPE)) {
-			// checks if type of removed event handler is EditorUpdateEvent
-			// if there is not any EditorUpdateEvent handler
-			if (eventManager.getHandlerCount(EditorUpdateEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(EditorUpdateEvent.NAME, editorUpdateFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE) && eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 0) {
-			// checks if type of removed event handler is EditorViewportChangeEvent
-			// if there is not any EditorViewportChangeEvent handler
-			// sets OFF the callback proxy in order to call the user event interface
-			nativeObject.off(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOff(event);
 	}
 
 	/*
@@ -1480,145 +1389,7 @@ public final class Editor implements IsEventManager {
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(EditorBeforeChangeEvent.TYPE)) {
-			// checks if type of added event handler is EditorBeforeChangeEvent
-			// if there is not any EditorBeforeChangeEvent handler
-			if (eventManager.getHandlerCount(EditorBeforeChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorBeforeChangeEvent.NAME, editorBeforeChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorBeforeSelectionChangeEvent.TYPE)) {
-			// checks if type of added event handler is EditorBeforeSelectionChangeEvent
-			// if there is not any EditorBeforeSelectionChangeEvent handler
-			if (eventManager.getHandlerCount(EditorBeforeSelectionChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorBeforeSelectionChangeEvent.NAME, editorBeforeSelectionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorBlurEvent.TYPE)) {
-			// checks if type of added event handler is EditorBlurEvent
-			// if there is not any EditorBlurEvent handler
-			if (eventManager.getHandlerCount(EditorBlurEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorBlurEvent.NAME, editorBlurFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorChangeEvent.TYPE)) {
-			// checks if type of added event handler is EditorChangeEvent
-			// if there is not any EditorChangeEvent handler
-			if (eventManager.getHandlerCount(EditorChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorChangeEvent.NAME, editorChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorChangesEvent.TYPE)) {
-			// checks if type of added event handler is EditorChangesEvent
-			// if there is not any EditorChangesEvent handler
-			if (eventManager.getHandlerCount(EditorChangesEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorChangesEvent.NAME, editorChangesFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorCursorActivityEvent.TYPE)) {
-			// checks if type of added event handler is EditorCursorActivityEvent
-			// if there is not any EditorCursorActivityEvent handler
-			if (eventManager.getHandlerCount(EditorCursorActivityEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorCursorActivityEvent.NAME, editorCursorActivityFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorElectrictInputEvent.TYPE)) {
-			// checks if type of added event handler is EditorElectrictInputEvent
-			// if there is not any EditorElectrictInputEvent handler
-			if (eventManager.getHandlerCount(EditorElectrictInputEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorElectrictInputEvent.NAME, editorElectrictInputFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorFocusEvent.TYPE)) {
-			// checks if type of added event handler is EditorFocusEvent
-			// if there is not any EditorFocusEvent handler
-			if (eventManager.getHandlerCount(EditorFocusEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorFocusEvent.NAME, editorFocusFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorGutterClickEvent.TYPE)) {
-			// checks if type of added event handler is EditorGutterClickEvent
-			// if there is not any EditorGutterClickEvent handler
-			if (eventManager.getHandlerCount(EditorGutterClickEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorGutterClickEvent.NAME, editorGutterClickFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorGutterContextMenuEvent.TYPE)) {
-			// checks if type of added event handler is EditorGutterContextMenuEvent
-			// if there is not any EditorGutterContextMenuEvent handler
-			if (eventManager.getHandlerCount(EditorGutterContextMenuEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorGutterContextMenuEvent.NAME, editorGutterContextMenuFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorInputReadEvent.TYPE)) {
-			// checks if type of added event handler is EditorInputReadEvent
-			// if there is not any EditorInputReadEvent handler
-			if (eventManager.getHandlerCount(EditorInputReadEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorInputReadEvent.NAME, editorInputReadFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorKeyHandledEvent.TYPE)) {
-			// checks if type of added event handler is EditorKeyHandledEvent
-			// if there is not any EditorKeyHandledEvent handler
-			if (eventManager.getHandlerCount(EditorKeyHandledEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorKeyHandledEvent.NAME, editorKeyHandledFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorOptionChangeEvent.TYPE)) {
-			// checks if type of added event handler is EditorOptionChangeEvent
-			// if there is not any EditorOptionChangeEvent handler
-			if (eventManager.getHandlerCount(EditorOptionChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorOptionChangeEvent.NAME, editorOptionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorRefreshEvent.TYPE)) {
-			// checks if type of added event handler is EditorRefreshEvent
-			// if there is not any EditorRefreshEvent handler
-			if (eventManager.getHandlerCount(EditorRefreshEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorRefreshEvent.NAME, editorRefreshFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorRenderLineEvent.TYPE)) {
-			// checks if type of added event handler is EditorRenderLineEvent
-			// if there is not any EditorRenderLineEvent handler
-			if (eventManager.getHandlerCount(EditorRenderLineEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorRenderLineEvent.NAME, editorRenderLineFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorScrollCursorIntoViewEvent.TYPE)) {
-			// checks if type of added event handler is EditorScrollCursorIntoViewEvent
-			// if there is not any EditorScrollCursorIntoViewEvent handler
-			if (eventManager.getHandlerCount(EditorScrollCursorIntoViewEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorScrollCursorIntoViewEvent.NAME, editorScrollCursorIntoViewFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorScrollEvent.TYPE)) {
-			// checks if type of added event handler is EditorScrollEvent
-			// if there is not any EditorScrollEvent handler
-			if (eventManager.getHandlerCount(EditorScrollEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorScrollEvent.NAME, editorScrollFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorSwapDocEvent.TYPE)) {
-			// checks if type of added event handler is EditorSwapDocEvent
-			// if there is not any EditorSwapDocEvent handler
-			if (eventManager.getHandlerCount(EditorSwapDocEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorSwapDocEvent.NAME, editorSwapDocFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorUpdateEvent.TYPE)) {
-			// checks if type of added event handler is EditorUpdateEvent
-			// if there is not any EditorUpdateEvent handler
-			if (eventManager.getHandlerCount(EditorUpdateEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(EditorUpdateEvent.NAME, editorUpdateFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(EditorViewportChangeEvent.TYPE) && eventManager.getHandlerCount(EditorViewportChangeEvent.TYPE) == 1) {
-			// checks if type of added event handler is EditorViewportChangeEvent
-			// if there is not any EditorViewportChangeEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.on(EditorViewportChangeEvent.NAME, editorViewportChangeFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOn(event);
 	}
 
 	// ---------------------------------

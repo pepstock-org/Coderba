@@ -25,6 +25,7 @@ import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.LineWidgetRedrawEvent;
+import org.pepstock.coderba.client.events.LineWidgetRedrawEventHandler;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.dom.client.Element;
@@ -80,6 +81,8 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	private final LineHandle handle;
 	// event manager instance
 	private final EventManager eventManager;
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 	// default element (null)
 	private static final Element DEFAULT_NODE = null;
 
@@ -128,6 +131,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		Id.applyTo(nativeObject);
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		this.eventItemManager = new EventItemManager();
 		// gets line handle from native object
 		NativeLineHandle nativeHandle = nativeObject.getLine();
 		// checks if line handle is consistent
@@ -143,6 +147,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		lineWidgetRedrawFunctionProxy.setCallback(this::onRedraw);
+		eventItemManager.addEventItem(new EventItem<LineWidgetRedrawEventHandler, NativeLineWidget>(LineWidgetRedrawEvent.TYPE, nativeObject, LineWidgetRedrawEvent.NAME, eventManager, lineWidgetRedrawFunctionProxy.getProxy()));
 	}
 
 	/**
@@ -224,12 +229,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(LineWidgetRedrawEvent.TYPE) && eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 1) {
-			// checks if type of added event handler is LineWidgetRedrawEvent
-			// if there is not any LineWidgetRedrawEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.on(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOn(event);
 	}
 
 	/*
@@ -240,12 +240,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(LineWidgetRedrawEvent.TYPE) && eventManager.getHandlerCount(LineWidgetRedrawEvent.TYPE) == 0) {
-			// checks if type of removed event handler is LineWidgetRedrawEvent
-			// if there is not any LineWidgetRedrawEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.off(LineWidgetRedrawEvent.NAME, lineWidgetRedrawFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOff(event);
 	}
 
 	/*

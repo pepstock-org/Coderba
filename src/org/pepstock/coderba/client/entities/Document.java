@@ -45,9 +45,13 @@ import org.pepstock.coderba.client.enums.TextMarkerType;
 import org.pepstock.coderba.client.events.AddHandlerEvent;
 import org.pepstock.coderba.client.events.ChangeItem;
 import org.pepstock.coderba.client.events.DocumentBeforeChangeEvent;
+import org.pepstock.coderba.client.events.DocumentBeforeChangeEventHandler;
 import org.pepstock.coderba.client.events.DocumentBeforeSelectionChangeEvent;
+import org.pepstock.coderba.client.events.DocumentBeforeSelectionChangeEventHandler;
 import org.pepstock.coderba.client.events.DocumentChangeEvent;
+import org.pepstock.coderba.client.events.DocumentChangeEventHandler;
 import org.pepstock.coderba.client.events.DocumentCursorActivityEvent;
+import org.pepstock.coderba.client.events.DocumentCursorActivityEventHandler;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
@@ -227,6 +231,8 @@ public final class Document implements IsEventManager {
 	private DocumentExtendSelectionsHandler documentExtendSelectionsHandler = null;
 	// linked document handler callback
 	private LinkedDocumentsHandler linkedDocumentsHandler = null;
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 
 	/**
 	 * Creates an editor instance wrapping a native code mirror object.
@@ -246,6 +252,7 @@ public final class Document implements IsEventManager {
 		this.language = language;
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		this.eventItemManager = new EventItemManager();
 		// stores id
 		Id.applyTo(nativeObject);
 		// -------------------------------
@@ -258,6 +265,13 @@ public final class Document implements IsEventManager {
 		documentBeforeChangeFunctionProxy.setCallback(this::onBeforeChange);
 		documentCursorActivityFunctionProxy.setCallback(this::onCursorActivity);
 		documentBeforeSelectionChangeFunctionProxy.setCallback(this::onBeforeSelectionChange);
+
+		eventItemManager.addEventItem(new EventItem<DocumentChangeEventHandler, NativeDocument>(DocumentChangeEvent.TYPE, nativeObject, DocumentChangeEvent.NAME, eventManager, documentChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<DocumentBeforeChangeEventHandler, NativeDocument>(DocumentBeforeChangeEvent.TYPE, nativeObject, DocumentBeforeChangeEvent.NAME, eventManager, documentBeforeChangeFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<DocumentCursorActivityEventHandler, NativeDocument>(DocumentCursorActivityEvent.TYPE, nativeObject, DocumentCursorActivityEvent.NAME, eventManager, documentCursorActivityFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(
+				new EventItem<DocumentBeforeSelectionChangeEventHandler, NativeDocument>(DocumentBeforeSelectionChangeEvent.TYPE, nativeObject, DocumentBeforeSelectionChangeEvent.NAME, eventManager, documentBeforeSelectionChangeFunctionProxy.getProxy()));
+
 		// adds to cache
 		Documents.get().add(this);
 	}
@@ -2421,33 +2435,7 @@ public final class Document implements IsEventManager {
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
-			// checks if type of removed event handler is DocumentBeforeChangeEvent
-			// if there is not any DocumentBeforeChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
-			// checks if type of removed event handler is DocumentBeforeSelectionChangeEvent
-			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
-			// checks if type of removed event handler is DocumentChangeEvent
-			// if there is not any DocumentChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentChangeEvent.TYPE) == 0) {
-				// sets OFF the callback proxy in order to call the user event interface
-				nativeObject.off(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE) && eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 0) {
-			// checks if type of removed event handler is DocumentCursorActivityEvent
-			// if there is not any DocumentCursorActivityEvent handler
-			// sets OFF the callback proxy in order to call the user event interface
-			nativeObject.off(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOff(event);
 	}
 
 	/*
@@ -2457,33 +2445,7 @@ public final class Document implements IsEventManager {
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(DocumentBeforeChangeEvent.TYPE)) {
-			// checks if type of added event handler is DocumentBeforeChangeEvent
-			// if there is not any DocumentBeforeChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentBeforeChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(DocumentBeforeChangeEvent.NAME, documentBeforeChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentBeforeSelectionChangeEvent.TYPE)) {
-			// checks if type of added event handler is DocumentBeforeSelectionChangeEvent
-			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentBeforeSelectionChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(DocumentBeforeSelectionChangeEvent.NAME, documentBeforeSelectionChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentChangeEvent.TYPE)) {
-			// checks if type of added event handler is DocumentChangeEvent
-			// if there is not any DocumentBeforeSelectionChangeEvent handler
-			if (eventManager.getHandlerCount(DocumentChangeEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(DocumentChangeEvent.NAME, documentChangeFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(DocumentCursorActivityEvent.TYPE) && eventManager.getHandlerCount(DocumentCursorActivityEvent.TYPE) == 1) {
-			// checks if type of added event handler is DocumentCursorActivityEvent
-			// if there is not any DocumentCursorActivityEvent handler
-				// sets the callback proxy in order to call the user event interface
-			nativeObject.on(DocumentCursorActivityEvent.NAME, documentCursorActivityFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOn(event);
 	}
 
 }

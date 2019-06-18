@@ -15,9 +15,7 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.NativeName;
-import org.pepstock.coderba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -31,7 +29,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-final class NativeLineHandle extends NativeObject {
+final class NativeLineHandle extends NativeEventEmitter {
 
 	/**
 	 * to avoid any instantiation
@@ -64,22 +62,22 @@ final class NativeLineHandle extends NativeObject {
 	@JsMethod
 	native int lineNo();
 
-	/**
-	 * Register an event handler for the given event type (a string) on the line handle instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	@JsMethod
-	native void on(String type, CallbackProxy.Proxy function);
-
-	/**
-	 * Remove an event handler on the line handle instance.
-	 * 
-	 * @param type event name to activate
-	 * @param function callback proxy function
-	 */
-	@JsMethod
-	native void off(String type, CallbackProxy.Proxy function);
+//	/**
+//	 * Register an event handler for the given event type (a string) on the line handle instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	@JsMethod
+//	native void on(String type, CallbackProxy.Proxy function);
+//
+//	/**
+//	 * Remove an event handler on the line handle instance.
+//	 * 
+//	 * @param type event name to activate
+//	 * @param function callback proxy function
+//	 */
+//	@JsMethod
+//	native void off(String type, CallbackProxy.Proxy function);
 
 }

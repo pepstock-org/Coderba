@@ -25,9 +25,13 @@ import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 import org.pepstock.coderba.client.events.TextMarkerBeforeCursorEnterEvent;
+import org.pepstock.coderba.client.events.TextMarkerBeforeCursorEnterEventHandler;
 import org.pepstock.coderba.client.events.TextMarkerClearEvent;
+import org.pepstock.coderba.client.events.TextMarkerClearEventHandler;
 import org.pepstock.coderba.client.events.TextMarkerHideEvent;
+import org.pepstock.coderba.client.events.TextMarkerHideEventHandler;
 import org.pepstock.coderba.client.events.TextMarkerUnhideEvent;
+import org.pepstock.coderba.client.events.TextMarkerUnhideEventHandler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -132,6 +136,8 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	private final Document document;
 	// event manager instance
 	private final EventManager eventManager;
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 
 	/**
 	 * Name of properties of native object.
@@ -175,6 +181,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		this.document = document;
 		// sets event manager
 		this.eventManager = new EventManager(this);
+		this.eventItemManager = new EventItemManager();
 		// stores the id of the marker
 		Id.applyTo(nativeObject);
 		// -------------------------------
@@ -184,6 +191,11 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		textMarkerClearFunctionProxy.setCallback(this::onClear);
 		textMarkerHideFunctionProxy.setCallback(this::onHide);
 		textMarkerUnhideFunctionProxy.setCallback(this::onUnhide);
+		
+		eventItemManager.addEventItem(new EventItem<TextMarkerBeforeCursorEnterEventHandler, NativeTextMarker>(TextMarkerBeforeCursorEnterEvent.TYPE, nativeObject, TextMarkerBeforeCursorEnterEvent.NAME, eventManager, textMarkerBeforeCursorEnterFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<TextMarkerClearEventHandler, NativeTextMarker>(TextMarkerClearEvent.TYPE, nativeObject, TextMarkerClearEvent.NAME, eventManager, textMarkerClearFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<TextMarkerHideEventHandler, NativeTextMarker>(TextMarkerHideEvent.TYPE, nativeObject, TextMarkerHideEvent.NAME, eventManager, textMarkerHideFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<TextMarkerUnhideEventHandler, NativeTextMarker>(TextMarkerUnhideEvent.TYPE, nativeObject, TextMarkerUnhideEvent.NAME, eventManager, textMarkerUnhideFunctionProxy.getProxy()));
 	}
 
 	/**
@@ -304,33 +316,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	 */
 	@Override
 	public void onAdd(AddHandlerEvent event) {
-		if (event.isRecognize(TextMarkerBeforeCursorEnterEvent.TYPE)) {
-			// checks if type of added event handler is TextMarkerBeforeCursorEnterEvent
-			// if there is not any TextMarkerBeforeCursorEnterEvent handler
-			if (eventManager.getHandlerCount(TextMarkerBeforeCursorEnterEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(TextMarkerBeforeCursorEnterEvent.NAME, textMarkerBeforeCursorEnterFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerClearEvent.TYPE)) {
-			// checks if type of added event handler is TextMarkerClearEvent
-			// if there is not any TextMarkerClearEvent handler
-			if (eventManager.getHandlerCount(TextMarkerClearEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(TextMarkerClearEvent.NAME, textMarkerClearFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerHideEvent.TYPE)) {
-			// checks if type of added event handler is TextMarkerHideEvent
-			// if there is not any TextMarkerHideEvent handler
-			if (eventManager.getHandlerCount(TextMarkerHideEvent.TYPE) == 1) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.on(TextMarkerHideEvent.NAME, textMarkerHideFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE) && eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 1) {
-			// checks if type of added event handler is TextMarkerUnhideEvent
-			// if there is not any TextMarkerUnhideEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.on(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOn(event);
 	}
 
 	/*
@@ -341,33 +327,7 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		if (event.isRecognize(TextMarkerBeforeCursorEnterEvent.TYPE)) {
-			// checks if type of removed event handler is TextMarkerBeforeCursorEnterEvent
-			// if there is not any TextMarkerBeforeCursorEnterEvent handler
-			if (eventManager.getHandlerCount(TextMarkerBeforeCursorEnterEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(TextMarkerBeforeCursorEnterEvent.NAME, textMarkerBeforeCursorEnterFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerClearEvent.TYPE)) {
-			// checks if type of removed event handler is TextMarkerClearEvent
-			// if there is not any TextMarkerClearEvent handler
-			if (eventManager.getHandlerCount(TextMarkerClearEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(TextMarkerClearEvent.NAME, textMarkerClearFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerHideEvent.TYPE)) {
-			// checks if type of removed event handler is TextMarkerHideEvent
-			// if there is not any TextMarkerHideEvent handler
-			if (eventManager.getHandlerCount(TextMarkerHideEvent.TYPE) == 0) {
-				// sets the callback proxy in order to call the user event interface
-				nativeObject.off(TextMarkerHideEvent.NAME, textMarkerHideFunctionProxy.getProxy());
-			}
-		} else if (event.isRecognize(TextMarkerUnhideEvent.TYPE) && eventManager.getHandlerCount(TextMarkerUnhideEvent.TYPE) == 0) {
-			// checks if type of removed event handler is TextMarkerUnhideEvent
-			// if there is not any TextMarkerUnhideEvent handler
-			// sets the callback proxy in order to call the user event interface
-			nativeObject.off(TextMarkerUnhideEvent.NAME, textMarkerUnhideFunctionProxy.getProxy());
-		}
+		eventItemManager.checkAndOff(event);
 	}
 
 	/*
