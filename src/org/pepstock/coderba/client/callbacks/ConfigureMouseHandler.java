@@ -18,8 +18,7 @@ package org.pepstock.coderba.client.callbacks;
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.MouseConfiguration;
 import org.pepstock.coderba.client.enums.MouseRepeat;
-
-import com.google.gwt.dom.client.NativeEvent;
+import org.pepstock.coderba.client.events.EditorNativeEvent;
 
 /**
  * Allow you to configure the behavior of mouse selection and dragging.<br>
@@ -39,6 +38,6 @@ public interface ConfigureMouseHandler {
 	 * @param event native event
 	 * @return mouse configuration instance
 	 */
-	MouseConfiguration handle(EditorArea editorArea, MouseRepeat repeat, NativeEvent event);
+	MouseConfiguration handle(EditorArea editorArea, MouseRepeat repeat, EditorNativeEvent event);
 
 }

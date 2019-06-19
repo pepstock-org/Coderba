@@ -15,6 +15,8 @@
 */
 package org.pepstock.coderba.client.commons;
 
+import org.pepstock.coderba.client.events.EditorNativeEvent;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -61,12 +63,46 @@ final class NativeJsHelper {
 	static native boolean isArray(Object object, String key);
 
 	/**
+	 * Returns a property of java script object as integer.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return integer value
+	 */
+	static native int propertyAsInt(Object object, String key);
+	
+	/**
+	 * Returns a property of java script object as boolean.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return boolean value
+	 */
+	static native boolean propertyAsBoolean(Object object, String key);
+	
+	/**
 	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
 	 * method.
 	 * 
 	 * @return new proxy for callback.
 	 */
 	static native <T> CallbackProxy<T> newCallbackProxy();
+	
+	/**
+	 * Sets the boolean property to <code>true</code> into a native event.
+	 * 
+	 * @param object the object on which to remove the property.
+	 * @param key the string name of the property to remove.
+	 */
+	static native void ignore(EditorNativeEvent object, String key);
+
+	/**
+	 * Removes a property from a native event.
+	 * 
+	 * @param object the object on which to remove the property.
+	 * @param key the string name of the property to remove.
+	 */
+	static native void remove(EditorNativeEvent object, String key);
 
 	/**
 	 * Removes a property from a java script object.
@@ -75,7 +111,7 @@ final class NativeJsHelper {
 	 * @param key the string name of the property to remove.
 	 */
 	static native void remove(NativeObject object, String key);
-
+	
 	/**
 	 * Removes a property from a java script object.
 	 * 

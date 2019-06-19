@@ -96,9 +96,9 @@ public final class LineHandle implements IsEventManager {
 	private final EventItemManager eventItemManager;
 
 	/**
-	 * Creates a line handle instance wrapping a native code mirror object and the document which this line handle belongs to.
+	 * Creates a line handle instance wrapping a native CodeMirror object and the document which this line handle belongs to.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param document document which this line handle belongs to
 	 */
 	LineHandle(NativeLineHandle nativeObject, Document document) {

@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
  * Fires whenever the editor is focused.
  * 
@@ -41,7 +39,7 @@ public final class EditorFocusEvent extends AbstractEditorWithNativeEvent<Editor
 	 * @param editorArea editor area instance
 	 * @param event native event instance
 	 */
-	public EditorFocusEvent(EditorArea editorArea, NativeEvent event) {
+	public EditorFocusEvent(EditorArea editorArea, EditorNativeEvent event) {
 		super(TYPE, editorArea, event);
 	}
 

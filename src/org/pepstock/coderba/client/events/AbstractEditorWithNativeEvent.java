@@ -18,7 +18,6 @@ package org.pepstock.coderba.client.events;
 import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.entities.Editor;
 
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
@@ -29,7 +28,7 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> extends AbstractHandlerEvent<H> {
 
-	private final NativeEvent event;
+	private final EditorNativeEvent event;
 	// editor area instance
 	private final EditorArea editorArea;
 
@@ -40,7 +39,7 @@ public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> exte
 	 * @param editorArea editor area instance
 	 * @param event native event instance
 	 */
-	public AbstractEditorWithNativeEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, NativeEvent event) {
+	public AbstractEditorWithNativeEvent(Type<? extends EventHandler> handlerType, EditorArea editorArea, EditorNativeEvent event) {
 		super(handlerType);
 		// checks if editor area is consistent
 		if (editorArea == null) {
@@ -74,7 +73,7 @@ public abstract class AbstractEditorWithNativeEvent<H extends EventHandler> exte
 	 * 
 	 * @return the native event instance
 	 */
-	public final NativeEvent getEvent() {
+	public final EditorNativeEvent getEvent() {
 		return event;
 	}
 

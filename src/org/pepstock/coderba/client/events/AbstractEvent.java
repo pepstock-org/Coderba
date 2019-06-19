@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.events;
 
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -29,7 +28,7 @@ import com.google.gwt.event.shared.GwtEvent;
 public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
 
 	// native event
-	private final NativeEvent nativeEvent;
+	private final EditorNativeEvent nativeEvent;
 
 	/**
 	 * Creates an event using a native event
@@ -37,7 +36,7 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @param nativeEvent native event of this custom event
 	 * @see com.google.gwt.dom.client.NativeEvent
 	 */
-	protected AbstractEvent(NativeEvent nativeEvent) {
+	protected AbstractEvent(EditorNativeEvent nativeEvent) {
 		super();
 		// checks if argument is consistent
 		if (nativeEvent == null) {
@@ -53,7 +52,7 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @see com.google.gwt.dom.client.NativeEvent
 	 * 
 	 */
-	public final NativeEvent getNativeEvent() {
+	public final EditorNativeEvent getNativeEvent() {
 		return nativeEvent;
 	}
 }

@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all themes, provided out of the box by <code>CodeMirror</code>, to style the editor.<br>
- * A theme is related to CSS file defining the corresponding styles.
+ * Contains all themes, provided out of the box by <code>CodeMirror</code>, to style the editor.
  * 
  * @author Andrea "Stock" Stocchero
  *

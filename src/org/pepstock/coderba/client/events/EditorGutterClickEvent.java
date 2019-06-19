@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
  * Fires when the editor gutter (the line-number area) is clicked.
  * 
@@ -47,7 +45,7 @@ public final class EditorGutterClickEvent extends AbstractEditorWithNativeEvent<
 	 * @param gutter CCS class name
 	 * @param event native event instance
 	 */
-	public EditorGutterClickEvent(EditorArea editorArea, int line, String gutter, NativeEvent event) {
+	public EditorGutterClickEvent(EditorArea editorArea, int line, String gutter, EditorNativeEvent event) {
 		super(TYPE, editorArea, event);
 		this.line = line;
 		this.gutter = gutter;

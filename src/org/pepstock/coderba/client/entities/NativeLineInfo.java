@@ -24,7 +24,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Native object, provided by Code Mirror, has the structure {line, handle, text, gutterMarkers, textClass, bgClass, wrapClass,
+ * Native object, provided by CodeMirror, has the structure {line, handle, text, gutterMarkers, textClass, bgClass, wrapClass,
  * widgets}, where gutterMarkers is an object mapping gutter IDs to marker elements, and widgets is an array of line widgets
  * attached to this line, and the various class properties refer to classes added with addLineClass.
  * 

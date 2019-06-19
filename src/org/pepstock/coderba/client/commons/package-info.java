@@ -14,6 +14,8 @@
     limitations under the License.
 */
 /**
+ * Core classes to manage the inter-operations with java script code. Contains also common classes to use on all packages.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

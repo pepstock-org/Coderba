@@ -97,7 +97,7 @@ public final class History extends BaseEntity {
 	}
 
 	/**
-	 * Creates an unmodifiable list of history items by a native array from Code Mirror methods.
+	 * Creates an unmodifiable list of history items by a native array from CodeMirror methods.
 	 * 
 	 * @param array array of native items.
 	 * @return an unmodifiable list of history items

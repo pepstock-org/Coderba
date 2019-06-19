@@ -44,7 +44,7 @@ public enum HorizontalFindUnit implements Key
 	/**
 	 * Creates the enumeration by its value.
 	 * 
-	 * @param value string value to use into Code Mirror configuration
+	 * @param value string value to use into CodeMirror configuration
 	 */
 	private HorizontalFindUnit(String value) {
 		this.value = value;

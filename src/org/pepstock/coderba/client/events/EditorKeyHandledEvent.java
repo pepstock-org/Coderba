@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
  * Fired after a key is handled through a key map.
  * 
@@ -44,7 +42,7 @@ public final class EditorKeyHandledEvent extends AbstractEditorWithNativeEvent<E
 	 * @param event native DOM keydown or keypress event instance
 	 * @param keyName the name of the handled key (for example "Ctrl-X" or "'q'")
 	 */
-	public EditorKeyHandledEvent(EditorArea editorArea, NativeEvent event, String keyName) {
+	public EditorKeyHandledEvent(EditorArea editorArea, EditorNativeEvent event, String keyName) {
 		super(TYPE, editorArea, event);
 		// checks if name is consistent
 		if (keyName == null) {

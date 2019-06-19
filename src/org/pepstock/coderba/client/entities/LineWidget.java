@@ -118,9 +118,9 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 	}
 
 	/**
-	 * Creates a line widget instance wrapping a native code mirror object and the document which this line widget belongs to.
+	 * Creates a line widget instance wrapping a native CodeMirror object and the document which this line widget belongs to.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param document document which this line widget belongs to
 	 */
 	LineWidget(NativeLineWidget nativeObject, Document document) {

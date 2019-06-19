@@ -14,11 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all modes provided out of the box by <code>CodeMirror</code>.<br>
- * Modes typically consist of a single JavaScript file.<br>
- * This file defines, in the simplest case, a lexer (tokenizer) for your language - a function that takes a character stream as
- * input, advances it past a token, and returns a style for that token.<br>
- * More advanced modes can also handle indentation for the language.
+ * Contains all modes (a lexer (tokenizer) for one or more programming languages), provided out of the box by <code>CodeMirror</code>.
  * 
  * @author Andrea "Stock" Stocchero
  *

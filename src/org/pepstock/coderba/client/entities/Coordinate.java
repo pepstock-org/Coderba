@@ -20,7 +20,7 @@ import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
  * Object which contains 2 values to identify a coordinate (as integer): from and to.<br>
- * It is used by Code Mirror methods
+ * It is used by CodeMirror methods
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -73,7 +73,7 @@ public final class Coordinate extends BaseEntity {
 
 	/**
 	 * Creates a container with a native object instance.<br>
-	 * This is used when coordinate has been passed by a method of Code Mirror.
+	 * This is used when coordinate has been passed by a method of CodeMirror.
 	 * 
 	 * @param nativeObject a native object instance
 	 */

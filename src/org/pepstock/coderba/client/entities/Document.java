@@ -234,9 +234,9 @@ public final class Document implements IsEventManager {
 	private final EventItemManager eventItemManager;
 
 	/**
-	 * Creates an editor instance wrapping a native code mirror object.
+	 * Creates an editor instance wrapping a native CodeMirror object.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param language language to apply to the document
 	 */
 	Document(NativeDocument nativeObject, Language language) {
@@ -487,7 +487,7 @@ public final class Document implements IsEventManager {
 		if (replacement != null && from != null && to != null) {
 			// if origin is consistent
 			if (origin != null) {
-				// invokes code mirror with origin
+				// invokes CodeMirror with origin
 				nativeObject.replaceRange(replacement, from, to, origin);
 			} else {
 				// invokes without origin

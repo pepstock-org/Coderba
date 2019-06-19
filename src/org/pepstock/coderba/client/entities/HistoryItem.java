@@ -23,7 +23,7 @@ import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
- * Entity which maps the history item of Code Mirror document.<br>
+ * Entity which maps the history item of CodeMirror document.<br>
  * It contains the changes and the ranges where the changes are applied.
  * 
  * @author Andrea "Stock" Stocchero

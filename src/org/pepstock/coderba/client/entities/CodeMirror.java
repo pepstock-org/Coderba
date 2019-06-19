@@ -66,9 +66,9 @@ public final class CodeMirror {
 	}
 
 	/**
-	 * Returns the singleton instance of the code mirror.
+	 * Returns the singleton instance of the CodeMirror.
 	 * 
-	 * @return the singleton instance of the code mirror
+	 * @return the singleton instance of the CodeMirror
 	 */
 	public static CodeMirror get() {
 		return INSTANCE;

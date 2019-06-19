@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Object which contains 4 values to identify an area: top, left, bottom and right.<br>
- * It is used by Code Mirror methods.
+ * It is used by CodeMirror methods.
  * 
  * @author Andrea "Stock" Stocchero
  *

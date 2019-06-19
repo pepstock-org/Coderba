@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.entities;
 import org.pepstock.coderba.client.commons.CallbackProxy;
 
 /**
- * Interface which maps the options of Code Mirror where you can add native callbacks.
+ * Interface which maps the options of CodeMirror where you can add native callbacks.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
  * Fires when the editor tries to scroll its cursor into view.<br>
  * Can be hooked into to take care of additional scrollable containers around the editor.<br>
@@ -43,7 +41,7 @@ public final class EditorScrollCursorIntoViewEvent extends AbstractEditorWithNat
 	 * @param editorArea editor area instance
 	 * @param event native event instance
 	 */
-	public EditorScrollCursorIntoViewEvent(EditorArea editorArea, NativeEvent event) {
+	public EditorScrollCursorIntoViewEvent(EditorArea editorArea, EditorNativeEvent event) {
 		super(TYPE, editorArea, event);
 	}
 

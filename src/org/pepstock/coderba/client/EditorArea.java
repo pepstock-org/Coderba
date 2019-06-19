@@ -229,7 +229,7 @@ public class EditorArea extends Widget {
 			}
 			// stores the editor area instance into cache
 			EditorAreas.add(this);
-			// creates the code mirror editor
+			// creates the CodeMirror editor
 			this.editor = CodeMirror.get().fromTextArea(editorAreaId, this);
 			// checks an initializer instance has been set
 			if (initializer != null) {

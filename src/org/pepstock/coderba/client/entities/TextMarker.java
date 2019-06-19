@@ -40,7 +40,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Object, provided by Code Mirror, that can be used to mark a range of text with a specific CSS class name.
+ * Object, provided by CodeMirror, that can be used to mark a range of text with a specific CSS class name.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -170,9 +170,9 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 	}
 
 	/**
-	 * Creates a text marker instance wrapping a native code mirror object and the document which this text marker belongs to.
+	 * Creates a text marker instance wrapping a native CodeMirror object and the document which this text marker belongs to.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param document document which this text marker belongs to
 	 */
 	TextMarker(NativeTextMarker nativeObject, Document document) {

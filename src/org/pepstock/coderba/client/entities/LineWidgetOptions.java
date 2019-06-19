@@ -109,7 +109,7 @@ public class LineWidgetOptions extends BaseEntity {
 
 	/**
 	 * Creates a container with a native object instance.<br>
-	 * This is used when coordinate has been passed by a method of Code Mirror.
+	 * This is used when coordinate has been passed by a method of CodeMirror.
 	 * 
 	 * @param nativeObject a native object instance
 	 */

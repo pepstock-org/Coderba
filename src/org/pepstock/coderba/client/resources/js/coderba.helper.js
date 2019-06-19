@@ -58,6 +58,35 @@
     	return typeof obj[key];
     }
     /*
+	 Returns a property of java script object as integer.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return integer value
+    */
+    CoderbaJsHelper.propertyAsInt = function(obj, key) {
+    	return obj[key];
+    }  
+    /*
+	 Returns a property of java script object as boolean.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return boolean value
+    */
+    CoderbaJsHelper.propertyAsBoolean = function(obj, key) {
+    	return obj[key];
+    }
+    /*
+	 Sets the boolean property to <code>true</code> into a native event.
+	  
+	 @param object the object on which to remove the property.
+	 @param key the string name of the property to remove.
+	 */
+	CoderbaJsHelper.ignore= function(obj, key) {
+    	obj[key] = true;
+    }    
+    /*
 	 Returns the java script object type of a property.
 	  
 	 @param object the object on which to search the property.

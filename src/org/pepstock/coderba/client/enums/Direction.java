@@ -43,7 +43,7 @@ public enum Direction implements Key
 	/**
 	 * Creates the enumeration by its value.
 	 * 
-	 * @param value string value to use into Code Mirror configuration
+	 * @param value string value to use into CodeMirror configuration
 	 */
 	private Direction(String value) {
 		this.value = value;

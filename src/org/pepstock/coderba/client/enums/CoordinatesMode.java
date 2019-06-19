@@ -18,7 +18,7 @@ package org.pepstock.coderba.client.enums;
 import org.pepstock.coderba.client.commons.Key;
 
 /**
- * Configuration object to define the type of coordinates that Code Mirror should provide.
+ * Configuration object to define the type of coordinates that CodeMirror should provide.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +44,7 @@ public enum CoordinatesMode implements Key
 	/**
 	 * Creates the enumeration by its value.
 	 * 
-	 * @param value string value to use into Code Mirror configuration
+	 * @param value string value to use into CodeMirror configuration
 	 */
 	private CoordinatesMode(String value) {
 		this.value = value;

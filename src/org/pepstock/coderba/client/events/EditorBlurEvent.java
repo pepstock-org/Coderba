@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.events;
 
 import org.pepstock.coderba.client.EditorArea;
 
-import com.google.gwt.dom.client.NativeEvent;
-
 /**
  * Fires whenever the editor is unfocused.
  * 
@@ -41,7 +39,7 @@ public final class EditorBlurEvent extends AbstractEditorWithNativeEvent<EditorB
 	 * @param editorArea editor area instance
 	 * @param event native event instance
 	 */
-	public EditorBlurEvent(EditorArea editorArea, NativeEvent event) {
+	public EditorBlurEvent(EditorArea editorArea, EditorNativeEvent event) {
 		super(TYPE, editorArea, event);
 	}
 

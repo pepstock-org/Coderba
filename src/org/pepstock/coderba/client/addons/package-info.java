@@ -14,8 +14,7 @@
     limitations under the License.
 */
 /**
- * CodeMirror distribution contains a number of reusable components that implement extra editor functionality.<br>
- * This package contains abstractly those components.
+ * Contains all reusable components, provided out of the box by <code>CodeMirror</code>, that implement extra editor functionality.
  * 
  * @author Andrea "Stock" Stocchero
  *

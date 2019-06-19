@@ -32,11 +32,11 @@ import org.pepstock.coderba.client.enums.Direction;
 import org.pepstock.coderba.client.enums.InputStyle;
 import org.pepstock.coderba.client.enums.MouseRepeat;
 import org.pepstock.coderba.client.enums.ReadOnly;
+import org.pepstock.coderba.client.events.EditorNativeEvent;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NativeEvent;
 
 import jsinterop.annotations.JsFunction;
 
@@ -123,7 +123,7 @@ public class EditorOptions implements IsOptions {
 		 *         elsewhere.
 		 *         </ul>
 		 */
-		NativeObject call(NativeEditor editor, String repeat, NativeEvent event);
+		NativeObject call(NativeEditor editor, String repeat, EditorNativeEvent event);
 	}
 
 	// ---------------------------
@@ -1366,7 +1366,7 @@ public class EditorOptions implements IsOptions {
 	 * @param event native event
 	 * @return mouse configuration native object
 	 */
-	private NativeObject onConfigureMouse(NativeEditor editor, String repeat, NativeEvent event) {
+	private NativeObject onConfigureMouse(NativeEditor editor, String repeat, EditorNativeEvent event) {
 		// creates a mouse repeat object
 		MouseRepeat confMouseRepeat = Key.getKeyByValue(MouseRepeat.class, repeat, MouseRepeat.SINGLE);
 		// gets editor area from native editor

@@ -49,7 +49,7 @@ public enum MouseRepeat implements Key
 	/**
 	 * Creates the enumeration by its value and mouse unit.
 	 * 
-	 * @param value string value to use into Code Mirror configuration
+	 * @param value string value to use into CodeMirror configuration
 	 * @param defaultUnit mouse unit which is used by CodeMirror as default, related to mouse repeat
 	 */
 	private MouseRepeat(String value, MouseUnit defaultUnit) {

@@ -45,8 +45,26 @@ import org.pepstock.coderba.client.events.EditorChangeEvent;
 import org.pepstock.coderba.client.events.EditorChangeEventHandler;
 import org.pepstock.coderba.client.events.EditorChangesEvent;
 import org.pepstock.coderba.client.events.EditorChangesEventHandler;
+import org.pepstock.coderba.client.events.EditorContextmenuEvent;
+import org.pepstock.coderba.client.events.EditorContextmenuEventHandler;
+import org.pepstock.coderba.client.events.EditorCopyEvent;
+import org.pepstock.coderba.client.events.EditorCopyEventHandler;
 import org.pepstock.coderba.client.events.EditorCursorActivityEvent;
 import org.pepstock.coderba.client.events.EditorCursorActivityEventHandler;
+import org.pepstock.coderba.client.events.EditorCutEvent;
+import org.pepstock.coderba.client.events.EditorCutEventHandler;
+import org.pepstock.coderba.client.events.EditorDblclickEvent;
+import org.pepstock.coderba.client.events.EditorDblclickEventHandler;
+import org.pepstock.coderba.client.events.EditorDragenterEvent;
+import org.pepstock.coderba.client.events.EditorDragenterEventHandler;
+import org.pepstock.coderba.client.events.EditorDragleaveEvent;
+import org.pepstock.coderba.client.events.EditorDragleaveEventHandler;
+import org.pepstock.coderba.client.events.EditorDragoverEvent;
+import org.pepstock.coderba.client.events.EditorDragoverEventHandler;
+import org.pepstock.coderba.client.events.EditorDragstartEvent;
+import org.pepstock.coderba.client.events.EditorDragstartEventHandler;
+import org.pepstock.coderba.client.events.EditorDropEvent;
+import org.pepstock.coderba.client.events.EditorDropEventHandler;
 import org.pepstock.coderba.client.events.EditorElectrictInputEvent;
 import org.pepstock.coderba.client.events.EditorElectrictInputEventHandler;
 import org.pepstock.coderba.client.events.EditorFocusEvent;
@@ -59,8 +77,19 @@ import org.pepstock.coderba.client.events.EditorInputReadEvent;
 import org.pepstock.coderba.client.events.EditorInputReadEventHandler;
 import org.pepstock.coderba.client.events.EditorKeyHandledEvent;
 import org.pepstock.coderba.client.events.EditorKeyHandledEventHandler;
+import org.pepstock.coderba.client.events.EditorKeydownEvent;
+import org.pepstock.coderba.client.events.EditorKeydownEventHandler;
+import org.pepstock.coderba.client.events.EditorKeypressEvent;
+import org.pepstock.coderba.client.events.EditorKeypressEventHandler;
+import org.pepstock.coderba.client.events.EditorKeyupEvent;
+import org.pepstock.coderba.client.events.EditorKeyupEventHandler;
+import org.pepstock.coderba.client.events.EditorMousedownEvent;
+import org.pepstock.coderba.client.events.EditorMousedownEventHandler;
+import org.pepstock.coderba.client.events.EditorNativeEvent;
 import org.pepstock.coderba.client.events.EditorOptionChangeEvent;
 import org.pepstock.coderba.client.events.EditorOptionChangeEventHandler;
+import org.pepstock.coderba.client.events.EditorPasteEvent;
+import org.pepstock.coderba.client.events.EditorPasteEventHandler;
 import org.pepstock.coderba.client.events.EditorRefreshEvent;
 import org.pepstock.coderba.client.events.EditorRefreshEventHandler;
 import org.pepstock.coderba.client.events.EditorRenderLineEvent;
@@ -71,6 +100,8 @@ import org.pepstock.coderba.client.events.EditorScrollEvent;
 import org.pepstock.coderba.client.events.EditorScrollEventHandler;
 import org.pepstock.coderba.client.events.EditorSwapDocEvent;
 import org.pepstock.coderba.client.events.EditorSwapDocEventHandler;
+import org.pepstock.coderba.client.events.EditorTouchstartEvent;
+import org.pepstock.coderba.client.events.EditorTouchstartEventHandler;
 import org.pepstock.coderba.client.events.EditorUpdateEvent;
 import org.pepstock.coderba.client.events.EditorUpdateEventHandler;
 import org.pepstock.coderba.client.events.EditorViewportChangeEvent;
@@ -80,7 +111,6 @@ import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -190,7 +220,7 @@ public final class Editor implements IsEventManager {
 		 * @param name the name of the handled key (for example "Ctrl-X" or "'q'")
 		 * @param event the DOM keydown or keypress event.
 		 */
-		void call(NativeEditor editor, String name, NativeEvent event);
+		void call(NativeEditor editor, String name, EditorNativeEvent event);
 	}
 
 	/**
@@ -224,7 +254,7 @@ public final class Editor implements IsEventManager {
 		 * @param editor native editor instance
 		 * @param event native DOM event
 		 */
-		void call(NativeEditor editor, NativeEvent event);
+		void call(NativeEditor editor, EditorNativeEvent event);
 	}
 
 	/**
@@ -259,7 +289,7 @@ public final class Editor implements IsEventManager {
 		 * @param editor native editor instance
 		 * @param event native DOM event
 		 */
-		void call(NativeEditor editor, NativeEvent item);
+		void call(NativeEditor editor, EditorNativeEvent item);
 	}
 
 	/**
@@ -278,7 +308,7 @@ public final class Editor implements IsEventManager {
 		 * @param gutter the CSS class of the gutter that was clicked
 		 * @param event the raw mousedown event object
 		 */
-		void call(NativeEditor editor, int line, String gutter, NativeEvent event);
+		void call(NativeEditor editor, int line, String gutter, EditorNativeEvent event);
 	}
 
 	/**
@@ -297,7 +327,7 @@ public final class Editor implements IsEventManager {
 		 * @param gutter the CSS class of the gutter that was clicked
 		 * @param event the raw contextmenu mouse event object
 		 */
-		void call(NativeEditor editor, int line, String gutter, NativeEvent event);
+		void call(NativeEditor editor, int line, String gutter, EditorNativeEvent event);
 	}
 
 	/**
@@ -391,7 +421,7 @@ public final class Editor implements IsEventManager {
 		 * @param editor native editor instance
 		 * @param event native DOM event
 		 */
-		void call(NativeEditor editor, NativeEvent event);
+		void call(NativeEditor editor, EditorNativeEvent event);
 	}
 
 	/**
@@ -463,6 +493,27 @@ public final class Editor implements IsEventManager {
 		void call(NativeEditor editor, int from, int to);
 	}
 
+	/**
+	 * Java script FUNCTION that is called when the editorFired when CodeMirror is handling a DOM event of this type.<br>
+	 * You can <code>preventDefault</code> the event, or give it a truthy <code>codemirrorIgnore</code> property, to signal that
+	 * CodeMirror should do no further handling.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface EditorDOMEventFunction {
+
+		/**
+		 * Is called when the editorFired when CodeMirror is handling a DOM event of this type.<br>
+		 * You can <code>preventDefault</code> the event, or give it a truthy <code>codemirrorIgnore</code> property, to signal
+		 * that CodeMirror should do no further handling.
+		 * 
+		 * @param editor native editor instance
+		 * @param event native DOM event
+		 */
+		void call(NativeEditor editor, EditorNativeEvent event);
+	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -506,6 +557,37 @@ public final class Editor implements IsEventManager {
 	private final CallbackProxy<EditorUpdateFunction> editorUpdateFunctionProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the EditorViewportChangeEvent function
 	private final CallbackProxy<EditorViewportChangeFunction> editorViewportChangeFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorMousedownEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorMousedownFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDblclickEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDblclickFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorTouchstartEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorTouchstartFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorContextmenuEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorContextmenuFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorKeydownEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorKeydownFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorKeypressEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorKeypressFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorKeyupEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorKeyupFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorCutEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorCutFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorCopyEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorCopyFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorPasteEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorPasteFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDragstartEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDragstartFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDragenterEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDragenterFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDragoverEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDragoverFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDragleaveEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDragleaveFunctionProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the EditorDropEvent function
+	private final CallbackProxy<EditorDOMEventFunction> editorDropFunctionProxy = JsHelper.get().newCallbackProxy();
+
 	// native editor object (generated by CodeMirror)
 	private final NativeEditor nativeObject;
 	// event manager instance
@@ -516,9 +598,9 @@ public final class Editor implements IsEventManager {
 	private final EventItemManager eventItemManager;
 
 	/**
-	 * Creates an editor instance wrapping a native code mirror object.
+	 * Creates an editor instance wrapping a native CodeMirror object.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param language language to apply to the document
 	 */
 	Editor(NativeEditor nativeObject, Language language) {
@@ -551,6 +633,21 @@ public final class Editor implements IsEventManager {
 		editorSwapDocFunctionProxy.setCallback(this::onSwapDoc);
 		editorUpdateFunctionProxy.setCallback(this::onUpdate);
 		editorViewportChangeFunctionProxy.setCallback(this::onViewportChange);
+		editorMousedownFunctionProxy.setCallback(this::onMousedown);
+		editorDblclickFunctionProxy.setCallback(this::onDblclick);
+		editorTouchstartFunctionProxy.setCallback(this::onTouchstart);
+		editorContextmenuFunctionProxy.setCallback(this::onContextmenu);
+		editorKeydownFunctionProxy.setCallback(this::onKeydown);
+		editorKeypressFunctionProxy.setCallback(this::onKeypress);
+		editorKeyupFunctionProxy.setCallback(this::onKeyup);
+		editorCutFunctionProxy.setCallback(this::onCut);
+		editorCopyFunctionProxy.setCallback(this::onCopy);
+		editorPasteFunctionProxy.setCallback(this::onPaste);
+		editorDragstartFunctionProxy.setCallback(this::onDragstart);
+		editorDragenterFunctionProxy.setCallback(this::onDragenter);
+		editorDragoverFunctionProxy.setCallback(this::onDragover);
+		editorDragleaveFunctionProxy.setCallback(this::onDragleave);
+		editorDropFunctionProxy.setCallback(this::onDrop);
 
 		eventItemManager.addEventItem(new EventItem<EditorChangeEventHandler, NativeEditor>(EditorChangeEvent.TYPE, nativeObject, EditorChangeEvent.NAME, eventManager, editorChangeFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<EditorChangesEventHandler, NativeEditor>(EditorChangesEvent.TYPE, nativeObject, EditorChangesEvent.NAME, eventManager, editorChangesFunctionProxy.getProxy()));
@@ -574,6 +671,22 @@ public final class Editor implements IsEventManager {
 		eventItemManager.addEventItem(new EventItem<EditorSwapDocEventHandler, NativeEditor>(EditorSwapDocEvent.TYPE, nativeObject, EditorSwapDocEvent.NAME, eventManager, editorSwapDocFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<EditorUpdateEventHandler, NativeEditor>(EditorUpdateEvent.TYPE, nativeObject, EditorUpdateEvent.NAME, eventManager, editorUpdateFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<EditorViewportChangeEventHandler, NativeEditor>(EditorViewportChangeEvent.TYPE, nativeObject, EditorViewportChangeEvent.NAME, eventManager, editorViewportChangeFunctionProxy.getProxy()));
+
+		eventItemManager.addEventItem(new EventItem<EditorMousedownEventHandler, NativeEditor>(EditorMousedownEvent.TYPE, nativeObject, EditorMousedownEvent.NAME, eventManager, editorMousedownFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDblclickEventHandler, NativeEditor>(EditorDblclickEvent.TYPE, nativeObject, EditorDblclickEvent.NAME, eventManager, editorDblclickFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorTouchstartEventHandler, NativeEditor>(EditorTouchstartEvent.TYPE, nativeObject, EditorTouchstartEvent.NAME, eventManager, editorTouchstartFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorContextmenuEventHandler, NativeEditor>(EditorContextmenuEvent.TYPE, nativeObject, EditorContextmenuEvent.NAME, eventManager, editorContextmenuFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorKeydownEventHandler, NativeEditor>(EditorKeydownEvent.TYPE, nativeObject, EditorKeydownEvent.NAME, eventManager, editorKeydownFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorKeypressEventHandler, NativeEditor>(EditorKeypressEvent.TYPE, nativeObject, EditorKeypressEvent.NAME, eventManager, editorKeypressFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorKeyupEventHandler, NativeEditor>(EditorKeyupEvent.TYPE, nativeObject, EditorKeyupEvent.NAME, eventManager, editorKeyupFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorCutEventHandler, NativeEditor>(EditorCutEvent.TYPE, nativeObject, EditorCutEvent.NAME, eventManager, editorCutFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorCopyEventHandler, NativeEditor>(EditorCopyEvent.TYPE, nativeObject, EditorCopyEvent.NAME, eventManager, editorCopyFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorPasteEventHandler, NativeEditor>(EditorPasteEvent.TYPE, nativeObject, EditorPasteEvent.NAME, eventManager, editorPasteFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDragstartEventHandler, NativeEditor>(EditorDragstartEvent.TYPE, nativeObject, EditorDragstartEvent.NAME, eventManager, editorDragstartFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDragenterEventHandler, NativeEditor>(EditorDragenterEvent.TYPE, nativeObject, EditorDragenterEvent.NAME, eventManager, editorDragenterFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDragoverEventHandler, NativeEditor>(EditorDragoverEvent.TYPE, nativeObject, EditorDragoverEvent.NAME, eventManager, editorDragoverFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDragleaveEventHandler, NativeEditor>(EditorDragleaveEvent.TYPE, nativeObject, EditorDragleaveEvent.NAME, eventManager, editorDragleaveFunctionProxy.getProxy()));
+		eventItemManager.addEventItem(new EventItem<EditorDropEventHandler, NativeEditor>(EditorDropEvent.TYPE, nativeObject, EditorDropEvent.NAME, eventManager, editorDropFunctionProxy.getProxy()));
 
 	}
 
@@ -1137,13 +1250,13 @@ public final class Editor implements IsEventManager {
 			Object object = nativeObject.getModeAt(position);
 			// checks the type of the mode
 			if (object instanceof String) {
-				// if string 
+				// if string
 				// returns a specification by string
-				return new ModeSpecification((String)object);
+				return new ModeSpecification((String) object);
 			} else if (object instanceof NativeModeSpecification) {
-				// if object 
+				// if object
 				// returns a specification by string
-				return new ModeSpecification((NativeModeSpecification)object);
+				return new ModeSpecification((NativeModeSpecification) object);
 			}
 		}
 		// if here, position is not consistent
@@ -1497,7 +1610,7 @@ public final class Editor implements IsEventManager {
 	 * @param name the name of the handled key (for example "Ctrl-X" or "'q'")
 	 * @param event the DOM key down or key press event
 	 */
-	private void onKeyHandled(NativeEditor editor, String name, NativeEvent event) {
+	private void onKeyHandled(NativeEditor editor, String name, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1529,7 +1642,7 @@ public final class Editor implements IsEventManager {
 	 * @param editor native editor instance
 	 * @param event DOM event instance
 	 */
-	private void onBlur(NativeEditor editor, NativeEvent event) {
+	private void onBlur(NativeEditor editor, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1561,7 +1674,7 @@ public final class Editor implements IsEventManager {
 	 * @param editor native editor instance
 	 * @param event DOM event instance
 	 */
-	private void onFocus(NativeEditor editor, NativeEvent event) {
+	private void onFocus(NativeEditor editor, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1579,7 +1692,7 @@ public final class Editor implements IsEventManager {
 	 * @param gutter the CSS class of the gutter that was clicked
 	 * @param event DOM event instance
 	 */
-	private void onGutterClick(NativeEditor editor, int line, String gutter, NativeEvent event) {
+	private void onGutterClick(NativeEditor editor, int line, String gutter, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1597,7 +1710,7 @@ public final class Editor implements IsEventManager {
 	 * @param gutter the CSS class of the gutter that was clicked
 	 * @param event DOM event instance
 	 */
-	private void onGutterContextMenu(NativeEditor editor, int line, String gutter, NativeEvent event) {
+	private void onGutterContextMenu(NativeEditor editor, int line, String gutter, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1684,7 +1797,7 @@ public final class Editor implements IsEventManager {
 	 * @param editor native editor instance
 	 * @param event DOME event instance
 	 */
-	private void onScrollCursorIntoView(NativeEditor editor, NativeEvent event) {
+	private void onScrollCursorIntoView(NativeEditor editor, EditorNativeEvent event) {
 		// gets editor area
 		EditorArea area = editor.getEditorArea();
 		// checks if area is consistent
@@ -1758,6 +1871,248 @@ public final class Editor implements IsEventManager {
 			eventManager.fireEvent(new EditorViewportChangeEvent(area, from, to));
 		}
 	}
+	
+
+	/**
+	 * Fires when the editor fires "mousedown" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onMousedown(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorMousedownEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "dblclick" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDblclick(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDblclickEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "touchstart" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onTouchstart(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorTouchstartEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "contextmenu" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onContextmenu(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorContextmenuEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "keydown" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onKeydown(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorKeydownEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "keypress" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onKeypress(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorKeypressEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "keyup" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onKeyup(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorKeyupEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "cut" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onCut(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorCutEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "copy" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onCopy(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorCopyEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "paste" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onPaste(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorPasteEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "dragstart" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDragstart(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDragstartEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "dragenter" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDragenter(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDragenterEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "dragover" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDragover(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDragoverEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "dragleave" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDragleave(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDragleaveEvent(area, event));
+		}
+	}
+
+	/**
+	 * Fires when the editor fires "drop" event.
+	 * 
+	 * @param editor native editor instance
+	 * @param event DOME event instance
+	 */
+	private void onDrop(NativeEditor editor, EditorNativeEvent event) {
+		// gets editor area
+		EditorArea area = editor.getEditorArea();
+		// checks if area is consistent
+		if (area != null) {
+			// fires the event
+			eventManager.fireEvent(new EditorDropEvent(area, event));
+		}
+	}
+
 
 	/**
 	 * Returns the native editor object.

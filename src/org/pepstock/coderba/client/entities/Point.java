@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Object which contains 2 values to identify a point: top and left.<br>
- * It is used by Code Mirror methods.
+ * It is used by CodeMirror methods.
  * 
  * @author Andrea "Stock" Stocchero
  *

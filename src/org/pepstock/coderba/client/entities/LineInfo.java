@@ -43,9 +43,9 @@ public final class LineInfo {
 	private final List<LineWidget> widgets = new LinkedList<>();
 
 	/**
-	 * Creates a line info instance wrapping a native code mirror object and the document which this line info belongs to.
+	 * Creates a line info instance wrapping a native CodeMirror object and the document which this line info belongs to.
 	 * 
-	 * @param nativeObject a native code mirror object
+	 * @param nativeObject a native CodeMirror object
 	 * @param document document which this line info belongs to
 	 */
 	LineInfo(NativeLineInfo nativeObject, Document document) {
@@ -61,7 +61,7 @@ public final class LineInfo {
 			// otherwise gets line handle from document by line number
 			this.lineHandle = this.document.getLineHandle(getLineNumber());
 		}
-		// gets the array of line widgets by Code Mirror
+		// gets the array of line widgets by CodeMirror
 		ArrayObject array = nativeObject.getWidgets();
 		// checks if array is consistent
 		if (array != null && !array.isEmpty()) {
