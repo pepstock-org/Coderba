@@ -17,6 +17,8 @@ package org.pepstock.coderba.client.commons;
 
 import org.pepstock.coderba.client.events.EditorNativeEvent;
 
+import com.google.gwt.dom.client.EventTarget;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -81,6 +83,23 @@ final class NativeJsHelper {
 	static native boolean propertyAsBoolean(Object object, String key);
 	
 	/**
+	 * Returns a property of java script object as string.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return string value
+	 */
+	static native String propertyAsString(Object object, String key);
+	
+	/**
+	 * FIXME
+	 * @param element
+	 * @param key
+	 * @return
+	 */
+	static native String elementAttribute(EventTarget element, String key);
+	
+	/**
 	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
 	 * method.
 	 * 
@@ -128,4 +147,5 @@ final class NativeJsHelper {
 	 * @param key The property key to clone
 	 */
 	static native void cloneProperty(Object source, Object target, String key);
+	
 }

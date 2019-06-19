@@ -23,6 +23,9 @@ package org.pepstock.coderba.client;
  *
  */
 public abstract class AddOn extends InjectableItem {
+	
+	// flags to know if injected
+	private boolean isInjected = false;
 
 	/**
 	 * Creates the object with the mandatory name of addon.
@@ -37,7 +40,13 @@ public abstract class AddOn extends InjectableItem {
 	 * Injects the addon instance into DOM document in order to consume it by CodeMirror.
 	 */
 	public final void inject() {
-		Injector.ensureInjected(this);
+		// checks if already injected
+		if (!isInjected) {
+			// injects
+			Injector.ensureInjected(this);
+			// sets flag as already injected
+			isInjected = true;
+		}
 	}
 
 }

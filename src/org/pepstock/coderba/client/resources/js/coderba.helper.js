@@ -57,6 +57,18 @@
     CoderbaJsHelper.type = function(obj, key) {
     	return typeof obj[key];
     }
+        /*
+	 Returns a property of java script object as string.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return string value
+    */
+    CoderbaJsHelper.propertyAsString = function(obj, key) {
+    	console.log(obj);
+    	console.log(key);
+    	return obj[key];
+    }  
     /*
 	 Returns a property of java script object as integer.
 	  
@@ -86,6 +98,24 @@
 	CoderbaJsHelper.ignore= function(obj, key) {
     	obj[key] = true;
     }    
+    /*
+	 Returns an array of strings with element attributes.
+	  
+	 @param element DOM element to scan
+	 @return an array of strings with element attributes
+    */
+    CoderbaJsHelper.elementAttribute = function(element, key) {
+    	// First, let's verify that the paragraph has some attributes    
+     	if (element.hasAttributes()) {
+           var attrs = element.attributes;
+	       for(var i = 0; i < attrs.length; i++) {
+	          if (attrs[i].name === key){
+	          	 return  attrs[i].value;
+	          }
+	       }
+	    }
+    	return null;
+    }  
     /*
 	 Returns the java script object type of a property.
 	  

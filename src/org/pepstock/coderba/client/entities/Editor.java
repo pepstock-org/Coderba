@@ -21,6 +21,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.KeyMap;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.callbacks.DialogHandler;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -513,7 +514,7 @@ public final class Editor implements IsEventManager {
 		 */
 		void call(NativeEditor editor, EditorNativeEvent event);
 	}
-
+	
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -2112,8 +2113,22 @@ public final class Editor implements IsEventManager {
 			eventManager.fireEvent(new EditorDropEvent(area, event));
 		}
 	}
+	
+	// -----------------------------------------
+	// ADDITIONAL methods from ADDON
+	// -----------------------------------------
 
-
+	/**
+	 * Creates a dialog object, at the top of the editor, activating the dialog addon.
+	 * 
+	 * @param handler handler instance invoked when ENTER is pressed into text field
+	 * @return a dialog object
+	 */
+	public Dialog createDialog(DialogHandler handler) {
+		return new Dialog(this, handler);
+	}
+	
+	
 	/**
 	 * Returns the native editor object.
 	 * 
@@ -2122,5 +2137,6 @@ public final class Editor implements IsEventManager {
 	NativeEditor getNativeObject() {
 		return nativeObject;
 	}
+
 
 }

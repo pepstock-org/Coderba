@@ -20,10 +20,12 @@ import org.pepstock.coderba.client.EditorAreas;
 import org.pepstock.coderba.client.commons.Array;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.CallbackProxy;
+import org.pepstock.coderba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.NativeEntity;
 import org.pepstock.coderba.client.commons.NativeName;
 import org.pepstock.coderba.client.commons.NativeObject;
+import org.pepstock.coderba.client.entities.Dialog.DialogFunction;
 import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
@@ -770,6 +772,18 @@ final class NativeEditor extends NativeEventEmitter {
 	 */
 	native TextAreaElement getTextArea();
 
+	// -----------------------------------------
+	// ADDITIONAL methods from ADDON
+	// -----------------------------------------
+	/**
+	 * FIXME
+	 * @param template
+	 * @param callback
+	 * @param options
+	 * @return
+	 */
+	native DialogFunction openDialog(Element template, Proxy callback, NativeObject options);
+	
 	/**
 	 * Returns the CODERBA ID.
 	 * 
