@@ -15,8 +15,8 @@
 */
 package org.pepstock.coderba.client;
 
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.pepstock.coderba.client.resources.InjectableResource;
 
@@ -30,7 +30,7 @@ import org.pepstock.coderba.client.resources.InjectableResource;
 public abstract class InjectableItem extends NamedItem {
 
 	// internal collections of resources to be inject
-	private final Collection<InjectableResource> resources = new LinkedList<>();
+	private final List<InjectableResource> resources = new LinkedList<>();
 
 	/**
 	 * Creates the object with a mandatory name as string.
@@ -46,7 +46,7 @@ public abstract class InjectableItem extends NamedItem {
 	 * 
 	 * @return the collection of script or style resources
 	 */
-	protected final Collection<InjectableResource> getResources() {
+	protected final List<InjectableResource> getResources() {
 		return resources;
 	}
 

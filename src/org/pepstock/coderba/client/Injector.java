@@ -15,8 +15,10 @@
 */
 package org.pepstock.coderba.client;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.pepstock.coderba.client.entities.CodeMirror;
@@ -44,6 +46,8 @@ public final class Injector {
 	private static final String CODERBA_PREFIX_SCRIPT_ELEMENT_ID = "_coderba_";
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
+	// internal comparator to sort the injectable resources, adding priority to style resources
+	private static final Comparator<InjectableResource> COMPARATOR = (InjectableResource o1, InjectableResource o2) -> InjectableResource.compare(o1, o2);
 
 	/**
 	 * To avoid any instantiation
@@ -182,9 +186,10 @@ public final class Injector {
 		// check if argument is consistent
 		if (item != null) {
 			// gets resources
-			Collection<InjectableResource> resources = item.getResources();
+			List<InjectableResource> resources = item.getResources();
 			// checks if there is any resources to add
 			if (!resources.isEmpty()) {
+				Collections.sort(resources, COMPARATOR);
 				// scans all resources to add
 				for (InjectableResource resource : resources) {
 					// inject

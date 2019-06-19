@@ -25,6 +25,43 @@ import com.google.gwt.resources.client.TextResource;
  *
  */
 public interface InjectableResource {
+	
+	/**
+	 * Compares the two specified resources.
+	 * 
+	 * @param k1 the first resource to compare
+	 * @param k2 the second resource to compare
+	 * @return the value 0 if k1 class is equal to k2; a value less than 0 if k1 class is a script resource is less than k2; and a value greater than
+	 *         0 if k1 class is style resource.
+	 */
+	static int compare(InjectableResource k1, InjectableResource k2) {
+		// checks if k1 argument is consistent
+		if (k1 == null) {
+			// checks if k2 argument is consistent
+			if (k2 == null) {
+				// both are null then equals
+				return 0;
+			}
+			// k2 is greater being not null
+			return -1;
+		} else {
+			// checks if k2 argument is consistent
+			if (k2 == null) {
+				// k2 is less being not null
+				return 1;
+			}
+			// checks if k1 is a STYLE resource 
+			if (k1 instanceof StyleResource) {
+				// if yes, priority 1
+				return -1;
+			} else if (k2 instanceof StyleResource) {
+				// checks if k1 is a STYLE resource 
+				return 1;
+			}
+			// if here, both reosurces are script
+			return 0;
+		}
+	}
 
 	/**
 	 * Returns a text resource instance which must be injected.
