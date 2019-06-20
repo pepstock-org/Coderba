@@ -19,8 +19,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
- * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
- * This resources type will load the CHART.JS module in async mode in order to optimize the performance when GWT code splitting
+ * Client bundle to reference CodeMirror, always needed to CODERBA.<br>
+ * This resources type will load the CodeMirror module in async mode in order to optimize the performance when GWT code splitting
  * is implemented.
  * 
  * @author Andrea "Stock" Stocchero

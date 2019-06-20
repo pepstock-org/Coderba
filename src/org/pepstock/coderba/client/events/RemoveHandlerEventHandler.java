@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
 public interface RemoveHandlerEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when a editor event handler is removed.
 	 * 
 	 * @param event event to be consumed
 	 */

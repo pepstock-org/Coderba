@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for event if text input matched the mode's electric patterns, and this caused the line's indentation to change.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorElectrictInputEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when text input matched the mode's electric patterns, and this caused the line's indentation to change.
 	 * 
 	 * @param event event to be consumed
 	 */

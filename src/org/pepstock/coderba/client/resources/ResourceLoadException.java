@@ -16,7 +16,7 @@
 package org.pepstock.coderba.client.resources;
 
 /**
- * Exception created when it's able to load CHART.JS source in deferred mode.
+ * Exception created when it's able to load CodeMirror source in deferred mode.
  * 
  * @author Andrea "Stock" Stocchero
  *

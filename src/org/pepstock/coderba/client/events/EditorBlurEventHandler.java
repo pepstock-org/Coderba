@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for event whenever the editor is unfocused.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorBlurEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when event fired whenever the editor is unfocused.
 	 * 
 	 * @param event event to be consumed
 	 */

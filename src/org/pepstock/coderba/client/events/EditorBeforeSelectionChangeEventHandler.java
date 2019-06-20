@@ -18,14 +18,14 @@ package org.pepstock.coderba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for removing a chart event handler.
+ * Event handler for firing event before the selection is moved.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public interface EditorBeforeSelectionChangeEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a chart event handler is removed.
+	 * Invoked when an event fired before the selection is moved.
 	 * 
 	 * @param event event to be consumed
 	 */

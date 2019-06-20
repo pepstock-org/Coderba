@@ -40,7 +40,7 @@ import com.google.gwt.resources.client.TextResource;
  * 
  * 			&#64;Override
  * 			public void run() {
- * 				// CODERBA charts and api...
+ * 				// CODERBA editor and api...
  * 			}
  * 		});
  * 	}
@@ -60,7 +60,7 @@ public final class EntryPointStarter {
 	}
 
 	/**
-	 * Start an entry point as a runnable. This runnable instance must contains all calls to chart.<br>
+	 * Start an entry point as a runnable. This runnable instance must contains all calls to editor.<br>
 	 * This helps when the GWT application is leveraging on code splitting.
 	 * 
 	 * @param runnable the entry point instance as runnable

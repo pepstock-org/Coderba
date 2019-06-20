@@ -19,15 +19,15 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * Abstract event which is fired when event handler has been added or removed to/from the chart.<br>
- * This event should use only for use internal only to manage internally all handlers.
+ * Abstract event which is fired when event handler has been added or removed to/from the editor entities.<br>
+ * This event should use only for use internal only to manage internally all handlers. 
  * 
  * @author Andrea "Stock" Stocchero
  * @param <H> type of event handler
  */
 public abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> {
 
-	// type of new handler added to the chart
+	// type of new handler added to the editor entities
 	private final Type<? extends EventHandler> handlerType;
 
 	/**

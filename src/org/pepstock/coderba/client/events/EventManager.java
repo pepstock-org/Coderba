@@ -50,7 +50,7 @@ public final class EventManager {
 			// if no, exception
 			throw new IllegalArgumentException("Event manager is null");
 		}
-		// streos event manager
+		// stores event manager
 		this.eventManagerImpl = eventManager;
 		// creates GWT manager
 		eventHandlerManager = new HandlerManager(this.eventManagerImpl, false);
@@ -113,7 +113,6 @@ public final class EventManager {
 		}
 		// adds handler
 		HandlerRegistration registration = new InternalHandlerRegistration<H>(this, eventHandlerManager.addHandler(type, handler), type, handler);
-		// if the handler is a chart event handler one
 		// sends the event
 		eventHandlerManager.fireEvent(new AddHandlerEvent(type));
 		// stores the registration
