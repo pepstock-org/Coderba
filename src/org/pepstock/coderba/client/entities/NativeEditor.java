@@ -823,5 +823,31 @@ final class NativeEditor extends NativeEventEmitter {
 	 * @return a function which, if called, will close the notification immediately. 
 	 */
 	native DialogFunction openNotification(Element template, NativeObject options);
+	
+	// -----------------------------------------
+	// ADDON SEARCH CURSOR
+	// -----------------------------------------
+	
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @param options search cursor options instance
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	native SearchCursor getSearchCursor(String query, Position start, NativeObject options);
+	
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @param options search cursor options instance
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	native SearchCursor getSearchCursor(RegExp query, Position start, NativeObject options);
 
 }

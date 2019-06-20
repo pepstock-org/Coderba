@@ -21,6 +21,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.KeyMap;
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
+import org.pepstock.coderba.client.addons.AddOnSearchcursor;
 import org.pepstock.coderba.client.callbacks.DialogHandler;
 import org.pepstock.coderba.client.commons.ArrayEntity;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
@@ -28,6 +29,7 @@ import org.pepstock.coderba.client.commons.CallbackProxy;
 import org.pepstock.coderba.client.commons.Id;
 import org.pepstock.coderba.client.commons.JsHelper;
 import org.pepstock.coderba.client.commons.Key;
+import org.pepstock.coderba.client.commons.NativeObject;
 import org.pepstock.coderba.client.commons.UndefinedValues;
 import org.pepstock.coderba.client.enums.CoordinatesMode;
 import org.pepstock.coderba.client.enums.HorizontalFindUnit;
@@ -110,6 +112,7 @@ import org.pepstock.coderba.client.events.EditorViewportChangeEventHandler;
 import org.pepstock.coderba.client.events.EventManager;
 import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
+import org.pepstock.coderba.client.utils.RegExp;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
@@ -2184,12 +2187,12 @@ public final class Editor implements IsEventManager {
 		// returns dialog
 		return dialog;
 	}
-	
+
 	/**
-	 * Shows an HTML fragment as a notification at the top of the editor. 
-	 * 	
+	 * Shows an HTML fragment as a notification at the top of the editor.
+	 * 
 	 * @param element an HTML fragment as a notification at the top of the editor.
-	 * @return  a dialog object
+	 * @return a dialog object
 	 */
 	public Dialog openNotification(Element element) {
 		return openNotification(element, new DialogOptions());
@@ -2204,7 +2207,7 @@ public final class Editor implements IsEventManager {
 	 * @param options options to configure the notification, it takes a single option: duration, the amount of time after which
 	 *            the notification will be automatically closed. If duration is zero, the dialog will not be closed
 	 *            automatically.
-	 * @return  a dialog object
+	 * @return a dialog object
 	 */
 	public Dialog openNotification(Element element, DialogOptions options) {
 		// checks if dialog was already created
@@ -2217,11 +2220,133 @@ public final class Editor implements IsEventManager {
 		// returns dialog
 		return dialog;
 	}
-	
+
 	// -----------------------------------------
-	// ADDON _____
+	// ADDON SEARCH CURSOR
 	// -----------------------------------------
 
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(String query) {
+		return getSearchCursor(query, null, null);
+	}
+
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(RegExp query) {
+		return getSearchCursor(query, null, null);
+	}
+
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(String query, Position start) {
+		return getSearchCursor(query, start, null);
+	}
+
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(RegExp query, Position start) {
+		return getSearchCursor(query, start, null);
+	}
+
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @param options search cursor options instance
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(String query, Position start, SearchCursorOptions options) {
+		// checks if query is consistent
+		if (query != null) {
+			// Injects add on
+			AddOnSearchcursor.INSTANCE.inject();
+			// invokes method
+			return nativeObject.getSearchCursor(query, checkPositionForSearchCursor(start), checkOptionsForSearchCursor(options));
+		}
+		// if here, the query is not consistent
+		return null;
+	}
+
+	/**
+	 * Returns a cursor item which can be used to implement search/replace functionality.
+	 * 
+	 * @param query text to search
+	 * @param start starting position for searching
+	 * @param options search cursor options instance
+	 * @return a cursor item which can be used to implement search/replace functionality or <code>null</code> if query is not
+	 *         consistent
+	 */
+	public SearchCursor getSearchCursor(RegExp query, Position start, SearchCursorOptions options) {
+		// checks if query is consistent
+		if (query != null) {
+			// Injects add on
+			AddOnSearchcursor.INSTANCE.inject();
+			// invokes method
+			return nativeObject.getSearchCursor(query, checkPositionForSearchCursor(start), checkOptionsForSearchCursor(options));
+		}
+		// if here, the query is not consistent
+		return null;
+	}
+
+	/**
+	 * Checks the position passed as argument if consistent and if no, returns a default position. 
+	 * 
+	 * @param start starting position for searching
+	 * @return the real starting position for searching
+	 */
+	private Position checkPositionForSearchCursor(Position start) {
+		// if start position is not consistent
+		if (start == null) {
+			// if yes, returns a default
+			return Position.create();
+		} else {
+			// returns the argument
+			return start;
+		}
+	}
+
+	/**
+	 * Checks the search options, passed as argument, if consistent and if no, returns an empty. 
+	 * 
+	 * @param options the search options, passed as argument
+	 * @return the real options for searching
+	 */
+	private NativeObject checkOptionsForSearchCursor(SearchCursorOptions options) {
+		// checks if options is consistent
+		if (options != null) {
+			// if yes, returns the native object
+			return options.getObject();
+		}
+		// returns default item
+		return SearchCursorOptions.DEFAULT_INSTANCE.getObject();
+	}
+
+	// -----------------------------------------
 
 	/**
 	 * Returns the native editor object.
