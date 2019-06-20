@@ -47,7 +47,7 @@ public final class Injector {
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
 	// internal comparator to sort the injectable resources, adding priority to style resources
-	private static final Comparator<InjectableResource> COMPARATOR = (InjectableResource o1, InjectableResource o2) -> InjectableResource.compare(o1, o2);
+	private static final Comparator<InjectableResource> COMPARATOR = (InjectableResource::compare);
 
 	/**
 	 * To avoid any instantiation
