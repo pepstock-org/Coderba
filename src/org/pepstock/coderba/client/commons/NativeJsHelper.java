@@ -17,8 +17,6 @@ package org.pepstock.coderba.client.commons;
 
 import org.pepstock.coderba.client.events.EditorNativeEvent;
 
-import com.google.gwt.dom.client.EventTarget;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -90,14 +88,6 @@ final class NativeJsHelper {
 	 * @return string value
 	 */
 	static native String propertyAsString(Object object, String key);
-	
-	/**
-	 * FIXME
-	 * @param element
-	 * @param key
-	 * @return
-	 */
-	static native String elementAttribute(EventTarget element, String key);
 	
 	/**
 	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback

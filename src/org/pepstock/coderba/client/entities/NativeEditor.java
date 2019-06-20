@@ -772,18 +772,6 @@ final class NativeEditor extends NativeEventEmitter {
 	 */
 	native TextAreaElement getTextArea();
 
-	// -----------------------------------------
-	// ADDITIONAL methods from ADDON
-	// -----------------------------------------
-	/**
-	 * FIXME
-	 * @param template
-	 * @param callback
-	 * @param options
-	 * @return
-	 */
-	native DialogFunction openDialog(Element template, Proxy callback, NativeObject options);
-	
 	/**
 	 * Returns the CODERBA ID.
 	 * 
@@ -803,4 +791,37 @@ final class NativeEditor extends NativeEventEmitter {
 	public EditorArea getEditorArea() {
 		return EditorAreas.get(getId());
 	}
+
+	// -----------------------------------------
+	// ADDITIONAL methods from ADDON
+	// -----------------------------------------
+
+	// -----------------------------------------
+	// ADDON DIALOG
+	// -----------------------------------------
+
+	/**
+	 * Open a dialog on top of the editor, using the HTML element and the dialog options passed as arguments.
+	 * 
+	 * @param template can be called with an HTML fragment or a detached DOM node that provides the prompt (should include an
+	 *            input or button tag).
+	 * @param callback instance invoked when ENTER is pressed into text field
+	 * @param options options to configure the dialog
+	 * @return a function which, if called, will close the dialog immediately.
+	 */
+	native DialogFunction openDialog(Element template, Proxy callback, NativeObject options);
+	
+	/**
+	 * Shows an HTML fragment as a notification at the top of the editor. It takes a single option: duration, the amount of time
+	 * after which the notification will be automatically closed. If duration is zero, the dialog will not be closed
+	 * automatically.
+	 * 
+	 * @param template an HTML fragment as a notification at the top of the editor.
+	 * @param options options to configure the notification, it takes a single option: duration, the amount of time after which
+	 *            the notification will be automatically closed. If duration is zero, the dialog will not be closed
+	 *            automatically.
+	 * @return a function which, if called, will close the notification immediately. 
+	 */
+	native DialogFunction openNotification(Element template, NativeObject options);
+
 }

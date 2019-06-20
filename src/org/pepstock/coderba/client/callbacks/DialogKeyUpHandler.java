@@ -15,15 +15,30 @@
 */
 package org.pepstock.coderba.client.callbacks;
 
+import org.pepstock.coderba.client.addons.AddOnDialog;
+import org.pepstock.coderba.client.entities.Dialog;
+
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * FIXME
+ * Related to {@link AddOnDialog}, defines the dialog callback that will be called whenever "keyup" event fires in the dialog's
+ * input.<br>
+ * If your callback returns <code>true</code>, the dialog will not do any further processing of the event.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface DialogKeyUpHandler {
 
-	boolean onKeyUp(NativeEvent event, String value);
-	
+	/**
+	 * It will be called whenever "keyup" event fires in the dialog's input.<br>
+	 * If your callback returns <code>true</code>, the dialog will not do any further processing of the event.
+	 * 
+	 * @param dialog dialog instance
+	 * @param event "keyup" native event instance
+	 * @param value value of text input element
+	 * @return <code>true</code>, the dialog will not do any further processing of the event
+	 */
+	boolean onKeyUp(Dialog dialog, NativeEvent event, String value);
+
 }

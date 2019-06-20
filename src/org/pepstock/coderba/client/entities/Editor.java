@@ -112,6 +112,7 @@ import org.pepstock.coderba.client.events.IsEventManager;
 import org.pepstock.coderba.client.events.RemoveHandlerEvent;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -514,7 +515,7 @@ public final class Editor implements IsEventManager {
 		 */
 		void call(NativeEditor editor, EditorNativeEvent event);
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -597,6 +598,8 @@ public final class Editor implements IsEventManager {
 	private Document document = null;
 	// event items manager instance
 	private final EventItemManager eventItemManager;
+	// dialog instance for addon
+	private Dialog dialog = null;
 
 	/**
 	 * Creates an editor instance wrapping a native CodeMirror object.
@@ -711,6 +714,15 @@ public final class Editor implements IsEventManager {
 	 */
 	public String getid() {
 		return Id.retrieveFrom(nativeObject.getOptions());
+	}
+
+	/**
+	 * Returns the editor area instance which this editor belongs to.
+	 * 
+	 * @return the editor area instance which this editor belongs to
+	 */
+	public EditorArea getEditorArea() {
+		return nativeObject.getEditorArea();
 	}
 
 	/**
@@ -1872,7 +1884,6 @@ public final class Editor implements IsEventManager {
 			eventManager.fireEvent(new EditorViewportChangeEvent(area, from, to));
 		}
 	}
-	
 
 	/**
 	 * Fires when the editor fires "mousedown" event.
@@ -2113,22 +2124,105 @@ public final class Editor implements IsEventManager {
 			eventManager.fireEvent(new EditorDropEvent(area, event));
 		}
 	}
-	
+
 	// -----------------------------------------
 	// ADDITIONAL methods from ADDON
 	// -----------------------------------------
 
+	// -----------------------------------------
+	// ADDON DIALOG
+	// -----------------------------------------
+
 	/**
-	 * Creates a dialog object, at the top of the editor, activating the dialog addon.
+	 * Returns the dialog instance or <code>null</code> if not instantiated.
 	 * 
-	 * @param handler handler instance invoked when ENTER is pressed into text field
+	 * @return the dialog instance or <code>null</code> if not instantiated.
+	 */
+	Dialog getDialog() {
+		return dialog;
+	}
+
+	/**
+	 * Open a dialog on top of the editor, using new {@link InputElement}, without any options.
+	 * 
+	 * @param dialogHandler handler instance invoked when ENTER is pressed into text field.
 	 * @return a dialog object
 	 */
-	public Dialog createDialog(DialogHandler handler) {
-		return new Dialog(this, handler);
+	public Dialog openDialog(DialogHandler dialogHandler) {
+		return openDialog(dialogHandler, null);
+	}
+
+	/**
+	 * Open a dialog on top of the editor, using the HTML element, without any options.
+	 * 
+	 * @param dialogHandler handler instance invoked when ENTER is pressed into text field.
+	 * @param element can be called with an HTML fragment or a detached DOM node that provides the prompt (should include an
+	 *            input or button tag).
+	 * @return a dialog object
+	 */
+	public Dialog openDialog(DialogHandler dialogHandler, Element element) {
+		return openDialog(dialogHandler, element, null);
+	}
+
+	/**
+	 * Open a dialog on top of the editor, using the HTML element and the dialog options passed as arguments.
+	 * 
+	 * @param dialogHandler handler instance invoked when ENTER is pressed into text field.
+	 * @param element can be called with an HTML fragment or a detached DOM node that provides the prompt (should include an
+	 *            input or button tag).
+	 * @param options options to configure the dialog
+	 * @return a dialog object
+	 */
+	public Dialog openDialog(DialogHandler dialogHandler, Element element, DialogOptions options) {
+		// checks if dialog was already created
+		if (dialog == null) {
+			// creates new dialog
+			dialog = new Dialog(this);
+		}
+		// open dialog
+		dialog.open(dialogHandler, element, options);
+		// returns dialog
+		return dialog;
 	}
 	
+	/**
+	 * Shows an HTML fragment as a notification at the top of the editor. 
+	 * 	
+	 * @param element an HTML fragment as a notification at the top of the editor.
+	 * @return  a dialog object
+	 */
+	public Dialog openNotification(Element element) {
+		return openNotification(element, new DialogOptions());
+	}
+
+	/**
+	 * Shows an HTML fragment as a notification at the top of the editor. It takes a single option: duration, the amount of time
+	 * after which the notification will be automatically closed. If duration is zero, the dialog will not be closed
+	 * automatically.
+	 * 
+	 * @param element an HTML fragment as a notification at the top of the editor.
+	 * @param options options to configure the notification, it takes a single option: duration, the amount of time after which
+	 *            the notification will be automatically closed. If duration is zero, the dialog will not be closed
+	 *            automatically.
+	 * @return  a dialog object
+	 */
+	public Dialog openNotification(Element element, DialogOptions options) {
+		// checks if dialog was already created
+		if (dialog == null) {
+			// creates new dialog
+			dialog = new Dialog(this);
+		}
+		// open dialog
+		dialog.notify(element, options);
+		// returns dialog
+		return dialog;
+	}
 	
+	// -----------------------------------------
+	// ADDON _____
+	// -----------------------------------------
+
+
 	/**
 	 * Returns the native editor object.
 	 * 
@@ -2137,6 +2231,5 @@ public final class Editor implements IsEventManager {
 	NativeEditor getNativeObject() {
 		return nativeObject;
 	}
-
 
 }

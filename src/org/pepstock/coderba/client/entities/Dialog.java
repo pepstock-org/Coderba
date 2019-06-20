@@ -15,7 +15,6 @@
 */
 package org.pepstock.coderba.client.entities;
 
-import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.addons.AddOnDialog;
 import org.pepstock.coderba.client.callbacks.DialogHandler;
 import org.pepstock.coderba.client.commons.CallbackProxy;
@@ -26,11 +25,13 @@ import org.pepstock.coderba.client.commons.NativeObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.NodeList;
 
 import jsinterop.annotations.JsFunction;
 
 /**
- * Related to {@link AddOnDialog}, provides a very simple way to query users for text input, at the top of the editor.
+ * Related to {@link AddOnDialog}, provides a very simple way to query users for text input, at the top of the editor.<br>
+ * It also provides the capability to add HTML fragment as a notification at the top of the editor.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -53,28 +54,27 @@ public final class Dialog {
 		 */
 		void call();
 	}
+
 	// callback proxy to invoke the dialog function when ENTER is pressed
 	private final CallbackProxy<DialogFunction> openDialogFunctionProxy = JsHelper.get().newCallbackProxy();
-	// editor instancef
+	// editor instance
 	private final Editor editor;
 	// dialog handler ONLY for DIALOG addon
-	private final DialogHandler dialogHandler;
+	private DialogHandler dialogHandler;
 	// callback to hide the dialog
-	private DialogFunction hideCallback = null;
-	// flag to know if dialog is already open
-	private boolean isOpen = false;
+	private DialogFunction hideDialogCallback = null;
+	// callback to hide the notification
+	private DialogFunction hideNotificationCallback = null;
 
 	/**
-	 * Creates a dialog object with own editor instance and the dialog handler.
+	 * Creates a dialog object with own editor instance.
 	 * 
 	 * @param editor editor instance which this dialog belongs to
-	 * @param dialogHandler handler instance invoked when ENTER is pressed into text field.
 	 */
-	Dialog(Editor editor, DialogHandler dialogHandler) {
+	Dialog(Editor editor) {
 		// forces inject if addon
 		AddOnDialog.INSTANCE.inject();
 		this.editor = editor;
-		this.dialogHandler = dialogHandler;
 		// ---------------------------------------
 		// -- SET CALLBACKS to PROXIES from ADDONS
 		// ---------------------------------------
@@ -82,77 +82,69 @@ public final class Dialog {
 	}
 
 	/**
-	 * @return the editor
+	 * Returns the editor instance which this dialog belongs to.
+	 * 
+	 * @return the editor instance which this dialog belongs to
 	 */
 	public Editor getEditor() {
 		return editor;
 	}
 
 	/**
-	 * Returns the handler instance invoked when ENTER is pressed into text field.
-	 * 
-	 * @return the handler instance invoked when ENTER is pressed into text field
-	 */
-	public DialogHandler getDialogHandler() {
-		return dialogHandler;
-	}
-	
-	/**
-	 * Open a dialog on top of the editor, using new {@link InputElement}, without any options.
-	 */
-	public void open() {
-		open(Document.get().createTextInputElement());
-	}
-	
-	/**
-	 * Open a dialog on top of the editor, using the HTML element, without any options.
-	 * 
-	 * @param element can be called with an HTML fragment or a detached DOM node that provides the prompt (should include an
-	 *            input or button tag).
-	 */
-	public void open(Element element) {
-		open(element, null);
-	}
-	
-	/**
-	 * Open a dialog on top of the editor, using new {@link InputElement} and the dialog options passed as argument.
-	 * 
-	 * @param options options to configure the dialog
-	 */
-	public void open(DialogOptions options) {
-		open(Document.get().createTextInputElement(), options);
-	}
-
-	/**
 	 * Open a dialog on top of the editor, using the HTML element and the dialog options passed as arguments.
 	 * 
+	 * @param dialogHandler handler instance invoked when ENTER is pressed into text field.
 	 * @param element can be called with an HTML fragment or a detached DOM node that provides the prompt (should include an
 	 *            input or button tag).
 	 * @param options options to configure the dialog
 	 */
-	public void open(Element element, DialogOptions options) {
-		// checks if dialog is open
-		if (!isOpen) {
+	void open(DialogHandler dialogHandler, Element element, DialogOptions options) {
+		// checks if handler is consistent
+		if (dialogHandler != null) {
+			// stores handler
+			this.dialogHandler = dialogHandler;
 			// object with options
 			NativeObject nativeOptions = null;
 			// checks if options are consistent
 			if (options != null) {
 				nativeOptions = options.getObject();
-			} 
+			}
 			// if element is not consistent
 			if (element == null) {
+				// creates a text input element
 				Element newElement = Document.get().createTextInputElement();
-				newElement.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
+				// checks and apply
+				checkAndApplyId(newElement);
 				// creates a input element
 				// invokes the open editor and stores teh callback for closing
-				hideCallback = editor.getNativeObject().openDialog(newElement, openDialogFunctionProxy.getProxy(), nativeOptions);
+				hideDialogCallback = editor.getNativeObject().openDialog(newElement, openDialogFunctionProxy.getProxy(), nativeOptions);
 			} else {
-				element.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
-				// invokes the open editor and stores teh callback for closing
-				hideCallback = editor.getNativeObject().openDialog(element, openDialogFunctionProxy.getProxy(), nativeOptions);
+				checkAndApplyId(element);
+				// invokes the open dialog by the editor and stores teh callback for closing
+				hideDialogCallback = editor.getNativeObject().openDialog(element, openDialogFunctionProxy.getProxy(), nativeOptions);
 			}
-			// sets flag as open
-			isOpen = true;
+		}
+	}
+
+	/**
+	 * Shows an HTML fragment as a notification at the top of the editor.
+	 * 
+	 * @param element an HTML fragment as a notification at the top of the editor.
+	 * @param options options to configure the notification, it takes a single option: duration, the amount of time after which
+	 *            the notification will be automatically closed. If duration is zero, the dialog will not be closed
+	 *            automatically.
+	 */
+	void notify(Element element, DialogOptions options) {
+		// if element is not consistent
+		if (element != null) {
+			// object with options
+			NativeObject nativeOptions = null;
+			// checks if options are consistent
+			if (options != null) {
+				nativeOptions = options.getObject();
+			}
+			// invokes the open notification by the editor and stores the callback for closing
+			hideNotificationCallback = editor.getNativeObject().openNotification(element, nativeOptions);
 		}
 	}
 
@@ -160,26 +152,57 @@ public final class Dialog {
 	 * If called, will close the dialog immediately
 	 */
 	public void hide() {
-		// checks if callback is consistent and
-		// dialog is open
-		if (hideCallback != null && isOpen) {
+		// checks if callback is consistent
+		if (hideDialogCallback != null) {
 			// force closure
-			hideCallback.call();
+			hideDialogCallback.call();
 		}
-		// sets flag as close
-		isOpen = false;
+	}
+
+	/**
+	 * If called, will close the notification immediately
+	 */
+	public void hideNotification() {
+		// checks if callback is consistent
+		if (hideNotificationCallback != null) {
+			// force closure
+			hideNotificationCallback.call();
+		}
 	}
 
 	/**
 	 * Fires when the dialog receives a ENTER key event.
 	 */
 	private void onDialogEnter() {
-		// gets editor area
-		EditorArea area = editor.getNativeObject().getEditorArea();
 		// checks if area is consistent
-		if (area != null && dialogHandler != null) {
+		if (dialogHandler != null) {
 			// invokes handler
-			dialogHandler.onEnter(area);
+			dialogHandler.onEnter(this);
+		}
+	}
+
+	/**
+	 * Checks the HTML fragment passed to open the dialog in order to set into text input element the editor id in order that
+	 * options can retrieve the editor instance related to callbacks.
+	 * 
+	 * @param element HTML fragment passed to open the dialog
+	 */
+	private void checkAndApplyId(Element element) {
+		// checks if the root element is itself a text input element
+		if (InputElement.TAG.equalsIgnoreCase(element.getTagName())) {
+			// sets editor id as attribute of element
+			element.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
+		} else {
+			// gets all text input element from root DOM element
+			// passed as argument
+			NodeList<Element> inputElements = element.getElementsByTagName(InputElement.TAG);
+			// scans all text input elements
+			for (int i = 0; i < inputElements.getLength(); i++) {
+				// gets element
+				Element inputElement = inputElements.getItem(i);
+				// sets editor id as attribute of element
+				inputElement.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
+			}
 		}
 	}
 

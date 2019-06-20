@@ -99,24 +99,6 @@
     	obj[key] = true;
     }    
     /*
-	 Returns an array of strings with element attributes.
-	  
-	 @param element DOM element to scan
-	 @return an array of strings with element attributes
-    */
-    CoderbaJsHelper.elementAttribute = function(element, key) {
-    	// First, let's verify that the paragraph has some attributes    
-     	if (element.hasAttributes()) {
-           var attrs = element.attributes;
-	       for(var i = 0; i < attrs.length; i++) {
-	          if (attrs[i].name === key){
-	          	 return  attrs[i].value;
-	          }
-	       }
-	    }
-    	return null;
-    }  
-    /*
 	 Returns the java script object type of a property.
 	  
 	 @param object the object on which to search the property.

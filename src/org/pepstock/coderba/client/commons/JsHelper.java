@@ -19,8 +19,6 @@ import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.events.EditorNativeEvent;
 import org.pepstock.coderba.client.resources.ResourcesType;
 
-import com.google.gwt.dom.client.EventTarget;
-
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CODERBA java script object implementation with some
  * utilities to act on java script objects.
@@ -125,21 +123,6 @@ public final class JsHelper {
 		// checks consistency of arguments
 		if (object != null && key != null) {
 			return NativeJsHelper.propertyAsString(object, key);
-		}
-		// if here, arguments not consistent
-		return UndefinedValues.STRING;
-	}
-	
-	/**
-	 * FIXME
-	 * @param element
-	 * @param key
-	 * @return
-	 */
-	public String elementAttribute(EventTarget element, String key) {
-		// checks consistency of arguments
-		if (element != null && key != null) {
-			return NativeJsHelper.elementAttribute(element, key);
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.STRING;

@@ -15,17 +15,24 @@
 */
 package org.pepstock.coderba.client.callbacks;
 
-import org.pepstock.coderba.client.EditorArea;
+import org.pepstock.coderba.client.addons.AddOnDialog;
+import org.pepstock.coderba.client.entities.Dialog;
 
 /**
- * FIXME
+ * Related to {@link AddOnDialog}, defines the dialog callback that is called when the user presses ENTER.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface DialogHandler {
 
-	default void onEnter(EditorArea editorArea) {
+	/**
+	 * It is called when the user presses ENTER.
+	 * 
+	 * @param dialog dialog instance
+	 */
+	default void onEnter(Dialog dialog) {
 		// do nothing
 	}
-	
+
 }

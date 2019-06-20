@@ -15,15 +15,26 @@
 */
 package org.pepstock.coderba.client.callbacks;
 
+import org.pepstock.coderba.client.addons.AddOnDialog;
+import org.pepstock.coderba.client.entities.Dialog;
+
 import com.google.gwt.dom.client.Element;
 
 /**
- * FIXME
+ * Related to {@link AddOnDialog}, defines the dialog callback that will be called after the dialog has been closed and removed
+ * from the DOM.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface DialogCloseHandler {
 
-	boolean onClose(Element element);
-	
+	/**
+	 * It will be called after the dialog has been closed and removed from the DOM.
+	 * 
+	 * @param dialog dialog instance to close
+	 * @param element HTML element which represents DOM element of dialog
+	 */
+	void onClose(Dialog dialog, Element element);
+
 }
