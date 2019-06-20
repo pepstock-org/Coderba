@@ -1805,7 +1805,7 @@ public final class Editor implements IsEventManager {
 		// checks if area is consistent
 		if (area != null) {
 			Document doc = area.getEditor().getDocument();
-			LineHandle lineHandle = doc.getLineHandleById(Id.retrieveFrom(line));
+			LineHandle lineHandle = doc.checkAndGet(line);
 			if (lineHandle != null) {
 				// fires the event
 				eventManager.fireEvent(new EditorRenderLineEvent(area, lineHandle, element));
@@ -2143,6 +2143,9 @@ public final class Editor implements IsEventManager {
 	// ADDON DIALOG
 	// -----------------------------------------
 
+	// FIXME
+	// MISSING CodeMirror.defineExtension("openConfirm", function(template, callbacks, options) {
+	
 	/**
 	 * Returns the dialog instance or <code>null</code> if not instantiated.
 	 * 
@@ -2232,6 +2235,9 @@ public final class Editor implements IsEventManager {
 	// ADDON SEARCH CURSOR
 	// -----------------------------------------
 
+	// FIXME
+	// CodeMirror.defineExtension("selectMatches", function(query, caseFold) {
+	
 	/**
 	 * Returns a cursor item which can be used to implement search/replace functionality.
 	 * 

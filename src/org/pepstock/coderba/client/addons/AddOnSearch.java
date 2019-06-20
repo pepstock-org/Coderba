@@ -41,6 +41,18 @@ public final class AddOnSearch extends AddOn {
 		// passes the name of addon
 		super(NAME);
 		getResources().add(new ScriptResource(AddOnResources.INSTANCE.search()));
+		getDependencies().add(AddOnSearchcursor.INSTANCE);
+		getDependencies().add(AddOnDialog.INSTANCE);
 	}
 
+// FIXME	
+//	  CodeMirror.commands.find = function(cm) {clearSearch(cm); doSearch(cm);};
+//	  CodeMirror.commands.findPersistent = function(cm) {clearSearch(cm); doSearch(cm, false, true);};
+//	  CodeMirror.commands.findPersistentNext = function(cm) {doSearch(cm, false, true, true);};
+//	  CodeMirror.commands.findPersistentPrev = function(cm) {doSearch(cm, true, true, true);};
+//	  CodeMirror.commands.findNext = doSearch;
+//	  CodeMirror.commands.findPrev = function(cm) {doSearch(cm, true);};
+//	  CodeMirror.commands.clearSearch = clearSearch;
+//	  CodeMirror.commands.replace = replace;
+//	CodeMirror.commands.replaceAll = function(cm) {replace(cm, true);};
 }

@@ -15,6 +15,9 @@
 */
 package org.pepstock.coderba.client;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.coderba.client.entities.ModeSpecification;
 
 /**
@@ -54,6 +57,15 @@ public abstract class Language extends NamedItem {
 	 * @return the mode related to the language
 	 */
 	public abstract Mode getMode();
+
+	/**
+	 * Returns the list of languages which this language depends on, on top to the main one.
+	 * 
+	 * @return the list of languages which this language depends on, on top to the main one
+	 */
+	public List<Language> getDependencies() {
+		return Collections.emptyList();
+	}
 
 	/**
 	 * Returns the mode specification for this language.

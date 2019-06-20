@@ -197,6 +197,8 @@ public final class TextMarker extends TextMarkerOptions implements IsEventManage
 		eventItemManager.addEventItem(new EventItem<TextMarkerClearEventHandler, NativeTextMarker>(TextMarkerClearEvent.TYPE, nativeObject, TextMarkerClearEvent.NAME, eventManager, textMarkerClearFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<TextMarkerHideEventHandler, NativeTextMarker>(TextMarkerHideEvent.TYPE, nativeObject, TextMarkerHideEvent.NAME, eventManager, textMarkerHideFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<TextMarkerUnhideEventHandler, NativeTextMarker>(TextMarkerUnhideEvent.TYPE, nativeObject, TextMarkerUnhideEvent.NAME, eventManager, textMarkerUnhideFunctionProxy.getProxy()));
+		// register to document
+		document.register(this);
 	}
 
 	/**

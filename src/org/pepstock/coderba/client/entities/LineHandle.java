@@ -117,7 +117,8 @@ public final class LineHandle implements IsEventManager {
 
 		eventItemManager.addEventItem(new EventItem<LineHandleChangeEventHandler, NativeLineHandle>(LineHandleChangeEvent.TYPE, nativeObject, LineHandleChangeEvent.NAME, eventManager, lineHandleChangeFunctionProxy.getProxy()));
 		eventItemManager.addEventItem(new EventItem<LineHandleDeleteEventHandler, NativeLineHandle>(LineHandleDeleteEvent.TYPE, nativeObject, LineHandleDeleteEvent.NAME, eventManager, lineHandleDeleteFunctionProxy.getProxy()));
-
+		// register to document
+		document.register(this);
 	}
 
 	/**
@@ -189,10 +190,8 @@ public final class LineHandle implements IsEventManager {
 		EditorArea area = document.getEditorArea();
 		// if area is consistent
 		if (area != null) {
-			// gets the line handle instance by the document cache and by its id
-			LineHandle lineHandle = document.getLineHandleById(Id.retrieveFrom(nativeLineHandle));
 			// fires event
-			eventManager.fireEvent(new LineHandleChangeEvent(lineHandle, item));
+			eventManager.fireEvent(new LineHandleChangeEvent(this, item));
 		}
 	}
 

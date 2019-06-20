@@ -15,6 +15,10 @@
 */
 package org.pepstock.coderba.client.languages;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.coderba.client.Language;
 import org.pepstock.coderba.client.Mode;
 import org.pepstock.coderba.client.modes.ModeHtmlmixed;
@@ -33,6 +37,9 @@ public final class HTML extends Language {
 
 	private static final Mode MODE = ModeHtmlmixed.MODE;
 
+	// dependencies with other languages
+	private static final List<Language> DEPENDENCIES = Collections.unmodifiableList(Arrays.asList(XML.LANGUAGE, JavaScript.LANGUAGE, CSS.LANGUAGE));
+
 	public static final HTML LANGUAGE = new HTML();
 
 	/**
@@ -40,6 +47,16 @@ public final class HTML extends Language {
 	 */
 	private HTML() {
 		super(NAME);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.coderba.client.Language#getDependencies()
+	 */
+	@Override
+	public List<Language> getDependencies() {
+		return DEPENDENCIES;
 	}
 
 	/*

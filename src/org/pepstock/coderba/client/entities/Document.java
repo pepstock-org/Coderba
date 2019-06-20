@@ -224,14 +224,14 @@ public final class Document implements IsEventManager {
 	private final Map<String, LineWidget> lineWidgets = new HashMap<>();
 	// maps all line handles
 	private final Map<String, LineHandle> lineHandles = new HashMap<>();
+	// event items manager instance
+	private final EventItemManager eventItemManager;
 	// document each line handler callback
 	private DocumentEachLineHandler documentEachLineHandler = null;
 	// document extend selection handler callback
 	private DocumentExtendSelectionsHandler documentExtendSelectionsHandler = null;
 	// linked document handler callback
 	private LinkedDocumentsHandler linkedDocumentsHandler = null;
-	// event items manager instance
-	private final EventItemManager eventItemManager;
 
 	/**
 	 * Creates an editor instance wrapping a native CodeMirror object.
@@ -283,7 +283,34 @@ public final class Document implements IsEventManager {
 	NativeDocument getObject() {
 		return nativeObject;
 	}
+	
+	/**
+	 * FIXME
+	 * @param newInstance
+	 */
+	void register(LineHandle newInstance) {
+		// stores into cache
+		lineHandles.put(newInstance.getId(), newInstance);
+	}
 
+	/**
+	 * FIXME
+	 * @param newInstance
+	 */
+	void register(LineWidget newInstance) {
+		// stores into cache
+		lineWidgets.put(newInstance.getId(), newInstance);
+	}
+
+	/**
+	 * FIXME
+	 * @param newInstance
+	 */
+	void register(TextMarker newInstance) {
+		// stores into cache
+		markers.put(newInstance.getId(), newInstance);
+	}
+	
 	/**
 	 * Returns the unique ID of document.
 	 * 
@@ -550,24 +577,7 @@ public final class Document implements IsEventManager {
 		// checks if line is valid
 		if (isValidLine(line)) {
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.getLineHandle(line);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// checks if there is an id
-				String lineHandleId = Id.retrieveFrom(nativeLineHandle);
-				// if line handle already in cache
-				if (lineHandles.containsKey(lineHandleId)) {
-					// returns from cache
-					return lineHandles.get(lineHandleId);
-				} else {
-					// creates new line handle
-					LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-					// stores into cache
-					lineHandles.put(lineHandle.getId(), lineHandle);
-					// returns it
-					return lineHandle;
-				}
-			}
+			return checkAndGet(nativeObject.getLineHandle(line));
 		}
 		// returns null
 		return null;
@@ -1346,8 +1356,8 @@ public final class Document implements IsEventManager {
 			}
 		}
 		// if here, the mode is not consistent
-		// then returns the default
-		return Defaults.get().getLanguage().getMode();
+		// then returns the language mode
+		return language.getMode();
 	}
 
 	/**
@@ -1564,10 +1574,7 @@ public final class Document implements IsEventManager {
 		// checks if arguments are consistent
 		if (from != null && to != null) {
 			// creates a marker
-			TextMarker marker = new TextMarker(nativeObject.markText(from, to, checkOptions(options, TextMarkerType.RANGE).getObject()), this);
-			// stores markers into cache
-			markers.put(marker.getId(), marker);
-			return marker;
+			return checkAndGet(nativeObject.markText(from, to, checkOptions(options, TextMarkerType.RANGE).getObject()));
 		}
 		// if here, arguments are not consistent
 		// then returns null
@@ -1612,10 +1619,7 @@ public final class Document implements IsEventManager {
 		// checks if argument is consistent
 		if (pos != null) {
 			// creates a marker
-			TextMarker marker = new TextMarker(nativeObject.setBookmark(pos, checkOptions(options, TextMarkerType.BOOKMARK).getObject()), this);
-			// stores the marker into cache
-			markers.put(marker.getId(), marker);
-			return marker;
+			return checkAndGet(nativeObject.setBookmark(pos, checkOptions(options, TextMarkerType.BOOKMARK).getObject()));
 		}
 		// if here, arguments are not consistent
 		// then returns null
@@ -1712,15 +1716,7 @@ public final class Document implements IsEventManager {
 		// checks if arguments are consistent
 		if (isValidLine(line) && gutterID != null) {
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line, gutterID, value);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// creates a line handle
-				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-				// stores into cache
-				lineHandles.put(lineHandle.getId(), lineHandle);
-				return lineHandle;
-			}
+			return checkAndGet(nativeObject.setGutterMarker(line, gutterID, value));
 		}
 		// if not, returns null.
 		return null;
@@ -1740,33 +1736,9 @@ public final class Document implements IsEventManager {
 		// checks if arguments are consistent
 		if (line != null && gutterID != null) {
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.setGutterMarker(line.getObject(), gutterID, value);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// creates a line handle
-				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-				// stores into cache
-				lineHandles.put(lineHandle.getId(), lineHandle);
-				return lineHandle;
-			}
+			return checkAndGet(nativeObject.setGutterMarker(line.getObject(), gutterID, value));
 		}
 		// if not, returns null.
-		return null;
-	}
-
-	/**
-	 * Returns a line handle by its id.
-	 * 
-	 * @param id the id of line handle
-	 * @return already existing line handle or <code>null</code> if not exists
-	 */
-	LineHandle getLineHandleById(String id) {
-		// checks if argument is consistent
-		if (id != null) {
-			return lineHandles.get(id);
-		}
-		// if here, id is not consistent
-		// then returns null
 		return null;
 	}
 
@@ -1812,15 +1784,7 @@ public final class Document implements IsEventManager {
 			// checks line class location to use
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			// gets line handle
-			NativeLineHandle nativeHandle = nativeObject.addLineClass(line, whereToUse.value(), className);
-			// checks if consistent
-			if (nativeHandle != null) {
-				// creates a line handle
-				LineHandle handle = new LineHandle(nativeHandle, this);
-				// stores into cache
-				lineHandles.put(handle.getId(), handle);
-				return handle;
-			}
+			return checkAndGet(nativeObject.addLineClass(line, whereToUse.value(), className));
 		}
 		// if arguments not consistent
 		// returns null
@@ -1857,15 +1821,7 @@ public final class Document implements IsEventManager {
 			// checks line class location to use
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.addLineClass(line.getObject(), whereToUse.value(), className);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// creates a line handle
-				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-				// stores into cache
-				lineHandles.put(lineHandle.getId(), lineHandle);
-				return lineHandle;
-			}
+			return checkAndGet(nativeObject.addLineClass(line.getObject(), whereToUse.value(), className));
 		}
 		// if arguments not consistent
 		// returns null
@@ -1910,15 +1866,7 @@ public final class Document implements IsEventManager {
 			// checks line class location to use
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line, whereToUse.value(), className);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// creates a line handle
-				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-				// stores into cache
-				lineHandles.put(lineHandle.getId(), lineHandle);
-				return lineHandle;
-			}
+			return checkAndGet(nativeObject.removeLineClass(line, whereToUse.value(), className));
 		}
 		// if arguments not consistent
 		// returns null
@@ -1963,15 +1911,7 @@ public final class Document implements IsEventManager {
 			// checks line class location to use
 			LineClassLocation whereToUse = where == null ? LineClassLocation.TEXT : where;
 			// gets line handle
-			NativeLineHandle nativeLineHandle = nativeObject.removeLineClass(line.getObject(), whereToUse.value(), className);
-			// checks if consistent
-			if (nativeLineHandle != null) {
-				// creates a line handle
-				LineHandle lineHandle = new LineHandle(nativeLineHandle, this);
-				// stores into cache
-				lineHandles.put(lineHandle.getId(), lineHandle);
-				return lineHandle;
-			}
+			return checkAndGet(nativeObject.removeLineClass(line.getObject(), whereToUse.value(), className));
 		}
 		// if arguments not consistent
 		// returns null
@@ -2005,15 +1945,7 @@ public final class Document implements IsEventManager {
 		// checks if lines and node are consistent
 		if (isValidLine(line) && node != null) {
 			// gets line widget
-			NativeLineWidget nativeWidget = nativeObject.addLineWidget(line, node, checkOptions(options).getObject());
-			// checks if consistent
-			if (nativeWidget != null) {
-				// creates a line widget
-				LineWidget widget = new LineWidget(nativeWidget, this);
-				// stores into cache
-				lineWidgets.put(widget.getId(), widget);
-				return widget;
-			}
+			return checkAndGet(nativeObject.addLineWidget(line, node, checkOptions(options).getObject()));
 		}
 		// if not, returns null
 		return null;
@@ -2034,33 +1966,9 @@ public final class Document implements IsEventManager {
 		// checks if lines and node are consistent
 		if (line != null && node != null) {
 			// gets line widget
-			NativeLineWidget nativeWidget = nativeObject.addLineWidget(line.getObject(), node, checkOptions(options).getObject());
-			// checks if consistent
-			if (nativeWidget != null) {
-				// creates a line widget
-				LineWidget widget = new LineWidget(nativeWidget, this);
-				// stores into cache
-				lineWidgets.put(widget.getId(), widget);
-				return widget;
-			}
+			return checkAndGet(nativeObject.addLineWidget(line.getObject(), node, checkOptions(options).getObject()));
 		}
 		// if not, returns null
-		return null;
-	}
-
-	/**
-	 * Returns an already created line widget by its id.
-	 * 
-	 * @param id line widget id.
-	 * @return line widget instance or <code>null</code> if not exists
-	 */
-	LineWidget getLineWidget(String id) {
-		// checks if argument is consistent
-		if (id != null) {
-			return lineWidgets.get(id);
-		}
-		// if here, id is not consistent
-		// then returns null
 		return null;
 	}
 
@@ -2187,7 +2095,73 @@ public final class Document implements IsEventManager {
 	private LinkedDocumentOptions checkOptions(LinkedDocumentOptions options) {
 		return options != null ? options : new LinkedDocumentOptions();
 	}
+	
+	/**
+	 * FIXME
+	 * @param nativeLineHandle
+	 * @return
+	 */
+	LineHandle checkAndGet(NativeLineHandle nativeLineHandle) {
+		// checks if consistent
+		if (nativeLineHandle != null) {
+			// checks if there is an id
+			String lineHandleId = Id.retrieveFrom(nativeLineHandle);
+			// if line handle already in cache
+			if (lineHandles.containsKey(lineHandleId)) {
+				// returns from cache
+				return lineHandles.get(lineHandleId);
+			} else {
+				// creates new line handle
+				return new LineHandle(nativeLineHandle, this);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * FIXME
+	 * @param nativeLineWidget
+	 * @return
+	 */
+	LineWidget checkAndGet(NativeLineWidget nativeLineWidget) {
+		// checks if consistent
+		if (nativeLineWidget != null) {
+			// checks if there is an id
+			String lineWidgetId = Id.retrieveFrom(nativeLineWidget);
+			// if line handle already in cache
+			if (lineWidgets.containsKey(lineWidgetId)) {
+				// returns from cache
+				return lineWidgets.get(lineWidgetId);
+			} else {
+				// creates new line handle
+				return new LineWidget(nativeLineWidget, this);
+			}
+		}
+		return null;
+	}
 
+	/**
+	 * FIXME
+	 * @param nativeTextMarker
+	 * @return
+	 */
+	TextMarker checkAndGet(NativeTextMarker nativeTextMarker) {
+		// checks if consistent
+		if (nativeTextMarker != null) {
+			// checks if there is an id
+			String textMarkertId = Id.retrieveFrom(nativeTextMarker);
+			// if line handle already in cache
+			if (markers.containsKey(textMarkertId)) {
+				// returns from cache
+				return markers.get(textMarkertId);
+			} else {
+				// creates new line handle
+				return new TextMarker(nativeTextMarker, this);
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Checks if passed options is consistent and then returns it otherwise returns an empty options.
 	 * 
@@ -2218,19 +2192,8 @@ public final class Document implements IsEventManager {
 			for (int i = 0; i < array.length(); i++) {
 				// gets marker
 				NativeTextMarker nativeMarker = array.get(i);
-				// gets its ID
-				String storedId = Id.retrieveFrom(nativeMarker);
-				// if it has not got an ID
-				if (storedId == null) {
-					// creates new marker
-					TextMarker newTextMarker = new TextMarker(nativeMarker, this);
-					// gets new ID
-					storedId = newTextMarker.getId();
-					// stores into cache
-					markers.put(storedId, newTextMarker);
-				}
 				// loads result list
-				result.add(markers.get(storedId));
+				result.add(checkAndGet(nativeMarker));
 			}
 			// returns the list
 			return Collections.unmodifiableList(result);
@@ -2259,17 +2222,7 @@ public final class Document implements IsEventManager {
 			// checks area is consistent
 			if (area != null) {
 				// gets line handle ID
-				LineHandle lineHandle;
-				String lineHandleId = Id.retrieveFrom(nativeLineHandle);
-				// if contains into cache
-				if (lineHandles.containsKey(lineHandleId)) {
-					lineHandle = lineHandles.get(lineHandleId);
-				} else {
-					// or creates new line handle
-					lineHandle = new LineHandle(nativeLineHandle, this);
-					// stores into cache
-					lineHandles.put(lineHandle.getId(), lineHandle);
-				}
+				LineHandle lineHandle = checkAndGet(nativeLineHandle);
 				// invokes the handler
 				documentEachLineHandler.handle(area, lineHandle);
 			}

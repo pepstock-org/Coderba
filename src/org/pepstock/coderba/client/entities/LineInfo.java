@@ -22,7 +22,7 @@ import java.util.List;
 import org.pepstock.coderba.client.commons.ArrayListHelper;
 import org.pepstock.coderba.client.commons.ArrayObject;
 import org.pepstock.coderba.client.commons.ArrayString;
-import org.pepstock.coderba.client.commons.Id;
+import org.pepstock.coderba.client.commons.NativeObject;
 
 /**
  * Entity which maps a line into a document, providing a set of information about it. {line, handle, text, gutterMarkers,
@@ -56,7 +56,7 @@ public final class LineInfo {
 		// if line handle is consistent consistent
 		if (handle != null) {
 			// gets the line handle by document cache
-			this.lineHandle = this.document.getLineHandleById(Id.retrieveFrom(handle));
+			this.lineHandle = document.checkAndGet(handle);
 		} else {
 			// otherwise gets line handle from document by line number
 			this.lineHandle = this.document.getLineHandle(getLineNumber());
@@ -67,14 +67,19 @@ public final class LineInfo {
 		if (array != null && !array.isEmpty()) {
 			// scans the array
 			for (int i = 0; i < array.length(); i++) {
-				// gets the id of line widget
-				String id = Id.retrieveFrom(array.get(i));
-				// gets the line widget object by the document cache
-				LineWidget widget = document.getLineWidget(id);
-				// if widget is consistent
-				if (widget != null) {
-					// adds to the list
-					this.widgets.add(widget);
+				// gets native object item
+				NativeObject nativeArrayItem = array.get(i);
+				// checks if is line widget
+				if (nativeArrayItem instanceof NativeLineWidget) {
+					// casts to native line widget
+					NativeLineWidget nativeLineWidget = (NativeLineWidget)nativeArrayItem;
+					// gets the line widget object by the document cache
+					LineWidget widget = document.checkAndGet(nativeLineWidget);
+					// if widget is consistent
+					if (widget != null) {
+						// adds to the list
+						this.widgets.add(widget);
+					}
 				}
 			}
 		}

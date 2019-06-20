@@ -75,6 +75,16 @@ public final class Injector {
 		if (language != null) {
 			// injects CodeMirror if missing
 			ensureInjected();
+			// gets dependencies
+			List<Language> dependencies = language.getDependencies();
+			// checks if there is any resources to add
+			if (!dependencies.isEmpty()) {
+				// scans all languages to add
+				for (Language dependency : dependencies) {
+					// inject
+					ensureInjected(dependency);
+				}
+			}
 			// injects mode of language
 			ensureInjected(language.getMode());
 			// gets the mode specification, loaded in the previous statement
@@ -185,6 +195,16 @@ public final class Injector {
 	private static void internalEnsureInjected(InjectableItem item) {
 		// check if argument is consistent
 		if (item != null) {
+			// gets dependencies
+			List<InjectableItem> dependencies = item.getDependencies();
+			// checks if there is any resources to add
+			if (!dependencies.isEmpty()) {
+				// scans all resources to add
+				for (InjectableItem dependency : dependencies) {
+					// inject
+					internalEnsureInjected(dependency);
+				}
+			}
 			// gets resources
 			List<InjectableResource> resources = item.getResources();
 			// checks if there is any resources to add

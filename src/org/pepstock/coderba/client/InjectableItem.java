@@ -31,6 +31,8 @@ public abstract class InjectableItem extends NamedItem {
 
 	// internal collections of resources to be inject
 	private final List<InjectableResource> resources = new LinkedList<>();
+	// internal collections of items (dependencies) to be inject
+	private final List<InjectableItem> dependencies = new LinkedList<>();
 
 	/**
 	 * Creates the object with a mandatory name as string.
@@ -42,12 +44,22 @@ public abstract class InjectableItem extends NamedItem {
 	}
 
 	/**
-	 * Returns the collection of script or style resources to classes which extend this one.
+	 * Returns the collection of script or style resources which will belongs to this item.
 	 * 
 	 * @return the collection of script or style resources
 	 */
 	protected final List<InjectableResource> getResources() {
 		return resources;
 	}
+	
+	/**
+	 * Returns the collection of items (dependencies) to this item.
+	 * 
+	 * @return the collection of items (dependencies) to this ite
+	 */
+	protected final List<InjectableItem> getDependencies() {
+		return dependencies;
+	}
+
 
 }

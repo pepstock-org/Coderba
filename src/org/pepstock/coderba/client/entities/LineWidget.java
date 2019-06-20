@@ -137,7 +137,7 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// checks if line handle is consistent
 		if (nativeHandle != null) {
 			// gets the line handle by document cache
-			this.handle = document.getLineHandleById(Id.retrieveFrom(nativeHandle));
+			this.handle = document.checkAndGet(nativeHandle);
 		} else {
 			// otherwise sets to null
 			// but it should not happen
@@ -148,6 +148,8 @@ public final class LineWidget extends LineWidgetOptions implements IsEventManage
 		// -------------------------------
 		lineWidgetRedrawFunctionProxy.setCallback(this::onRedraw);
 		eventItemManager.addEventItem(new EventItem<LineWidgetRedrawEventHandler, NativeLineWidget>(LineWidgetRedrawEvent.TYPE, nativeObject, LineWidgetRedrawEvent.NAME, eventManager, lineWidgetRedrawFunctionProxy.getProxy()));
+		// registers itself into document
+		document.register(this);
 	}
 
 	/**
