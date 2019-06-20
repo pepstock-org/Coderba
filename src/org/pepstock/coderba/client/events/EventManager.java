@@ -68,6 +68,8 @@ public final class EventManager {
 			// removes handler
 			handler.removeHandler();
 		}
+		// clear list
+		handlerRegistrations.clear();
 	}
 
 	/**

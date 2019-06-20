@@ -597,10 +597,10 @@ public final class Editor implements IsEventManager {
 	private final NativeEditor nativeObject;
 	// event manager instance
 	private final EventManager eventManager;
-	// the current document managed by editor
-	private Document document = null;
 	// event items manager instance
 	private final EventItemManager eventItemManager;
+	// the current document managed by editor
+	private Document document = null;
 	// dialog instance for addon
 	private Dialog dialog = null;
 
@@ -715,7 +715,7 @@ public final class Editor implements IsEventManager {
 	 * 
 	 * @return the CODERBA id
 	 */
-	public String getid() {
+	public String getId() {
 		return Id.retrieveFrom(nativeObject.getOptions());
 	}
 
@@ -726,6 +726,13 @@ public final class Editor implements IsEventManager {
 	 */
 	public EditorArea getEditorArea() {
 		return nativeObject.getEditorArea();
+	}
+	
+	/**
+	 * Removes all handlers
+	 */
+	public void removeAllHandlers() {
+		eventManager.removeAllHandlers();
 	}
 
 	/**

@@ -191,7 +191,7 @@ public final class Dialog {
 		// checks if the root element is itself a text input element
 		if (InputElement.TAG.equalsIgnoreCase(element.getTagName())) {
 			// sets editor id as attribute of element
-			element.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
+			element.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getId());
 		} else {
 			// gets all text input element from root DOM element
 			// passed as argument
@@ -201,7 +201,7 @@ public final class Dialog {
 				// gets element
 				Element inputElement = inputElements.getItem(i);
 				// sets editor id as attribute of element
-				inputElement.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getid());
+				inputElement.setAttribute(Id.CODERBA_ID_AS_STRING, editor.getId());
 			}
 		}
 	}

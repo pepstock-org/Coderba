@@ -254,6 +254,8 @@ public class EditorArea extends Widget {
 			editor.toTextArea();
 			// removes wrapper
 			editor.getWrapperElement().removeFromParent();
+			// removes all created handlers
+			editor.removeAllHandlers();
 			// destroy ...
 			editor = null;
 			// removes editor area instance from cache
