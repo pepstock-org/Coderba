@@ -19,6 +19,7 @@ import org.pepstock.coderba.client.EditorArea;
 import org.pepstock.coderba.client.EditorAreaId;
 import org.pepstock.coderba.client.Injector;
 import org.pepstock.coderba.client.Language;
+import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.Document;
@@ -33,6 +34,82 @@ import com.google.gwt.dom.client.Element;
  *
  */
 public final class CodeMirror {
+	
+	/**
+	 * Name of out of the box CodeMirror command names.
+	 */
+	public enum Command implements Key
+	{
+		DEFAULT_TAB("defaultTab"),
+		DEL_CHAR_AFTER("delCharAfter"),
+		DEL_CHAR_BEFORE("delCharBefore"),
+		DEL_GROUP_AFTER("delGroupAfter"),
+		DEL_GROUP_BEFORE("delGroupBefore"),
+		DEL_LINE_LEFT("delLineLeft"),
+		DEL_WORD_AFTER("delWordAfter"),
+		DEL_WORD_BEFORE("delWordBefore"),
+		DEL_WRAPPED_LINE_LEFT("delWrappedLineLeft"),
+		DEL_WRAPPED_LINE_RIGHT("delWrappedLineRight"),
+		DELETE_LINE("deleteLine"),
+		GO_CHAR_LEFT("goCharLeft"),
+		GO_CHAR_RIGHT("goCharRight"),
+		GO_COLUMN_LEFT("goColumnLeft"),
+		GO_COLUMN_RIGHT("goColumnRight"),
+		GO_DOC_END("goDocEnd"),
+		GO_DOC_START("goDocStart"),
+		GO_GROUP_LEFT("goGroupLeft"),
+		GO_GROUP_RIGHT("goGroupRight"),
+		GO_LINE_DOWN("goLineDown"),
+		GO_LINE_END("goLineEnd"),
+		GO_LINE_LEFT("goLineLeft"),
+		GO_LINE_LEFT_SMART("goLineLeftSmart"),
+		GO_LINE_RIGHT("goLineRight"),
+		GO_LINE_START("goLineStart"),
+		GO_LINE_START_SMART("goLineStartSmart"),
+		GO_LINE_UP("goLineUp"),
+		GO_PAGE_DOWN("goPageDown"),
+		GO_PAGE_UP("goPageUp"),
+		GO_WORD_LEFT("goWordLeft"),
+		GO_WORD_RIGHT("goWordRight"),
+		INDENT_AUTO("indentAuto"),
+		INDENT_LESS("indentLess"),
+		INDENT_MORE("indentMore"),
+		INSERT_SOFT_TAB("insertSoftTab"),
+		INSERT_TAB("insertTab"),
+		KILL_LINE("killLine"),
+		NEWLINE_AND_INDENT("newlineAndIndent"),
+		OPEN_LINE("openLine"),
+		REDO("redo"),
+		REDO_SELECTION("redoSelection"),
+		SELECT_ALL("selectAll"),
+		SINGLE_SELECTION("singleSelection"),
+		TOGGLE_OVERWRITE("toggleOverwrite"),
+		TRANSPOSE_CHARS("transposeChars"),
+		UNDO("undo"),
+		UNDO_SELECTION("undoSelection");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the command name.
+		 * 
+		 * @param value value of command name
+		 */
+		private Command(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.coderba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
 
 	// singleton instance
 	private static final CodeMirror INSTANCE = new CodeMirror();

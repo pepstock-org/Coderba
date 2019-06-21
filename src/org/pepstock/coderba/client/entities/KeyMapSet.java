@@ -108,6 +108,8 @@ public final class KeyMapSet extends NativeObjectContainer {
 	KeyMapTable getKeyMapTable(Key name) {
 		// getx native object of key map
 		NativeObject table = getValue(name);
+		// FIXME fallthough to manage. no good in this way
+		///
 		// checks if consistent
 		if (table != null) {
 			// returns key map table

@@ -16,16 +16,59 @@
 package org.pepstock.coderba.client.addons;
 
 import org.pepstock.coderba.client.AddOn;
+import org.pepstock.coderba.client.commons.Key;
 import org.pepstock.coderba.client.resources.AddOnResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "search" addon to enable this capability into editor.
+ * Is the "search" addon to enable this capability into editor.<br>
+ * Implements the search commands.<br>
+ * CodeMirror has keys bound to these {@link AddOnSearch.Command} by default, but will not do anything with them unless an implementation is provided.<br>
+ * It will make use of {@link AddOnDialog} when available to make prompting for search queries less ugly.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class AddOnSearch extends AddOn {
+
+	/**
+	 * Name of command names activated by this addon.
+	 */
+	public enum Command implements Key
+	{
+		FIND("find"),
+		FIND_PERSISTENT("findPersistent"),
+		FIND_PERSISTENT_NEXT("findPersistentNext"),
+		FIND_PERSISTENT_PREV("findPersistentPrev"),
+		FIND_NEXT("findNext"),
+		FIND_PREV("findPrev"),
+		CLEAR_SEARCH("clearSearch"),
+		REPLACE("replace"),
+		REPLACE_ALL("replaceAll");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the command name.
+		 * 
+		 * @param value value of command name
+		 */
+		private Command(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.coderba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
+
 	// name of editor addon
 	private static final String NAME = "search";
 
@@ -44,15 +87,4 @@ public final class AddOnSearch extends AddOn {
 		getDependencies().add(AddOnSearchcursor.INSTANCE);
 		getDependencies().add(AddOnDialog.INSTANCE);
 	}
-
-// FIXME	
-//	  CodeMirror.commands.find = function(cm) {clearSearch(cm); doSearch(cm);};
-//	  CodeMirror.commands.findPersistent = function(cm) {clearSearch(cm); doSearch(cm, false, true);};
-//	  CodeMirror.commands.findPersistentNext = function(cm) {doSearch(cm, false, true, true);};
-//	  CodeMirror.commands.findPersistentPrev = function(cm) {doSearch(cm, true, true, true);};
-//	  CodeMirror.commands.findNext = doSearch;
-//	  CodeMirror.commands.findPrev = function(cm) {doSearch(cm, true);};
-//	  CodeMirror.commands.clearSearch = clearSearch;
-//	  CodeMirror.commands.replace = replace;
-//	CodeMirror.commands.replaceAll = function(cm) {replace(cm, true);};
 }

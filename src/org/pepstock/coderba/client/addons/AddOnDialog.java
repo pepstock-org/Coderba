@@ -16,15 +16,32 @@
 package org.pepstock.coderba.client.addons;
 
 import org.pepstock.coderba.client.AddOn;
+import org.pepstock.coderba.client.callbacks.DialogCloseHandler;
+import org.pepstock.coderba.client.callbacks.DialogHandler;
+import org.pepstock.coderba.client.callbacks.DialogInputHandler;
+import org.pepstock.coderba.client.callbacks.DialogKeyDownHandler;
+import org.pepstock.coderba.client.callbacks.DialogKeyUpHandler;
+import org.pepstock.coderba.client.entities.Dialog;
+import org.pepstock.coderba.client.entities.DialogOptions;
+import org.pepstock.coderba.client.entities.Editor;
 import org.pepstock.coderba.client.resources.AddOnResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 import org.pepstock.coderba.client.resources.StyleResource;
 
 /**
- * Is the "dialog" addon to enable this capability into editor.
+ * Is the "dialog" addon to enable this capability into editor.<br>
+ * Provides a very simple way to query users for text input.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see Dialog
+ * @see DialogOptions
+ * @see DialogHandler
+ * @see DialogInputHandler
+ * @see DialogKeyUpHandler
+ * @see DialogKeyDownHandler
+ * @see DialogCloseHandler
+ * @see Editor#openDialog(org.pepstock.coderba.client.callbacks.DialogHandler, com.google.gwt.dom.client.Element, DialogOptions)
+ * @see Editor#openNotification(com.google.gwt.dom.client.Element, DialogOptions)
  */
 public final class AddOnDialog extends AddOn {
 	// name of editor addon

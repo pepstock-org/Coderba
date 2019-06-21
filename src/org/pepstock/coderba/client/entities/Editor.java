@@ -1426,7 +1426,7 @@ public final class Editor implements IsEventManager {
 	 * 
 	 * @param name the command with the given name on the editor.
 	 */
-	public void execCommand(String name) {
+	public void executeCommand(String name) {
 		executeCommand(Key.create(name));
 	}
 

@@ -16,13 +16,22 @@
 package org.pepstock.coderba.client.addons;
 
 import org.pepstock.coderba.client.AddOn;
+import org.pepstock.coderba.client.entities.Editor;
+import org.pepstock.coderba.client.entities.SearchCursor;
+import org.pepstock.coderba.client.entities.SearchCursorMatch;
+import org.pepstock.coderba.client.entities.SearchCursorOptions;
 import org.pepstock.coderba.client.resources.AddOnResources;
 import org.pepstock.coderba.client.resources.ScriptResource;
 
 /**
- * Is the "searchcursor" addon to enable this capability into editor.
+ * Is the "searchcursor" addon to enable this capability into editor.<br>
+ * It can be used to implement search/replace functionality. 
  * 
  * @author Andrea "Stock" Stocchero
+ * @see SearchCursor
+ * @see SearchCursorOptions
+ * @see SearchCursorMatch
+ * @see Editor#getSearchCursor(String, org.pepstock.coderba.client.entities.Position, SearchCursorOptions)
  *
  */
 public final class AddOnSearchcursor extends AddOn {
